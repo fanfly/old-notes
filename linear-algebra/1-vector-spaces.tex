@@ -1,25 +1,74 @@
 \chapter{Vector Spaces}
 \section{Algebraic Strutures}
 \begin{definition}
-  A nonempty set $G$ and a binary operation $\star: G \times G \to G$
-  form a \emph{group} $(G, \star)$, if the following conditions
-  (G1), (G2), and (G3) hold:
-  \begin{enumerate}[(G1)]
-    \item For all $a, b, c \in G$,
-      $(a \star b) \star c = a \star (b \star c)$.
-    \item There exists an \emph{identity element} $e \in G$ such that
-      $a \star e = a$ and $e \star a = a$ hold for all $a \in G$. 
-    \item For all $a \in G$, there exists $a' \in G$ such that
-      $a \star a' = e$, where $e$ is an identity element of $G$.
-  \end{enumerate}
+  A binary operation $\star$ on a set $G$ is called \emph{associative} if
+  for all $a, b, c \in G$, $(a \star b) \star c = a \star (b \star c)$ holds.
 \end{definition}
+
+\begin{remark}
+  The product $a_1 \star a_2 \star \cdots \star a_n$ can be uniquely defined
+  if $\star$ is associative.
+\end{remark}
+
 \begin{definition}
-  A group $(G, \star)$ is called an \emph{Abelian group} if the following
-  condition (G4) holds:
-  \begin{enumerate}[(G1),start=4]
-    \item For elements $a, b \in G$, $a \star b = b \star a$.
-  \end{enumerate}
+  Let $G$ be a set and $\star$ be a binary operation on $G$. An
+  \emph{identity} of $G$ with respect to $\star$ is an element $e \in G$ such
+  that $a \star e = a$ and $e \star a = a$ for all $a \in G$.
 \end{definition}
+
+\begin{observation}
+  The identity of $G$ with respect to $\star$ is unique if it exists.
+\end{observation}
+\begin{proof}
+  If $e$ and $e'$ are identity of $G$ with respect to $\star$, then
+  $e = e \star e' = e'$.
+\end{proof}
+
+\begin{definition}
+  Let $\star$ be a binary operation on $G$ with identity $e$. Let $a$ be an
+  element of $G$. An element $b \in G$ is called an \emph{inverse} of $a$ if
+  $a \star b = e$ and $b \star a = e$.
+\end{definition}
+
+\begin{observation}
+  Let $\star$ be an associative binary operation on $G$ with identity $e$.
+  Then for all $a \in G$, the inverse of $a \in G$ is unique if it exists.
+\end{observation}
+\begin{proof}
+  If both $b$ and $b'$ are inverses of $a$, then
+  $$
+  b = b \star e = b \star (a \star b') = (b \star a) \star b'
+    = e \star b' = b',
+  $$
+  so $b = b'$.
+\end{proof}
+
+\begin{definition}
+  A set $G$ and a binary operation $\star$ on $G$ form a \emph{group}
+  $(G, \star)$ if the following conditions hold.
+  \begin{itemize}
+    \item $\star$ is associative.
+    \item $G$ has an identity with respect to $\star$.
+    \item Every element of $G$ has an inverse.
+  \end{itemize}
+\end{definition}
+
 \begin{example}
-  $(\mathbb{Z}, +)$ is an Abelian group.
+  Let $S$ denote the set of permutations of $\{1, 2, 3\}$ and $\circ$
+  denote the composition of permutations. Then $(S, \circ)$ is a group.
+\end{example}
+
+\begin{definition}
+  A binary operation $\star$ on a set $G$ is called \emph{commutative} if
+  for all $a, b, \in G$, $a \star b = b \star a$ holds.
+\end{definition}
+
+\begin{definition}
+  A group $(G, \star)$ is called an \emph{Abelian group} if $\star$ is
+  commutative.
+\end{definition}
+
+\begin{example}
+  $(\mathbb{Z}, +)$ and $(\mathbb{Q} \setminus \{0\}, \cdot)$ are Abelian
+  groups.
 \end{example}
