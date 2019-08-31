@@ -1,0 +1,25 @@
+\chapter{Vector Spaces}
+\section{Algebraic Strutures}
+\begin{definition}
+  A nonempty set $G$ and a binary operation $\star: G \times G \to G$
+  form a \emph{group} $(G, \star)$, if the following conditions
+  (G1), (G2), and (G3) hold:
+  \begin{enumerate}[(G1)]
+    \item For all $a, b, c \in G$,
+      $(a \star b) \star c = a \star (b \star c)$.
+    \item There exists an \emph{identity element} $e \in G$ such that
+      $a \star e = a$ and $e \star a = a$ hold for all $a \in G$. 
+    \item For all $a \in G$, there exists $a' \in G$ such that
+      $a \star a' = e$, where $e$ is an identity element of $G$.
+  \end{enumerate}
+\end{definition}
+\begin{definition}
+  A group $(G, \star)$ is called an \emph{Abelian group} if the following
+  condition (G4) holds:
+  \begin{enumerate}[(G1),start=4]
+    \item For elements $a, b \in G$, $a \star b = b \star a$.
+  \end{enumerate}
+\end{definition}
+\begin{example}
+  $(\mathbb{Z}, +)$ is an Abelian group.
+\end{example}
