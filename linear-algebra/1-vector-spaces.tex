@@ -1,14 +1,10 @@
 \chapter{Vector Spaces}
 \section{Algebraic Strutures}
+\subsection{Groups and Abelian Groups}
 \begin{definition}
   A binary operation $\star$ on a set $G$ is called \emph{associative} if
   for all $a, b, c \in G$, $(a \star b) \star c = a \star (b \star c)$ holds.
 \end{definition}
-
-\begin{remark}
-  The product $a_1 \star a_2 \star \cdots \star a_n$ can be uniquely defined
-  if $\star$ is associative.
-\end{remark}
 
 \begin{definition}
   Let $G$ be a set and $\star$ be a binary operation on $G$. An
@@ -16,13 +12,19 @@
   that $a \star e = a$ and $e \star a = a$ for all $a \in G$.
 \end{definition}
 
-\begin{observation}
+\begin{theorem}
   The identity of $G$ with respect to $\star$ is unique if it exists.
-\end{observation}
+\end{theorem}
 \begin{proof}
   If $e$ and $e'$ are identity of $G$ with respect to $\star$, then
   $e = e \star e' = e'$.
 \end{proof}
+
+\begin{notation}
+  The identity of $G$ is denoted by $1_G$.
+  However, if the binary operation is written additively, the identity is
+  denoted by $0_G$ instead.
+\end{notation}
 
 \begin{definition}
   Let $\star$ be a binary operation on $G$ with identity $e$. Let $a$ be an
@@ -30,27 +32,35 @@
   $a \star b = e$ and $b \star a = e$.
 \end{definition}
 
-\begin{observation}
-  Let $\star$ be an associative binary operation on $G$ with identity $e$.
-  Then for all $a \in G$, the inverse of $a \in G$ is unique if it exists.
-\end{observation}
+\begin{theorem}
+  For all $a \in G$, the inverse of $a \in G$ is unique if it exists.
+\end{theorem}
 \begin{proof}
   If both $b$ and $b'$ are inverses of $a$, then
-  $$
-  b = b \star e = b \star (a \star b') = (b \star a) \star b'
-    = e \star b' = b',
-  $$
-  so $b = b'$.
+  \begin{align*}
+  b
+  = b \star 1_G
+  = b \star (a \star b')
+  = (b \star a) \star b'
+  = 1_G \star b'
+  = b'. &\qedhere
+  \end{align*}
 \end{proof}
+
+\begin{notation}
+  The inverse of $a$ in $G$ is denoted by $a^{-1}$.
+  However, if the binary operation is written additively, the inverse of $a$
+  is denoted by $-a$ instead.
+\end{notation}
 
 \begin{definition}
   A set $G$ and a binary operation $\star$ on $G$ form a \emph{group}
   $(G, \star)$ if the following conditions hold.
-  \begin{itemize}
-    \item $\star$ is associative.
-    \item $G$ has an identity with respect to $\star$.
-    \item Every element of $G$ has an inverse.
-  \end{itemize}
+  \begin{enumerate}[(a)]
+    \item The binary operation $\star$ is associative.
+    \item $1_G$ exists.
+    \item For all $a \in G$, $a^{-1}$ exists.
+  \end{enumerate}
 \end{definition}
 
 \begin{example}
@@ -72,3 +82,122 @@
   $(\mathbb{Z}, +)$ and $(\mathbb{Q} \setminus \{0\}, \cdot)$ are Abelian
   groups.
 \end{example}
+
+\begin{theorem}
+  Let $(G, \star)$ be a group. Then for all $a \in G$, $(a^{-1})^{-1} = a$.
+\end{theorem}
+\begin{proof}
+  Since $a \star a^{-1} = 1_G$, $a$ is the inverse of $a^{-1}$ in $G$.
+  Thus, $(a^{-1})^{-1} = a$.
+\end{proof}
+
+\begin{theorem}{(Cancellation Law)}
+  Let $(G, \star)$ be a group. Then the following statements are true.
+  \begin{enumerate}[(a)]
+    \item For all $a, b, c \in G$, if $c \star a = c \star b$, then $a = b$.
+    \item For all $a, b, c \in G$, if $a \star c = b \star c$, then $a = b$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}[(a)]
+    \item We have
+      $$
+      a = 1_G \star a = (c^{-1} \star c) \star a = c^{-1} \star (c \star a)
+      $$
+      and
+      $$
+      b = 1_G \star b = (c^{-1} \star c) \star b = c^{-1} \star (c \star b).
+      $$
+      Because $c \star a = c \star b$, we have $a = b$.
+    \item The proof is similar to (a). \qedhere
+  \end{enumerate}
+\end{proof}
+
+\subsection{Fields}
+\begin{definition}
+  Let $F$ be a set. Let $+$ and $\cdot$ be binary operations on $F$.
+  The operation $\cdot$ is called \emph{distributive} over the operation $+$
+  if
+  $$
+  a \cdot (b + c) = a \cdot b + a \cdot c
+  $$
+  and
+  $$
+  (b + c) \cdot a = b \cdot a + c \cdot a
+  $$
+  hold for all $a, b, c \in F$.
+\end{definition}
+
+\begin{definition}
+  A set $F$ and two binary operations $+$ and $\cdot$ on $F$ form a
+  \emph{field} $(F, +, \cdot)$ if the following conditions hold.
+  \begin{itemize}
+    \item $(F, +)$ is an Abelian group.
+    \item $(F \setminus \{0_F\}, \cdot)$ is an Abelian group.
+    \item The operation $\cdot$ is distributive over the operation $+$.
+  \end{itemize}
+\end{definition}
+
+\begin{example}
+  $(\mathbb{Q}, +, \cdot)$, $(\mathbb{R}, +, \cdot)$,
+  and $(\mathbb{C}, +, \cdot)$ are fields.
+\end{example}
+
+\begin{example}
+  $(\mathbb{Q}[\sqrt{2}], +, \cdot)$ is a field, where
+  $$
+  \mathbb{Q}[\sqrt{2}] = \{a + b\sqrt{2} : a, b \in \mathbb{Q}\}.
+  $$
+\end{example}
+
+\begin{theorem}\label{thm:field}
+  Let $(F, +, \cdot)$ be a field. Then the following statements are true.
+  \begin{enumerate}[(a)]
+    \item For all $a \in F$, $a \cdot 0_F = 0_F = 0_F \cdot a$.
+    \item For all $a, b \in F$, $(-a) \cdot b = -(a \cdot b) = a \cdot (-b)$.
+    \item For all $a, b \in F$, $(-a) \cdot (-b) = a \cdot b$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}[(a)]
+    \item Since
+      $$
+      a \cdot 0_F + a \cdot 0_F
+      = a \cdot (0_F + 0_F)
+      = a \cdot 0_F
+      = a \cdot 0_F + 0_F,
+      $$
+      we have $a \cdot 0_F = 0_F$ by cancellation law.
+      The proof of $0_F \cdot a = 0_F$ is similar.
+    \item By (a), we have
+      $$
+      a \cdot b + (-a) \cdot b
+      = (a + (-a)) \cdot b
+      = 0_F \cdot b
+      = 0_F.
+      $$
+      Thus, $(-a) \cdot b = -(a \cdot b)$.
+      The proof of $a \cdot (-b) = -(a \cdot b)$ is similar.
+    \item We have
+      $$
+      (-a) \cdot (-b) = -(a \cdot (-b)) = -(-(a \cdot b)) = a \cdot b
+      $$
+      by applying (b) twice. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Let $G = F \setminus \{0_F\}$ and $1_F$ be the multiplicative identity of
+  $G$.
+  By Theorem \ref{thm:field} (a), we have
+  $1_G \cdot 0_F = 0_F = 0_F \cdot 1_G$.
+  Therefore, $1_G$ is also the multiplicative identity of $F$, and thus we
+  denote it by $1_F$.
+\end{remark}
+
+\begin{remark}
+  Subtraction and division are defined in terms of addition and
+  multiplication.
+  That is, for all $a, b \in F$, we have $a - b = a + (-b)$ and
+  $a / b = a \cdot b^{-1}$.
+\end{remark}

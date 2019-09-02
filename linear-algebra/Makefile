@@ -2,7 +2,7 @@ TEX := xelatex -interaction=nonstopmode -halt-on-error
 
 all: linear-algebra.pdf
 
-%.pdf: %.tex
+%.pdf: %.tex *.tex
 	$(TEX) $^
 
 clean:
