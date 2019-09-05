@@ -1,18 +1,21 @@
 \chapter{Vector Spaces}
-\section{Algebraic Strutures}
-\subsection{Groups and Abelian Groups}
-\begin{definition}
+\section{Groups and Abelian Groups}
+\begin{definition}\label{def:binary-operation}
+  A binary operation on a set $G$ is a mapping from $G \times G$ to $G$.
+\end{definition}
+
+\begin{definition}\label{def:associativity}
   A binary operation $\star$ on a set $G$ is called \emph{associative} if
   for all $a, b, c \in G$, $(a \star b) \star c = a \star (b \star c)$ holds.
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:identity}
   Let $G$ be a set and $\star$ be a binary operation on $G$. An
   \emph{identity} of $G$ with respect to $\star$ is an element $e \in G$ such
   that $a \star e = a$ and $e \star a = a$ for all $a \in G$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:identity-uniqueness}
   The identity of $G$ with respect to $\star$ is unique if it exists.
 \end{theorem}
 \begin{proof}
@@ -26,13 +29,13 @@
   denoted by $0_G$ instead.
 \end{notation}
 
-\begin{definition}
+\begin{definition}\label{def:inverse}
   Let $\star$ be a binary operation on $G$ with identity $e$. Let $a$ be an
   element of $G$. An element $b \in G$ is called an \emph{inverse} of $a$ if
   $a \star b = e$ and $b \star a = e$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:inverse-uniqueness}
   For all $a \in G$, the inverse of $a \in G$ is unique if it exists.
 \end{theorem}
 \begin{proof}
@@ -53,11 +56,11 @@
   is denoted by $-a$ instead.
 \end{notation}
 
-\begin{definition}
+\begin{definition}\label{def:group}
   A set $G$ and a binary operation $\star$ on $G$ form a \emph{group}
   $(G, \star)$ if the following conditions hold.
-  \begin{enumerate}[(a)]
-    \item The binary operation $\star$ is associative.
+  \begin{enumerate}
+    \item The operation $\star$ is associative.
     \item $1_G$ exists.
     \item For all $a \in G$, $a^{-1}$ exists.
   \end{enumerate}
@@ -68,12 +71,12 @@
   denote the composition of permutations. Then $(S, \circ)$ is a group.
 \end{example}
 
-\begin{definition}
+\begin{definition}\label{def:commutativity}
   A binary operation $\star$ on a set $G$ is called \emph{commutative} if
   for all $a, b, \in G$, $a \star b = b \star a$ holds.
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:abelian-group}
   A group $(G, \star)$ is called an \emph{Abelian group} if $\star$ is
   commutative.
 \end{definition}
@@ -83,7 +86,7 @@
   groups.
 \end{example}
 
-\begin{theorem}
+\begin{theorem}\label{thm:inverse-inverse}
   Let $(G, \star)$ be a group. Then for all $a \in G$, $(a^{-1})^{-1} = a$.
 \end{theorem}
 \begin{proof}
@@ -91,15 +94,15 @@
   Thus, $(a^{-1})^{-1} = a$.
 \end{proof}
 
-\begin{theorem}{(Cancellation Law)}
+\begin{theorem}[Cancellation Law]\label{thm:group-cancel}
   Let $(G, \star)$ be a group. Then the following statements are true.
-  \begin{enumerate}[(a)]
+  \begin{enumerate}
     \item For all $a, b, c \in G$, if $c \star a = c \star b$, then $a = b$.
     \item For all $a, b, c \in G$, if $a \star c = b \star c$, then $a = b$.
   \end{enumerate}
 \end{theorem}
 \begin{proof} \leavevmode
-  \begin{enumerate}[(a)]
+  \begin{enumerate}
     \item We have
       $$
       a = 1_G \star a = (c^{-1} \star c) \star a = c^{-1} \star (c \star a)
@@ -113,22 +116,20 @@
   \end{enumerate}
 \end{proof}
 
-\subsection{Fields}
-\begin{definition}
+\section{Fields}
+\begin{definition}\label{def:distributivity}
   Let $F$ be a set. Let $+$ and $\cdot$ be binary operations on $F$.
-  The operation $\cdot$ is called \emph{distributive} over the operation $+$
-  if
-  $$
-  a \cdot (b + c) = a \cdot b + a \cdot c
-  $$
-  and
-  $$
-  (b + c) \cdot a = b \cdot a + c \cdot a
-  $$
-  hold for all $a, b, c \in F$.
+  \begin{enumerate}
+    \item The operation $\cdot$ is called \emph{left-distributive} over $+$
+      if $a \cdot (b + c) = a \cdot b + a \cdot c$ for all $a, b, c \in F$.
+    \item The operation $\cdot$ is called \emph{right-distributive} over $+$
+      if $(a + b) \cdot c = a \cdot c + b \cdot c$ for all $a, b, c \in F$.
+    \item The operation $\cdot$ is called \emph{distributive} over $+$
+      if it is both left-distributive and right-distributive.
+  \end{enumerate}
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:field}
   A set $F$ and two binary operations $+$ and $\cdot$ on $F$ form a
   \emph{field} $(F, +, \cdot)$ if the following conditions hold.
   \begin{itemize}
@@ -150,25 +151,25 @@
   $$
 \end{example}
 
-\begin{theorem}\label{thm:field}
+\begin{theorem}\label{thm:field-multiplication}
   Let $(F, +, \cdot)$ be a field. Then the following statements are true.
-  \begin{enumerate}[(a)]
+  \begin{enumerate}
     \item For all $a \in F$, $a \cdot 0_F = 0_F = 0_F \cdot a$.
     \item For all $a, b \in F$, $(-a) \cdot b = -(a \cdot b) = a \cdot (-b)$.
     \item For all $a, b \in F$, $(-a) \cdot (-b) = a \cdot b$.
   \end{enumerate}
 \end{theorem}
 \begin{proof} \leavevmode
-  \begin{enumerate}[(a)]
-    \item Since
+  \begin{enumerate}
+    \item We have
       $$
       a \cdot 0_F + a \cdot 0_F
       = a \cdot (0_F + 0_F)
       = a \cdot 0_F
-      = a \cdot 0_F + 0_F,
+      = a \cdot 0_F + 0_F.
       $$
-      we have $a \cdot 0_F = 0_F$ by cancellation law.
-      The proof of $0_F \cdot a = 0_F$ is similar.
+      Thus, $a \cdot 0_F = 0_F$ by cancelltaion law
+      (\Cref{thm:group-cancel}). The proof of $0_F \cdot a = 0_F$ is similar.
     \item By (a), we have
       $$
       a \cdot b + (-a) \cdot b
@@ -187,9 +188,9 @@
 \end{proof}
 
 \begin{remark}
-  Let $G = F \setminus \{0_F\}$ and $1_F$ be the multiplicative identity of
+  Let $G = F \setminus \{0_F\}$ and $1_G$ be the multiplicative identity of
   $G$.
-  By Theorem \ref{thm:field} (a), we have
+  By \Cref{thm:field-multiplication} (a), we have
   $1_G \cdot 0_F = 0_F = 0_F \cdot 1_G$.
   Therefore, $1_G$ is also the multiplicative identity of $F$, and thus we
   denote it by $1_F$.
@@ -197,7 +198,72 @@
 
 \begin{remark}
   Subtraction and division are defined in terms of addition and
-  multiplication.
-  That is, for all $a, b \in F$, we have $a - b = a + (-b)$ and
-  $a / b = a \cdot b^{-1}$.
+  multiplication by using additive and multiplicative inverses.
 \end{remark}
+
+\section{Vector Spaces}
+\begin{definition}\label{def:vector-space}
+  $V$ is a \emph{vector space} over a field $F$ if the following conditions
+  hold.
+  \begin{enumerate}
+    \item $(V, +)$ is an Abelian group.
+    \item For all $x \in V$, $1_F \cdot x = x$.
+    \item For all $a, b \in F$ and for all $x \in V$,
+      $(a \cdot b) \cdot x = a \cdot (b \cdot x)$.
+    \item For all $a, b \in F$ and for all $x \in V$,
+      $(a + b) \cdot x = a \cdot x + b \cdot x$.
+    \item For all $a \in F$ and for all $x, y \in V$,
+      $a \cdot (x + y) = a \cdot x + a \cdot y$.
+  \end{enumerate}
+\end{definition}
+\begin{example}
+  $F^n$ is a vector space over $F$.
+\end{example}
+\begin{example}
+  Let $\mathcal{P}(F)$ denote the set of polynomials with coefficients in $F$.
+  Then $\mathcal{P}(F)$ is a vector space over $F$.
+\end{example}
+\begin{example}
+  Let $\mathcal{F}(S, F)$ denote the set of functions from $S$ to $F$.
+  Then $\mathcal{F}(S, F)$ is a vector space over $F$.
+\end{example}
+
+\begin{theorem}\label{thm:vector-space-multiplication}
+  Let $V$ be a vector space over $F$. Then the following statements are true.
+  \begin{enumerate}
+    \item For all $x \in V$, $0_F \cdot x = 0_V$.
+    \item For all $a \in F$, $a \cdot 0_V = 0_V$.
+    \item For all $a \in F$ and $x \in V$,
+      $(-a) \cdot x = -(a \cdot x) = a \cdot (-x)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item We have
+      $$
+      0_F \cdot x + 0_F \cdot x
+      = (0_F + 0_F) \cdot x
+      = 0_F \cdot x
+      = 0_F \cdot x + 0_V.
+      $$
+      Thus, $0_F \cdot x = 0_V$ by cancelltaion law
+      (\Cref{thm:group-cancel}).
+    \item It is similar to the proof of (a).
+    \item By (a), we have
+      $$
+      a \cdot x + (-a) \cdot x
+      = (a + (-a)) \cdot x
+      = 0_F \cdot x
+      = 0_V.
+      $$
+      Thus, $(-a) \cdot x = -(a \cdot x)$.
+      By (b), we have
+      $$
+      a \cdot x + a \cdot (-x)
+      = a \cdot (x + (-x))
+      = a \cdot 0_V
+      = 0_V.
+      $$
+      Thus, $a \cdot (-x) = -(a \cdot x)$. \qedhere
+  \end{enumerate}
+\end{proof}
