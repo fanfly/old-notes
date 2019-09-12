@@ -203,8 +203,10 @@
 
 \section{Vector Spaces}
 \begin{definition}\label{def:vector-space}
-  $V$ is a \emph{vector space} over a field $F$ if the following conditions
-  hold.
+  Let $F$ be a field.
+  A set $V$ and two operations $+: V \times V \to V$,
+  $\cdot: F \times V \to V$ form a \emph{vector space} over $F$
+  if the following conditions hold.
   \begin{enumerate}
     \item $(V, +)$ is an Abelian group.
     \item For all $x \in V$, $1_F \cdot x = x$.
@@ -217,19 +219,20 @@
   \end{enumerate}
 \end{definition}
 \begin{example}
-  $F^n$ is a vector space over $F$.
+  $(F^n, +, \cdot)$ is a vector space over $F$.
 \end{example}
 \begin{example}
   Let $\mathcal{P}(F)$ denote the set of polynomials with coefficients in $F$.
-  Then $\mathcal{P}(F)$ is a vector space over $F$.
+  Then $(\mathcal{P}(F), +, \cdot)$ is a vector space over $F$.
 \end{example}
 \begin{example}
   Let $\mathcal{F}(S, F)$ denote the set of functions from $S$ to $F$.
-  Then $\mathcal{F}(S, F)$ is a vector space over $F$.
+  Then $(\mathcal{F}(S, F), +, \cdot)$ is a vector space over $F$.
 \end{example}
 
 \begin{theorem}\label{thm:vector-space-multiplication}
-  Let $V$ be a vector space over $F$. Then the following statements are true.
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Then the following statements are true.
   \begin{enumerate}
     \item For all $x \in V$, $0_F \cdot x = 0_V$.
     \item For all $a \in F$, $a \cdot 0_V = 0_V$.
@@ -267,3 +270,74 @@
       Thus, $a \cdot (-x) = -(a \cdot x)$. \qedhere
   \end{enumerate}
 \end{proof}
+
+\section{Subspaces}
+\begin{definition}\label{def:inheritance}
+  Let $(V, +_V, \cdot_V)$ be a vector space over a field $F$.
+  Let $W$ be a subset of $V$.
+  If $+_W: W \times W \to W$ and $\cdot_W: F \times W \to W$
+  satisfy
+  \begin{equation*}
+    x +_W y = x +_V y
+      \quad \text{and}
+      \quad a \cdot_W x = a \cdot_V x
+  \end{equation*}
+  for all $a \in F$ and $x, y \in W$, then we say that $+_W$ and $\cdot_W$
+  \emph{inherit} $+_V$ and $\cdot_V$, respectively.
+\end{definition}
+
+\begin{definition}\label{def:subspace}
+  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
+  A subset $W$ of $V$ is called a \emph{subspace} of $V$ if
+  $(W, +_W, \cdot_W)$ is a vector space over $F$, where $+_W$ and $\cdot_W$
+  inherit $+_V$ and $\cdot_V$, respectively.
+\end{definition}
+
+\begin{theorem}\label{thm:subspace}
+  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
+  Let $W$ be a subset of $V$.
+  Then $W$ is a subspace of $V$ if the following conditions hold.
+  \begin{enumerate}
+    \item For all $x, y \in W$, $x +_V y \in W$.
+    \item For all $a \in F$ and $x \in W$, $a \cdot_V x \in W$.
+    \item $0_V \in W$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We can define operations $+_W: W \times W \to W$
+  and $\cdot_W: F \times W \to W$ such that
+  \begin{equation*}
+    x +_W y = x +_V y
+      \quad \text{and}
+      \quad a \cdot_W x = a \cdot_V x
+  \end{equation*}
+  for all $a \in F$ and $x, y \in W$ due to (a) and (b).
+  Then according to \Cref{def:inheritance}, $+_W$ and $\cdot_W$ inherit
+  $+_V$ and $\cdot_V$, respectively.
+
+  Now we prove that $(W, +_W, \cdot_W)$ is a vector space over $F$.
+  Since a vector in $W$ is also in $V$, properties (b), (c), (d), and (e)
+  in \Cref{def:subspace} hold trivially.
+  Thus, one only needs to check property (a) in \Cref{def:subspace},
+  i.e., $(W, +_W)$ is an Abelian group.
+
+  Since $+_W$ inherits $+_V$, $+_V$ is associative implies that
+  $+_W$ is associative.
+  Furthermore, with $0_V \in W$ we have
+  \begin{equation*}
+    0_V +_W x = x = x +_W 0_V
+      \quad \text{and}
+      \quad x +_W (-x) = 0_V = (-x) +_W x
+  \end{equation*}
+  hold for all $x \in W$.
+  Thus, $0_V \in W$ is an additive identity of $W$, and each vector in $W$
+  also has an additive inverse in $W$, which complete the proof.
+\end{proof}
+
+\begin{example}
+  Let $\mathcal{P}_n(F)$ denote the set of polynomials in $\mathcal{P}(F)$
+  with degree less than or equal to $n$, where $n \geq -1$ is an integer.
+  Then it follows from \Cref{thm:subspace} that $\mathcal{P}_n(F)$ is
+  a subspace of $\mathcal{P}(F)$.
+\end{example}
+
