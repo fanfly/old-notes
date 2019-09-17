@@ -323,11 +323,21 @@
 
   Since $+_W$ inherits $+_V$, $+_V$ is associative implies that
   $+_W$ is associative.
-  Furthermore, with $0_V \in W$ we have
+  Furthermore, since
   \begin{equation*}
-    0_V +_W x = x = x +_W 0_V
-      \quad \text{and}
-      \quad x +_W (-x) = 0_V = (-x) +_W x
+    \begin{array}{lll}
+      0_V \in W
+        & \text{and}
+        & -x = -(1_F \cdot x) = (-1_F) \cdot x \in W
+    \end{array}
+  \end{equation*}
+  hold for all $x \in W$, we have
+  \begin{equation*}
+    \begin{array}{lll}
+      0_V +_W x = x = x +_W 0_V
+        & \text{and}
+        & x +_W (-x) = 0_V = (-x) +_W x
+    \end{array}
   \end{equation*}
   hold for all $x \in W$.
   Thus, $0_V \in W$ is an additive identity of $W$, and each vector in $W$
@@ -341,3 +351,88 @@
   a subspace of $\mathcal{P}(F)$.
 \end{example}
 
+\begin{theorem}\label{thm:intersection}
+  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
+  Let $I$ be an index set such that $W_i$ is a subspace of $V$
+  for all $i \in I$.
+  Then the intersection
+  \begin{equation*}
+    W = \bigcap_{i \in I} W_i
+  \end{equation*}
+  is a subspace of $V$.
+\end{theorem}
+\begin{proof}
+  For all $a \in F$ and for all $x, y \in W$, since
+  \begin{equation*}
+    \begin{array}{lllll}
+      x +_V y \in W_i
+      & \text{and}
+      & a \cdot_V x \in W_i
+      & \text{and}
+      & 0_V \in W_i
+    \end{array}
+  \end{equation*}
+  hold for all indices $i \in I$, we have
+  \begin{equation*}
+    \begin{array}{lllll}
+      x +_V y \in W
+      & \text{and}
+      & a \cdot_V x \in W
+      & \text{and}
+      & 0_V \in W.
+    \end{array}
+  \end{equation*}
+  Thus, $W$ is a subspace of $V$.
+\end{proof}
+
+\begin{definition}\label{def:sum}
+  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
+  Let $S_1$ and $S_2$ be subsets of $V$.
+  Then the \emph{sum} of $S_1$ and $S_2$, denoted $S_1 + S_2$,
+  is the set
+  $\{x + y: x \in S_1 \;\text{and}\; y \in S_2\}$.
+\end{definition}
+
+\begin{theorem}\label{thm:sum}
+  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
+  If $W_1$ and $W_2$ be subspaces of $V$, then the following statements are
+  true.
+  \begin{enumerate}
+    \item $W_1 + W_2$ is a subspace of $V$.
+    \item If $W$ is a subspace of $V$ with $W_1 \cup W_2 \subseteq W$,
+      then $W_1 + W_2 \subseteq W$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item Suppose that $a \in F$ and $x, y \in W_1 + W_2$.
+      Then there exists $x_1, y_1 \in W_1$ and $x_2, y_2 \in W_2$ such that
+      \begin{equation*}
+        \begin{array}{lll}
+        x = x_1 +_V x_2
+          & \text{and}
+          & y = y_1 +_V y_2.
+        \end{array}
+      \end{equation*}
+      Thus,
+      \begin{equation*}
+        a \cdot_V x
+          = a \cdot_V (x_1 + x_2)
+          = a \cdot_V x_1 + a \cdot_V x_2
+          \in W_1 + W_2
+      \end{equation*}
+      and
+      \begin{equation*}
+        x +_V y
+          = (x_1 +_V x_2) + (y_1 +_V y_2)
+          = (x_1 +_V y_1) + (x_2 +_V y_2)
+          \in W_1 + W_2.
+      \end{equation*}
+      We also have $0_V = 0_V +_V 0_V \in W_1 + W_2$.
+      Hence, $W_1 + W_2$ is a subspace of $V$.
+    \item If $x \in W_1 + W_2$, then there exists $x_1 \in W_1$ and
+      $x_2 \in W_2$ such that $x = x_1 + x_2$.
+      Since $W_1 \subseteq W$ and $W_2 \subseteq W$, we have $x_1 \in W$ and
+      $x_2 \in W$, which implies $x \in W$. \qedhere
+  \end{enumerate}
+\end{proof}
