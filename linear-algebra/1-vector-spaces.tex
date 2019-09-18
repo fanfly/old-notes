@@ -385,7 +385,7 @@
   Thus, $W$ is a subspace of $V$.
 \end{proof}
 
-\begin{definition}\label{def:sum}
+\begin{definition}\label{def:sum-of-sets}
   Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
   Let $S_1$ and $S_2$ be subsets of $V$.
   Then the \emph{sum} of $S_1$ and $S_2$, denoted $S_1 + S_2$,
@@ -436,3 +436,105 @@
       $x_2 \in W$, which implies $x \in W$. \qedhere
   \end{enumerate}
 \end{proof}
+
+\section{Spanning Sets}
+\begin{definition}\label{def:summation}
+  Let $(G, +)$ be an Abelian group.
+  Then we define
+  \begin{equation*}
+    \sum_{i=m}^n a_i =
+      \left\{
+      \begin{array}{ll}
+        \displaystyle
+          \sum_{i=m}^{n-1} a_i + a_n & \text{if} \; m \leq n\\[1.5em]
+        0_G & \text{if} \; m > n,\\
+      \end{array}
+      \right.
+  \end{equation*}
+  where $a_i \in G$ for each integer $i$ with $m \leq i \leq n$.
+\end{definition}
+
+\begin{definition}\label{def:linear-combination}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Let $S$ be a subset of $V$.
+  Then a vector $x \in V$ is called a \emph{linear combination} of $S$ if
+  there exists some nonnegative integer $n$ such that
+  \begin{equation*}
+    x = \sum_{i=1}^n a_ix_i,
+  \end{equation*}
+  where $a_i \in F$ and $x_i \in S$ for each integer $i$ with $1 \leq i \leq n$.
+\end{definition}
+\begin{remark}
+  Since $n$ can be zero, $0_V$ is a linear combination for all $S \subseteq V$.
+\end{remark}
+
+\begin{definition}\label{def:span}
+  Let $(V, +, \cdot)$ is a vector space over $F$.
+  The \emph{span} of $S$, denoted $\mathrm{span}(S)$, is the set that
+  consists of all linear combinations of $S$.
+\end{definition}
+
+\begin{theorem}\label{thm:span}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Let $S \subseteq V$. Then the following statements are true.
+  \begin{enumerate}
+    \item $\mathrm{span}(S)$ is a subspace of $V$.
+    \item If $W$ is a subspace of $V$ such that $S \subseteq W$, then
+      $\mathrm{span}(S) \subseteq W$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+\begin{enumerate}
+  \item If $c \in F$ and $x, y \in \mathrm{span}(S)$, then there exist
+    nonnegative integers $m, n$,
+    scalars $a_1, \dots, a_m, b_1, \dots, b_n \in F$
+    and vectors $x_1, \dots, x_m, y_1, \dots, y_n \in S$ such that
+    \begin{equation*}
+      \begin{array}{lll}
+        \displaystyle x = \sum_{i=1}^m a_ix_i
+        & \text{and}
+        & \displaystyle y = \sum_{j=1}^n b_jy_j.
+      \end{array}
+    \end{equation*}
+    Thus, we have
+    \begin{align*}
+      cx
+      &= c(a_1x_1 + \cdots + a_mx_m) \\
+      &= c(a_1x_1) + \cdots + c(a_mx_m) \\
+      &= (ca_1)x_1 + \cdots + (ca_m)x_m \in \mathrm{span}(S)
+    \end{align*}
+    and
+    \begin{equation*}
+      x + y
+        = a_1x_1 + \cdots a_mx_m + b_1y_1 + \cdots + b_ny_n
+        \in \mathrm{span}(S).
+    \end{equation*}
+    Also, $0_V \in \mathrm{span}(S)$.
+    Hence, $\mathrm{span}(S)$ is a subspace of $V$.
+  \item If $x \in \mathrm{span}(S)$, then there exists an
+    nonnegative integer $n$, scalars $a_1, \dots, a_n \in F$
+    and vectors $x_1, \dots, x_n \in S$ such that
+    \begin{equation*}
+      x = \sum_{i=1}^m a_ix_i.
+    \end{equation*}
+    Thus, since $x_1, \dots, x_n \in W$, we have
+    $x = a_1x_1 + \cdots + a_nx_n \in W$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{definition}\label{def:spanning-set}
+  A subset $S$ of a vector space $(V, +, \cdot)$ \emph{spans} $V$
+  if $\mathrm{span}(S) = V$.
+  In this case, we also say that $S$ is a \emph{spanning set} of $V$.
+\end{definition}
+
+\begin{example}
+  $\{(1, 1, 0), (0, 1, 1), (1, 0, 1)\}$ is a spanning set of $\mathbb{R}^3$
+  since for all $x, y, z \in \mathbb{R}$,
+  \begin{equation*}
+    (x, y, z)
+      = \frac{x+y-z}{2} \cdot (1, 1, 0)
+      + \frac{-x+y+z}{2} \cdot (0, 1, 1)
+      + \frac{x-y+z}{2} \cdot (1, 0, 1).
+  \end{equation*}
+\end{example}

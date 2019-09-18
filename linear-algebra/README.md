@@ -8,3 +8,4 @@ This study note is based on the textbook *Linear Algebra, 4th Edition, by Friedb
   * Fields
   * Vector Spaces
   * Subspaces
+  * Spanning Sets
