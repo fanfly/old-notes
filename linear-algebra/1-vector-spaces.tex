@@ -467,6 +467,19 @@
 \begin{remark}
   Since $n$ can be zero, $0_V$ is a linear combination for all $S \subseteq V$.
 \end{remark}
+\begin{remark}
+  Although $S$ can be infinite, the number of terms in the summation must be
+  finite.
+  For example, although we have
+  \begin{equation*}
+    e = \sum_{k=0}^\infty \frac{1}{k!}
+      = \frac{1}{1} + \frac{1}{1} + \frac{1}{2} + \frac{1}{6}
+        + \frac{1}{24} + \cdots,
+  \end{equation*}
+  $e$ is not a linear combination of $\mathbb{Q}$ in the vector space
+  $\mathbb{R}$ over $\mathbb{Q}$ since the number of terms is the summation
+  is infinite.
+\end{remark}
 
 \begin{definition}\label{def:span}
   Let $(V, +, \cdot)$ is a vector space over $F$.
@@ -538,3 +551,95 @@
       + \frac{x-y+z}{2} \cdot (1, 0, 1).
   \end{equation*}
 \end{example}
+
+\section{Linearly Independent Sets}
+\begin{definition}\label{def:linear-dependence}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  \begin{enumerate}
+    \item A subset $S$ of $V$ is called \emph{linearly dependent} if there is
+      an element $x \in S$ with $x \in \mathrm{span}(S \setminus \{x\})$.
+    \item A subset $S$ of $V$ is called \emph{linearly independent} if
+      it is not linear dependent.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}\label{thm:trivial-linear-combination}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Then a subset $S$ of $V$ is linearly dependent if and only if there
+  exist a positive integer $n$,
+  scalars $a_1, \dots, a_n \in F$,
+  and distinct vectors $x_1, \dots, x_n \in S$ such that
+  \begin{equation*}
+    \sum_{i=1}^n a_ix_i = 0_V,
+  \end{equation*}
+  where there exists an integer $i \in \{1, \dots, n\}$ such that
+  $a_i \neq 0_F$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$) Since $S$ is linearly dependent, there exists
+  $x \in S$ with $x \in \mathrm{span}(S \setminus \{x\})$.
+  Thus, there exist $m$ scalars $a_1, \dots, a_m \in F$ and
+  $m$ distinct vectors $x_1, \dots, x_m \in S \setminus \{x\}$ such that
+  \begin{equation*}
+    x = a_1x_1 + \cdots + a_mx_m,
+  \end{equation*}
+  which implies
+  \begin{equation*}
+    a_1x_1 + \cdots + a_mx_m + (-1_F)x = 0_V.
+  \end{equation*}
+  ($\Leftarrow$) Suppose that there are $n$ scalars $a_1, \dots, a_n \in F$
+  and $n$ distinct vectors $x_1, \dots, x_n \in S$, where $a_1 \neq 0_F$,
+  such that
+  \begin{equation*}
+    a_1x_1 + a_2x_2 + \cdots + a_nx_n = 0_V.
+  \end{equation*}
+  Then we have
+  \begin{align*}
+    x_1
+    &= a_1^{-1}(a_1x_1) \\
+    &= a_1^{-1}(-(a_2x_2 + \cdots + a_nx_n)) \\
+    &= (-a_1^{-1}a_2)x_2 + \cdots + (-a_1^{-1}a_n)x_n \\
+    &\in \mathrm{span}(S \setminus \{x_1\}).
+  \end{align*}
+  Thus, $S$ is linearly dependent.
+\end{proof}
+
+\begin{example}
+  Let $S = \{1, 1+2x, 1+2x+3x^2, 1+2x+3x^2+4x^3\}$ be a subset of
+  $\mathcal{P}_3(\mathbb{R})$.
+  Then $S$ is linearly independent since the only solution to the
+  following system of linear equations
+  \begin{equation*}
+    \setlength\arraycolsep{0pt}
+    \begin{array}{r>{{}}c<{{}}r>{{}}c<{{}}r>{{}}c<{{}}r@{{}={}}r}
+      a_1 & &      & &      & &      & 0 \\
+      a_1 &+& 2a_2 & &      & &      & 0 \\
+      a_1 &+& 2a_2 &+& 3a_3 & &      & 0 \\
+      a_1 &+& 2a_2 &+& 3a_3 &+& 4a_4 & 0 \\
+    \end{array}
+  \end{equation*}
+  is $a_1 = a_2 = a_3 = a_4 = 0$.
+\end{example}
+
+\begin{theorem}\label{thm:linear-dependence-subset}
+  Let $(V, +, \cdot)$ be a vector space, and let $R \subseteq S \subseteq V$.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item If $R$ is linearly dependent, then $S$ is linearly dependent.
+    \item If $S$ is linearly independent, then $R$ is linearly independent.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item If $R$ is linearly dependent, then there exists $x \in R$ such that
+      $x \in \mathrm{span}(R \setminus \{x\})$.
+      By $R \subseteq S$, we have
+      $R \setminus \{x\} \subseteq S \setminus \{x\}$.
+      Since $x \in S$ and $x \in \mathrm{span}(S \setminus \{x\})$, $S$ is
+      linearly dependent.
+    \item Suppose that $S$ is linearly independent.
+      If $R$ is linearly dependent, then $S$ is linearly dependent by (a),
+      contradiction.
+      Thus, $R$ is linearly independent. \qedhere
+  \end{enumerate}
+\end{proof}
