@@ -6,4 +6,4 @@ all: linear-algebra.pdf
 	$(TEX) $^ && $(TEX) $^
 
 clean:
-	rm *.aux *.log *.out *.pdf
+	rm -f *.aux *.log *.out *.pdf
