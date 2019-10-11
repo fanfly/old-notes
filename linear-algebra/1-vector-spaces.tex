@@ -728,23 +728,22 @@
 \end{definition}
 
 \begin{example}
-  Since $\mathrm{span}(\varnothing) = \{0_V\}$ and $\varnothing$ is linearly
-  independent, $\varnothing$ is a basis of $\{0_V\}$.
-\end{example}
-\begin{example}
-  Let $S = \{x_1, \dots, x_n\}$ be a subset of $F^n$ with
-  $(x_i)_j = [\![i = j]\!]$ for all $i, j \in \{1, \dots, n\}$.
-  Then $S$ is called the \emph{standard basis} of $F^n$.
-\end{example}
-\begin{example}
-  The set $S = \{1_F, x, x^2, \dots, x^n\}$ is the called the
-  \emph{standard basis} of $\mathcal{P}_n(F)$.
+  Following are some examples of bases.
+  \begin{itemize}
+    \item Since $\mathrm{span}(\varnothing) = \{0_V\}$ and $\varnothing$ is
+      linearly independent, $\varnothing$ is a basis of $\{0_V\}$.
+    \item Let $S = \{x_1, \dots, x_n\}$ be a subset of $F^n$ with
+      $(x_i)_j = [\![i = j]\!]$ for all $i, j \in \{1, \dots, n\}$.
+      Then $S$ is called the \emph{standard basis} of $F^n$.
+    \item The set $S = \{1_F, x, x^2, \dots, x^n\}$ is the called the
+      \emph{standard basis} of $\mathcal{P}_n(F)$.
+  \end{itemize}
 \end{example}
 
 \begin{theorem}\label{thm:finite-basis-existence}
   Let $(V, +, \cdot)$ be a vector space over $F$.
-  If there exists a finite set $S$ that spans $V$,
-  then $V$ has a finite basis.
+  If there exists a finite set $S$ that spans $V$, then there is a subset
+  $Q$ of $S$ that is a finite basis of $V$.
 \end{theorem}
 \begin{proof}
   By \Cref{thm:linearly-independent-subset}, there exists
@@ -820,4 +819,86 @@
   \Cref{thm:linear-independence-implication}, and thus $|Q'| \leq |S|$ by
   \Cref{thm:replacement}, contradiction to $|Q'| = |S| + 1$.
   Therefore, $Q$ is finite.
+\end{proof}
+
+\begin{theorem}\label{thm:dimension}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  If $V$ has a finite basis, then all bases of $V$ have the same size.
+\end{theorem}
+\begin{proof}
+  Let $S$ be a finite basis of $V$ and let $Q$ be an arbitrary basis of $V$.
+  Since $V = \mathrm{span}(S)$ and $Q$ is linearly independent, it
+  follows that $Q$ is finite, and thus $|Q| \leq |S|$ by
+  replacement theorem (\Cref{thm:replacement}).
+
+  Also, since $V = \mathrm{span}(Q)$ and $S$ is linearly independent,
+  we have $|S| \leq |Q|$ by replacement theorem (\Cref{thm:replacement}).
+  Thus, $|Q| = |S|$.
+\end{proof}
+
+\begin{definition}
+  A vector space $(V, +, \cdot)$ over $F$ is called \emph{finite-dimensional}
+  if it has a finite basis.
+  A vector space that is not finite-dimensional is called
+  \emph{infinite-dimensional}.
+\end{definition}
+
+\begin{definition}
+  The number of vectors in each basis of a finite-dimensional vector space $V$
+  is called the \emph{dimension} of $V$ and is denoted by $\mathrm{dim}(V)$.
+\end{definition}
+
+\begin{example}
+  We have $\mathrm{dim}(\{0_V\}) = 0$, $\mathrm{dim}(F^n) = n$, and
+  $\mathrm{dim}(\mathcal{P}_n(F)) = n + 1$.
+\end{example}
+
+\begin{example}
+  The dimension of a vector space depends on its field of scalars.
+  \begin{itemize}
+    \item If $V = \mathbb{C}$ is a vector space over $\mathbb{R}$, then
+      $\mathrm{dim}(V) = 2$ since $\{1, i\}$ is a basis of $V$.
+    \item If $W = \mathbb{C}$ is a vector space over $\mathbb{C}$, then
+      $\mathrm{dim}(W) = 1$ since $\{1\}$ is a basis of $W$.
+  \end{itemize}
+\end{example}
+
+\begin{theorem}\label{thm:basis-equivalence}
+  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Then a subset of $V$ of $n = \mathrm{dim}(V)$ vectors is linearly
+  independent if and only if it is a spanning set of $V$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$) Suppose that $Q$ is linearly independent with $|Q| = n$.
+  By replacement theorem (\Cref{thm:replacement}), there exists
+  $R \subseteq S \setminus Q$ such that $|Q \cup R| = |S|$ and
+  $\mathrm{span}(Q \cup R) = V$.
+  Since $|Q| = |S|$, we have $|R| = 0$, i.e., $R = \varnothing$.
+  Thus, $\mathrm{span}(Q) = V$.
+
+  ($\Leftarrow$) Suppose that $S$ spans $V$ with $|S| = n$.
+  By \Cref{thm:finite-basis-existence}, there is a subset $Q$ of $S$
+  that is a basis of $V$.
+  Then we have $|Q| = n$, implying $Q = S$.
+  Thus, $S$ is a basis of $V$.
+\end{proof}
+
+\begin{theorem}\label{thm:subspace-dimension}
+  Let $(V, +, \cdot)$ be a finite-dimensional vector space over $F$,
+  and let $V'$ be a subspace of $V$. Then the following statements hold.
+  \begin{enumerate}
+    \item $\mathrm{dim}(V') \leq \mathrm{dim}(V)$.
+    \item If $\mathrm{dim}(V') = \mathrm{dim}(V)$, then $V' = V$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Let $S$ be a basis of $V$ and let $S'$ be a basis of $V'$.
+  \begin{enumerate}
+    \item Since $S'$ is linearly independent and $V = \mathrm{span}(S)$,
+      we have $|S'| \leq |S|$ by replacement theorem (\Cref{thm:replacement}).
+      Thus, $\mathrm{dim}(V') \leq \mathrm{dim}(V)$.
+    \item Since $S'$ is linearly independent and $|S'| = \mathrm{dim}(V)$,
+      we have $\mathrm{span}(S') = V$ by \Cref{thm:basis-equivalence}.
+      Thus, $V' = \mathrm{span}(S') = V$. \qedhere
+  \end{enumerate}
 \end{proof}
