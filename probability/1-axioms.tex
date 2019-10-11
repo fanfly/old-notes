@@ -1,0 +1,199 @@
+\chapter{Axioms of Probability}
+\section{Sample Space and Events}
+\begin{definition}
+  The set of all possible outcomes of an experiment is called the
+  \emph{sample space} of the experiment and is denoted by $\Omega$.
+\end{definition}
+\begin{example}
+  If the experiment consists of tossing two dice, then the sample space is
+  \begin{equation*}
+    \Omega = \{ (i, j): i, j \in \{1, 2, 3, 4, 5, 6\} \}.
+  \end{equation*}
+\end{example}
+
+\begin{definition}
+  Let $\Omega$ be a sample space of an experiment.
+  A subset $\Sigma$ of the power set of $\Omega$ is called a
+  \emph{$\sigma$-algebra} if the following conditions hold.
+  \begin{enumerate}
+    \item $\Omega \in \Sigma$.
+    \item For all $E \in \Sigma$,
+      $\Omega \setminus E \in \Sigma$.
+    \item If $E_1, E_2, \dots$ is a sequence of elements in $\Sigma$, then
+      \begin{equation*}
+        \bigcup_{i=1}^\infty E_i \in \Sigma.
+      \end{equation*}
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  A pair $(\Omega, \Sigma)$ where $\Sigma$ is a $\sigma$-algebra in $\Omega$
+  is called a \emph{measurable space}.
+\end{definition}
+
+\begin{definition}
+  In a measurable space $(\Omega, \Sigma)$, each element of $\Sigma$ is called
+  an \emph{event} of $\Omega$ (in $\Sigma$).
+\end{definition}
+\begin{remark}
+  An event of $\Omega$ is a subset of $\Omega$.
+\end{remark}
+
+\begin{definition}
+  Two events $E$ and $F$ are \emph{mutually exclusive} if
+  $E \cap F = \varnothing$.
+\end{definition}
+
+\begin{definition}
+  Let $(\Omega, \Sigma)$ be a measurable space.
+  A function $P: \Sigma \to \mathbb{R}$ is called a
+  \emph{probability function} and $(\Omega, \Sigma, P)$ is a
+  \emph{probability space} if the following conditions hold.
+  \begin{enumerate}
+    \item For all $E \in \Sigma$, $P(E) \geq 0$.
+    \item $P(\Omega) = 1$.
+    \item If $E_1, E_2, \dots$ is a sequence of events that are pairwise
+      mutually exclusive, then
+      \begin{equation*}
+        P\left(\bigcup_{i=1}^\infty E_i\right)
+        = \sum_{i=1}^\infty P(E_i).
+      \end{equation*}
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}\label{thm:probability}
+  Let $(\Omega, \Sigma, P)$ be a probability space.
+  Let $E, F \in \Sigma$.
+  Then $P(F \setminus E) = P(F) - P(E \cap F)$.
+\end{theorem}
+\begin{proof}
+  Since $E \cap F$ and $F \setminus E$ are mutually exclusive, we have
+  \begin{equation*}
+    P(F)
+    = P((E \cap F) \cup (F \setminus E))
+    = P(E \cap F) + P(F \setminus E).
+  \end{equation*}
+  Thus, $P(F \setminus E) = P(F) - P(E \cap F)$.
+\end{proof}
+
+\begin{corollary}
+  $P(\Omega \setminus E) = 1 - P(E)$ holds for any event $E$,
+  implying $P(\varnothing) = 0$.
+\end{corollary}
+
+\begin{corollary}
+  If $E \subseteq F$, then $P(E) \leq P(F)$
+  because $P(F) - P(E) = P(F \setminus E) \geq 0$.
+\end{corollary}
+
+\begin{theorem}[Inclusive-exclusive Principle]\label{thm:addition}
+  Let $(\Omega, \Sigma, P)$ be a probability space.
+  If $E_1, \dots, E_n \in \Sigma$, then
+  \begin{equation*}
+    P\left(\bigcup_{i=1}^n E_i\right)
+    = \sum_{r=1}^n (-1)^{r+1} \sum_{1 \leq i_1 < \cdots < i_r \leq n}
+      P(E_{i_1} \cap \cdots \cap E_{i_r}).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  The proof is by induction on $n$.
+  The theorem holds for $n = 0$ and $n = 1$ trivially.
+  For $n = 2$, since $E_1 \cap E_2$ and $E_1 \setminus E_2$ are mutually
+  exclusive, we have
+  \begin{equation*}
+    P(E_1) = P((E_1 \cap E_2) \cup (E_1 \setminus E_2))
+           = P(E_1 \cap E_2) + P(E_1 \setminus E_2).
+  \end{equation*}
+  Thus, since $E_1 \setminus E_2$ and $E_2$ are mutually exclusive, we have
+  \begin{align*}
+    P(E_1 \cup E_2)
+    &= P((E_1 \setminus E_2) \cup E_2) \\
+    &= P(E_1 \setminus E_2) + P(E_2) \\
+    &= P(E_1) - P(E_1 \cap E_2) + P(E_2).
+  \end{align*}
+
+  Now suppose that the theorem holds for some $n \geq 2$, and we prove that
+  the theorem is true for $n + 1$.
+  Since $E_1 \cup \cdots \cup E_n$ and $E_{n+1}$ are mutually exclusive, we
+  have
+  \begin{equation*}
+    P(E_1 \cup \cdots \cup E_n \cup E_{n+1})
+    = P(E_1 \cup \cdots \cup E_n) + P(E_{n+1})
+      - P((E_1 \cup \cdots \cup E_n) \cap E_{n+1}),
+  \end{equation*}
+  where the first term can be written as
+  \begin{equation*}
+    P(E_1 \cup \cdots \cup E_n)
+    = \sum_{r=1}^n (-1)^{r+1} \sum_{1 \leq i_1 < \cdots < i_r \leq n}
+      P(E_{i_1} \cap \cdots \cap E_{i_r}),
+  \end{equation*}
+  and the last term can be written as
+  \begin{align*}
+    &\;P((E_1 \cup \cdots \cup E_n) \cap E_{n+1}) \\
+    &= P((E_1 \cap E_{n+1}) \cup \cdots \cup (E_k \cap E_{n+1})) \\
+    &= \sum_{s=1}^n (-1)^{s+1} \sum_{1 \leq i_1 \cdots \leq i_s \leq n}
+       P((E_{i_1} \cap E_{n+1}) \cap \cdots \cap (E_{i_s} \cap E_{n+1})) \\
+    &= \sum_{s=1}^n (-1)^{s+1} \sum_{1 \leq i_1 \cdots \leq i_s \leq n}
+       P(E_{i_1} \cap \cdots \cap E_{i_s} \cap E_{n+1}) \\
+    &= -\sum_{r=2}^{n+1} (-1)^{r+1}
+       \sum_{\substack{1 \leq i_1 \cdots \leq i_{r-1} \leq n \\ i_r = n+1}}
+       P(E_{i_1} \cap \cdots \cap E_{i_{r-1}} \cap E_{i_r}).
+  \end{align*}
+  
+  Now we consider $r$, which is the number of sets in each intersection.
+  The second term is actually the case with $r = 1$, and the last term
+  consists of the cases with $r \geq 2$. Thus,
+  \begin{equation*}
+    P(E_{n+1}) - P((E_1 \cup \cdots E_n) \cap E_{n+1})
+    = \sum_{r=1}^n (-1)^{r+1}
+      \sum_{\substack{1 \leq i_1 \cdots \leq i_{r-1} \leq n \\ i_r = n+1}}
+      P(E_{i_1} \cap \cdots \cap E_{i_r}).
+  \end{equation*}
+  Furthermore, note that the first term consists of the case where $E_{n+1}$
+  does not appear in the intersection, while the difference above consists
+  of the case where $E_{n+1}$ appears in the intersection.
+  Thus, by summing up all terms, we have
+  \begin{equation*}
+    P(E_1 \cup \cdots \cup E_n \cup E_{n+1})
+    = \sum_{r=1}^{n+1} (-1)^{r+1}
+      \sum_{1 \leq i_1 \leq \cdots \leq i_r \leq n+1}
+      P(E_{i_1} \cap \cdots \cap E_{i_r}),
+  \end{equation*}
+  which completes the proof.
+\end{proof}
+\begin{example}
+  For any three events $E_1, E_2, E_3$, we have $P(E_1 \cup E_2 \cup E_3) =
+  P(E_1) + P(E_2) + P(E_3) - P(E_1 \cap E_2) - P(E_2 \cap E_3)
+  - P(E_3 \cap E_1) + P(E_1 \cap E_2 \cap E_3)$.
+\end{example}
+
+\section{Sample Spaces with Equally Likely Outcomes}
+\begin{theorem}
+  Let $\Omega = \{\omega_1, \dots, \omega_n\}$ be a finite sample space and
+  let $P$ be a probability function such that
+  $P(\{\omega_i\}) = P(\{\omega_j\})$ for $i, j \in \{1, \dots, n\}$.
+  Then for each event $E \subseteq \Omega$ with $|E| = k$, we have
+  \begin{equation*}
+    P(E) = \frac{k}{n}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $p$ denote the probability of each elementary event $\{\omega_i\}$ for
+  all $i \in \{1, \dots, n\}$. Then we have
+  \begin{equation*}
+    1 = P(\Omega)
+      = P\left(\bigcup_{i=1}^n \{\omega_i\}\right)
+      = \sum_{i=1}^n P(\{\omega_i\})
+      = np.
+  \end{equation*}
+  Thus,
+  \begin{equation*}
+    p = \frac{1}{n}.
+  \end{equation*}
+  Let $E = \{\omega_{i_1}, \dots, \omega_{i_k}\}$. Then
+  \begin{equation*}
+    P(E) = P\left(\bigcup_{r=1}^k \{\omega_{i_r}\}\right)
+         = \sum_{r=1}^k P(\{\omega_{i_r}\})
+         = \frac{k}{n}. \qedhere
+  \end{equation*}
+\end{proof}
