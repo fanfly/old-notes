@@ -1,0 +1,50 @@
+\chapter{Conditional Probability and Independence}
+\section{Conditional Probability}
+\begin{definition}
+  Let $(\Omega, \Sigma, P)$ be a probability space.
+  If $E$ is an event with $P(E) > 0$, then define
+  \begin{equation*}
+    P(F \mid E) = \frac{P(E \cap F)}{P(E)}
+  \end{equation*}
+  for any event $F$.
+\end{definition}
+
+\begin{theorem}
+  Let $(\Omega, \Sigma, P)$ be a probability space.
+  If $E$ is an event with $P(E) > 0$, then the function
+  $P_E: \Sigma \to \mathbb{R}$ is a probability function if
+  \begin{equation*}
+    P_E(F) = P(F \mid E)
+  \end{equation*}
+  for any event $F$.
+\end{theorem}
+\begin{proof}
+  For events $E$ and $F$,
+  \begin{equation*}
+    P_E(F) = \frac{P(E \cap F)}{P(E)} \geq 0.
+  \end{equation*}
+  Moreover,
+  \begin{equation*}
+    P_E(\Omega) = \frac{P(E \cap \Omega)}{P(E)}
+                = \frac{P(E)}{P(E)}
+                = 1.
+  \end{equation*}
+  If $F_1, F_2, \dots$ is a sequence of events that are piecewise
+  mutually exclusive, then
+  \begin{align*}
+    P_E\left(\bigcup_{i=1}^\infty F_i\right)
+    = \frac{P\Big(E \cap \bigcup_{i=1}^\infty F_i\Big)}
+           {P(E)}
+    = \frac{P\Big(\bigcup_{i=1}^\infty (E \cap F_i)\Big)}
+           {P(E)}
+    = \sum_{i=1}^\infty \frac{P(E \cap F_i)}{P(E)}
+    = \sum_{i=1}^\infty P_E(F_i).
+  \end{align*}
+  Thus, $P_E$ is a probability function.
+\end{proof}
+
+\section{Bayes's Formula}
+
+\section{Independence}
+
+\section{Conditional Independence}
