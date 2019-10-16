@@ -43,8 +43,78 @@
   Thus, $P_E$ is a probability function.
 \end{proof}
 
-\section{Bayes's Formula}
+\section{Bayes' Formula}
+\begin{definition}
+  A \emph{partition} of $\Omega$ is a family of nonempty events such that
+  each element in $\Omega$ is in exactly one of these events.
+\end{definition}
+
+\begin{theorem}\label{thm:total-probability}
+  Let $E_1, \dots, E_n$ form a partition of $\Omega$ such that $P(E_i) > 0$
+  for each $i \in \{1, \dots, n\}$.
+  Then for any event $F$,
+  \begin{equation*}
+    P(F) = \sum_{i=1}^n P(F \mid E_i)P(E_i).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Since
+  \begin{equation*}
+    F = F \cap \Omega
+      = F \cap \bigcup_{i=1}^n E_i
+      = \bigcup_{i=1}^n (F \cap E_i),
+  \end{equation*}
+  it follows that
+  \begin{equation*}
+    P(F)
+    = P\left(\bigcup_{i=1}^n (F \cap E_i)\right)
+    = \sum_{i=1}^n P(F \cap E_i)
+    = \sum_{i=1}^n P(F \mid E_i)P(E_i). \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Bayes' Formula]\label{thm:bayes}
+  Let $E_1, \dots, E_n$ form a partition of $\Omega$ such that $P(E_j) > 0$
+  for each $j \in \{1, \dots, n\}$.
+  Then for any event $F$ with $P(F) > 0$, for any $i \in \{1, \dots, n\}$,
+  we have
+  \begin{equation*}
+    P(E_i \mid F) = \frac{P(F \mid E_i)P(E_i)}
+                         {\sum_{j=1}^n P(F \mid E_j)P(E_j)}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  By \Cref{thm:total-probability}, we have
+  \begin{equation*}
+    P(E_i \mid F)
+    = \frac{P(E_i \cap F)}{P(F)}
+    = \frac{P(F \mid E_i)P(E_i)}
+           {\sum_{j=1}^n P(F \mid E_j)P(E_j)}. \qedhere
+  \end{equation*}
+\end{proof}
 
 \section{Independence}
+\begin{definition}
+  Let $E_1, \dots, E_n$ be events in a probability space
+  $(\Omega, \Sigma, P)$.
+  \begin{itemize}
+    \item $E_1, \dots, E_n$ are \emph{independent} if
+      \begin{equation*}
+        P\left(\bigcap_{i \in I} E_i\right)
+        = \prod_{i \in I} P(E_i)
+      \end{equation*}
+      holds for any nonempty subset $I$ of $\{1, \dots, n\}$.
+    \item $E_1, \dots, E_n$ are \emph{dependent} if they are not independent.
+  \end{itemize}
+\end{definition}
 
-\section{Conditional Independence}
+\begin{definition}
+  Let $E_1, \dots, E_n$ and $F$ be events in a probability space
+  $(\Omega, \Sigma, P)$, where $P(F) > 0$.
+  Then $E_1, \dots, E_n$ are \emph{independent given event $F$} if
+  \begin{equation*}
+    P\left(\bigcap_{i \in I} E_i \;\Bigg|\; F\right)
+    = \prod_{i \in I} P(E_i \mid F)
+  \end{equation*}
+  holds for any nonempty subset $I$ of $\{1, \dots, n\}$.
+\end{definition}
