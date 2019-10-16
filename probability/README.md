@@ -9,6 +9,5 @@ This study note is based on the textbook *A First Course in Probability, 9th Edi
   * Sample Spaces with Equally Likely Outcomes
 * Conditional Probability and Independence
   * Conditional Probability
-  * Bayes's Formula
+  * Bayes' Formula
   * Independence
-  * Conditional Independence
