@@ -9,3 +9,6 @@ This study note is based on the textbook *Linear Algebra, 4th Edition, by Friedb
   * Vector Spaces
   * Subspaces
   * Spanning Sets
+  * Bases and Dimension
+* Linear Transformations
+  * Linear Transformations, Null Spaces and Ranges

@@ -1,0 +1,167 @@
+\chapter{Linear Transformations}
+\section{Linear Transformations, Null Spaces and Ranges}
+\begin{definition}
+  Let $f: X \to Y$ be a function.
+  \begin{itemize}
+    \item $f$ is \emph{injective} (i.e, $f$ is an \emph{injection})
+      if $T(x) = T(x')$ implies $x = x'$ for $x, x' \in X$.
+    \item $f$ is \emph{surjective} (i.e., $f$ is a \emph{surjection})
+      if for each $y \in Y$, there exists some $x \in X$ with $T(x) = y$.
+    \item $f$ is \emph{bijective} (i.e., $f$ is a \emph{bijection})
+      if $f$ is injective and surjective.
+  \end{itemize}
+\end{definition}
+\begin{remark}
+  If both domain and codomain of a function are vector spaces, then the
+  function is usually said to be a \emph{transformation}.
+  Furthermore, it is said to be an \emph{operator} if its domain and codomain
+  are the same.
+\end{remark}
+
+\begin{definition}
+  Let $V$ and $W$ be vector spaces over $F$.
+  A transformation $T: V \to W$ is \emph{linear} if the following statements
+  hold.
+  \begin{enumerate}
+    \item $T(x + y) = T(x) + T(y)$ for all $x, y \in V$.
+    \item $T(ax) = aT(x)$ for all $a \in F$ and $x \in V$.
+  \end{enumerate}
+  The set of all linear transformations from $V$ to $W$ is denoted by
+  $\mathcal{L}(V, W)$.
+  In the case that $V = W$, we write $\mathcal{L}(V)$ for short.
+\end{definition}
+
+\begin{example}
+  The \emph{zero transformation} from $V$ to $W$ is the transformation
+  $O_{V, W}: V \to W$ that satisfies $O_{V, W}(x) = 0_W$
+  for all $x \in V$.
+  It is clear that $O_{V, W} \in \mathcal{L}(V, W)$.
+\end{example}
+\begin{example}
+  The \emph{identity transformation} on $V$ is the transformation
+  $I_V: V \to V$ that satisfies $I_V(x) = x$ for all $x \in V$.
+  It is clear that $I_{V} \in \mathcal{L}(V)$.
+\end{example}
+\begin{example}
+  Recall that $\mathcal{P}(F)$ is the set of polynomials with coefficients in
+  $F$.
+  \begin{itemize}
+    \item The differential operator
+      $D: \mathcal{P}(\mathbb{R}) \to \mathcal{P}(\mathbb{R})$
+      with $D(f) = f'$ for $f \in \mathcal{P}(\mathbb{R})$, where $f'$ is the
+      derivative of $f$, is linear.
+    \item The operator
+      $T: \mathcal{P}(\mathbb{R}) \to \mathcal{P}(\mathbb{R})$ such that
+      for $f \in \mathcal{P}(\mathbb{R})$,
+      \begin{equation*}
+        (T(f))(x) = \int_0^x f(t) dt
+      \end{equation*}
+      for all $x \in \mathbb{R}$, is linear.
+  \end{itemize}
+\end{example}
+
+\begin{theorem}
+  If $V$ and $W$ are vector spaces over $F$, then $\mathcal{L}(V, W)$ is also
+  a vector space over $F$.
+\end{theorem}
+\begin{proof}
+  $\mathcal{L}(V, W)$ is a vector space because it is a subspace of
+  $\mathcal{F}(V, W)$, which is proved as follows.
+  \begin{enumerate}
+    \item If $T_1, T_2 \in \mathcal{L}(V, W)$, then $T_1 + T_2$ is linear
+      because
+      \begin{align*}
+        (T_1 + T_2)(x + y)
+        &= T_1(x + y) + T_2(x + y) \\
+        &= T_1(x) + T_1(y) + T_2(x) + T_2(y) \\
+        &= T_1(x) + T_2(x) + T_1(y) + T_2(y) \\
+        &= (T_1 + T_2)(x) + (T_1 + T_2)(y)
+      \end{align*}
+      and
+      \begin{align*}
+        (T_1 + T_2)(cx)
+        &= T_1(cx) + T_2(cx) \\
+        &= cT_1(x) + cT_2(x) \\
+        &= c(T_1(x) + T_2(x)) \\
+        &= c(T_1 + T_2)(x)
+      \end{align*}
+      hold for $x, y \in V$ and $c \in F$.
+    \item If $T \in \mathcal{L}(V, W)$ and $a \in F$, then $aT$ is linear
+      because
+      \begin{align*}
+        (aT)(x + y)
+        &= aT(x + y) \\
+        &= a(T(x) + T(y)) \\
+        &= aT(x) + aT(y) \\
+        &= (aT)(x) + (aT)(y)
+      \end{align*}
+      and
+      \begin{align*}
+        (aT)(cx) = aT(cx) = a(cT(x)) = c(aT(x)) = c(aT)(x)
+      \end{align*}
+      hold for $x, y \in V$ and $c \in F$.
+    \item It is clear that $O_{V, W} \in \mathcal{L}(V, W)$.
+      \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
+  \begin{itemize}
+    \item The \emph{null space} $N(T)$ of $T$ is the set of vectors $x \in V$
+      with $T(x) = 0_W$; that is,
+      \begin{equation*}
+        N(T) = \{x \in V: T(x) = 0_W\}.
+      \end{equation*}
+    \item The \emph{range} $R(T)$ of $T$ is the image of $V$ under $T$;
+      that is,
+      \begin{equation*}
+        R(T) = \{T(x): x \in V\}.
+      \end{equation*}
+  \end{itemize}
+\end{definition}
+\begin{example}
+  Let $D: \mathcal{P}(\mathbb{R}) \to \mathcal{P}(\mathbb{R})$ be the
+  differential operator. Then
+  \begin{equation*}
+    N(D) = \{a_0: a_0 \in \mathbb{R}\}
+    \quad \text{and}
+    \quad R(D) = \mathcal{P}(\mathbb{R}).
+  \end{equation*}
+\end{example}
+
+\begin{theorem}
+  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
+  Then $N(T)$ and $R(T)$ are subspaces of $V$ and $W$, respectively.
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item Let $x, x' \in N(T)$ and $a \in F$. Then we have
+      $T(x + x') = T(x) + T(x') = 0_W + 0_W = 0_W$,
+      $T(ax) = aT(x) = a0_W = 0_W$
+      and $T(0_V) = 0_W$.
+      Thus, $N(T)$ is a subspace of $V$.
+    \item Let $y, y' \in R(T)$ and $a \in F$. There exist $x, x' \in V$
+      with $y = T(x)$ and $y' = T(x')$. Then we have
+      $y + y' = T(x) + T(x') = T(x + x')$,
+      $ay = aT(x) = T(ax)$
+      and $0_W = T(0_V)$.
+      Thus, $R(T)$ is a subspace of $W$. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
+  \begin{itemize}
+    \item The \emph{nullity} of $T$, denoted by $\mathrm{nullity}(T)$,
+      is the dimension of $N(T)$.
+    \item The \emph{rank} of $T$, denoted by $\mathrm{rank}(T)$,
+      is the dimension of $R(T)$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}[Rank-nullity Theorem]
+  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
+  If $V$ is finite-dimensional, then
+  $\mathrm{nullity}(T) + \mathrm{rank}(T) = \mathrm{dim}(V)$.
+\end{theorem}
