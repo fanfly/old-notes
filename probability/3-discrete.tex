@@ -1,0 +1,247 @@
+\chapter{Discrete Random Variables}
+\section{Discrete Random Variables}
+\begin{definition}
+  Let $X: \Omega \to \mathbb{R}$ be a function in a probability space
+  $(\Omega, \Sigma, P)$.
+  Then $X$ is called a \emph{random variable} if for each
+  $S \in \mathcal{B}$, its preimage
+  \begin{equation*}
+    X^{-1}(S) = \{\omega \in \Omega : X(\omega) \in S\}
+  \end{equation*}
+  is an element of $\Sigma$.
+  \begin{itemize}
+    \item A random variable is \emph{discrete} if its range is countable.
+    \item A random variable is \emph{continuous} if its range is uncountable.
+  \end{itemize}
+\end{definition}
+\begin{remark}
+  Since each $S \in \mathcal{B}$ is mapped to a event $X^{-1}(S) \in \Sigma$,
+  we will abuse the notation, using conditions related to a ramdom variable
+  to denote events.
+  For example,
+  \begin{equation*}
+    P(-1 \leq X \leq 1) = P(\{\omega \in \Omega: -1 \leq X(\omega) \leq 1\}).
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Let $X$ be a random variable in a probability space $(\Omega, \Sigma, P)$.
+  The \emph{probability mass function} $p_X: \mathbb{R} \to \mathbb{R}$ of $X$
+  is defined as
+  \begin{equation*}
+    p_X(x) = P(X = x)
+  \end{equation*}
+  for each $x \in \mathbb{R}$.
+\end{definition}
+
+\section{Expectation and Variance}
+\begin{definition}
+  Let $X$ be a discrete random variable in a probability space
+  $(\Omega, \Sigma, P)$.
+  Then the \emph{expectation} of $X$, denoted by $E[X]$, is defined as
+  follows.
+  \begin{itemize}
+    \item If $X$ is nonnegative, i.e, $X(\omega) \geq 0$ for each
+      $\omega \in \Omega$, then
+      \begin{equation*}
+        E[X] = \sum_{x \in X(\Omega)} x \cdot p_X(x).
+      \end{equation*}
+    \item Otherwise, we define $E[X] = E[X^+] - E[X^-]$,
+      where $X^+ = \max\{X, 0\}$ and $X^- = \max\{-X, 0\}$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $X$ and $Y$ be discrete random variables in a probability space
+  $(\Omega, \Sigma, P)$.
+  If both $E[X]$ and $E[Y]$ exist, then the following statements are true.
+  \begin{enumerate}
+    \item $E[aX] = aE[X]$ for $a \in \mathbb{R}$.
+    \item $E[X + Y] = E[X] + E[Y]$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item First, suppose that $a \geq 0$. If $X$ is nonnegative, then
+      so is $aX$. Thus, we have
+      \begin{equation*}
+        E[aX]
+        = \sum_{x \in X(\Omega)} ax \cdot p_X(x)
+        = aE[X].
+      \end{equation*}
+      If $X$ is not nonnegative, by the fact that $(aX)^+ = aX^+$ and
+      $(aX)^- = aX^-$, we have
+      \begin{align*}
+        E[aX]
+        = E[aX^+] - E[aX^-]
+        = aE[X^+] - aE[X^-]
+        = aE[X].
+      \end{align*}
+      since $X^+$ and $X^-$ are nonnegative.
+      Thus the statement holds for $a \geq 0$.
+
+      For the case that $a < 0$, note that since $(-X)^+ = X^-$ and
+      $(-X)^- = X^+$, it follows that
+      \begin{equation*}
+        E[-X]
+        = E[X^-] - E[X^+]
+        = -E[X].
+      \end{equation*}
+      Thus, we have
+      \begin{equation*}
+        E[aX]
+        = E[(-a)(-X)]
+        = -aE[-X]
+        = aE[X].
+      \end{equation*}
+    \item To be completed. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $X$ be a discrete random variable in a probability space
+  $(\Omega, \Sigma, P)$.
+  Then the \emph{variance} of $X$ is defined as
+  \begin{equation*}
+    \mathrm{Var}(X) = E[(X - E[X])^2].
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a discrete random variable.
+  Then $\mathrm{Var}(X) = E[X^2] - (E[X])^2$.
+\end{theorem}
+\begin{proof}
+  It is proved by
+  \begin{align*}
+    \mathrm{Var}(X)
+    &= E[(X - E[X])]^2 \\
+    &= E[X^2 - 2X \cdot E[X] + (E[X])^2] \\
+    &= E[X^2] - 2E[X] \cdot E[X] + (E[X])^2 \\
+    &= E[X^2] - (E[X])^2. \qedhere
+  \end{align*}
+\end{proof}
+
+\section{Bernoulli and Binomial Random Variables}
+\begin{definition}
+  Let $0 \leq p \leq 1$.
+  A random variable $X$ is called a \emph{Bernoulli random variable} with
+  parameter $p$ if $p_X(1) = p$ and $p_X(0) = 1 - p$.
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a Bernoulli random variable with parameter $p$.
+  \begin{enumerate}
+    \item $E[X] = p$.
+    \item $\mathrm{Var}(X) = p(1 - p)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Since $p(0) + p(1) = 1$, we have $p(x) = 0$ for $x \notin \{0, 1\}$.
+  \begin{enumerate}
+    \item We have
+      \begin{equation*}
+        E[X] = \sum_{x\,:\,p_X(x) > 0} x \cdot p_X(X)
+             = 1 \cdot p + 0 \cdot (1 - p)
+             = p.
+      \end{equation*}
+    \item By (a), we have
+      \begin{align*}
+        \mathrm{Var}(X)
+        &= E[X^2] - (E[X])^2 \\
+        &= (1^2 \cdot p + 0^2 \cdot (1-p)) - p^2 \\
+        &= p - p^2 \\
+        &= p(1-p). \qedhere
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $n$ be a nonnegative integer and $0 \leq p \leq 1$.
+  A random variable $X$ is called a \emph{binomial random variable} with
+  parameter $(n, p)$, if
+  \begin{equation*}
+    p_X(x) = \binom{n}{x} p^x (1-p)^{n-x}
+  \end{equation*}
+  for each $x \in \{0, \dots, n\}$.
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a binomial random variable with parameter $(n, p)$.
+  \begin{enumerate}
+    \item $E[X] = np$.
+    \item $\mathrm{Var}(X) = np(1 - p)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We have $p(x) = 0$ for $x \notin \{0, \dots, n\}$ because
+  \begin{equation*}
+    \sum_{x=0}^n \binom{n}{x} p^x (1-p)^{n-x} = (p + (1-p))^n = 1.
+  \end{equation*}
+  Also, note that
+  \begin{align*}
+    E[X^k]
+    &= \sum_{x=0}^n x^k \binom{n}{x} p^x (1-p)^{n-x} \\
+    &= \sum_{x=1}^n x^k \binom{n}{x} p^x (1-p)^{n-x} \\
+    &= np \sum_{x=1}^n x^{k-1} \binom{n-1}{x-1} p^{x-1} (1-p)^{n-x} \\
+    &= np \sum_{y=0}^{n-1} (y+1)^{k-1} \binom{n-1}{y} p^y (1-p)^{(n-1)-y}
+       \tag{$\star$}
+  \end{align*}
+  holds for positive integer $k$.
+  \begin{enumerate}
+    \item By ($\star$), the expectation of $X$ is given by
+      \begin{align*}
+        E[X]
+        = np\sum_{y=0}^{n-1} \binom{n-1}{y} p^y (1-p)^{(n-1)-y}
+        = np.
+      \end{align*}
+    \item By ($\star$), we have
+      \begin{align*}
+        E[X^2]
+        = np\sum_{y=0}^{n-1} (y+1)\binom{n-1}{y} p^y (1-p)^{(n-1)-y}
+        = np((n-1)p+1).
+      \end{align*}
+      Thus, the variance of $X$ is given by
+      \begin{align*}
+        \mathrm{Var}(X)
+        &= E[X^2] - (E[X])^2 \\
+        &= np((n-1)p + 1) - (np)^2 \\
+        &= np(1 - p). \qedhere
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\section{Poisson Random Variable}
+\begin{theorem}
+  Let $\lambda > 0$.
+  For integer $n \geq \lambda$, let $X_n$ be a binomial random variable with
+  parameter $(n, \lambda/n)$. Then for nonnegative integer $x$, we have
+  \begin{equation*}
+    \lim_{n \to \infty}p_{X_n}(x) = e^{-\lambda} \cdot \frac{\lambda^x}{x!}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  For $n \geq \lambda$, we have
+  \begin{align*}
+    p_{X_n}(x)
+    &= \frac{n!}{(n-x)! \cdot x!} \cdot \left(\frac{\lambda}{n}\right)^x \left(\frac{n-\lambda}{n}\right)^{n-x} \\
+    &= \frac{\lambda^x}{x!} \cdot \frac{n!}{(n-x)! \cdot (n-\lambda)^x} \cdot \left(\frac{n-\lambda}{n}\right)^n \\
+    &= \frac{\lambda^x}{x!} \cdot \prod_{i=1}^{x} \frac{n+1-i}{n-\lambda} \cdot \left(1 - \frac{\lambda}{n}\right)^n.
+  \end{align*}
+  Thus,
+  \begin{equation*}
+    \lim_{n\to\infty} p_{X_n}(x)
+    = \frac{\lambda^x}{x!} \cdot \prod_{i=1}^x \left(\lim_{n\to\infty} \frac{n+1-i}{n-\lambda}\right) \cdot \lim_{n\to\infty}\left(1 - \frac{\lambda}{n}\right)^n
+    = \frac{\lambda^x}{x!} \cdot e^{-\lambda}. \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  Let $\lambda > 0$.
+  A random variable $X$ is called a \emph{Poisson random variable} with
+  parameter $\lambda$, if
+  \begin{equation*}
+    p_X(x) = e^{-x} \cdot \frac{\lambda^x}{x!}
+  \end{equation*}
+  holds for any nonnegative integer $x$.
+\end{definition}

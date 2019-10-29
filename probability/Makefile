@@ -1,4 +1,4 @@
-TEX := xelatex -interaction=nonstopmode -halt-on-error
+TEX := pdflatex -interaction=nonstopmode -halt-on-error
 
 all: probability.pdf
 
