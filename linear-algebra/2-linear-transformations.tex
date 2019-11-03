@@ -213,7 +213,7 @@
   Let $S$ be a basis for $V$ and $Q$ a basis for $\mathcal{N}(T)$.
   By corollary to replacement theorem (\Cref{thm:replacement}), there is
   $R \subseteq S \setminus Q$ such that $Q \cup R$ is a basis for $V$.
-  Since $|R| = |S| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T)$,
+  Since $|R| = |Q \cup R| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T)$,
   the theorem holds if $|R| = \mathrm{dim}(\mathcal{R}(T))$.
   
   If there exist different $x, x' \in R$ with $T(x) = T(x')$, then we have
@@ -255,5 +255,6 @@
   linearly independent.
 
   Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, and we can conclude that
-  $\mathrm{rank}(T) = |T(R)| = |R| = |S| - |Q|$, which completes the proof.
+  $\mathrm{rank}(T) = |T(R)| = |R| = |Q \cup R| - |Q|$,
+  which completes the proof.
 \end{proof}
