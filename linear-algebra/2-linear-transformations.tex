@@ -3,7 +3,7 @@
 \begin{definition}
   Let $f: X \to Y$ be a function.
   \begin{itemize}
-    \item $f$ is \emph{injective} (i.e, $f$ is an \emph{injection})
+    \item $f$ is \emph{injective} (i.e., $f$ is an \emph{injection})
       if $T(x) = T(x')$ implies $x = x'$ for $x, x' \in X$.
     \item $f$ is \emph{surjective} (i.e., $f$ is a \emph{surjection})
       if for each $y \in Y$, there exists some $x \in X$ with $T(x) = y$.
@@ -105,18 +105,61 @@
   \end{enumerate}
 \end{proof}
 
+\begin{theorem}\label{thm:linear-span}
+  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
+  Let $S$ be a subset of $V$ and let $U$ be a subspace of $V$.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item If $n$ is a nonnegative integer, then for $a_1, \dots, a_n \in F$
+      and $x_1, \dots, x_n \in V$, we have
+      \begin{equation*}
+        T\left(\sum_{i=1}^n a_ix_i\right) = a_i\sum_{i=1}^n T(x_i).
+      \end{equation*}
+    \item If $S$ spans $U$, then $T(S)$ spans $T(U)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item The proof is by induction on $n$. For $n = 0$, it holds trivially.
+      If the statement is true for some $n \geq 0$, then we have
+      \begin{align*}
+        T(a_1x_1 + \cdots + a_nx_n + a_{n+1}x_{n+1})
+        &= T(a_1x_1 + \cdots + a_nx_n) + T(a_{n+1}x_{n+1}) \\
+        &= a_1T(x_1) + \cdots + a_nT(x_n) + a_{n+1}T(x_{n+1}).
+      \end{align*}
+      Thus, the statement is true for nonnegative integer $n$.
+    \item We prove that $\mathrm{span}(T(S)) = T(U)$.
+      If $y \in \mathrm{span}(T(S))$, then there exist
+      $a_i \in F$, $x_i \in S$ for $i \in \{1, \dots, n\}$ such that
+      \begin{equation*}
+        y = \sum_{i=1}^n a_iT(x_i)
+          = T\left(\sum_{i=1}^n a_ix_i\right) \in T(U),
+      \end{equation*}
+      so $\mathrm{span}(T(S)) \subseteq T(U)$.
+
+      If $y \in T(U)$, then there exist
+      $a_i \in F$, $x_i \in S$ for $i \in \{1, \dots, n\}$ such that
+      \begin{equation*}
+        y = T\left(\sum_{i=1}^n a_ix_i\right)
+          = \sum_{i=1}^n a_iT(x_i) \in \mathrm{span}(T(S)),
+      \end{equation*}
+      so $T(U) \subseteq \mathrm{span}(T(S))$.
+      Thus, $\mathrm{span}(T(S)) = T(U)$. \qedhere
+  \end{enumerate}
+\end{proof}
+
 \begin{definition}
   Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
   \begin{itemize}
-    \item The \emph{null space} $N(T)$ of $T$ is the set of vectors $x \in V$
-      with $T(x) = 0_W$; that is,
+    \item The \emph{null space} $\mathcal{N}(T)$ of $T$ is the set of vectors
+      $x \in V$ with $T(x) = 0_W$; that is,
       \begin{equation*}
-        N(T) = \{x \in V: T(x) = 0_W\}.
+        \mathcal{N}(T) = \{x \in V: T(x) = 0_W\}.
       \end{equation*}
-    \item The \emph{range} $R(T)$ of $T$ is the image of $V$ under $T$;
-      that is,
+    \item The \emph{range} $\mathcal{R}(T)$ of $T$ is the image of $V$ under
+      $T$; that is,
       \begin{equation*}
-        R(T) = \{T(x): x \in V\}.
+        \mathcal{R}(T) = \{T(x): x \in V\}.
       \end{equation*}
   \end{itemize}
 \end{definition}
@@ -124,29 +167,30 @@
   Let $D: \mathcal{P}(\mathbb{R}) \to \mathcal{P}(\mathbb{R})$ be the
   differential operator. Then
   \begin{equation*}
-    N(D) = \{a_0: a_0 \in \mathbb{R}\}
+    \mathcal{N}(D) = \{a_0: a_0 \in \mathbb{R}\}
     \quad \text{and}
-    \quad R(D) = \mathcal{P}(\mathbb{R}).
+    \quad \mathcal{R}(D) = \mathcal{P}(\mathbb{R}).
   \end{equation*}
 \end{example}
 
-\begin{theorem}
+\begin{theorem}\label{thm:kernel-range-subspace}
   Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
-  Then $N(T)$ and $R(T)$ are subspaces of $V$ and $W$, respectively.
+  Then $\mathcal{N}(T)$ and $\mathcal{R}(T)$ are subspaces of $V$ and $W$,
+  respectively.
 \end{theorem}
 \begin{proof} \leavevmode
   \begin{enumerate}
-    \item Let $x, x' \in N(T)$ and $a \in F$. Then we have
+    \item Let $x, x' \in \mathcal{N}(T)$ and $a \in F$. Then we have
       $T(x + x') = T(x) + T(x') = 0_W + 0_W = 0_W$,
       $T(ax) = aT(x) = a0_W = 0_W$
       and $T(0_V) = 0_W$.
-      Thus, $N(T)$ is a subspace of $V$.
-    \item Let $y, y' \in R(T)$ and $a \in F$. There exist $x, x' \in V$
-      with $y = T(x)$ and $y' = T(x')$. Then we have
+      Thus, $\mathcal{N}(T)$ is a subspace of $V$.
+    \item Let $y, y' \in \mathcal{R}(T)$ and $a \in F$. There exist
+      $x, x' \in V$ with $y = T(x)$ and $y' = T(x')$. Then we have
       $y + y' = T(x) + T(x') = T(x + x')$,
       $ay = aT(x) = T(ax)$
       and $0_W = T(0_V)$.
-      Thus, $R(T)$ is a subspace of $W$. \qedhere
+      Thus, $\mathcal{R}(T)$ is a subspace of $W$. \qedhere
   \end{enumerate}
 \end{proof}
 
@@ -154,9 +198,9 @@
   Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
   \begin{itemize}
     \item The \emph{nullity} of $T$, denoted by $\mathrm{nullity}(T)$,
-      is the dimension of $N(T)$.
+      is the dimension of $\mathcal{N}(T)$.
     \item The \emph{rank} of $T$, denoted by $\mathrm{rank}(T)$,
-      is the dimension of $R(T)$.
+      is the dimension of $\mathcal{R}(T)$.
   \end{itemize}
 \end{definition}
 
@@ -165,3 +209,51 @@
   If $V$ is finite-dimensional, then
   $\mathrm{nullity}(T) + \mathrm{rank}(T) = \mathrm{dim}(V)$.
 \end{theorem}
+\begin{proof}
+  Let $S$ be a basis for $V$ and $Q$ a basis for $\mathcal{N}(T)$.
+  By corollary to replacement theorem (\Cref{thm:replacement}), there is
+  $R \subseteq S \setminus Q$ such that $Q \cup R$ is a basis for $V$.
+  Since $|R| = |S| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T)$,
+  the theorem holds if $|R| = \mathrm{dim}(\mathcal{R}(T))$.
+  
+  If there exist different $x, x' \in R$ with $T(x) = T(x')$, then we have
+  $T(x - x') = T(x) - T(x') = 0_W$, and thus
+  $x - x' \in \mathcal{N}(T) = \mathrm{span}(Q)$.
+  It follows that $x \in \mathrm{span}(Q \cup \{x'\})$,
+  contradiction to the fact that $S$ is linearly independent.
+  Thus, $|R| = |T(R)|$. We claim that $T(R)$ is a basis for $\mathcal{R}(T)$.
+
+  First we prove that $T(R)$ spans $\mathcal{R}(T)$.
+  By \Cref{thm:linear-span} (b) and the fact that $T(Q) = \{0_V\}$, we have
+  \begin{align*}
+    \mathcal{R}(T) &= T(\mathrm{span}(Q \cup R)) \\
+                   &= \mathrm{span}(T(Q \cup R)) \\
+                   &= \mathrm{span}(T(Q)) + \mathrm{span}(T(R)) \\
+                   &= \mathrm{span}(T(R)).
+  \end{align*}
+
+  Then we prove that $T(R)$ is linearly independent.
+  Suppose that
+  \begin{equation*}
+    a_1T(x_1) + \cdots + a_nT(x_n) = 0_W
+  \end{equation*}
+  holds for some $a_1, \dots, a_n \in F$ and some different
+  $x_1, \dots, x_n \in R$ with $n \geq 1$.
+  Then by \Cref{thm:linear-span} we have $T(a_1x_1 + \cdots + a_nx_n) = 0_W$,
+  and thus $a_1x_1 + \cdots a_nx_n \in \mathcal{N}(T)$.
+  Hence, there exist some $b_1, \dots, b_m \in F$ and some different
+  $y_1, \dots, y_m \in Q$ such that
+  \begin{equation*}
+    a_1x_1 + \cdots + a_nx_n = b_1y_1 + \cdots + b_my_m.
+  \end{equation*}
+  That is,
+  \begin{equation*}
+    a_1x_1 + \cdots + a_nx_n + (-b_1)y_1 + \cdots + (-b_m)y_m = 0_V.
+  \end{equation*}
+  Since $Q \cup R$ is linearly independent, we have
+  $a_1 = \cdots = a_n = b_1 = \cdots = b_m = 0_F$, implying that $T(R)$ is
+  linearly independent.
+
+  Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, and we can conclude that
+  $\mathrm{rank}(T) = |T(R)| = |R| = |S| - |Q|$, which completes the proof.
+\end{proof}
