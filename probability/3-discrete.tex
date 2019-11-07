@@ -16,8 +16,7 @@
 \end{definition}
 \begin{remark}
   Since each $S \in \mathcal{B}$ is mapped to a event $X^{-1}(S) \in \Sigma$,
-  we will abuse the notation, using conditions related to a ramdom variable
-  to denote events.
+  we will use conditions related to ramdom variables to denote events.
   For example,
   \begin{equation*}
     P(-1 \leq X \leq 1) = P(\{\omega \in \Omega: -1 \leq X(\omega) \leq 1\}).
@@ -178,24 +177,24 @@
   \begin{equation*}
     \sum_{x=0}^n \binom{n}{x} p^x (1-p)^{n-x} = (p + (1-p))^n = 1.
   \end{equation*}
-  Also, note that
+  Also, we have the fact that
   \begin{align*}
     E[X^k]
     &= \sum_{x=0}^n x^k \binom{n}{x} p^x (1-p)^{n-x} \\
     &= \sum_{x=1}^n x^k \binom{n}{x} p^x (1-p)^{n-x} \\
     &= np \sum_{x=1}^n x^{k-1} \binom{n-1}{x-1} p^{x-1} (1-p)^{n-x} \\
     &= np \sum_{y=0}^{n-1} (y+1)^{k-1} \binom{n-1}{y} p^y (1-p)^{(n-1)-y}
-       \tag{$\star$}
+       \tag{$\ast$}
   \end{align*}
   holds for positive integer $k$.
   \begin{enumerate}
-    \item By ($\star$), the expectation of $X$ is given by
+    \item By ($\ast$), the expectation of $X$ is given by
       \begin{align*}
         E[X]
         = np\sum_{y=0}^{n-1} \binom{n-1}{y} p^y (1-p)^{(n-1)-y}
         = np.
       \end{align*}
-    \item By ($\star$), we have
+    \item By ($\ast$), we have
       \begin{align*}
         E[X^2]
         = np\sum_{y=0}^{n-1} (y+1)\binom{n-1}{y} p^y (1-p)^{(n-1)-y}
@@ -211,7 +210,7 @@
   \end{enumerate}
 \end{proof}
 
-\section{Poisson Random Variable}
+\section{Poisson Random Variables}
 \begin{theorem}
   Let $\lambda > 0$.
   For integer $n \geq \lambda$, let $X_n$ be a binomial random variable with
@@ -241,7 +240,128 @@
   A random variable $X$ is called a \emph{Poisson random variable} with
   parameter $\lambda$, if
   \begin{equation*}
-    p_X(x) = e^{-x} \cdot \frac{\lambda^x}{x!}
+    p_X(x) = e^{-\lambda} \cdot \frac{\lambda^x}{x!}
   \end{equation*}
   holds for any nonnegative integer $x$.
 \end{definition}
+
+\begin{theorem}
+  Let $X$ be a Poisson random variable with parameter $\lambda$.
+  \begin{enumerate}
+    \item $E[X] = \lambda$.
+    \item $\mathrm{Var}(X) = \lambda$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We have $p_X(x) = 0$ for $x \notin \{0, 1, 2, \dots\}$ because
+  \begin{equation*}
+    \sum_{x=0}^\infty p_X(x)
+    = e^{-\lambda}\sum_{x=0}^\infty \frac{\lambda^x}{x!}
+    = e^{-\lambda} \cdot e^{\lambda}
+    = 1.
+  \end{equation*}
+  where the second equality follows from the fact that
+  $e^t = \sum_{k=0}^\infty t^k/k!$ for $t \in \mathbb{R}$.
+  \begin{enumerate}
+    \item We have
+      \begin{equation*}
+        E[X]
+        = \sum_{x=0}^\infty x \cdot \frac{e^{-\lambda}\lambda^x}{x!}
+        = \sum_{x=1}^\infty x \cdot \frac{e^{-\lambda}\lambda^x}{x!}
+        = \lambda e^{-\lambda}\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}
+        = \lambda e^{-\lambda}\sum_{y=0}^\infty \frac{\lambda^y}{y!}
+        = \lambda.
+      \end{equation*}
+    \item Since
+      \begin{align*}
+        E[X^2]
+        &= \sum_{x=0}^\infty x^2 \cdot \frac{e^{-\lambda}\lambda^x}{x!} \\
+        &= \sum_{x=1}^\infty x^2 \cdot \frac{e^{-\lambda}\lambda^x}{x!} \\
+        &= \lambda \sum_{x=1}^\infty x \cdot \frac{e^{-\lambda}\lambda^{x-1}}{(x-1)!} \\
+        &= \lambda \sum_{y=0}^\infty (y+1) \cdot \frac{e^{-\lambda}\lambda^y}{y!} \\
+        &= \lambda(\lambda + 1),
+      \end{align*}
+      we have
+      \begin{equation*}
+        \mathrm{Var}(X)
+        = E[X^2] - (E[X])^2
+        = \lambda(\lambda + 1) - \lambda^2
+        = \lambda. \qedhere
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\section{Geometric and Negative Binomial Random Variables}
+\begin{definition}
+  Let $0 \leq p \leq 1$.
+  A random variable $X$ is called a \emph{geometric random variable}
+  with parameter $p$, if
+  \begin{equation*}
+    p_X(x) = p \cdot (1-p)^{x-1}
+  \end{equation*}
+  holds for any positive integer $x$.
+\end{definition}
+
+\begin{definition}
+  Let $r$ be a nonnegative integer and $0 \leq p \leq 1$.
+  A random variable $X$ is called a \emph{negative binomial random variable}
+  with parameter $(r, p)$, if
+  \begin{equation*}
+    p_X(x) = \binom{x-1}{r-1}p^r(1-p)^{x-r}
+  \end{equation*}
+  holds for any integer $x \geq r$.
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a negative binomial random variable with parameter $(r, p)$.
+  \begin{enumerate}
+    \item $E[X] = r/p$.
+    \item $\mathrm{Var}(X) = r(1-p)/p^2$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We have $p_X(x) = 0$ for $x \notin \{r, r+1, r+2, \dots\}$ because
+  \begin{align*}
+    \sum_{x=r}^\infty p_X(x)
+    &= \sum_{x=r}^\infty \binom{x-1}{r-1} p^r (1-p)^{x-r} \\
+    &= \sum_{x=r}^\infty \binom{-r}{x-r} p^r (-(1-p))^{x-r} \\
+    &= p^r \sum_{y=0}^\infty \binom{-r}{y} (-(1-p))^y \\
+    &= p^r (1-(1-p))^{-r} \\
+    &= 1,
+  \end{align*}
+  where the second equality follows from
+  \begin{equation*}
+    \binom{x-1}{r-1}
+    = \binom{x-1}{x-r}
+    = \binom{-r}{x-r} \cdot (-1)^{x-r}.
+  \end{equation*}
+  \begin{enumerate}
+    \item To be completed.
+    \item To be completed. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\section{Hypergeometric Random Variables}
+\begin{definition}
+  Let $n, K, N$ be nonnegative integers with $n \leq N$ and $K \leq N$.
+  A random variable $X$ is called a \emph{hypergeometric random variable}
+  with parameter $(n, K, N)$ if
+  \begin{equation*}
+    p_X(x) = \frac{\binom{K}{x}\binom{N-K}{n-x}}{\binom{N}{n}}
+  \end{equation*}
+  holds for any integer $x \in \{0, 1, \dots, K\}$.
+\end{definition}
+\begin{remark}
+  A hypergeometric random variable with parameter $(1, K, N)$ is a Bernoulli
+  random variable with parameter $K/N$.
+\end{remark}
+\begin{remark}
+  A hypergeometric random variable $X$ with parameter $(n, K, N)$ can be seen
+  as the number of successes in $n$ draws without replacement from a
+  population of size $N$ that contains $K$ objects that represent success.
+\end{remark}
+\begin{remark}
+  If $N$ and $K$ are large compared to $n$, then a hypergeometric random
+  variable $X$ with parameter $(n, K, N)$ behaves like a binomial
+  random variable with parameter $(n, K/N)$.
+\end{remark}
