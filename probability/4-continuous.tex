@@ -1,0 +1,51 @@
+\chapter{Continuous Random Variables}
+\section{Continuous Random Variables}
+\begin{definition}
+  A random variable $X$ is a \emph{continuous random variable}
+  if there exists a nonnegative function $f_X: \mathbb{R} \to \mathbb{R}$
+  such that
+  \begin{equation*}
+    P(X \in S) = \int_S f_X(x) dx
+  \end{equation*}
+  holds for any $S \in \mathcal{B}$.
+  The function $f_X$ is called a \emph{probability density function} of $X$.
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a continuous random variable in a probability space
+  $(\Omega, \Sigma, P)$.
+  Then $p_X(a) = 0$ for $a \in \mathbb{R}$.
+\end{theorem}
+\begin{proof}
+  It is proved by
+  \begin{equation*}
+    p_X(a) = P(X = a) = \int_a^a f_X(x)dx = 0. \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  The \emph{cumulative distribution function} $F_X$ of a random variable $X$
+  is defined by
+  \begin{equation*}
+    F_X(x) = P(X \leq x)
+  \end{equation*}
+  for all $x \in \mathbb{R}$.
+\end{definition}
+
+\begin{theorem}
+  Let $X$ be a continuous random variable in a probability space
+  $(\Omega, \Sigma, P)$.
+  If $f_X$ is a probability density function of $X$, then
+  \begin{equation*}
+    F_X(x) = \int_{-\infty}^x f_X(t) dt.
+  \end{equation*}
+  holds for all $x \in \mathbb{R}$.
+\end{theorem}
+\begin{proof}
+  For all $x \in \mathbb{R}$, we have
+  \begin{equation*}
+    F_X(x) = P(X \leq x)
+           = P(X \in (-\infty, x])
+           = \int_{-\infty}^x f_X(t) dt. \qedhere
+  \end{equation*}
+\end{proof}

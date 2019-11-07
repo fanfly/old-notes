@@ -3,16 +3,11 @@
 \begin{definition}
   Let $X: \Omega \to \mathbb{R}$ be a function in a probability space
   $(\Omega, \Sigma, P)$.
-  Then $X$ is called a \emph{random variable} if for each
-  $S \in \mathcal{B}$, its preimage
+  Then $X$ is called a \emph{random variable} if $X^{-1}(S) \in \Sigma$ for
+  all $S \in \mathcal{B}$, where
   \begin{equation*}
-    X^{-1}(S) = \{\omega \in \Omega : X(\omega) \in S\}
+    X^{-1}(S) = \{\omega \in \Omega : X(\omega) \in S\}.
   \end{equation*}
-  is an element of $\Sigma$.
-  \begin{itemize}
-    \item A random variable is \emph{discrete} if its range is countable.
-    \item A random variable is \emph{continuous} if its range is uncountable.
-  \end{itemize}
 \end{definition}
 \begin{remark}
   Since each $S \in \mathcal{B}$ is mapped to a event $X^{-1}(S) \in \Sigma$,
@@ -22,6 +17,11 @@
     P(-1 \leq X \leq 1) = P(\{\omega \in \Omega: -1 \leq X(\omega) \leq 1\}).
   \end{equation*}
 \end{remark}
+
+\begin{definition}
+  A random variable $X$ is a discrete random variable if there is a countable
+  set $S \subseteq \mathbb{R}$ such that $P(X \in S) = 1$. 
+\end{definition}
 
 \begin{definition}
   Let $X$ be a random variable in a probability space $(\Omega, \Sigma, P)$.
