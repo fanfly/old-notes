@@ -45,7 +45,37 @@
   For all $x \in \mathbb{R}$, we have
   \begin{equation*}
     F_X(x) = P(X \leq x)
-           = P(X \in (-\infty, x])
            = \int_{-\infty}^x f_X(t) dt. \qedhere
   \end{equation*}
 \end{proof}
+
+\section{Expectation and Variance}
+
+\section{Uniform Random Variables}
+\begin{definition}
+  Let $a, b$ be real numbers with $a < b$.
+  A continuous random variable $X$ is called a \emph{uniform random variable}
+  with parameters $(a, b)$ if the function $f_X: \mathbb{R} \to \mathbb{R}$
+  with
+  \begin{equation*}
+    f_X(x) = \left\{
+    \begin{array}{ll}
+      \dfrac{1}{b-a}, &\ \text{if}\ a \leq x \leq b \\[1em]
+      0,              &\ \text{otherwise}
+    \end{array}
+    \right.
+  \end{equation*}
+  for $x \in \mathbb{R}$ is a probability density function of $X$.
+\end{definition}
+
+\section{Normal Random Variables}
+\begin{definition}
+  Let $\mu, \sigma$ be real numbers with $\sigma \geq 0$.
+  A continuous random variable $X$ is called a \emph{normal random variable}
+  with parameters $(\mu, \sigma^2)$ if the function
+  $f_X: \mathbb{R} \to \mathbb{R}$ with
+  \begin{equation*}
+    f_X(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/(2\sigma^2)}
+  \end{equation*}
+  for $x \in \mathbb{R}$ is a probability density function of $X$.
+\end{definition}
