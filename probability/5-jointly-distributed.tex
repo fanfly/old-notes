@@ -1,0 +1,56 @@
+\chapter{Jointly Distributed Random Variables}
+\section{Jointly Distributed Random Variables}
+\begin{definition}
+  Let $X$ and $Y$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  \begin{itemize}
+    \item The function $p_{X,Y}: \mathbb{R}^2 \to \mathbb{R}$ with
+      \begin{equation*}
+        p_{X,Y}(x, y) = P(X = x\ \text{and}\ Y = y)
+      \end{equation*}
+      for $x, y \in \mathbb{R}$ is the
+      \emph{joint probability mass function} of $X$ and $Y$.
+    \item If there exists a nonnegative function
+      $f_{X,Y}: \mathbb{R}^2 \to \mathbb{R}$ such that
+      \begin{equation*}
+        \iint\limits_S f_{X,Y}(x, y)\,dx\,dy
+        = P((X, Y) \in S)
+      \end{equation*}
+      holds for all $S \in \mathcal{B}^2$, then $f_{X,Y}$ is a
+      \emph{joint probability density function} of $X$ and $Y$.
+    \item The function $F_{X,Y}: \mathbb{R}^2 \to \mathbb{R}$ with
+      \begin{equation*}
+        F_{X,Y}(x, y) = P(X \leq x\ \text{and}\ Y \leq y)
+      \end{equation*}
+      for $x, y \in \mathbb{R}$ is the
+      \emph{joint cumulative distribution function} of $X$ and $Y$.
+  \end{itemize}
+\end{definition}
+\begin{definition}
+  Let $X_1, X_2, \dots, X_n$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  \begin{itemize}
+    \item The function $p: \mathbb{R}^n \to \mathbb{R}$ with
+      \begin{equation*}
+        p(x_1, \dots, x_n)
+        = P(X_i = x_i\ \text{for}\ i \in \{1, \dots, n\})
+      \end{equation*}
+      for $x_1, \dots, x_n \in \mathbb{R}$ is the
+      \emph{joint probability mass function} of $X_1, \dots, X_n$.
+    \item If there exists a nonnegative function
+      $f: \mathbb{R}^n \to \mathbb{R}$ such that
+      \begin{equation*}
+        \idotsint\limits_S f(x_1, \dots, x_n)\,dx_1 \cdots dx_n
+        = P((X_1, \dots, X_n) \in S)
+      \end{equation*}
+      holds for all $S \in \mathcal{B}^n$, then $f$ is a
+      \emph{joint probability density function} of $X_1, \dots, X_n$.
+    \item The function $F: \mathbb{R}^n \to \mathbb{R}$ with
+      \begin{equation*}
+        F(x_1, \dots, x_n)
+        = P(X_i \leq x_i\ \text{for}\ i \in \{1, \dots, n\})
+      \end{equation*}
+      for $x_1, \dots, x_n \in \mathbb{R}$ is the
+      \emph{joint cumulative distribution function} of $X_1, \dots, X_n$.
+  \end{itemize}
+\end{definition}
