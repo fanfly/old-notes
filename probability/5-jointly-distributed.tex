@@ -54,3 +54,49 @@
       \emph{joint cumulative distribution function} of $X_1, \dots, X_n$.
   \end{itemize}
 \end{definition}
+
+\section{Independent Random Variables}
+\begin{definition}
+  Let $X$ and $Y$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  Then $X$ and $Y$ are \emph{independent} if the events $X \in S_1$ and
+  $Y \in S_2$ are independent for any $S_1, S_2 \in \mathcal{B}$.
+\end{definition}
+
+\begin{definition}
+  Let $X_1, X_2, \dots, X_n$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  Then $X_1, X_2, \dots, X_n$ are \emph{independent} if the events
+  $X_1 \in S_1$, $X_2 \in S_2$, \dots, $X_n \in S_n$ are independent
+  for any $S_1, S_2, \dots, S_n \in \mathcal{B}$.
+\end{definition}
+
+\section{Sums of Independent Random Variables}
+\begin{theorem}
+  Let $X$ and $Y$ be independent continuous random variables and $Z = X + Y$.
+  Then $f_Z: \mathbb{R} \to \mathbb{R}$ with
+  \begin{equation*}
+    f_Z(z) = \int_{-\infty}^\infty f_X(x) \cdot f_Y(z-x)\,dx
+  \end{equation*}
+  for $z \in \mathbb{R}$ is a probability density function of $Z$, where $f_X$
+  and $f_Y$ are probability density functions of $X$ and $Y$, respectively.
+\end{theorem}
+\begin{proof}
+  We have
+  \begin{align*}
+    F_Z(z)
+    &= P(X + Y \leq z) \\
+    &= \int_{-\infty}^\infty \int_{-\infty}^{z-x} f_{X,Y}(x, y)\,dy\,dx \\
+    &= \int_{-\infty}^\infty \int_{-\infty}^z f_{X,Y}(x, u-x)\,du\,dx
+       \tag{$u = x + y$} \\
+    &= \int_{-\infty}^z \int_{-\infty}^\infty f_{X,Y}(x, u-x)\,dx\,du.
+  \end{align*}
+  Thus,
+  \begin{align*}
+    \frac{d}{dz}F_Z(z)
+    = \int_{-\infty}^\infty f_{X,Y}(x, z-x)\,dx
+    = \int_{-\infty}^\infty f_X(x) \cdot f_Y(z-x)\,dx
+    = f_Z(z),
+  \end{align*}
+  implying $f_Z$ is a probability density function of $Z$.
+\end{proof}
