@@ -1,0 +1,38 @@
+\chapter{Properties of Expectation}
+\section{Covariance and Correlation}
+\begin{definition}
+  Let $X$ and $Y$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  The \emph{covariance} of $X$ and $Y$ is defined by
+  \begin{equation*}
+    \Cov(X, Y) = E[(X - E[X])(Y - E[Y])].
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $X$ and $Y$ be random variables on a probability space
+  $(\Omega, \Sigma, P)$.
+  The \emph{correlation} of $X$ and $Y$ is defined by
+  \begin{equation*}
+    \rho(X, Y) = \frac{\Cov(X, Y)}{\sqrt{\Var(X) \cdot \Var(Y)}}.
+  \end{equation*}
+\end{definition}
+
+\section{Moment Generating Functions}
+\begin{definition}
+  Let $X$ be a random variable.
+  Then the \emph{moment generating function} $M_X$ of $X$ is defined by
+  \begin{equation*}
+    M_X(t) = E[e^{tX}].
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  Let $X$ be a random variable.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item $M_X(0) = 1$.
+    \item For each positive integer $k$, $M_X^{(k)}(0) = E[X^k]$
+      if $E[X^k]$ exists.
+  \end{enumerate}
+\end{proposition}

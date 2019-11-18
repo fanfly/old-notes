@@ -5,9 +5,11 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amsopn}
 \usepackage{thmtools}
 \declaretheorem[style=definition,numbered=no]{definition}
 \declaretheorem[style=definition,numberwithin=chapter]{theorem}
+\declaretheorem[style=definition,sibling=theorem]{proposition}
 \declaretheorem[style=definition,numbered=no]{example}
 \declaretheorem[style=definition,numbered=no]{notation}
 \declaretheorem[style=remark,numbered=no]{remark}
@@ -16,10 +18,16 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{array}
 \setlist[enumerate,1]{label={(\alph*)}}
+
+% useful operators
+\DeclareMathOperator{\Var}{Var} % variance
+\DeclareMathOperator{\Cov}{Cov} % covariance
+
 \begin{document}
 \input{1-axioms}
 \input{2-conditional}
 \input{3-discrete}
 \input{4-continuous}
 \input{5-jointly-distributed}
+\input{6-expectation}
 \end{document}
