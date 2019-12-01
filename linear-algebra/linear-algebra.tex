@@ -8,6 +8,8 @@
 \usepackage{thmtools}
 \declaretheorem[style=definition,numbered=no]{definition}
 \declaretheorem[style=definition,numberwithin=chapter]{theorem}
+\declaretheorem[style=definition,sibling=theorem]{proposition}
+\declaretheorem[style=definition,sibling=theorem]{lemma}
 \declaretheorem[style=definition,numbered=no]{example}
 \declaretheorem[style=definition,numbered=no]{notation}
 \declaretheorem[style=remark,numbered=no]{remark}
@@ -16,6 +18,13 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{array}
 \setlist[enumerate,1]{label={(\alph*)}}
+
+% math operators in linear algebra
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\N}{\mathcal{N}}
+
 \begin{document}
 \input{1-vector-spaces}
 \input{2-linear-transformations}

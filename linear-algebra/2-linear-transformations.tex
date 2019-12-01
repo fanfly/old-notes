@@ -204,7 +204,7 @@
   \end{itemize}
 \end{definition}
 
-\begin{theorem}[Rank-nullity Theorem]
+\begin{theorem}[Rank-nullity Theorem]\label{thm:rank-nullity}
   Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
   If $V$ is finite-dimensional, then
   $\mathrm{nullity}(T) + \mathrm{rank}(T) = \mathrm{dim}(V)$.
@@ -257,4 +257,93 @@
   Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, and we can conclude that
   $\mathrm{rank}(T) = |T(R)| = |R| = |Q \cup R| - |Q|$,
   which completes the proof.
+\end{proof}
+
+\section{Invertibility and Isomorphisms}
+\begin{definition}
+  Let $X$ and $Y$ be sets and let $f: X \to Y$ be a function.
+  \begin{itemize}
+    \item A function $g: Y \to X$ is a \emph{left inverse} of $f$ if
+      $g \circ f = I_X$.
+      We say that $f$ is \emph{left invertible} if it has a left inverse.
+    \item A function $g: Y \to X$ is a \emph{right inverse} of $f$ if
+      $f \circ g = I_Y$.
+      We say that $f$ is \emph{right invertible} if it has a right inverse.
+    \item A function $g: R \to S$ is an \emph{inverse} of $f$ if it is a left
+      inverse and a right inverse of $f$.
+      We say that $f$ is \emph{invertible} if it has an inverse.
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}\label{prop:invertible}
+  The following statements are true.
+  \begin{enumerate}
+    \item A function is left invertible if and only if it is injective.
+    \item A function is right invertible if and only if it is surjective.
+    \item A function is invertible if and only if it is bijective.
+  \end{enumerate}
+\end{proposition}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item $(\Rightarrow)$
+      Suppose that $f: X \to Y$ is left invertible.
+      Let $g: Y \to X$ be an left inverse of $f$.
+      Then for each $x, x' \in X$ that satisfy $f(x) = f(x')$, we have
+      $x = g(f(x)) = g(f(x')) = x'$.
+
+      $(\Leftarrow)$
+      Suppose that $f: X \to Y$ is injective.
+      Then there exists a function $g: Y \to X$ such that $g(f(x)) = x$ holds
+      for all $x \in X$, implying $g$ is a left inverse of $f$.
+    \item $(\Rightarrow)$
+      Suppose that $f: X \to Y$ is right invertible.
+      Let $g: Y \to X$ be an right inverse of $f$.
+      Then $y = f(g(y))$ for all $y \in Y$, and thus $f$ is surjective.
+
+      $(\Leftarrow)$
+      Suppose that $f: X \to Y$ is surjective.
+      Then there exists a function $g: Y \to X$ such that $f(g(y)) = y$ for
+      all $y \in Y$, implying $g$ is a right inverse of $g$.
+    \item Straightforward from (a) and (b). \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $V$ and $W$ be vector spaces over $F$.
+  \begin{itemize}
+    \item A linear transformation $T: V \to W$ is called an \emph{isomorphism}
+      from $V$ onto $W$ if it is invertible.
+    \item We say that $V$ is \emph{isomorphic} to $W$, denoted by $V \cong W$,
+      if there is an isomorphism from $V$ onto $W$.
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  Let $V$ and $W$ be vector spaces over $F$. Then $V \cong W$ if and only if
+  $W \cong V$.
+\end{proposition}
+\begin{proof}
+  If $V \cong W$, then there exists $T \in \mathcal{L}(V, W)$ that is
+  invertible.
+  Because $T^{-1}$ is linear and invertible, it is an isomorphism from $W$ onto
+  $V$, and thus $W \cong V$.
+  The other side can be proved similarly.
+\end{proof}
+
+\begin{theorem}
+  Let $V$ and $W$ be finite-dimensional vector spaces over $F$.
+  Then $V \cong W$ if and only if $\dim(V) = \dim(W)$.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$
+  Let $T$ be an isomorphism from $V$ onto $W$.
+  Since $T$ is invertible, we have $\nullity(T) = 0$.
+  Thus, by rank-nullity theorem (\Cref{thm:rank-nullity}) we have
+  $\rank(T) = \dim(V)$.
+  Furthermore, we have $\R(T) = W$ since $T$ is bijective by
+  \Cref{prop:invertible}.
+  Therefore, $\dim(V) = \dim(W)$.
+
+  $(\Leftarrow)$
+  To be completed.
 \end{proof}
