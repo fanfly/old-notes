@@ -6,13 +6,13 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{thmtools}
-\declaretheorem[style=definition,numbered=no]{definition}
-\declaretheorem[style=definition,numberwithin=chapter]{theorem}
+\declaretheorem[style=definition,numberwithin=section]{theorem}
 \declaretheorem[style=definition,sibling=theorem]{proposition}
 \declaretheorem[style=definition,sibling=theorem]{lemma}
+\declaretheorem[style=definition,sibling=theorem]{definition}
 \declaretheorem[style=definition,numbered=no]{example}
 \declaretheorem[style=definition,numbered=no]{notation}
-\declaretheorem[style=remark,numbered=no]{remark}
+\declaretheorem[style=definition,numbered=no]{remark}
 \declaretheorem[style=definition,numbered=no]{corollary}
 \usepackage{cleveref}
 \usepackage[shortlabels]{enumitem}
@@ -24,6 +24,8 @@
 \DeclareMathOperator{\nullity}{nullity}
 \newcommand{\R}{\mathcal{R}}
 \newcommand{\N}{\mathcal{N}}
+
+\DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
 \begin{document}
 \input{1-vector-spaces}

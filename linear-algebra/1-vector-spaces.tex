@@ -1,214 +1,155 @@
 \chapter{Vector Spaces}
-\section{Groups and Fields}
-\begin{definition}\label{def:binary-operation}
-  A binary operation on a set $G$ is a mapping from $G \times G$ to $G$.
-\end{definition}
-
-\begin{definition}\label{def:associativity}
-  A binary operation $\star$ on a set $G$ is called \emph{associative} if
-  for all $a, b, c \in G$, $(a \star b) \star c = a \star (b \star c)$ holds.
-\end{definition}
-
-\begin{definition}\label{def:identity}
-  Let $G$ be a set and $\star$ be a binary operation on $G$. An
-  \emph{identity} of $G$ with respect to $\star$ is an element $e \in G$ such
-  that $a \star e = a$ and $e \star a = a$ for all $a \in G$.
-\end{definition}
-
-\begin{theorem}\label{thm:identity-uniqueness}
-  The identity of $G$ with respect to $\star$ is unique if it exists.
-\end{theorem}
-\begin{proof}
-  If $e$ and $e'$ are identity of $G$ with respect to $\star$, then
-  $e = e \star e' = e'$.
-\end{proof}
-
-\begin{notation}
-  The identity of $G$ is denoted by $1_G$.
-  However, if the binary operation is written additively, the identity is
-  denoted by $0_G$ instead.
-\end{notation}
-
-\begin{definition}\label{def:inverse}
-  Let $\star$ be a binary operation on $G$ with identity $e$. Let $a$ be an
-  element of $G$. An element $b \in G$ is called an \emph{inverse} of $a$ if
-  $a \star b = e$ and $b \star a = e$.
-\end{definition}
-
-\begin{theorem}\label{thm:inverse-uniqueness}
-  For all $a \in G$, the inverse of $a \in G$ is unique if it exists.
-\end{theorem}
-\begin{proof}
-  If both $b$ and $b'$ are inverses of $a$, then
-  \begin{align*}
-  b
-  = b \star 1_G
-  = b \star (a \star b')
-  = (b \star a) \star b'
-  = 1_G \star b'
-  = b'. &\qedhere
-  \end{align*}
-\end{proof}
-
-\begin{notation}
-  The inverse of $a$ in $G$ is denoted by $a^{-1}$.
-  However, if the binary operation is written additively, the inverse of $a$
-  is denoted by $-a$ instead.
-\end{notation}
-
-\begin{definition}\label{def:group}
-  A set $G$ and a binary operation $\star$ on $G$ form a \emph{group}
-  $(G, \star)$ if the following conditions hold.
-  \begin{enumerate}[label=(G \arabic*),leftmargin=3.5em]
-    \item $\star$ is associative.
-    \item The identity of $G$ (with respect to $\star$) exists.
-    \item For all $a \in G$, the inverse of $a$ (with respect to $\star$)
-      exists.
-  \end{enumerate}
-\end{definition}
-
-\begin{example}
-  Let $S$ denote the set of permutations of $\{1, 2, 3\}$ and let $\circ$
-  denote the composition of permutations. That is,
-  \begin{equation*}
-    S = \big\{
-      (1)(2)(3), (1)(2\;3), (2)(3\;1), (3)(1\;2), (1\;2\;3), (3\;2\;1) 
-    \big\}.
-  \end{equation*}
-  Then $(S, \circ)$ is a group.
-\end{example}
-
-\begin{definition}\label{def:commutativity}
-  A binary operation $\star$ on a set $G$ is called \emph{commutative} if
-  for all $a, b, \in G$, $a \star b = b \star a$ holds.
-\end{definition}
-
-\begin{definition}\label{def:abelian-group}
-  A group $(G, \star)$ is called an \emph{Abelian group} if the following
-  condition holds.
-  \begin{enumerate}[label=(G \arabic*),leftmargin=3.5em,start=4]
-    \item $\star$ is commutative.
-  \end{enumerate}
-\end{definition}
-
-\begin{example}
-  $(\mathbb{Z}, +)$ and $(\mathbb{Q} \setminus \{0\}, \cdot)$ are Abelian
-  groups.
-\end{example}
-
-\begin{theorem}\label{thm:inverse-inverse}
-  Let $(G, \star)$ be a group. Then for all $a \in G$, $(a^{-1})^{-1} = a$.
-\end{theorem}
-\begin{proof}
-  Since $a \star a^{-1} = 1_G$, $a$ is the inverse of $a^{-1}$ in $G$.
-  Thus, $(a^{-1})^{-1} = a$.
-\end{proof}
-
-\begin{theorem}[Cancellation Law]\label{thm:group-cancel}
-  Let $(G, \star)$ be a group. Then the following statements are true.
-  \begin{enumerate}
-    \item For all $a, b, c \in G$, if $c \star a = c \star b$, then $a = b$.
-    \item For all $a, b, c \in G$, if $a \star c = b \star c$, then $a = b$.
-  \end{enumerate}
-\end{theorem}
-\begin{proof} \leavevmode
-  \begin{enumerate}
-    \item We have
-      $$
-      a = 1_G \star a = (c^{-1} \star c) \star a = c^{-1} \star (c \star a)
-      $$
-      and
-      $$
-      b = 1_G \star b = (c^{-1} \star c) \star b = c^{-1} \star (c \star b).
-      $$
-      Because $c \star a = c \star b$, we have $a = b$.
-    \item The proof is similar to (a). \qedhere
-  \end{enumerate}
-\end{proof}
-
-\begin{definition}
-  Let $F$ be a set. Let $+$ and $\cdot$ be binary operations on $F$.
-  \begin{itemize}
-    \item The operation $\cdot$ is called \emph{left-distributive} over $+$
-      if $a \cdot (b + c) = a \cdot b + a \cdot c$ for all $a, b, c \in F$.
-    \item The operation $\cdot$ is called \emph{right-distributive} over $+$
-      if $(a + b) \cdot c = a \cdot c + b \cdot c$ for all $a, b, c \in F$.
-    \item The operation $\cdot$ is called \emph{distributive} over $+$
-      if it is both left-distributive and right-distributive.
-  \end{itemize}
-\end{definition}
-
+\section{Fields}
 \begin{definition}\label{def:field}
-  A set $F$ and two binary operations $+$ and $\cdot$ on $F$ form a
-  \emph{field} $(F, +, \cdot)$ if the following conditions hold.
-  \begin{enumerate}[label=(F \arabic*),leftmargin=3.5em]
-    \item $(F, +)$ is an Abelian group.
-    \item $(F \setminus \{0_F\}, \cdot)$ is an Abelian group.
-    \item The operation $\cdot$ is distributive over $+$.
+  A \emph{field} is a set $F$ with two operations, called \emph{addition}
+  (denoted by $+$) and \emph{multiplication} (denoted by $\cdot$), which
+  satisfy the following axioms.
+  \begin{enumerate}[leftmargin=3.5em]
+    \item[(A 1)] If $a \in F$ and $b \in F$, then $a + b \in F$.
+    \item[(M 1)] If $a \in F$ and $b \in F$, then $a \cdot b \in F$.
+    \item[(A 2)] $a + b = b + a$ for all $a, b \in F$.
+    \item[(M 2)] $a \cdot b = b \cdot a$ for all $a, b \in F$.
+    \item[(A 3)] $(a + b) + c = a + (b + c)$ for all $a, b, c \in F$.
+    \item[(M 3)] $(a \cdot b) + c = a + (b \cdot c)$ for all $a, b, c \in F$.
+    \item[(A 4)] There is an element $0_F$ in $F$ such that $0_F + a = a$ for
+      all $a \in F$.
+    \item[(M 4)] There is an element $1_F$ in $F \setminus \{0_F\}$ such that
+      $1_F \cdot a = a$ for all $a \in F$.
+    \item[(A 5)] For each $a \in F$ there is an element $-a$ in $F$ such that
+      $a + (-a) = 0_F$.
+    \item[(M 5)] For each $a \in F \setminus \{0_F\}$ there is an element
+      $a^{-1}$ in $F$ such that $a \cdot a^{-1} = 1_F$.
+    \item[(D)] $a \cdot (b + c) = a \cdot b + a \cdot c$ for all
+      $a, b, c \in F$.
   \end{enumerate}
 \end{definition}
+\begin{remark} \leavevmode
+  \begin{itemize}
+    \item For simplification, we usually write $ab$ instead of $a \cdot b$.
+    \item The axioms labeled with ``A'' and ``M'' are usually called the
+      \emph{axioms of addition} and the \emph{axioms of multiplication},
+      respectively. The axiom labeld with ``D'' is the \emph{distributive law}.
+    \item The elements $0_F$ and $1_F$ are usually called the
+      \emph{additive identity} and the \emph{multiplicative identity} of $F$,
+      respectively.
+      Also, $-a$ and $a^{-1}$ are called the \emph{additive inverse} and the
+      \emph{multiplicative inverse} of $a$, respectively.
+    \item \emph{Subtraction} and \emph{division} can be defined using additive
+      and multiplicative inverses.
+  \end{itemize}
+\end{remark}
 
 \begin{example}
-  $(\mathbb{Q}, +, \cdot)$, $(\mathbb{R}, +, \cdot)$,
-  and $(\mathbb{C}, +, \cdot)$ are fields.
+  $\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$ are fields.
 \end{example}
 
 \begin{example}
-  $(\mathbb{Q}[\sqrt{2}], +, \cdot)$ is a field, where
-  $$
-  \mathbb{Q}[\sqrt{2}] = \{a + b\sqrt{2} : a, b \in \mathbb{Q}\}.
-  $$
+  Let $\mathbb{B} = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
+  defined as follows.
+  \begin{align*}
+    \begin{array}{c|cc}
+      \oplus & 0 & 1 \\
+      \hline
+      0      & 0 & 1 \\
+      1      & 1 & 0 \\
+    \end{array}
+    \quad
+    \begin{array}{c|cc}
+      \odot & 0 & 1 \\
+      \hline
+      0     & 0 & 0 \\
+      1     & 0 & 1 \\
+    \end{array}
+  \end{align*}
+  Then $\mathbb{B}$ is a field with $\oplus$ and $\odot$ as addition and
+  multiplication, respectively.
 \end{example}
 
-\begin{theorem}\label{thm:field-multiplication}
-  Let $(F, +, \cdot)$ be a field. Then the following statements are true.
+\begin{remark}
+  In a field $F$, if one can add up finite $1_F$'s such that the sum equals to
+  $0_F$, then the smallest number of summands is called the
+  \emph{characteristic} of $F$.
+  Thus, the characteristic of $\mathbb{B}$ is $2$ since $1 \oplus 1 = 0$ in
+  $\mathbb{B}$.
+\end{remark}
+
+\begin{proposition}\label{prop:cancelltaion-of-addition}
+  Let $F$ be a field with $a, b, c \in F$.
   \begin{enumerate}
-    \item For all $a \in F$, $a \cdot 0_F = 0_F = 0_F \cdot a$.
-    \item For all $a, b \in F$, $(-a) \cdot b = -(a \cdot b) = a \cdot (-b)$.
-    \item For all $a, b \in F$, $(-a) \cdot (-b) = a \cdot b$.
+    \item If $a + b = a + c$, then $b = c$.
+    \item If $a + b = a$, then $b = 0_F$.
+    \item If $a + b = 0_F$, then $b = -a$.
+    \item $-(-a) = a$.
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 \begin{proof} \leavevmode
   \begin{enumerate}
-    \item We have
-      $$
-      a \cdot 0_F + a \cdot 0_F
-      = a \cdot (0_F + 0_F)
-      = a \cdot 0_F
-      = a \cdot 0_F + 0_F.
-      $$
-      Thus, $a \cdot 0_F = 0_F$ by cancelltaion law
-      (\Cref{thm:group-cancel}). The proof of $0_F \cdot a = 0_F$ is similar.
-    \item By (a), we have
-      $$
-      a \cdot b + (-a) \cdot b
-      = (a + (-a)) \cdot b
-      = 0_F \cdot b
-      = 0_F.
-      $$
-      Thus, $(-a) \cdot b = -(a \cdot b)$.
-      The proof of $a \cdot (-b) = -(a \cdot b)$ is similar.
-    \item We have
-      $$
-      (-a) \cdot (-b) = -(a \cdot (-b)) = -(-(a \cdot b)) = a \cdot b
-      $$
-      by applying (b) twice. \qedhere
+    \item It can be proved by
+      \begin{align*}
+        b
+        &= 0_F + b      \\
+        &= (-a + a) + b \\
+        &= -a + (a + b) \\
+        &= -a + (a + c) \\
+        &= (-a + a) + c \\
+        &= 0_F + c      \\
+        &= c.
+      \end{align*}
+    \item By applying (a), it follows from $a + b = a + 0_F$ that $b = 0_F$.
+    \item By applying (a), it follows from $a + b = a + (-a)$ that $b = -a$.
+    \item Since $-a + a = 0_F$, we have $a = -(-a)$ by (c). \qedhere
   \end{enumerate}
 \end{proof}
 
-\begin{remark}
-  Let $G = F \setminus \{0_F\}$ and $1_G$ be the multiplicative identity of
-  $G$.
-  By \Cref{thm:field-multiplication} (a), we have
-  $1_G \cdot 0_F = 0_F = 0_F \cdot 1_G$.
-  Therefore, $1_G$ is also the multiplicative identity of $F$, and thus we
-  denote it by $1_F$.
-\end{remark}
+\begin{proposition}\label{prop:cancelltaion-of-multiplication}
+  Let $F$ be a field with $a, b, c \in F$ and $a \neq 0_F$.
+  \begin{enumerate}
+    \item If $a \cdot b = a \cdot c$, then $b = c$.
+    \item If $a \cdot b = a$, then $b = 1_F$.
+    \item If $a \cdot b = 1_F$, then $b = a^{-1}$.
+    \item $(a^{-1})^{-1} = a$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  The proof is similar to \Cref{prop:cancelltaion-of-addition}.
+\end{proof}
 
-\begin{remark}
-  Subtraction and division are defined in terms of addition and
-  multiplication by using additive and multiplicative inverses.
-\end{remark}
+\begin{proposition}\label{prop:multiplication-of-inverses}
+  Let $F$ be a field with $a, b \in F$.
+  \begin{enumerate}
+    \item $0_F \cdot a = 0_F$.
+    \item $(-a) \cdot b = -(a \cdot b) = a \cdot (-b)$.
+    \item $(-a) \cdot (-b) = a \cdot b$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof} \leavevmode
+  \begin{enumerate}
+    \item Since
+      \begin{equation*}
+        0_F \cdot a + 0_F \cdot a
+        = (0_F + 0_F) \cdot a
+        = 0_F \cdot a,
+      \end{equation*}
+      we have $0_F \cdot a = 0_F$ by \Cref{prop:cancelltaion-of-addition} (b).
+    \item Since
+      \begin{equation*}
+        (-a) \cdot b + a \cdot b
+        = (-a + a) \cdot b
+        = 0_F \cdot b
+        = 0_F,
+      \end{equation*}
+      we have $(-a) \cdot b = -(a \cdot b)$ by
+      \Cref{prop:cancelltaion-of-addition} (c).
+      The other half can be proved similarly.
+    \item By applying (b) twice, we have
+      \begin{equation*}
+        (-a) \cdot (-b)
+        = -(a \cdot (-b))
+        = -(-(a \cdot b))
+        = a \cdot b. \qedhere
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
 
 \section{Vector Spaces}
 \begin{definition}\label{def:vector-space}
@@ -258,7 +199,7 @@
   \end{enumerate}
 \end{theorem}
 \begin{proof}
-  It is similar to the proof of \Cref{thm:field-multiplication}.
+  It is similar to the proof of \Cref{prop:cancelltaion-of-multiplication}.
   \begin{enumerate}
     \item We have
       $$
@@ -267,8 +208,7 @@
       = 0_F \cdot x
       = 0_F \cdot x + 0_V.
       $$
-      Thus, $0_F \cdot x = 0_V$ by cancelltaion law
-      (\Cref{thm:group-cancel}).
+      Thus, $0_F \cdot x = 0_V$ by \Cref{prop:cancelltaion-of-addition}.
     \item It is similar to the proof of (a).
     \item By (a), we have
       $$
