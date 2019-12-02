@@ -1,0 +1,101 @@
+\chapter{Regular Languages}
+\section{Deterministic Finite State Automata}
+\begin{definition}\label{def:string}
+  An \emph{alphabet} $\Sigma$ is a finite set of symbols.
+  \begin{itemize}
+    \item A \emph{string} over $\Sigma$ is a finite sequence of symbols from
+      $\Sigma$.
+    \item The \emph{length} of a string $w$, denoted by $|w|$, is the number of
+      symbols it contains.
+    \item The string of length $0$ is called the \emph{empty string}, denoted
+      by $\epsilon$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}\label{def:language}
+  Let $\Sigma$ be an alphabet.
+  \begin{itemize}
+    \item For any nonnegative integer $n$, $\Sigma^n$ denotes the set of words
+      of length $n$.
+    \item $\Sigma^*$ denotes the set of all strings over $\Sigma$.
+    \item A \emph{language} over $\Sigma$ is a subset of $\Sigma^*$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}\label{def:dfa}
+  A \emph{deterministic finite state automaton} is a system
+  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
+  follows.
+  \begin{itemize}
+    \item $\Sigma$ is the alphabet.
+    \item $Q$ is a finite set of \emph{states}.
+    \item $q_0 \in Q$ is the \emph{initial} state.
+    \item $F \subseteq Q$ is the set of \emph{accepting} states.
+    \item $\delta$ is the \emph{transition function} from $Q \times \Sigma$ to
+      $Q$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}\label{def:dfa-run}
+  The \emph{run} of DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ on an input
+  string $w = a_1 \cdots a_n$ over $\Sigma$ is the sequence of states
+  \begin{equation*}
+    r = (r_0, r_1, \dots, r_n)
+  \end{equation*}
+  where $r_0 = q_0$ and $\delta(r_{i-1}, a_i) = r_i$ for each
+  $i \in \{1, \dots, n\}$.
+  \begin{itemize}
+    \item $r$ is an \emph{accepting} run if $r_n \in F$.
+    \item We say that $\mathcal{A}$ \emph{accepts} $w$ if the run of
+      $\mathcal{A}$ on $w$ is an accepting run.
+    \item The language of all strings accepted by $\mathcal{A}$ is denoted by
+      $L(\mathcal{A})$.
+    \item A language $L$ is \emph{regular} if there is a DFA $\mathcal{A}$ with
+      $L = L(\mathcal{A})$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  For DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, the empty string
+  $\epsilon$ is accepted by $\mathcal{A}$ if and only if $q_0 \in F$.
+\end{remark}
+
+\section{Nondeterministic Finite State Automata}
+\begin{definition}\label{def:nfa}
+  A \emph{nondeterministic finite state automaton} is a system
+  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
+  follows.
+  \begin{itemize}
+    \item $\Sigma$ is the alphabet.
+    \item $Q$ is a finite set of \emph{states}.
+    \item $q_0 \in Q$ is the \emph{initial} state.
+    \item $F \subseteq Q$ is the set of \emph{accepting} states.
+    \item $\delta \subseteq Q \times \Sigma \times Q$ is the
+      \emph{transition relation}.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}\label{def:nfa-run}
+  A \emph{run} of NFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ on an input
+  string $w = a_1 \cdots a_n$ over $\Sigma$ is the sequence of states
+  \begin{equation*}
+    r = (r_0, r_1, \dots, r_n)
+  \end{equation*}
+  where $r_0 = q_0$ and $(r_{i-1}, a_i, r_i) \in \delta$ for each
+  $i \in \{1, \dots, n\}$.
+  \begin{itemize}
+    \item $r$ is an \emph{accepting} run if $r_n \in F$.
+    \item We say that $\mathcal{A}$ \emph{accepts} $w$ if there is an accepting
+      run of $\mathcal{A}$ on $w$.
+    \item The language of all strings accepted by $\mathcal{A}$ is denoted by
+      $L(\mathcal{A})$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}\label{thm:dfa-nfa-equivalence}
+  For every NFA $\mathcal{A}$, there is a DFA $\mathcal{A}'$ with
+  $L(\mathcal{A}) = L(\mathcal{A}')$.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
