@@ -6,17 +6,17 @@
   satisfy the following axioms.
   \begin{enumerate}[leftmargin=3.5em]
     \item[(A 1)] If $a \in F$ and $b \in F$, then $a + b \in F$.
-    \item[(M 1)] If $a \in F$ and $b \in F$, then $a \cdot b \in F$.
     \item[(A 2)] $a + b = b + a$ for all $a, b \in F$.
-    \item[(M 2)] $a \cdot b = b \cdot a$ for all $a, b \in F$.
     \item[(A 3)] $(a + b) + c = a + (b + c)$ for all $a, b, c \in F$.
-    \item[(M 3)] $(a \cdot b) + c = a + (b \cdot c)$ for all $a, b, c \in F$.
     \item[(A 4)] There is an element $0_F$ in $F$ such that $0_F + a = a$ for
-      all $a \in F$.
-    \item[(M 4)] There is an element $1_F$ in $F \setminus \{0_F\}$ such that
-      $1_F \cdot a = a$ for all $a \in F$.
+      all $a \in F$. 
     \item[(A 5)] For each $a \in F$ there is an element $-a$ in $F$ such that
       $a + (-a) = 0_F$.
+    \item[(M 1)] If $a \in F$ and $b \in F$, then $a \cdot b \in F$.
+    \item[(M 2)] $a \cdot b = b \cdot a$ for all $a, b \in F$.
+    \item[(M 3)] $(a \cdot b) + c = a + (b \cdot c)$ for all $a, b, c \in F$.
+    \item[(M 4)] There is an element $1_F$ in $F \setminus \{0_F\}$ such that
+      $1_F \cdot a = a$ for all $a \in F$.
     \item[(M 5)] For each $a \in F \setminus \{0_F\}$ there is an element
       $a^{-1}$ in $F$ such that $a \cdot a^{-1} = 1_F$.
     \item[(D)] $a \cdot (b + c) = a \cdot b + a \cdot c$ for all
@@ -40,11 +40,11 @@
 \end{remark}
 
 \begin{example}
-  $\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$ are fields.
+  $\QQ$, $\RR$ and $\CC$ are fields.
 \end{example}
 
 \begin{example}
-  Let $\mathbb{B} = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
+  Let $\BB = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
   defined as follows.
   \begin{align*}
     \begin{array}{c|cc}
@@ -61,7 +61,7 @@
       1     & 0 & 1 \\
     \end{array}
   \end{align*}
-  Then $\mathbb{B}$ is a field with $\oplus$ and $\odot$ as addition and
+  Then $\BB$ is a field with $\oplus$ and $\odot$ as addition and
   multiplication, respectively.
 \end{example}
 
@@ -69,11 +69,10 @@
   In a field $F$, if one can add up finite $1_F$'s such that the sum equals to
   $0_F$, then the smallest number of summands is called the
   \emph{characteristic} of $F$.
-  Thus, the characteristic of $\mathbb{B}$ is $2$ since $1 \oplus 1 = 0$ in
-  $\mathbb{B}$.
+  Thus, the characteristic of $\BB$ is $2$ since $1 \oplus 1 = 0$ in $\BB$.
 \end{remark}
 
-\begin{proposition}\label{prop:cancelltaion-of-addition}
+\begin{proposition}\label{prop:field-addition}
   Let $F$ be a field with $a, b, c \in F$.
   \begin{enumerate}
     \item If $a + b = a + c$, then $b = c$.
@@ -101,7 +100,7 @@
   \end{enumerate}
 \end{proof}
 
-\begin{proposition}\label{prop:cancelltaion-of-multiplication}
+\begin{proposition}\label{prop:field-multiplication}
   Let $F$ be a field with $a, b, c \in F$ and $a \neq 0_F$.
   \begin{enumerate}
     \item If $a \cdot b = a \cdot c$, then $b = c$.
@@ -111,10 +110,11 @@
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  The proof is similar to \Cref{prop:cancelltaion-of-addition}.
+  The proof is omitted since it is similar to that of
+  \Cref{prop:field-addition}.
 \end{proof}
 
-\begin{proposition}\label{prop:multiplication-of-inverses}
+\begin{proposition}\label{prop:field-operation}
   Let $F$ be a field with $a, b \in F$.
   \begin{enumerate}
     \item $0_F \cdot a = 0_F$.
@@ -130,7 +130,7 @@
         = (0_F + 0_F) \cdot a
         = 0_F \cdot a,
       \end{equation*}
-      we have $0_F \cdot a = 0_F$ by \Cref{prop:cancelltaion-of-addition} (b).
+      we have $0_F \cdot a = 0_F$ by \Cref{prop:field-addition} (b).
     \item Since
       \begin{equation*}
         (-a) \cdot b + a \cdot b
@@ -138,8 +138,7 @@
         = 0_F \cdot b
         = 0_F,
       \end{equation*}
-      we have $(-a) \cdot b = -(a \cdot b)$ by
-      \Cref{prop:cancelltaion-of-addition} (c).
+      we have $(-a) \cdot b = -(a \cdot b)$ by \Cref{prop:field-addition} (c).
       The other half can be proved similarly.
     \item By applying (b) twice, we have
       \begin{equation*}
@@ -153,158 +152,166 @@
 
 \section{Vector Spaces}
 \begin{definition}\label{def:vector-space}
-  Let $F$ be a field and let $V$ be a set on which two operations
-  $+: V \times V \to V$ and $\cdot: F \times V \to V$ are defined.
-  Then $(V, +, \cdot)$ is a \emph{vector space} over
-  $F$ if the following conditions hold.
-  \begin{enumerate}[label=(V \arabic*),leftmargin=3.5em]
-    \item $(V, +)$ is an Abelian group.
-    \item For all $x \in V$, $1_F \cdot x = x$.
-    \item For all $a, b \in F$ and for all $x \in V$,
-      $(a \cdot b) \cdot x = a \cdot (b \cdot x)$.
-    \item For all $a, b \in F$ and for all $x \in V$,
-      $(a + b) \cdot x = a \cdot x + b \cdot x$.
-    \item For all $a \in F$ and for all $x, y \in V$,
-      $a \cdot (x + y) = a \cdot x + a \cdot y$.
+  A \emph{vector space} over a field $F$ is a set $V$ with two operations,
+  called \emph{addition} (denoted by $+$) and \emph{scalar multiplication}
+  (denoted by $\cdot$), which satisfy the following axioms.
+  \begin{enumerate}[leftmargin=3.5em]
+    \item[(V 1)] If $x \in V$ and $y \in V$, then $x + y \in V$.
+    \item[(V 2)] If $a \in F$ and $x \in V$, then $a \cdot x \in V$. 
+    \item[(V 3)] $x + y = y + x$ for all $x, y \in V$.
+    \item[(V 4)] $(x + y) + z = x + (y + z)$ for all $x, y, z \in V$.
+    \item[(V 5)] $(a \cdot b) \cdot x = a \cdot (b \cdot x)$ for all
+      $a, b \in F$ and $x \in V$. 
+    \item[(V 6)] There is an element $0_V$ in $V$ such that $0_V + x = x$ for
+      all $x \in V$.
+    \item[(V 7)] $1_F \cdot x = x$ for all $x \in V$.
+    \item[(V 8)] For each $x \in V$ there is an element $-x$ such that
+      $x + (-x) = 0_V$.
+    \item[(V 9)] $a \cdot (x + y) = a \cdot x + a \cdot y$ for all $a \in F$
+      and $x, y \in V$.
+    \item[(V 10)] $(a + b) \cdot x = a \cdot x + b \cdot x$ for all
+      $a, b \in F$ and $x \in V$.
   \end{enumerate}
 \end{definition}
-\begin{remark}
-  We also say that $V$ is a vector space over $F$ if both $+$ and $\cdot$
-  are ``standard''.
-\end{remark}
 
 \begin{example}
-  $(\mathbb{C}, +, \cdot)$ is a vector space over $\mathbb{R}$, and
-  $(\mathbb{R}, +, \cdot)$ is a vector space over $\mathbb{Q}$.
-\end{example}
-\begin{example} Let $F$ be a field.
-  \begin{itemize}
-    \item $(F^n, +, \cdot)$ is a vector space over $F$.
-    \item Let $\mathcal{P}(F)$ denote the set of polynomials with coefficients
-      in $F$.
-      Then $(\mathcal{P}(F), +, \cdot)$ is a vector space over $F$.
-    \item Let $\mathcal{F}(S, F)$ denote the set of functions from $S$ to $F$.
-      Then $(\mathcal{F}(S, F), +, \cdot)$ is a vector space over $F$.
-  \end{itemize}
+  A field is a vector space over itself.
 \end{example}
 
-\begin{theorem}\label{thm:vector-space-multiplication}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Then the following statements are true.
+\begin{example}
+  $\CC$ is a vector space over $\RR$.
+\end{example}
+
+\begin{example}
+  $\RR$ is a vector space over $\QQ$.
+\end{example}
+
+\begin{example}
+  The set of \emph{$n$-tuples} with elements from a field $F$ is denoted by
+  $F^n$.
+  For $x = (x_1, \dots, x_n) \in F^n$, $y = (y_1, \dots, y_n) \in F^n$, and
+  $c \in F$, we define the operations of addition and scalar multiplication by
+  \begin{equation*}
+    x + y = (x_1 + y_1, \dots, x_n + y_n)
+    \quad \text{and} \quad
+    c \cdot x = (c \cdot x_1, \dots, c \cdot x_n).
+  \end{equation*}
+  Then $F^n$ is a vector space over $F$.
+\end{example}
+
+\begin{example}
+  The set of all $m \times n$ \emph{matrices} with elements from a field $F$ is
+  denoted by $F^{m \times n}$.
+  For $A, B \in F^{m \times n}$ and $c \in F$, we define the operations of
+  addition and scalar multiplication by
+  \begin{equation*}
+    (A + B)_{ij} = A_{ij} + B_{ij}
+    \quad \text{and} \quad
+    (c \cdot A)_{ij} = c \cdot A_{ij}
+  \end{equation*}
+  for $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
+  Then $F^{m \times n}$ is a vector space over $F$.
+\end{example}
+
+\begin{example}
+  The set of \emph{functions} from a nonempty set $S$ to a field $F$ is denoted
+  by $\func{S}{F}$.
+  For $f, g \in \func{S}{F}$ and $c \in F$, we define the operations of
+  addition and scalar multiplication by
+  \begin{equation*}
+    (f + g)(s) = f(s) + g(s)
+    \quad \text{and} \quad
+    (c \cdot f)(s) = c \cdot f(s)
+  \end{equation*}
+  for all $s \in S$.
+  Then $\func{S}{F}$ is a vector space over $F$.
+\end{example}
+
+\begin{example}
+  The set of \emph{polynomials} with coefficients from a field $F$ is denoted
+  by $\poly{F}$.
+  For $f, g \in \poly{F}$ and $c \in F$ with
+  \begin{equation*}
+    f(t) = \sum_{i=0}^n a_it^i
+    \quad \text{and} \quad
+    g(t) = \sum_{i=0}^n b_it^i,
+  \end{equation*}
+  we define the operations of addition and scalar multiplication by
+  \begin{equation*}
+    (f + g)(t) = \sum_{i=0}^n (a_i + b_i)t^i
+    \quad \text{and} \quad
+    (c \cdot f)(t) = \sum_{i=0}^n (c \cdot a_i)t^i.
+  \end{equation*}
+  Then $\poly{F}$ is a vector space over $F$.
+\end{example}
+
+\begin{proposition}\label{prop:vector-space-addition}
+  Let $V$ be a vector space with $x, y, z \in F$.
   \begin{enumerate}
-    \item For all $x \in V$, $0_F \cdot x = 0_V$.
-    \item For all $a \in F$, $a \cdot 0_V = 0_V$.
-    \item For all $a \in F$ and $x \in V$,
-      $(-a) \cdot x = -(a \cdot x) = a \cdot (-x)$.
+    \item If $x + y = x + z$, then $y = z$.
+    \item If $x + y = x$, then $y = 0_V$.
+    \item If $x + y = 0_V$, then $y = -x$.
+    \item $-(-x) = x$.
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 \begin{proof}
-  It is similar to the proof of \Cref{prop:cancelltaion-of-multiplication}.
+  The proof is omitted since it is similar to that of
+  \Cref{prop:field-addition}.
+\end{proof}
+
+\begin{proposition}\label{prop:vector-space-operation}
+  Let $V$ be a vector space over a field $F$ with $x \in V$ and $a \in F$.
   \begin{enumerate}
-    \item We have
-      $$
-      0_F \cdot x + 0_F \cdot x
-      = (0_F + 0_F) \cdot x
-      = 0_F \cdot x
-      = 0_F \cdot x + 0_V.
-      $$
-      Thus, $0_F \cdot x = 0_V$ by \Cref{prop:cancelltaion-of-addition}.
-    \item It is similar to the proof of (a).
-    \item By (a), we have
-      $$
-      a \cdot x + (-a) \cdot x
-      = (a + (-a)) \cdot x
-      = 0_F \cdot x
-      = 0_V.
-      $$
-      Thus, $(-a) \cdot x = -(a \cdot x)$.
-      By (b), we have
-      $$
-      a \cdot x + a \cdot (-x)
-      = a \cdot (x + (-x))
-      = a \cdot 0_V
-      = 0_V.
-      $$
-      Thus, $a \cdot (-x) = -(a \cdot x)$. \qedhere
+    \item $0_F \cdot x = 0_V$.
+    \item $a \cdot 0_V = 0_V$.
+    \item $(-a) \cdot x = -(a \cdot x) = a \cdot (-x)$.
   \end{enumerate}
+\end{proposition}
+\begin{proof}
+  The proof is omitted since it is similar to that of
+  \Cref{prop:field-operation}.
 \end{proof}
 
 \section{Subspaces}
-\begin{definition}\label{def:inheritance}
-  Let $(V, +_V, \cdot_V)$ be a vector space over a field $F$.
-  Let $W$ be a subset of $V$.
-  If $+_W: W \times W \to W$ and $\cdot_W: F \times W \to W$
-  satisfy
-  \begin{equation*}
-    x +_W y = x +_V y
-      \quad \text{and}
-      \quad a \cdot_W x = a \cdot_V x
-  \end{equation*}
-  for all $a \in F$ and $x, y \in W$, then we say that $+_W$ and $\cdot_W$
-  \emph{inherit} $+_V$ and $\cdot_V$, respectively.
-\end{definition}
-
 \begin{definition}\label{def:subspace}
-  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
-  A subset $W$ of $V$ is called a \emph{subspace} of $V$ if
-  $(W, +_W, \cdot_W)$ is a vector space over $F$, where $+_W$ and $\cdot_W$
-  inherit $+_V$ and $\cdot_V$, respectively.
+  Let $V$ be a vector space over a field $F$.
+  Then a subset $W$ of $V$ is called a \emph{subspace} of $V$ if $W$ is a
+  vector space over $F$ with the operations of addition and scalar
+  multiplication defined on $V$.
 \end{definition}
 
 \begin{theorem}\label{thm:subspace}
-  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
-  Let $W$ be a subset of $V$.
+  Let $V$ be a vector space over a field $F$ and $W \subseteq V$.
   Then $W$ is a subspace of $V$ if the following conditions hold.
   \begin{enumerate}
-    \item For all $x, y \in W$, $x +_V y \in W$.
-    \item For all $a \in F$ and $x \in W$, $a \cdot_V x \in W$.
+    \item $x + y \in W$ for all $x, y \in W$.
+    \item $ax \in W$ for all $x \in W$ and $a \in F$.
     \item $0_V \in W$.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
-  We can define operations $+_W: W \times W \to W$
-  and $\cdot_W: F \times W \to W$ such that
+  Since a vector in $W$ is also in $V$, (V 3), (V 4), (V 5), (V 7), (V 9) and
+  (V 10) in \Cref{def:vector-space} hold trivially.
+  Furthermore, (a) implies (V 1), (b) implies (V 2), (c) implies (V 6), and
+  (V 8) is also true since
   \begin{equation*}
-    x +_W y = x +_V y
-      \quad \text{and}
-      \quad a \cdot_W x = a \cdot_V x
+    -x = -(1_Fx) = (-1_F)x \in W
   \end{equation*}
-  for all $a \in F$ and $x, y \in W$ due to (a) and (b).
-  Then $+_W$ and $\cdot_W$ inherit $+_V$ and $\cdot_V$, respectively.
-
-  Now we prove that $(W, +_W, \cdot_W)$ is a vector space over $F$.
-  Since a vector in $W$ is also in $V$, (V 2), (V 3), (V 4) and (V 5) hold
-  trivially for $W$.
-  Thus, one only needs to prove (V 1), i.e., $(W, +_W)$ is an Abelian group.
-
-  Since $+_W$ inherits $+_V$, $+_V$ is associative implies that
-  $+_W$ is associative.
-  Furthermore, since
-  \begin{equation*}
-    \begin{array}{lll}
-      0_V \in W
-        & \text{and}
-        & -x = -(1_F \cdot x) = (-1_F) \cdot x \in W
-    \end{array}
-  \end{equation*}
-  hold for all $x \in W$, we have
-  \begin{equation*}
-    \begin{array}{lll}
-      0_V +_W x = x = x +_W 0_V
-        & \text{and}
-        & x +_W (-x) = 0_V = (-x) +_W x
-    \end{array}
-  \end{equation*}
-  hold for all $x \in W$.
-  Thus, $0_V \in W$ is an additive identity of $W$, and each vector in $W$
-  also has an additive inverse in $W$, which complete the proof.
+  holds for all $x \in W$.
+  Thus, $W$ is a vector space over $F$.
 \end{proof}
 
 \begin{example}
-  Let $\mathcal{P}_n(F)$ denote the set of polynomials in $\mathcal{P}(F)$
-  with degree less than or equal to $n$, where $n \geq -1$ is an integer.
-  Then it follows from \Cref{thm:subspace} that $\mathcal{P}_n(F)$ is
-  a subspace of $\mathcal{P}(F)$.
+  The set of polynomials in $\mathcal{P}(F)$ with degree not greater than
+  $n$ is denoted by $\mathcal{P}_n(F)$, where the \emph{degree} of a nonzero
+  polynomial
+  \begin{equation*}
+    f(t) = a_0 + a_1t + a_2t^2 + \cdots + a_mt^m
+  \end{equation*}
+  is defined to be the largest integer $n$ such that $a_n \neq 0_F$, and the
+  degree of zero polynomial is defined to be $-1$.
+  Then it follows from \Cref{thm:subspace} that $\mathcal{P}_n(F)$ is a
+  subspace of $\mathcal{P}(F)$.
 \end{example}
 
 \begin{theorem}\label{thm:intersection}
