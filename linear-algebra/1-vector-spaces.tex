@@ -40,11 +40,11 @@
 \end{remark}
 
 \begin{example}
-  $\QQ$, $\RR$ and $\CC$ are fields.
+  $\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$ are fields.
 \end{example}
 
 \begin{example}
-  Let $\BB = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
+  Let $\mathbb{B} = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
   defined as follows.
   \begin{align*}
     \begin{array}{c|cc}
@@ -61,16 +61,9 @@
       1     & 0 & 1 \\
     \end{array}
   \end{align*}
-  Then $\BB$ is a field with $\oplus$ and $\odot$ as addition and
+  Then $\mathbb{B}$ is a field with $\oplus$ and $\odot$ as addition and
   multiplication, respectively.
 \end{example}
-
-\begin{remark}
-  In a field $F$, if one can add up finite $1_F$'s such that the sum equals to
-  $0_F$, then the smallest number of summands is called the
-  \emph{characteristic} of $F$.
-  Thus, the characteristic of $\BB$ is $2$ since $1 \oplus 1 = 0$ in $\BB$.
-\end{remark}
 
 \begin{proposition}\label{prop:field-addition}
   Let $F$ be a field with $a, b, c \in F$.
@@ -157,16 +150,16 @@
   (denoted by $\cdot$), which satisfy the following axioms.
   \begin{enumerate}[leftmargin=3.5em]
     \item[(V 1)] If $x \in V$ and $y \in V$, then $x + y \in V$.
-    \item[(V 2)] If $a \in F$ and $x \in V$, then $a \cdot x \in V$. 
-    \item[(V 3)] $x + y = y + x$ for all $x, y \in V$.
-    \item[(V 4)] $(x + y) + z = x + (y + z)$ for all $x, y, z \in V$.
-    \item[(V 5)] $(a \cdot b) \cdot x = a \cdot (b \cdot x)$ for all
-      $a, b \in F$ and $x \in V$. 
-    \item[(V 6)] There is an element $0_V$ in $V$ such that $0_V + x = x$ for
+    \item[(V 2)] $x + y = y + x$ for all $x, y \in V$. 
+    \item[(V 3)] $(x + y) + z = x + (y + z)$ for all $x, y, z \in V$.
+    \item[(V 4)] There is an element $0_V$ in $V$ such that $0_V + x = x$ for
       all $x \in V$.
-    \item[(V 7)] $1_F \cdot x = x$ for all $x \in V$.
-    \item[(V 8)] For each $x \in V$ there is an element $-x$ such that
+    \item[(V 5)] For each $x \in V$ there is an element $-x$ such that
       $x + (-x) = 0_V$.
+    \item[(V 6)] If $a \in F$ and $x \in V$, then $a \cdot x \in V$. 
+    \item[(V 7)] $(a \cdot b) \cdot x = a \cdot (b \cdot x)$ for all
+      $a, b \in F$ and $x \in V$. 
+    \item[(V 8)] $1_F \cdot x = x$ for all $x \in V$.
     \item[(V 9)] $a \cdot (x + y) = a \cdot x + a \cdot y$ for all $a \in F$
       and $x, y \in V$.
     \item[(V 10)] $(a + b) \cdot x = a \cdot x + b \cdot x$ for all
@@ -174,16 +167,25 @@
   \end{enumerate}
 \end{definition}
 
+\begin{remark} \leavevmode
+  \begin{itemize}
+    \item For simplification, we usually write $ax$ instead of $a \cdot x$.
+    \item The elements $0_V$ is usually called the \emph{additive identity} of
+      $V$, and $-x$ is called the \emph{additive inverse} of $x$ in $V$.
+    \item \emph{Subtraction} can be defined using additive inverses.
+  \end{itemize}
+\end{remark}
+
 \begin{example}
   A field is a vector space over itself.
 \end{example}
 
 \begin{example}
-  $\CC$ is a vector space over $\RR$.
+  $\mathbb{C}$ is a vector space over $\mathbb{R}$.
 \end{example}
 
 \begin{example}
-  $\RR$ is a vector space over $\QQ$.
+  $\mathbb{R}$ is a vector space over $\mathbb{Q}$.
 \end{example}
 
 \begin{example}
@@ -215,8 +217,8 @@
 
 \begin{example}
   The set of \emph{functions} from a nonempty set $S$ to a field $F$ is denoted
-  by $\func{S}{F}$.
-  For $f, g \in \func{S}{F}$ and $c \in F$, we define the operations of
+  by $\mathcal{F}(S, F)$.
+  For $f, g \in \\mathcal{F}(S, F)$ and $c \in F$, we define the operations of
   addition and scalar multiplication by
   \begin{equation*}
     (f + g)(s) = f(s) + g(s)
@@ -224,13 +226,13 @@
     (c \cdot f)(s) = c \cdot f(s)
   \end{equation*}
   for all $s \in S$.
-  Then $\func{S}{F}$ is a vector space over $F$.
+  Then $\\mathcal{F}(S, F)$ is a vector space over $F$.
 \end{example}
 
 \begin{example}
   The set of \emph{polynomials} with coefficients from a field $F$ is denoted
-  by $\poly{F}$.
-  For $f, g \in \poly{F}$ and $c \in F$ with
+  by $\mathcal{P}(F)$.
+  For $f, g \in \mathcal{P}(F)$ and $c \in F$ with
   \begin{equation*}
     f(t) = \sum_{i=0}^n a_it^i
     \quad \text{and} \quad
@@ -242,7 +244,7 @@
     \quad \text{and} \quad
     (c \cdot f)(t) = \sum_{i=0}^n (c \cdot a_i)t^i.
   \end{equation*}
-  Then $\poly{F}$ is a vector space over $F$.
+  Then $\mathcal{P}(F)$ is a vector space over $F$.
 \end{example}
 
 \begin{proposition}\label{prop:vector-space-addition}
@@ -284,21 +286,40 @@
   Let $V$ be a vector space over a field $F$ and $W \subseteq V$.
   Then $W$ is a subspace of $V$ if the following conditions hold.
   \begin{enumerate}
+    \item $0_V \in W$.
     \item $x + y \in W$ for all $x, y \in W$.
     \item $ax \in W$ for all $x \in W$ and $a \in F$.
-    \item $0_V \in W$.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
-  Since a vector in $W$ is also in $V$, (V 3), (V 4), (V 5), (V 7), (V 9) and
+  Since a vector in $W$ is also in $V$, (V 2), (V 3), (V 7), (V 8), (V 9) and
   (V 10) in \Cref{def:vector-space} hold trivially.
-  Furthermore, (a) implies (V 1), (b) implies (V 2), (c) implies (V 6), and
-  (V 8) is also true since
+  Furthermore, (a) implies (V 4), (b) implies (V 1), (c) implies (V 6), and
+  (V 5) is also true since
   \begin{equation*}
     -x = -(1_Fx) = (-1_F)x \in W
   \end{equation*}
   holds for all $x \in W$.
   Thus, $W$ is a vector space over $F$.
+\end{proof}
+
+\begin{corollary}\label{cor:subspace}
+  Let $V$ be a vector space over a field $F$ and $W \subseteq V$.
+  Then $W$ is a subspace of $V$ if and only if the following conditions hold.
+  \begin{enumerate}
+    \item $0_V \in W$.
+    \item $ax + y \in W$ for all $x, y \in W$ and $a \in F$.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  $(\Rightarrow)$ Straightforward.
+  $(\Leftarrow)$ For all $x, y \in W$ and $a \in F$, we have
+  \begin{equation*}
+    x + y = 1_F x + y \in W
+    \quad \text{and} \quad
+    ax = ax + 0_V \in W.
+  \end{equation*}
+  Thus, $W$ is a subspace of $V$ by \Cref{thm:subspace}.
 \end{proof}
 
 \begin{example}
@@ -310,95 +331,83 @@
   \end{equation*}
   is defined to be the largest integer $n$ such that $a_n \neq 0_F$, and the
   degree of zero polynomial is defined to be $-1$.
-  Then it follows from \Cref{thm:subspace} that $\mathcal{P}_n(F)$ is a
-  subspace of $\mathcal{P}(F)$.
+  Then one can verify that $\mathcal{P}_n(F)$ is a subspace of
+  $\mathcal{P}(F)$.
 \end{example}
 
-\begin{theorem}\label{thm:intersection}
-  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
-  Let $I$ be an index set such that $W_i$ is a subspace of $V$
-  for all $i \in I$.
-  Then the intersection
+\begin{example}
+  An $n \times n$ matrix $A$ is called \emph{diagonal} if $i \neq j$ impies
+  $A_{ij} = 0_F$ for all $i, j \in \{1, \dots, n\}$.
+  Then one can verify that the set of $n \times n$ diagonal matrices is a
+  subspace of $F^{n \times n}$.
+\end{example}
+
+\begin{example}
+  The \emph{trace} of an $n \times n$ matrix $A$, denoted by $\tr(A)$, is
+  defined by
   \begin{equation*}
-    W = \bigcap_{i \in I} W_i
+    \tr(A) = \sum_{i=1}^n A_{ii}.
   \end{equation*}
-  is a subspace of $V$.
-\end{theorem}
+  Then one can verify that the set of $n \times n$ matrices that have trace
+  equal to $0_F$ is a subspace of $F^{n \times n}$.
+\end{example}
+
+\begin{proposition}\label{prop:subspace-intersection}
+  Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$.
+  Then $W_1 \cap W_2$ is a subspace of $V$.
+\end{proposition}
 \begin{proof}
-  For all $a \in F$ and for all $x, y \in W$, since
-  \begin{equation*}
-    \begin{array}{lllll}
-      x +_V y \in W_i
-      & \text{and}
-      & a \cdot_V x \in W_i
-      & \text{and}
-      & 0_V \in W_i
-    \end{array}
-  \end{equation*}
-  hold for all indices $i \in I$, we have
-  \begin{equation*}
-    \begin{array}{lllll}
-      x +_V y \in W
-      & \text{and}
-      & a \cdot_V x \in W
-      & \text{and}
-      & 0_V \in W.
-    \end{array}
-  \end{equation*}
-  Thus, $W$ is a subspace of $V$.
+  Since $W_1$ and $W_2$ are subspaces of $V$, we have $0_V \in W_1 \cap W_2$.
+  Furthermore, for each $x, y \in W_1 \cap W_2$ and for each $a \in F$, we have
+  $ax + y \in W_1 \cap W_2$ by \Cref{cor:subspace}.
+  Thus, $W_1 \cap W_2$ is a subspace of $V$.
 \end{proof}
 
-\begin{definition}\label{def:sum-of-sets}
-  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
-  Let $S_1$ and $S_2$ be subsets of $V$.
-  Then the \emph{sum} of $S_1$ and $S_2$, denoted $S_1 + S_2$,
-  is defined as
+\begin{example}
+  Let $W_1$ be the set of $n \times n$ diagonal matrices.
+  Let $W_2$ be the set of $n \times n$ matrices that have trace equal to $0_F$.
+  Then since both $W_1$ and $W_2$ are subspaces of $F^{n \times n}$,
+  we can conclude that $W_1 \cap W_2$ is also a subspace of $F^{n \times n}$.
+\end{example}
+
+\begin{definition}\label{def:sum}
+  Let $V$ be a vector space and let $S_1, S_2 \subseteq V$.
+  Then the \emph{sum} of $S_1$ and $S_2$, denoted by $S_1 + S_2$, is the set
   \begin{equation*}
-    S_1 + S_2 \; = \; \{x + y: x \in S_1 \;\text{and}\; y \in S_2\}.
+    \{x + y: x \in S_1\ \text{and}\ y \in S_2\}.
   \end{equation*}
 \end{definition}
 
-\begin{theorem}\label{thm:sum}
-  Let $(V, +_V, \cdot_V)$ be a vector space over $F$.
-  If $W_1$ and $W_2$ be subspaces of $V$, then the following statements are
-  true.
+\begin{proposition}\label{prop:subspace-sum}
+  Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$.
+  Then the following statements are true.
   \begin{enumerate}
     \item $W_1 + W_2$ is a subspace of $V$.
-    \item If $W$ is a subspace of $V$ with $W_1 \cup W_2 \subseteq W$,
-      then $W_1 + W_2 \subseteq W$.
+    \item If $U$ is a subspace of $V$ with $W_1 \cup W_2 \subseteq U$,
+      then $W_1 + W_2 \subseteq U$.
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 \begin{proof} \leavevmode
   \begin{enumerate}
-    \item Suppose that $a \in F$ and $x, y \in W_1 + W_2$.
-      Then there exists $x_1, y_1 \in W_1$ and $x_2, y_2 \in W_2$ such that
-      \begin{equation*}
-        \begin{array}{lll}
-        x = x_1 +_V x_2
-          & \text{and}
-          & y = y_1 +_V y_2.
-        \end{array}
-      \end{equation*}
+    \item We have $0_V = 0_V + 0_V \in W_1 + W_2$.
+      For each $x, y \in W_1 + W_2$ and for each $a \in F$, by \Cref{def:sum}
+      there exist $x_1, y_1 \in W_1$ and $x_2, y_2 \in W_2$ such that
+      $x = x_1 + x_2$ and $y = y_1 + y_2$.
       Thus,
-      \begin{equation*}
-        a \cdot_V x
-          = a \cdot_V (x_1 + x_2)
-          = a \cdot_V x_1 + a \cdot_V x_2
-          \in W_1 + W_2
-      \end{equation*}
-      and
-      \begin{equation*}
-        x +_V y
-          = (x_1 +_V x_2) + (y_1 +_V y_2)
-          = (x_1 +_V y_1) + (x_2 +_V y_2)
-          \in W_1 + W_2.
-      \end{equation*}
-      We also have $0_V = 0_V +_V 0_V \in W_1 + W_2$.
-      Hence, $W_1 + W_2$ is a subspace of $V$.
-    \item If $x \in W_1 + W_2$, then there exists $x_1 \in W_1$ and
-      $x_2 \in W_2$ such that $x = x_1 + x_2$.
-      Since $W_1 \subseteq W$ and $W_2 \subseteq W$, we have $x_1 \in W$ and
-      $x_2 \in W$, which implies $x \in W$. \qedhere
+      \begin{align*}
+        ax + y
+        &= a(x_1 + x_2) + (y_1 + y_2) \\
+        &= (ax_1 + ax_2) + (y_1 + y_2) \\
+        &= (ax_1 + y_1) + (ax_2 + y_2) \\
+        &\in W_1 + W_2.
+      \end{align*}
+    \item Let $x$ be a vector in $W_1 + W_2$.
+      Then by \Cref{def:sum} there exists $x_1 \in W_1$ and $x_2 \in W_2$ such
+      that $x = x_1 + x_2$.
+      We have $x_1 \in U$ since $W_1 \subseteq U$.
+      Also, we have $x_2 \in U$ since $W_2 \subseteq U$.
+      It follows that $x = x_1 + x_2 \in U$, and thus $W_1 + W_2 \subseteq U$.
+      \qedhere
   \end{enumerate}
 \end{proof}
 
