@@ -412,112 +412,89 @@
 \end{proof}
 
 \section{Spanning Sets}
-\begin{definition}\label{def:summation}
-  Let $(G, +)$ be an Abelian group.
-  Then we define
-  \begin{equation*}
-    \sum_{i=m}^n a_i =
-      \left\{
-      \begin{array}{ll}
-        \displaystyle
-          \sum_{i=m}^{n-1} a_i + a_n & \text{if} \; m \leq n\\[1.5em]
-        0_G & \text{if} \; m > n,\\
-      \end{array}
-      \right.
-  \end{equation*}
-  where $a_i \in G$ for each integer $i$ with $m \leq i \leq n$.
-\end{definition}
-
 \begin{definition}\label{def:linear-combination}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Let $S$ be a subset of $V$.
+  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
   Then a vector $x \in V$ is called a \emph{linear combination} of $S$ if
-  there exist some nonnegative integer $n$,
-  scalars $a_1, \dots, a_n \in F$,
-  and vectors $x_1, \dots, x_n \in S$ such that
+  there exist scalars $a_1, \dots, a_n \in F$ and vectors
+  $x_1, \dots, x_n \in S$ for some nonnegative integer $n$ such that
   \begin{equation*}
     x = \sum_{i=1}^n a_ix_i.
   \end{equation*}
 \end{definition}
 \begin{remark}
-  Since $n$ can be zero, $0_V$ is a linear combination for all $S \subseteq V$.
-\end{remark}
-\begin{remark}
-  Although $S$ can be infinite, the number of terms in the summation must be
-  finite.
-  For example, in the vector space $\mathbb{R}$ over $\mathbb{Q}$,
-  although we have
-  \begin{equation*}
-    e = \sum_{k=0}^\infty \frac{1}{k!}
-      = \frac{1}{1} + \frac{1}{1} + \frac{1}{2} + \frac{1}{6}
-        + \frac{1}{24} + \cdots,
-  \end{equation*}
-  $e$ is still not a linear combination of $\mathbb{Q}$.
+  \leavevmode
+  \begin{itemize}
+    \item If $n = 0$, then the sum in the right hand side is $0_V$ since
+      nothing are added up.
+      Thus, $0_V$ is a linear combination of any subset of $V$.
+    \item Note that $n$ should be finite. Thus, in the vector space
+      $\mathbb{R}$ over the field $\mathbb{Q}$, $e$ is not a linear combination
+      of $\mathbb{Q}$ even if we have
+      \begin{equation*}
+        e = \sum_{i=0}^\infty \frac{1}{i!}.
+      \end{equation*}
+  \end{itemize}
 \end{remark}
 
 \begin{definition}\label{def:span}
-  Let $(V, +, \cdot)$ is a vector space over $F$.
-  The \emph{span} of $S$, denoted $\mathrm{span}(S)$, is the set that
-  consists of all linear combinations of $S$.
+  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
+  Then the \emph{span} of $S$, denoted $\spn(S)$, is defined as the
+  set of all linear combinations of $S$.
 \end{definition}
 
 \begin{theorem}\label{thm:span}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Let $S \subseteq V$. Then the following statements are true.
+  Let $V$ be a vector space over $F$ and let $S \subseteq V$.
+  Then the following statements are true.
   \begin{enumerate}
-    \item $\mathrm{span}(S)$ is a subspace of $V$.
-    \item If $W$ is a subspace of $V$ such that $S \subseteq W$, then
-      $\mathrm{span}(S) \subseteq W$.
+    \item $\spn(S)$ is a subspace of $V$.
+    \item If $U$ is a subspace of $V$ such that $S \subseteq U$, then
+      $\spn(S) \subseteq U$.
   \end{enumerate}
 \end{theorem}
-\begin{proof} \leavevmode
-\begin{enumerate}
-  \item If $c \in F$ and $x, y \in \mathrm{span}(S)$, then there exist
-    nonnegative integers $m, n$,
-    scalars $a_1, \dots, a_m, b_1, \dots, b_n \in F$
-    and vectors $x_1, \dots, x_m, y_1, \dots, y_n \in S$ such that
-    \begin{equation*}
-      \begin{array}{lll}
-        \displaystyle x = \sum_{i=1}^m a_ix_i
-        & \text{and}
-        & \displaystyle y = \sum_{j=1}^n b_jy_j.
-      \end{array}
-    \end{equation*}
-    Thus, we have
-    \begin{align*}
-      cx
-      &= c(a_1x_1 + \cdots + a_mx_m) \\
-      &= c(a_1x_1) + \cdots + c(a_mx_m) \\
-      &= (ca_1)x_1 + \cdots + (ca_m)x_m \in \mathrm{span}(S)
-    \end{align*}
-    and
-    \begin{equation*}
-      x + y
-        = a_1x_1 + \cdots a_mx_m + b_1y_1 + \cdots + b_ny_n
-        \in \mathrm{span}(S).
-    \end{equation*}
-    Also, $0_V \in \mathrm{span}(S)$.
-    Hence, $\mathrm{span}(S)$ is a subspace of $V$.
-  \item If $x \in \mathrm{span}(S)$, then there exists an
-    nonnegative integer $n$, scalars $a_1, \dots, a_n \in F$
-    and vectors $x_1, \dots, x_n \in S$ such that
-    \begin{equation*}
-      x = \sum_{i=1}^m a_ix_i.
-    \end{equation*}
-    Thus, since $x_1, \dots, x_n \in W$, we have
-    $x = a_1x_1 + \cdots + a_nx_n \in W$. \qedhere
-\end{enumerate}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Let $c \in F$ and $x, y \in \spn(S)$.
+      Then there exist scalars $a_1, \dots, a_n \in F$
+      and vectors $x_1, \dots, x_n \in S$ such that
+      \begin{equation*}
+        x = a_1x_1 + \cdots + a_nx_n.
+      \end{equation*}
+      Also, there exist scalars $b_1, \dots, b_n \in F$
+      and vectors $y_1, \dots, y_m \in S$ such that
+      \begin{equation*}
+        y = b_1y_1 + \cdots + b_ny_m.
+      \end{equation*}
+      Thus, we have
+      \begin{align*}
+        cx + y
+        &= c(x_1 + \cdots + x_n) + (y_1 + \cdots + y_m) \\
+        &= cx_1 + \cdots + cx_n + y_1 + \cdots + y_m \\
+        &\in \spn(S).
+      \end{align*}
+      Furthermore, $0_V \in \spn(S)$.
+      Hence, $\spn(S)$ is a subspace of $V$ by \Cref{cor:subspace}.
+    \item Let $x \in \spn(S)$.
+      Then there exist scalars $a_1, \dots, a_n \in F$
+      and vectors $x_1, \dots, x_n \in S$ such that
+      \begin{equation*}
+        x = a_1x_1 + \cdots + a_nx_n.
+      \end{equation*}
+      Since $S \subseteq U$, we have $x_1, \dots, x_n \in U$, and it follows that
+      $x = a_1x_1 + \cdots + a_nx_n \in U$ due to the closeness of $U$.
+      Thus, $\spn(S) \subseteq U$. \qedhere
+  \end{enumerate}
 \end{proof}
 
 \begin{definition}\label{def:spanning-set}
-  A subset $S$ of a vector space $(V, +, \cdot)$ \emph{spans} $V$
-  if $\mathrm{span}(S) = V$.
-  In this case, we also say that $S$ is a \emph{spanning set} of $V$.
+  Let $V$ be a vector space and let $S \subseteq V$.
+  If $\spn(S) = V$, then $S$ is called a \emph{spanning set} of $V$, and we
+  also say $S$ \emph{spans} $V$.
 \end{definition}
 
 \begin{example}
   $\{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ is a spanning set of $\mathbb{R}^3$
-  since for all $x, y, z \in \mathbb{R}$,
+  since for any $x, y, z \in \mathbb{R}$,
   \begin{equation*}
     (x, y, z)
       = \frac{-x+y+z}{2} \cdot (0, 1, 1)
@@ -526,154 +503,171 @@
   \end{equation*}
 \end{example}
 
-\section{Linearly Independent Sets}
-\begin{definition}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Let $S$ be a subset of $V$.
-  For scalars $a_1, \dots, a_n \in F$ and distinct vectors
-  $x_1, \dots, x_n \in S$, we say that
-  \begin{equation*}
-    \sum_{i=1}^n a_ix_i = 0_V
-  \end{equation*}
-  is a \emph{trivial representation} of $0_V$ as a linear combination of $S$
-  if $a_1 = \cdots = a_n = 0_F$.
-\end{definition}
+\begin{proposition}\label{prop:span}
+  Let $V$ be a vector space and let $R, S \subseteq V$.
+  \begin{enumerate}
+    \item $S \subseteq \spn(S)$.
+    \item If $R \subseteq S$, then $\spn(R) \subseteq \spn(S)$.
+    \item $S = \spn(S)$ if and only if $S$ is a subspace of $V$.
+    \item $\spn(R \cup S) = \spn(R) + \spn(S)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Straightforward.
+    \item It is true since a linear combination of a subset of $S$ is also a
+      linear combination of $S$.
+    \item $(\Rightarrow)$ Straightforward from \Cref{thm:span} (a).
 
-\begin{definition}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
+      $(\Leftarrow)$ Note that any linear combination of $S$ is in $S$ due to
+      closeness of addition and scalar multiplication in $S$.
+      Thus, $\spn(S) \subseteq S$, and it follows that $S = \spn(S)$.
+    \item Since $R \subseteq \spn(R)$ and $S \subseteq \spn(S)$, we have
+      $R \cup S \subseteq \spn(R) + \spn(S)$. Thus, by \Cref{thm:span}, we have
+      $\spn(R \cup S) \subseteq \spn(R) + \spn(S)$.
+      On the other side, since
+      \begin{equation*}
+        \spn(R) \subseteq \spn(R \cup S)
+        \quad \text{and} \quad
+        \spn(S) \subseteq \spn(R \cup S),
+      \end{equation*}
+      we can conclude that $\spn(R) \cup \spn(S) \subseteq \spn(R \cup S)$.
+      Thus, $\spn(R) + \spn(S) \subseteq \spn(R \cup S)$
+      by \Cref{prop:subspace-sum}. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\section{Linearly Independent Sets}
+\begin{definition}\label{def:linear-independence}
+  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
   \begin{itemize}
-    \item A subset $S$ of $V$ is called \emph{linearly dependent} if there
-      exists a nontrivial representation of $0_V$ as a linear combination of
-      $S$.
-    \item A subset $S$ of $V$ is called \emph{linearly independent} if
-      it is not linear dependent.
+    \item $S$ is \emph{linearly dependent} if there exist scalars
+      $a_1, a_2, \dots, a_n \in F \setminus \{0_F\}$ and distinct vectors
+      $x_1, x_2, \dots, x_n \in S$ for some positive integer $n$ such that
+      \begin{equation*}
+        a_1x_1 + a_2x_2 + \cdots + a_nx_n = 0_V.
+      \end{equation*}
+    \item $S$ is \emph{linearly independent} if it is not linearly dependent.
   \end{itemize}
 \end{definition}
 
-\begin{theorem}\label{thm:linear-dependence-first-equivalence}
-  Let $(V, +, \cdot)$ be a vector space over $F$ and let $S \subseteq V$.
-  Then $S$ is linearly independent if and only if there exists $x \in S$
-  such that $x \in \mathrm{span}(S \setminus \{x\})$.
+\begin{theorem}\label{thm:linear-dependence-equivalence}
+  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
+  Then the following statements are equivalent.
+  \begin{enumerate}
+    \item $S$ is linearly dependent.
+    \item There exists $x \in S$ with $x \in \spn(S \setminus \{x\})$.
+    \item There exists $x \in S$ with $\spn(S) = \spn(S \setminus \{x\})$.
+  \end{enumerate}
 \end{theorem}
 \begin{proof}
-  ($\Rightarrow$) Because $S$ is linearly dependent, it follows that
-  there exists a nontrivial representation
-  \begin{equation*}
-    a_1x_1 + a_2x_2 + \cdots + a_nx_n = 0_V
-  \end{equation*}
-  as a linear combination of $S$, where $a_1, \dots, a_n \in F$ are scalars
-  and $x_1, \dots, x_n \in S$ are distinct vectors.
-  Without loss of generality, let $a_1 \neq 0_F$.
-  Then we have
-  \begin{align*}
-    x_1
-    &= (-a_1)^{-1}(a_2x_2 + \cdots + a_nx_n) \\
-    &= (-a_1)^{-1}a_2x_2 + \cdots + (-a_1)^{-1}a_nx_n \\
-    &\in \mathrm{span}(S \setminus \{x_1\}).
-  \end{align*}
-  
-  ($\Leftarrow$) Since $x \in \mathrm{span}(S \setminus \{x\})$, there exists
-  scalars $a_1, \dots, a_n \in F$ and distinct vectors
-  $x_1, \dots, x_n \in S \setminus \{x\}$ such that
-  \begin{equation*}
-    a_1x_1 + \cdots + a_nx_n = x.
-  \end{equation*}
-  Then
-  \begin{equation*}
-    (-1_F)x + a_1x_1 + \cdots + a_nx_n = 0_V
-  \end{equation*}
-  is a nontrivial representation of $0_V$ as a linear combination of $S$.
-\end{proof}
-
-\begin{theorem}\label{thm:linear-dependence-second-equivalence}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Let $S$ be a subset of $V$ and let $x$ be an element of $S$.
-  Then $x \in \mathrm{span}(S \setminus \{x\})$ if and only if
-  $\mathrm{span}(S) = \mathrm{span}(S \setminus \{x\})$.
-\end{theorem}
-\begin{proof}
-  ($\Rightarrow$) Since $x \in \mathrm{span}(S \setminus \{x\})$
-  and $S \setminus \{x\} \subseteq \mathrm{span}(S \setminus \{x\})$,
-  we have
-  \begin{equation*}
-    S \subseteq \mathrm{span}(S \setminus \{x\})
-    \quad \Rightarrow \quad
-    \mathrm{span}(S) \subseteq \mathrm{span}(S \setminus \{x\})
-  \end{equation*}
-  by
-  \Cref{thm:span}.
-  Also, $\mathrm{span}(S \setminus \{x\}) \subseteq \mathrm{span}(S)$
-  because $S \setminus \{x\} \subseteq S$.
-  Thus, we can conclude that
-  $\mathrm{span}(S \setminus \{x\}) = \mathrm{span}(S)$.
-
-  ($\Leftarrow$) Since
-  $x \in S \subseteq \mathrm{span}(S) = \mathrm{span}(S \setminus \{x\})$,
-  we have $x \in \mathrm{span}(S \setminus \{x\})$.
+  \leavevmode
+  \begin{enumerate}[(i)]
+    \item First we assume (a) and prove (b). Suppose that
+      \begin{equation*}
+        a_0x_0 + a_1x_1 + \cdots + a_nx_n = 0_V,
+      \end{equation*}
+      where $a_0, a_1, \dots, a_n$ are nonzero scalars and
+      $x_0, x_1, \dots, x_n$ are distinct vectors. Then
+      \begin{align*}
+        x_0
+        &= (-a_0)^{-1}(a_1x_1 + \cdots + a_nx_n) \\
+        &= ((-a_0)^{-1}a_1)x_1 + \cdots + ((-a_0)^{-1}a_n)x_n \\
+        &\in \spn(S \setminus \{x_0\}).
+      \end{align*}
+    \item Then we assume (b) and prove (c). Since
+      \begin{equation*}
+        x \in \spn(S \setminus \{x\})
+        \quad \text{and} \quad
+        S \setminus \{x\} \subseteq \spn(S \setminus \{x\}),
+      \end{equation*}
+      we have $S \subseteq \spn(S \setminus \{x\})$.
+      Thus, $\spn(S) \subseteq \spn(S \setminus \{x\})$ by \Cref{thm:span},
+      and we can conclude that $\spn(S) = \spn(S \setminus \{x\})$.
+    \item Then we assume (c) and prove (b). It is straightforward
+      since $x \in S \subseteq \spn(S) = \spn(S \setminus \{x\})$.
+    \item Finally we assume (b) and prove (a).
+      Without loss of generality, let $a_1, \dots, a_n \in F$ be nonzero
+      scalars and $x_1, \dots, x_n \in S \setminus \{x\}$ be distinct vectors
+      such that $x = a_1x_1 + \cdots + a_nx_n$. Then we have
+      \begin{equation*}
+        (-1_F)x + a_1x_1 + \cdots + a_nx_n = 0_V,
+      \end{equation*}
+      which completes the proof. \qedhere
+  \end{enumerate}
 \end{proof}
 
 \begin{example}
-  Let $S = \{1, 1+2x, 1+2x+3x^2, 1+2x+3x^2+4x^3\}$ be a subset of
-  $\mathcal{P}_3(\mathbb{R})$.
-  Then $S$ is linearly independent since the only solution to the
-  following system of linear equations
+  Let $S = \{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ be a subset of $\mathbb{R}^3$.
+  Suppose that $a_1, a_2, a_3 \in \mathbb{R}$ are scalars such that
+  \begin{equation*}
+    a_1(0, 1, 1) + a_2(1, 0, 1) + a_3(1, 1, 0) = (0, 0, 0).
+  \end{equation*}
+  Then we have the following system of equations.
   \begin{equation*}
     \setlength\arraycolsep{0pt}
-    \begin{array}{r>{{}}c<{{}}r>{{}}c<{{}}r>{{}}c<{{}}r@{{}={}}r}
-      a_1 & &      & &      & &      & 0 \\
-      a_1 &+& 2a_2 & &      & &      & 0 \\
-      a_1 &+& 2a_2 &+& 3a_3 & &      & 0 \\
-      a_1 &+& 2a_2 &+& 3a_3 &+& 4a_4 & 0 \\
+    \begin{array}{r>{{}}c<{{}}r>{{}}c<{{}}r@{{}={}}r}
+          & & a_2 &+& a_3 & 0 \\
+      a_1 & &     &+& a_3 & 0 \\
+      a_1 &+& a_2 & &     & 0 \\
     \end{array}
   \end{equation*}
-  is $a_1 = a_2 = a_3 = a_4 = 0$.
+  Since the only solution to this system of equations is $a_1 = a_2 = a_3 = 0$,
+  we can conclude that $S$ is linearly independent by
+  \Cref{def:linear-independence}.
 \end{example}
 
-\begin{theorem}\label{thm:linear-independence-implication}
-  Let $(V, +, \cdot)$ be a vector space, and let $R \subseteq S \subseteq V$.
-  If $R$ is linearly dependent, then $S$ is linearly dependent.
-\end{theorem}
-\begin{proof}
-  If $R$ is linearly dependent, then there exists $x \in R$ such that
-  $x \in \mathrm{span}(R \setminus \{x\})$.
-  By $R \subseteq S$, we have
-  $R \setminus \{x\} \subseteq S \setminus \{x\}$.
-  Since $x \in S$ and $x \in \mathrm{span}(S \setminus \{x\})$, $S$ is
-  linearly dependent.
-\end{proof}
+\begin{example}
+  Let $S = \{(1, 1, 1), (0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ be a subset of
+  $\mathbb{R}^3$.
+  We can conclude that $S$ is linearly dependent since
+  \begin{equation*}
+    (1, 1, 1)
+    = \frac{1}{2} \cdot (0, 1, 1) + \frac{1}{2} \cdot (1, 0, 1)
+      + \frac{1}{2} \cdot (1, 1, 0).
+  \end{equation*}
+\end{example}
 
-\begin{corollary}
-  Let $(V, +, \cdot)$ be a vector space, and let $R \subseteq S \subseteq V$.
-  If $S$ is linearly independent, then $R$ is linearly independent.
-\end{corollary}
+\begin{proposition}\label{prop:linear-independence-subset}
+  Let $V$ be a vector space and let $R, S$ be subsets of $V$ with
+  $R \subseteq S$.
+  \begin{enumerate}
+    \item If $R$ is linearly dependent, then so is $S$.
+    \item If $S$ is linearly independent, then so is $R$.
+  \end{enumerate}
+\end{proposition}
 \begin{proof}
-  Suppose that $S$ is linearly independent.
-  If $R$ is linearly dependent, then so is $S$ by
-  \Cref{thm:linear-independence-implication}, contradiction.
-  Thus, $R$ is linearly independent.
+  \leavevmode
+  \begin{enumerate}
+    \item Suppose that $R$ is linearly dependent. Then by
+      \Cref{def:linear-independence} there exists $x \in R$
+      such that $x \in \spn(R \setminus \{x\})$. Also, we have
+      $R \setminus \{x\} \subseteq S \setminus \{x\}$ since $R \subseteq S$.
+      Thus, $x \in \spn{S \setminus \{x\}}$, and it follows that $S$ is
+      linearly dependent.
+    \item Straightforward from (a). \qedhere
+  \end{enumerate}
 \end{proof}
 
 \begin{theorem}\label{thm:linearly-independent-subset}
-  Let $(V, +, \cdot)$ be a vector space.
-  For each finite set $S \subseteq V$, there exists a linearly independent
-  set $Q \subseteq S$ such that $\mathrm{span}(Q) = \mathrm{span}(S)$.
+  Let $V$ be a vector space and let $S$ be a finite subset of $V$.
+  Then there exists a linearly independent subset $Q$ of $S$ such that
+  $\spn(Q) = \spn(S)$.
 \end{theorem}
 \begin{proof}
-  The proof is by induction on $n = |S|$.
-  The induction begins with $n = 0$, i.e., $S = \varnothing$.
+  The proof is by induction on $|S|$.
+  The induction begins with $|S| = 0$, i.e., $S = \varnothing$.
   Since $\varnothing$ is linearly independent, we can choose
-  $R = \varnothing$, and thus the theorem holds.
+  $Q = \varnothing$, and thus the theorem holds.
 
-  Now suppose that the theorem is true for some integer $n \geq 0$,
-  and we prove that the theorem holds for $n + 1$.
+  Now suppose that the theorem is true for $|S| = n$, where $n$ is a
+  nonnegative integer, and we prove that the theorem holds for $|S| = n + 1$.
   If $S$ is linearly independent, then we can choose $Q = S$.
-  Otherwise, there exists $x \in S$
-  with $\mathrm{span}(S \setminus \{x\}) = \mathrm{span}(S)$ because
-  $S$ is linearly dependent.
-  Let $S' = S \setminus \{x\}$. Then there exists a linearly independent set
-  $Q \subseteq S'$ such that $\mathrm{span}(Q) = \mathrm{span}(S')$ by
-  induction hypothesis, implying
-  $Q \subseteq S$ and $\mathrm{span}(Q) = \mathrm{span}(S)$.
+  Otherwise, there exists $x \in S$ with $\spn(S) = \spn(S \setminus \{x\})$.
+  Then there is a linearly independent set $Q \subseteq S \setminus \{x\}$
+  such that $\spn(Q) = \spn(S \setminus \{x\})$ by induction hypothesis,
+  implying $Q \subseteq S$ and $\spn(Q) = \spn(S)$, which completes the proof.
 \end{proof}
 
 \section{Bases and Dimension}

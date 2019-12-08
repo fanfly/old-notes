@@ -9,8 +9,8 @@
 \declaretheorem[style=definition,numberwithin=section]{theorem}
 \declaretheorem[style=definition,sibling=theorem]{proposition}
 \declaretheorem[style=definition,sibling=theorem]{lemma}
-\declaretheorem[style=definition,sibling=theorem]{definition}
 \declaretheorem[style=definition,sibling=theorem]{corollary}
+\declaretheorem[style=definition,sibling=theorem]{definition}
 \declaretheorem[style=definition,numbered=no]{example}
 \declaretheorem[style=definition,numbered=no]{notation}
 \declaretheorem[style=definition,numbered=no]{remark}
@@ -20,12 +20,10 @@
 \setlist[enumerate,1]{label={(\alph*)}}
 
 % math operators in linear algebra
-\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
-
-\newcommand{\range}{\mathcal{R}}
-\newcommand{\nullspace}{\mathcal{N}}
+\DeclareMathOperator{\tr}{tr}
 
 \DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
