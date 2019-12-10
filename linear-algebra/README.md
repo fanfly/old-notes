@@ -1,6 +1,6 @@
 Linear Algebra
 ===
-This study note is based on the textbook *Linear Algebra, 4th Edition, by Friedberg, Insel, and Spence*.
+This [study note](linear-algebra.pdf) is based on the textbook *Linear Algebra* (4th edition) written by Stephen H. Friedberg, Arnold J. Insel, and Lawrence E. Spence.
 
 ## Table of Contents
 * Vector Spaces

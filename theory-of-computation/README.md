@@ -1,6 +1,6 @@
 Theory of Computation
 ===
-This [study note](theory-of-computation) is based on the textbook *Introduction to the Theory of Computation, 3rd Edition, by Sipser*.
+This [study note](theory-of-computation.pdf) is based on the textbook *Introduction to the Theory of Computation* (3rd edition) written by Michael Sipser.
 
 ## Table of Contents
 * Regular Languages
