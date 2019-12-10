@@ -23,7 +23,7 @@
 \end{definition}
 
 \begin{definition}\label{def:dfa}
-  A \emph{deterministic finite state automaton} is a system
+  A \emph{deterministic finite state automaton} (DFA) is a system
   $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
   follows.
   \begin{itemize}
@@ -56,13 +56,16 @@
 \end{definition}
 
 \begin{remark}
-  For DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, the empty string
-  $\epsilon$ is accepted by $\mathcal{A}$ if and only if $q_0 \in F$.
+  \leavevmode
+  \begin{itemize}
+    \item For DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, the empty string
+      $\epsilon$ is accepted by $\mathcal{A}$ if and only if $q_0 \in F$.
+  \end{itemize}
 \end{remark}
 
 \section{Nondeterministic Finite State Automata}
 \begin{definition}\label{def:nfa}
-  A \emph{nondeterministic finite state automaton} is a system
+  A \emph{nondeterministic finite state automaton} (NFA) is a system
   $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
   follows.
   \begin{itemize}
@@ -93,9 +96,51 @@
 \end{definition}
 
 \begin{theorem}\label{thm:dfa-nfa-equivalence}
-  For every NFA $\mathcal{A}$, there is a DFA $\mathcal{A}'$ with
-  $L(\mathcal{A}) = L(\mathcal{A}')$.
+  For every NFA $\mathcal{A}$, there is a DFA $\widehat{\mathcal{A}}$ with
+  $L(\mathcal{A}) = L(\widehat{\mathcal{A}})$.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  Let $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$.
+  We construct $\widehat{\mathcal{A}} = (\Sigma, \widehat{Q}, \widehat{q_0},
+  \widehat{F}, \widehat{\delta})$ as follows.
+  \begin{itemize}
+    \item $\widehat{Q} = \mathcal{P}(Q)$.
+    \item $\widehat{q_0} = \{q_0\}$.
+    \item $\widehat{F} = \{\widehat{q} \in \widehat{Q}:
+      q \in \widehat{q}\ \text{for some}\ q \in F\}$.
+    \item $\widehat{\delta}: \widehat{Q} \times \Sigma \to \widehat{Q}$ is the
+      transition function such that
+      \begin{equation*}
+        \widehat{\delta}(\widehat{q}, a) = \{q \in Q:
+          (p, a, q) \in \delta\ \text{for some}\ p \in \widehat{q}\,\}.
+      \end{equation*}
+      holds for each $\widehat{q} \in \widehat{Q}$ and $a \in \Sigma$.
+  \end{itemize}
+  Now we prove that $L(\mathcal{A}) = L(\widehat{\mathcal{A}})$.
+  For $w \in \Sigma^*$, let
+  $\widehat{r} = (\widehat{r}_0, \widehat{r}_1, \dots, \widehat{r}_n)$ be
+  the run of $\widehat{\mathcal{A}}$ on $w$.
+  \begin{enumerate}[(i)]
+    \item Suppose that $r = (r_0, r_1, \dots, r_n)$ is an accepting run of
+      $\mathcal{A}$ on $w$, and we prove that $\widehat{r}$ is an accepting run
+      on $w$.
+      It is obvious that $r_0 \in \widehat{r}_0$.
+      If $r_{i-1} \in \widehat{r}_{i-1}$ for some $i \in \{1, \dots, n\}$, then 
+      we have $r_i \in \widehat\delta(\widehat{r}_{i-1}, a_i) = \widehat{r}_i$
+      since $(r_{i-1}, a_i, r_i) \in \delta$.
+      Thus, $r_n \in \widehat{r}_n$, and it follows that
+      $\widehat{r}_n \in \widehat{F}$.
+      Therefore, we have $L(\mathcal{A}) \subseteq L(\widehat{\mathcal{A}})$.
+    \item Suppose that $\widehat{r}$ is an accepting run.
+      Then due to the construction of $\widehat{F}$ and $\widehat\delta$, we
+      can construct an accepting run $r = (r_0, r_1, \dots, r_n)$ of
+      $\mathcal{A}$ on $w$ as follows.
+      \begin{itemize}
+        \item Let $r_n$ be a state in $\widehat{r}_n \cap F$.
+        \item For $i \in \{0, \dots, n-1\}$, let $r_i$ be a state in
+          $\widehat{r}_i$ such that $(r_i, a_{i+1}, r_{i+1}) \in \delta$.
+      \end{itemize}
+      Thus, we have $L(\widehat{\mathcal{A}}) \subseteq L(\mathcal{A})$,
+      which completes the proof. \qedhere
+  \end{enumerate}
 \end{proof}
