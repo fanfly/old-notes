@@ -1,30 +1,35 @@
 \documentclass[12pt]{report}
 \usepackage[a4paper,left=2.5cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{thmtools}
+\usepackage{cleveref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{array}
+
+\newcommand{\sectionbreak}{\clearpage}
+\setlist[enumerate,1]{label={(\alph*)}}
+
+% different types of "theorems"
 \declaretheorem[style=definition,numberwithin=section]{theorem}
 \declaretheorem[style=definition,sibling=theorem]{proposition}
 \declaretheorem[style=definition,sibling=theorem]{lemma}
 \declaretheorem[style=definition,sibling=theorem]{corollary}
 \declaretheorem[style=definition,sibling=theorem]{definition}
 \declaretheorem[style=definition,numbered=no]{example}
+\declaretheorem[style=definition,numbered=no]{examples}
 \declaretheorem[style=definition,numbered=no]{notation}
 \declaretheorem[style=definition,numbered=no]{remark}
-\usepackage{cleveref}
-\usepackage[shortlabels]{enumitem}
-\usepackage{array}
-\setlist[enumerate,1]{label={(\alph*)}}
 
-% math operators in linear algebra
+% math operators for simplification
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\tr}{tr}
 
+% use bold fonts to emphasize
 \DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
 \begin{document}

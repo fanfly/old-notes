@@ -176,76 +176,69 @@
   \end{itemize}
 \end{remark}
 
-\begin{example}
-  A field is a vector space over itself.
-\end{example}
+\begin{examples}
+  \leavevmode
+  \begin{itemize}
+    \item A field is a vector space over itself, e.g., $\mathbb{R}$ is a vector
+      space over $\mathbb{R}$.
+    \item $\mathbb{C}$ is a vector space over $\mathbb{R}$.
+    \item $\mathbb{R}$ is a vector space over $\mathbb{Q}$.
+  \end{itemize}
+\end{examples}
 
-\begin{example}
-  $\mathbb{C}$ is a vector space over $\mathbb{R}$.
-\end{example}
-
-\begin{example}
-  $\mathbb{R}$ is a vector space over $\mathbb{Q}$.
-\end{example}
-
-\begin{example}
-  The set of \emph{$n$-tuples} with elements from a field $F$ is denoted by
-  $F^n$.
-  For $x = (x_1, \dots, x_n) \in F^n$, $y = (y_1, \dots, y_n) \in F^n$, and
-  $c \in F$, we define the operations of addition and scalar multiplication by
-  \begin{equation*}
-    x + y = (x_1 + y_1, \dots, x_n + y_n)
-    \quad \text{and} \quad
-    c \cdot x = (c \cdot x_1, \dots, c \cdot x_n).
-  \end{equation*}
-  Then $F^n$ is a vector space over $F$.
-\end{example}
-
-\begin{example}
-  The set of all $m \times n$ \emph{matrices} with elements from a field $F$ is
-  denoted by $F^{m \times n}$.
-  For $A, B \in F^{m \times n}$ and $c \in F$, we define the operations of
-  addition and scalar multiplication by
-  \begin{equation*}
-    (A + B)_{ij} = A_{ij} + B_{ij}
-    \quad \text{and} \quad
-    (c \cdot A)_{ij} = c \cdot A_{ij}
-  \end{equation*}
-  for $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
-  Then $F^{m \times n}$ is a vector space over $F$.
-\end{example}
-
-\begin{example}
-  The set of \emph{functions} from a nonempty set $S$ to a field $F$ is denoted
-  by $\mathcal{F}(S, F)$.
-  For $f, g \in \\mathcal{F}(S, F)$ and $c \in F$, we define the operations of
-  addition and scalar multiplication by
-  \begin{equation*}
-    (f + g)(s) = f(s) + g(s)
-    \quad \text{and} \quad
-    (c \cdot f)(s) = c \cdot f(s)
-  \end{equation*}
-  for all $s \in S$.
-  Then $\\mathcal{F}(S, F)$ is a vector space over $F$.
-\end{example}
-
-\begin{example}
-  The set of \emph{polynomials} with coefficients from a field $F$ is denoted
-  by $\mathcal{P}(F)$.
-  For $f, g \in \mathcal{P}(F)$ and $c \in F$ with
-  \begin{equation*}
-    f(t) = \sum_{i=0}^n a_it^i
-    \quad \text{and} \quad
-    g(t) = \sum_{i=0}^n b_it^i,
-  \end{equation*}
-  we define the operations of addition and scalar multiplication by
-  \begin{equation*}
-    (f + g)(t) = \sum_{i=0}^n (a_i + b_i)t^i
-    \quad \text{and} \quad
-    (c \cdot f)(t) = \sum_{i=0}^n (c \cdot a_i)t^i.
-  \end{equation*}
-  Then $\mathcal{P}(F)$ is a vector space over $F$.
-\end{example}
+\begin{examples}
+  \leavevmode
+  \begin{itemize}
+    \item The set of \emph{$n$-tuples} with elements from a field $F$ is
+      denoted by $F^n$.
+      For $x = (x_1, \dots, x_n) \in F^n$, $y = (y_1, \dots, y_n) \in F^n$, and
+      $c \in F$, we define the operations of addition and scalar multiplication
+      by
+      \begin{equation*}
+        x + y = (x_1 + y_1, \dots, x_n + y_n)
+        \quad \text{and} \quad
+        c \cdot x = (c \cdot x_1, \dots, c \cdot x_n).
+      \end{equation*}
+      Then $F^n$ is a vector space over $F$.
+    \item The set of all $m \times n$ \emph{matrices} with elements from a
+      field $F$ is denoted by $F^{m \times n}$.
+      For $A, B \in F^{m \times n}$ and $c \in F$, we define the operations of
+      addition and scalar multiplication by
+      \begin{equation*}
+        (A + B)_{ij} = A_{ij} + B_{ij}
+        \quad \text{and} \quad
+        (c \cdot A)_{ij} = c \cdot A_{ij}
+      \end{equation*}
+      for $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
+      Then $F^{m \times n}$ is a vector space over $F$.
+    \item The set of \emph{functions} from a nonempty set $S$ to a field $F$ is
+      denoted by $\mathcal{F}(S, F)$.
+      For $f, g \in \mathcal{F}(S, F)$ and $c \in F$, we define the operations
+      of addition and scalar multiplication by
+      \begin{equation*}
+        (f + g)(s) = f(s) + g(s)
+        \quad \text{and} \quad
+        (c \cdot f)(s) = c \cdot f(s)
+      \end{equation*}
+      for all $s \in S$.
+      Then $\mathcal{F}(S, F)$ is a vector space over $F$.
+    \item The set of \emph{polynomials} with coefficients from a field $F$ is
+      denoted by $\mathcal{P}(F)$.
+      For $f, g \in \mathcal{P}(F)$ and $c \in F$ with
+      \begin{equation*}
+        f(t) = \sum_{i=0}^n a_it^i
+        \quad \text{and} \quad
+        g(t) = \sum_{i=0}^n b_it^i,
+      \end{equation*}
+      we define the operations of addition and scalar multiplication by
+      \begin{equation*}
+        (f + g)(t) = \sum_{i=0}^n (a_i + b_i)t^i
+        \quad \text{and} \quad
+        (c \cdot f)(t) = \sum_{i=0}^n (c \cdot a_i)t^i.
+      \end{equation*}
+      Then $\mathcal{P}(F)$ is a vector space over $F$.
+  \end{itemize}
+\end{examples}
 
 \begin{proposition}\label{prop:vector-space-addition}
   Let $V$ be a vector space with $x, y, z \in F$.
@@ -335,22 +328,22 @@
   $\mathcal{P}(F)$.
 \end{example}
 
-\begin{example}
-  An $n \times n$ matrix $A$ is called \emph{diagonal} if $i \neq j$ impies
-  $A_{ij} = 0_F$ for all $i, j \in \{1, \dots, n\}$.
-  Then one can verify that the set of $n \times n$ diagonal matrices is a
-  subspace of $F^{n \times n}$.
-\end{example}
-
-\begin{example}
-  The \emph{trace} of an $n \times n$ matrix $A$, denoted by $\tr(A)$, is
-  defined by
-  \begin{equation*}
-    \tr(A) = \sum_{i=1}^n A_{ii}.
-  \end{equation*}
-  Then one can verify that the set of $n \times n$ matrices that have trace
-  equal to $0_F$ is a subspace of $F^{n \times n}$.
-\end{example}
+\begin{examples}
+  \leavevmode
+  \begin{itemize}
+    \item An $n \times n$ matrix $A$ is called \emph{diagonal} if
+      $A_{ij} = 0_F$ for all $i, j \in \{1, \dots, n\}$ with $i \neq j$.
+      Then one can verify that the set of $n \times n$ diagonal matrices is a
+      subspace of $F^{n \times n}$.
+    \item The \emph{trace} of an $n \times n$ matrix $A$, denoted by $\tr(A)$,
+      is defined by
+      \begin{equation*}
+        \tr(A) = \sum_{i=1}^n A_{ii}.
+      \end{equation*}
+      Then one can verify that the set of $n \times n$ matrices that have trace
+      equal to $0_F$ is a subspace of $F^{n \times n}$.
+  \end{itemize}
+\end{examples}
 
 \begin{proposition}\label{prop:subspace-intersection}
   Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$.
@@ -552,6 +545,13 @@
   \end{itemize}
 \end{definition}
 
+\begin{remark}
+  \leavevmode
+  \begin{itemize}
+    \item Note that $\varnothing$ is linearly independent.
+  \end{itemize}
+\end{remark}
+
 \begin{theorem}\label{thm:linear-dependence-equivalence}
   Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
   Then the following statements are equivalent.
@@ -650,60 +650,50 @@
   \end{enumerate}
 \end{proof}
 
-\begin{theorem}\label{thm:linearly-independent-subset}
-  Let $V$ be a vector space and let $S$ be a finite subset of $V$.
-  Then there exists a linearly independent subset $Q$ of $S$ such that
-  $\spn(Q) = \spn(S)$.
-\end{theorem}
-\begin{proof}
-  The proof is by induction on $|S|$.
-  The induction begins with $|S| = 0$, i.e., $S = \varnothing$.
-  Since $\varnothing$ is linearly independent, we can choose
-  $Q = \varnothing$, and thus the theorem holds.
-
-  Now suppose that the theorem is true for $|S| = n$, where $n$ is a
-  nonnegative integer, and we prove that the theorem holds for $|S| = n + 1$.
-  If $S$ is linearly independent, then we can choose $Q = S$.
-  Otherwise, there exists $x \in S$ with $\spn(S) = \spn(S \setminus \{x\})$.
-  Then there is a linearly independent set $Q \subseteq S \setminus \{x\}$
-  such that $\spn(Q) = \spn(S \setminus \{x\})$ by induction hypothesis,
-  implying $Q \subseteq S$ and $\spn(Q) = \spn(S)$, which completes the proof.
-\end{proof}
-
 \section{Bases and Dimension}
 \begin{definition}\label{def:basis}
-  Let $(V, +, \cdot)$ be a vector space. A subset $S$ of $V$ is a \emph{basis}
-  of $V$ if $S$ is not only a spanning set but also a linearly independent set
-  of $V$.
+  A \emph{basis} for a vector space $V$ is a linearly independent subset of $V$
+  that spans $V$.
 \end{definition}
 
-\begin{example}
-  Following are some examples of bases.
+\begin{examples}
+  \leavevmode
   \begin{itemize}
-    \item Since $\mathrm{span}(\varnothing) = \{0_V\}$ and $\varnothing$ is
-      linearly independent, $\varnothing$ is a basis of $\{0_V\}$.
-    \item Let $S = \{x_1, \dots, x_n\}$ be a subset of $F^n$ with
-      $(x_i)_j = [\![i = j]\!]$ for all $i, j \in \{1, \dots, n\}$.
-      Then $S$ is called the \emph{standard basis} of $F^n$.
-    \item The set $S = \{1_F, x, x^2, \dots, x^n\}$ is the called the
-      \emph{standard basis} of $\mathcal{P}_n(F)$.
+    \item $\varnothing$ is a basis for $\{0_V\}$.
+    \item $\{e_1, \dots, e_n\}$ is a basis for $F^n$, where $e_i$ is the
+      $n$-tuple whose $i$-th component is $1_F$ and the other components are
+      all $0_F$.
+    \item $\{E_{ij} : 1 \leq i \leq m\ \text{and}\ 1 \leq j \leq n\}$ is a
+      basis for $F^{m \times n}$, where $E_{ij}$ is the matrix whose
+      $(i, j)$-entry is $1_F$ and the other entries are all $0_F$.
+    \item $\{t^0, t^1, t^2, \dots, t^n\}$ is a basis for $\mathcal{P}_n(F)$.
+    \item $\{t^0, t^1, t^2, \dots\}$ is a basis for $\mathcal{P}(F)$.
   \end{itemize}
-\end{example}
+\end{examples}
 
-\begin{theorem}\label{thm:finite-basis-existence}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
+\begin{proposition}\label{prop:finite-basis-existence}
+  Let $V$ be a vector space.
   If there exists a finite set $S$ that spans $V$, then there is a subset
   $Q$ of $S$ that is a finite basis of $V$.
-\end{theorem}
+\end{proposition}
 \begin{proof}
-  By \Cref{thm:linearly-independent-subset}, there exists
-  a linearly independent set $Q \subseteq S$
-  such that $\mathrm{span}(Q) = \mathrm{span}(S) = V$.
-  Thus, $Q$ is a finite basis of $V$.
+  The proof is by induction on $|S|$.
+  For the induction basis, suppose that $|S| = 0$, i.e., $S = \varnothing$.
+  Then the proposition holds since one can choose $Q = \varnothing$ as a basis
+  for $V$.
+
+  Now assume the induction hypothesis that the proposition holds for $|S| = n$
+  with $n \geq 0$.
+  If $S$ is linearly independent, then we can choose $Q = S$ as a basis for
+  $V$.
+  Otherwise, there exists $x \in S$ with $\spn(S \setminus \{x\}) = \spn(S)$,
+  i.e., $S \setminus \{x\}$ spans $V$.
+  Thus, by induction hypothesis there is a subset $Q$ of $S \setminus \{x\}$
+  that is a basis for $V$, which completes the proof.
 \end{proof}
 
 \begin{theorem}[Replacement Theorem]\label{thm:replacement}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
+  Let $V$ be a vector space over a field $F$.
   Let $S$ be a finite set that spans $V$,
   and let $Q \subseteq V$ be a finite linearly independent set.
   Then $|Q| \leq |S|$, and there exists $R \subseteq S \setminus Q$ such that
@@ -711,113 +701,123 @@
 \end{theorem}
 \begin{proof}
   The proof is based on induction on $|Q|$.
-  The induction begins with $|Q| = 0$, i.e., $Q = \varnothing$.
-  Choosing $R = S$, we have $Q \cup R = S$, and thus
-  both $|Q \cup R| = S$ and $\mathrm{span}(Q \cup R) = V$ hold.
+  The theorem holds for $|Q| = 0$, i.e., $Q = \varnothing$, since we have
+  $|\varnothing| \leq |S|$, $|\varnothing \cup S| = |S|$ and
+  $\spn(\varnothing \cup S) = V$.
 
   Now suppose that the theorem is true for $|Q| = m$ with $m \geq 0$,
   and we prove that the theorem holds for $|Q|= m + 1$.
-  Let $Q = \{x_1, \dots, x_{m+1}\}$ and let $Q' = Q \setminus \{x_{m+1}\}$.
+  Let $Q = \{x_1, \dots, x_{m+1}\}$ and let $Q' = \{x_1, \dots, x_m\}$.
   By induction hypothesis, there exists
   $R' = \{y_1, \dots, y_k\} \subseteq S \setminus Q'$
-  such that $m + k = |S|$ and $\mathrm{span}(Q' \cup R') = V$.
+  such that $|Q'| + |R'| = |S|$ and $\mathrm{span}(Q' \cup R') = V$.
   Since $Q' \cup R'$ spans $V$, there exists
   $a_1, \dots, a_m, b_1, \dots, b_k \in F$ such that
   \begin{equation*}
     x_{m+1} = \sum_{i=1}^m a_ix_i + \sum_{j=1}^k b_jy_j.
   \end{equation*}
-  If $b_j = 0_F$ for all $j \in \{1, \dots, k\}$, then $x_{m+1}$ is a linear
-  combination of $Q$, implying that $Q$ is linearly dependent, contradiction.
+  If $b_j = 0_F$ for all $j \in \{1, \dots, k\}$, then
+  $x_{m+1} \in \spn(Q') = \spn(Q \setminus\{x_{m+1}\})$,
+  implying that $Q$ is linearly dependent, contradiction.
   Thus, there must exist some $j \in \{1, \dots, k\}$
-  such that $b_j \neq 0_F$.
-  Without loss of generality let $b_k \neq 0_F$.
+  such that $b_j \neq 0_F$.s
+  Without loss of generality, suppose that $b_k \neq 0_F$ with $k \geq 1$.
   Also, let $R = \{y_1, \dots, y_{k-1}\}$.
-  Then $|Q \cup R| = (m+1) + (k-1) = |S|$.
-  Since $k \geq 1$, we have $|Q| \leq |S|$.
-  Note that $(Q' \cup R') \setminus (Q \cup R) = \{y_k\}$.
-  By
+  Then $|Q \cup R| = (m+1) + (k-1) = |S|$, and we have $|Q| \leq |S|$.
+  It follows that
+  \begin{equation*}
+    Q' \cup R'
+    \quad \subseteq \quad Q \cup R \cup \{y_k\}
+    \quad \subseteq \quad \mathrm{span}(Q \cup R),
+  \end{equation*}
+  where the second inclusion holds because
   \begin{equation*}
     y_k = (-b_k)^{-1}\left(
        \sum_{i=1}^m a_ix_i + (-1_F)x_{m+1} + \sum_{j=1}^{k-1} b_jy_j
-    \right) \in \mathrm{span}(Q \cup R),
+    \right) \in \mathrm{span}(Q \cup R).
   \end{equation*}
-  we have
-  \begin{equation*}
-    Q' \cup R'
-      \subseteq Q \cup R \cup \{y_k\}
-      \subseteq \mathrm{span}(Q \cup R).
-  \end{equation*}
-  Thus, by \Cref{thm:span} we have
+  Then, we have
   \begin{equation*}
     V = \mathrm{span}(Q' \cup R')
       \subseteq \mathrm{span}(Q \cup R)
-      \subseteq V,
+      \subseteq V.
   \end{equation*}
-  implying $\mathrm{span}(Q \cup R) = V$.
+  by \Cref{thm:span}.
+  Thus, $\mathrm{span}(Q \cup R) = V$, which completes the proof.
 \end{proof}
 
-\begin{corollary}
-  Let $(V, +, \cdot)$ be a vector space over $F$ that is spanned by a finite
-  set. Then every linearly independent subset of $V$ is finite.
+\begin{corollary}\label{cor:infinite-dimensional}
+  Let $V$ be a vector space and $Q$ be a linearly independent subset of $V$
+  that is infinite.
+  Then each spanning set of $V$ is infinite.
 \end{corollary}
 \begin{proof}
-  Suppose that $S$ is a finite spanning set of $V$ and that $Q$ is linearly
-  independent.
-  If $Q$ is infinite, then there exists $Q' \subseteq Q$ with
-  $|Q'| = |S| + 1$.
-  It follows that $Q'$ is linearly independent by
-  \Cref{thm:linear-independence-implication}, and thus $|Q'| \leq |S|$ by
-  \Cref{thm:replacement}, contradiction to $|Q'| = |S| + 1$.
-  Therefore, $Q$ is finite.
+  Suppose that there is a finite set $S$ that spans $V$.
+  Let $Q'$ be a subset of $Q$ with $|Q'| = |S| + 1$.
+  By \Cref{prop:linear-independence-subset}, we can conclude that $Q'$ is also
+  linearly independent.
+  Thus, we have $|Q'| \leq |S|$ by replacement theorem
+  (\Cref{thm:replacement}), contradiction.
 \end{proof}
 
-\begin{theorem}\label{thm:dimension}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  If $V$ has a finite basis, then all bases of $V$ have the same size.
-\end{theorem}
+\begin{corollary}\label{cor:dimension}
+  Let $V$ be a vector space.
+  If $V$ has a finite basis, then each basis for $V$ has the same size.
+\end{corollary}
 \begin{proof}
-  Let $S$ be a finite basis of $V$ and let $Q$ be an arbitrary basis of $V$.
-  Since $V = \mathrm{span}(S)$ and $Q$ is linearly independent, it
-  follows that $Q$ is finite, and thus $|Q| \leq |S|$ by
-  replacement theorem (\Cref{thm:replacement}).
-
-  Also, since $V = \mathrm{span}(Q)$ and $S$ is linearly independent,
-  we have $|S| \leq |Q|$ by replacement theorem (\Cref{thm:replacement}).
+  Let $S$ be a finite basis for $V$ and $Q$ an arbitrary basis for $V$.
+  Since $V = \spn(S)$ and $Q$ is linearly independent, it follows that $Q$ is
+  finite by \Cref{cor:infinite-dimensional}, and thus we have $|Q| \leq |S|$.
+  Also, since $V = \spn(Q)$ and $S$ is linearly independent, we have
+  $|S| \leq |Q|$.
   Thus, $|Q| = |S|$.
 \end{proof}
 
-\begin{definition}
-  A vector space $(V, +, \cdot)$ over $F$ is called \emph{finite-dimensional}
-  if it has a finite basis.
-  A vector space that is not finite-dimensional is called
-  \emph{infinite-dimensional}.
-\end{definition}
-
-\begin{definition}
-  The number of vectors in each basis of a finite-dimensional vector space $V$
-  is called the \emph{dimension} of $V$ and is denoted by $\mathrm{dim}(V)$.
-\end{definition}
-
-\begin{example}
-  We have $\mathrm{dim}(\{0_V\}) = 0$, $\mathrm{dim}(F^n) = n$, and
-  $\mathrm{dim}(\mathcal{P}_n(F)) = n + 1$.
-\end{example}
-
-\begin{example}
-  The dimension of a vector space depends on its field of scalars.
+\begin{definition}\label{def:dimension}
+  Let $V$ be a vector space.
   \begin{itemize}
-    \item If $V = \mathbb{C}$ is a vector space over $\mathbb{R}$, then
-      $\mathrm{dim}(V) = 2$ since $\{1, i\}$ is a basis of $V$.
-    \item If $W = \mathbb{C}$ is a vector space over $\mathbb{C}$, then
-      $\mathrm{dim}(W) = 1$ since $\{1\}$ is a basis of $W$.
+    \item $V$ is \emph{finite-dimensional} if it has a finite basis.
+      In this case, the number of vectors in each basis for $V$ is called the
+      \emph{dimension} of $V$, denoted by $\dim(V)$.
+    \item $V$ is \emph{infinite-dimensional} if it is not finite-dimensional.
   \end{itemize}
-\end{example}
+\end{definition}
 
-\begin{theorem}\label{thm:basis-equivalence}
-  Let $(V, +, \cdot)$ be a vector space over $F$.
-  Then a subset of $V$ of $n = \mathrm{dim}(V)$ vectors is linearly
+\begin{remark}
+  \leavevmode
+  \begin{itemize}
+    \item If a vector space has a linearly independent subset that is infinite,
+      we can conclude that it is infinite-dimensional by
+      \Cref{cor:infinite-dimensional}.
+  \end{itemize}
+\end{remark}
+
+\begin{examples}
+  One can find the dimension of a vector space by any basis it admits.
+  \begin{itemize}
+    \item $\dim(\{0_V\}) = 0$.
+    \item $\dim(F^n) = n$.
+    \item $\dim(F^{m \times n}) = mn$.
+    \item $\dim(\mathcal{P}_n(F)) = n + 1$.
+    \item $\mathcal{P}(F)$ is infinite-dimensional.
+  \end{itemize}
+\end{examples}
+
+\begin{examples}
+  Note that the dimension of a vector space depends on its field of scalars.
+  \begin{itemize}
+    \item Let $V = \mathbb{C}$ be a vector space over $\mathbb{R}$.
+      Then we have $\dim(V) = 2$ since $\{1, i\}$ is a basis for $V$.
+    \item Let $W = \mathbb{C}$ be a vector space over $\mathbb{C}$.
+      Then we have $\dim(W) = 1$ since $\{1\}$ is a basis for $V$.
+  \end{itemize}
+\end{examples}
+
+\begin{proposition}\label{prop:basis-equivalence}
+  Let $V$ be a vector space.
+  Then a subset of $V$ of $n = \dim(V)$ vectors is linearly
   independent if and only if it is a spanning set of $V$.
-\end{theorem}
+\end{proposition}
 \begin{proof}
   ($\Rightarrow$) Suppose that $Q$ is linearly independent with $|Q| = n$.
   By replacement theorem (\Cref{thm:replacement}), there exists
@@ -827,28 +827,38 @@
   Thus, $\mathrm{span}(Q) = V$.
 
   ($\Leftarrow$) Suppose that $S$ spans $V$ with $|S| = n$.
-  By \Cref{thm:finite-basis-existence}, there is a subset $Q$ of $S$
+  By \Cref{prop:finite-basis-existence}, there is a subset $Q$ of $S$
   that is a basis of $V$.
   Then we have $|Q| = n$, implying $Q = S$.
-  Thus, $S$ is a basis of $V$.
+  Thus, $S$ is a basis for $V$.
 \end{proof}
 
-\begin{theorem}\label{thm:subspace-dimension}
-  Let $(V, +, \cdot)$ be a finite-dimensional vector space over $F$,
-  and let $V'$ be a subspace of $V$. Then the following statements hold.
+\begin{proposition}\label{prop:subspace-dimension}
+  Let $V$ be a finite-dimensional vector space.
+  Let $V'$ be a subspace of $V$.
+  Then the following statements are true.
   \begin{enumerate}
     \item $\mathrm{dim}(V') \leq \mathrm{dim}(V)$.
     \item If $\mathrm{dim}(V') = \mathrm{dim}(V)$, then $V' = V$.
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 \begin{proof}
-  Let $S$ be a basis of $V$ and let $S'$ be a basis of $V'$.
+  Let $S$ and $S'$ be bases for $V$ and $V'$, respectively.
   \begin{enumerate}
     \item Since $S'$ is linearly independent and $V = \mathrm{span}(S)$,
       we have $|S'| \leq |S|$ by replacement theorem (\Cref{thm:replacement}).
       Thus, $\mathrm{dim}(V') \leq \mathrm{dim}(V)$.
     \item Since $S'$ is linearly independent and $|S'| = \mathrm{dim}(V)$,
-      we have $\mathrm{span}(S') = V$ by \Cref{thm:basis-equivalence}.
+      we have $\mathrm{span}(S') = V$ by \Cref{prop:basis-equivalence}.
       Thus, $V' = \mathrm{span}(S') = V$. \qedhere
   \end{enumerate}
 \end{proof}
+
+\begin{example}
+  Let $W$ be the set of $n \times n$ diagonal matrices, which is a subspace of
+  $F^{n \times n}$.
+  Then one can verify that $\{E_{ii}: 1 \leq i \leq n\}$ is a basis for $W$,
+  where $E_{ij}$ is the matrix whose $(i, j)$-entry is $1_F$ and the other
+  entries are $0_F$.
+  Thus, $\dim(W) = n$.
+\end{example}
