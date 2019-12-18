@@ -144,3 +144,127 @@
       which completes the proof. \qedhere
   \end{enumerate}
 \end{proof}
+
+\section{Regular Expressions}
+\begin{definition}
+  Let $\Sigma$ be an alphabet.
+  A \emph{regular expression} over $\Sigma$ is a string in the minimal language
+  over $\Sigma \cup \{\varnothing, \epsilon, {}^*, \cdot, \cup, (, )\}$
+  that satisfies the following conditions.
+  \begin{enumerate}[1.]
+    \item $\varnothing$ is a regular expression.
+    \item $\epsilon$ is a regular expression.
+    \item If $a \in \Sigma$, then $a$ is a regular expression.
+    \item If $e_1$ and $e_2$ are regular expressions, then so is
+      $(e_1 \cdot e_2)$.
+    \item If $e_1$ and $e_2$ are regular expressions, then so is
+      $(e_1 \cup e_2)$.
+    \item If $e$ is a regular expression, then so is $(e)^*$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  A regular expression $e$ over an alphabet $\Sigma$ defines a language $L(e)$
+  as follows.
+  \begin{enumerate}[1.]
+    \item $L(\varnothing) = \varnothing$.
+    \item $L(\epsilon) = \{\epsilon\}$.
+    \item $L(a) = \{a\}$ for each $a \in \Sigma$.
+    \item $L((e_1 \cdot e_2)) = L(e_1) \cdot L(e_2)$ for each regular
+      expressions $e_1$ and $e_2$.
+    \item $L((e_1 \cup e_2)) = L(e_1) \cup L(e_2)$ for each regular
+      expressions $e_1$ and $e_2$.
+    \item $L((e)^*) = L(e^*)$ for each regular expression $e$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  We will write $(e_1e_2)$ instead of $(e_1 \cdot e_2)$ for simplification.
+  Furthermore, we may omit parentheses if there is no ambiguity.
+\end{remark}
+
+\begin{theorem}
+  Let $\Sigma$ be an alphabet.
+  A language $L$ over $\Sigma$ is regular if and only if there is a regular
+  expression $e$ over $\Sigma$ such that $L = L(e)$.
+\end{theorem}
+\begin{proof}
+  $(\Leftarrow)$
+  It holds trivially since all finite languages are regular, and regular
+  languages are closed under union, cancatenation and star operations.
+
+  $(\Rightarrow)$
+  Since $L$ is regular, there is a DFA
+  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ with $L = L(\mathcal{A})$.
+  For $p, q \in Q$ and $S \subseteq Q$, define $L(p, S, q)$ to be the language
+  of strings $w \in \Sigma^*$ such that the run $r$ of $w = a_1 \cdots a_n$
+  on $\mathcal{A}$ with
+  \begin{equation*}
+    r = (r_0, r_1, \dots, r_{n-1}, r_n)
+  \end{equation*}
+  satisfying $r_0 = p$, $r_n = q$ and $r_i \in S$ for each
+  $i \in \{1, \dots, n-1\}$.
+  Then it suffices to prove that there exists a regular expression $e$ with
+  $L(e) = L(p, S, q)$ for each $p, q \in Q$ and $S \subseteq Q$ since
+  \begin{equation*}
+    L = \bigcup_{q \in F} L(q_0, Q, q).
+  \end{equation*}
+  The proof is by induction on $|S|$.
+  For the induction basis, let $|S| = 0$, i.e., $S = \varnothing$.
+  Then we have
+  \begin{equation*}
+    L(p, \varnothing, p)
+    = \{\epsilon\} \cup \{a \in \Sigma: \delta(p, a) = p\}
+  \end{equation*}
+  and
+  \begin{equation*}
+    L(p, \varnothing, q)
+    = \{a \in \Sigma: \delta(p, a) = q\}
+  \end{equation*}
+  for all $p, q \in Q$ with $p \neq q$, and thus the induction basis is proved.
+  Now assume the induction hypothesis that the statement holds for $|S| = k$,
+  and we prove that it is true for $|S| = k + 1$.
+  Let $s$ be an arbitrary state in $S$ and let $S' = S \setminus \{s\}$.
+  Then it suffices to prove that
+  \begin{equation*}
+    L(p, S, q)
+      \quad = \quad L(p, S', q)
+      \quad \cup \quad
+      L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q).
+  \end{equation*}
+  since $|S'| = k$.
+  \begin{enumerate}[(i)]
+    \item It is obvious that 
+      \begin{equation*}
+        L(p, S, q)
+          \quad \supseteq \quad L(p, S', q)
+          \quad \cup \quad
+          L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q)
+      \end{equation*}
+      since $S = S' \cup \{s\}$.
+    \item Then we prove that
+      \begin{equation*}
+        L(p, S, q)
+          \quad \subseteq \quad L(p, S', q)
+          \quad \cup \quad
+          L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q).
+      \end{equation*}
+      Suppose that $w \in L(p, S, q)$.
+      Let $i_1, i_2, \dots, i_\ell$ be all indices in $\{1, \dots, n - 1\}$
+      such that $r_{i_j} = s$ for each $j \in \{1, \dots, \ell\}$,
+      where $i_1 < i_2 < \cdots < i_\ell$.
+
+      If $\ell = 0$, then $w \in L(p, S', q)$ since $r_i \neq s$ for all
+      $i \in \{1, \dots, n - 1\}$.
+      Otherwise, we have
+      \begin{align*}
+        a_1 \cdots a_{i_1} &\in L(p, S', s) \\
+        a_{i_1+1} \cdots a_{i_2} &\in L(s, S', s) \\
+        &\vdots \\
+        a_{i_{\ell-1}+1} \cdots a_{i_\ell} &\in L(s, S', s) \\
+        a_{i_\ell+1} \cdots a_n &\in L(s, S', q),
+      \end{align*}
+      and thus $w \in L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q)$.
+      This completes the proof. \qedhere
+  \end{enumerate}
+\end{proof}
