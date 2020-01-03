@@ -833,6 +833,34 @@
   Thus, $S$ is a basis for $V$.
 \end{proof}
 
+\begin{proposition}\label{prop:coordinate}
+  Let $V$ be a finite-dimensional vector space.
+  Let $S = \{x_1, \dots, x_n\}$ be a basis for $V$.
+  Then for each $x \in V$, there exist a unique $n$-tuple
+  $(a_1, \dots, a_n) \in F^n$ with
+  \begin{equation*}
+    x = a_1x_1 + \cdots + a_nx_n.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Since $x \in \spn(S)$, there exist scalars $a_1, \dots, a_n \in F$ such that
+  \begin{equation*}
+    x = a_1x_1 + \cdots + a_nx_n.
+  \end{equation*}
+  Now we prove the uniqueness.
+  Let $b_1, \dots, b_n \in F$ be scalars with
+  \begin{equation*}
+    x = b_1x_1 + \cdots + b_nx_n.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    0_V = (a_1 - b_1)x_1 + \cdots + (a_n - b_n)x_n,
+  \end{equation*}
+  and it follows that $(a_1 - b_1, a_2 - b_2, \dots, a_n - b_n) = 0_{F^n}$
+  since $S$ is linearly independent.
+  Thus, $(a_1, \dots, a_n) = (b_1, \dots, b_n)$.
+\end{proof}
+
 \begin{proposition}\label{prop:subspace-dimension}
   Let $V$ be a finite-dimensional vector space.
   Let $V'$ be a subspace of $V$.
