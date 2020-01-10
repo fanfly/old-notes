@@ -10,4 +10,9 @@ This [study note](linear-algebra.pdf) is based on the textbook *Linear Algebra* 
   * Spanning Sets
   * Bases and Dimension
 * Linear Transformations
-  * Linear Transformations, Null Spaces and Ranges
+  * Linear Transformations
+  * Rank and Nullity
+  * Isomorphisms
+  * Coordinates and Matrix Representations
+  * Matrix Multiplication
+  * Left-Multiplication Transformations

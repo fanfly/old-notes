@@ -166,17 +166,22 @@
 \end{theorem}
 \begin{proof}
   Let $S$ be a basis for $V$ and $Q$ a basis for $\mathcal{N}(T)$.
-  By corollary to replacement theorem (\Cref{thm:replacement}), there is
+  By replacement theorem (\Cref{thm:replacement}), there is
   $R \subseteq S \setminus Q$ such that $Q \cup R$ is a basis for $V$.
-  Since $|R| = |Q \cup R| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T)$,
-  the theorem holds if $|R| = \mathrm{dim}(\mathcal{R}(T))$.
+  Since
+  \begin{equation*}
+    |R| = |Q \cup R| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T),
+  \end{equation*}
+  it suffices the prove that $|R| = \mathrm{dim}(\mathcal{R}(T))$.
   
   If there exist different $x, x' \in R$ with $T(x) = T(x')$, then we have
   $T(x - x') = T(x) - T(x') = 0_W$, and thus
   $x - x' \in \mathcal{N}(T) = \mathrm{span}(Q)$.
   It follows that $x \in \mathrm{span}(Q \cup \{x'\})$,
-  contradiction to the fact that $S$ is linearly independent.
-  Thus, $|R| = |T(R)|$. We claim that $T(R)$ is a basis for $\mathcal{R}(T)$.
+  contradiction to the fact that $Q \cup R$ is linearly independent.
+  Thus, $T(x) \neq T(x')$ for any different $x, x' \in R$, and it follows that
+  $|R| = |T(R)|$.
+  We claim that $T(R)$ is a basis for $\mathcal{R}(T)$.
 
   First we prove that $T(R)$ spans $\mathcal{R}(T)$.
   By \Cref{thm:linear-span} (b) and the fact that $T(Q) = \{0_V\}$, we have
@@ -208,10 +213,7 @@
   Since $Q \cup R$ is linearly independent, we have
   $a_1 = \cdots = a_n = b_1 = \cdots = b_m = 0_F$, implying that $T(R)$ is
   linearly independent.
-
-  Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, and we can conclude that
-  $\mathrm{rank}(T) = |T(R)| = |R| = |Q \cup R| - |Q|$,
-  which completes the proof.
+  Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, which completes the proof.
 \end{proof}
 
 \section{Isomorphisms}
@@ -226,31 +228,6 @@
   \end{equation*}
   for all $x \in X$.
 \end{definition}
-
-\begin{proposition}
-  \label{prop:associativity-of-composition}
-  Let $W, X, Y, Z$ be sets.
-  Let
-  \begin{equation*}
-    f: W \to X, \quad g: X \to Y, \quad h: Y \to Z
-  \end{equation*}
-  be functions.
-  Then we have
-  \begin{equation*}
-    (hg)f = h(gf).
-  \end{equation*}
-\end{proposition}
-\begin{proof}
-  Since
-  \begin{align*}
-    ((hg)f)(w)
-    &= (hg)(f(w)) \tag{composition of $f$ and $hg$} \\
-    &= h(g(f(w))) \tag{composition of $g$ and $h$} \\
-    &= h((gf)(w)) \tag{composition of $f$ and $g$} \\
-    &= (h(gf))(w) \tag{composition of $gf$ and $h$}
-  \end{align*}
-  holds for all $w \in W$, we have $(hg)f = h(gf)$.
-\end{proof}
 
 \begin{definition}
   \label{def:identity-function}
@@ -477,12 +454,13 @@
   \label{def:coordinate}
   Let $V$ be a finite-dimensional vector space over a field $F$.
   Let $\beta = (x_1, \dots, x_n)$ be an ordered basis for $V$.
-  Then we define $\phi_\beta: V \to F^n$ by
+  Then we define $\phi_\beta: V \to F^n$ such that
   \begin{equation*}
-    \phi_\beta(a_1x_1 + a_2x_2 + \cdots + a_nx_n)
+    \phi_\beta(x)
     = \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{pmatrix}
+    \quad \text{for each}\ x \in V\ \text{with}\ x = \sum_{i=1}^n a_ix_i,
   \end{equation*}
-  for any $a_1, a_2, \dots, a_n \in F$.
+  where $a_1, a_2, \dots, a_n \in F$.
   For each vector $x$ in $V$, $\phi_\beta(x)$ is called the \emph{coordinate}
   of $x$ with respect to $\beta$, denoted by $[x]_\beta$.
 \end{definition}
@@ -588,13 +566,14 @@
 
 \begin{theorem}
   \label{thm:matrix-representation}
-  Let $\beta = (x_1, \dots, x_n)$ and $\gamma = (y_1, \dots, y_m)$ be ordered
-  bases for a vector spaces $V$ and $W$ over $F$, respectively.
+  Let $\beta$ and $\gamma$ be ordered bases for a vector spaces $V$ and $W$
+  over $F$, respectively.
   Then $\Phi_\beta^\gamma$ is an isomorphism from $\mathcal{L}(V, W)$ onto
   $F^{m \times n}$.
 \end{theorem}
 \begin{proof}
-  $\Phi_\beta^\gamma$ is linear since for any $c \in F$ and
+  Let $\beta = (x_1, \dots, x_n)$ and $\gamma = (y_1, \dots, y_m)$.
+  Note that $\Phi_\beta^\gamma$ is linear since for any $c \in F$ and
   $T_1, T_2 \in \mathcal{L}(V, W)$, we have
   \begin{align*}
     \Bigl([cT_1 + T_2]_\beta^\gamma\Bigr)_{ij}
@@ -610,5 +589,313 @@
     &= \Bigl(c[T_1]_\beta^\gamma + [T_2]_\beta^\gamma\Bigr)_{ij}
   \end{align*}
   for any $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
-  The following is to be completed.
+  To prove that $\Phi_\beta^\gamma$ is invertible, let
+  \begin{equation*}
+    A =
+    \begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{pmatrix}
+  \end{equation*}
+  be an arbitrary matrix in $F^{m \times n}$.
+  By \Cref{lem:linear-uniqueness}, there exists a unique linear transformation
+  $T: V \to W$ such that
+  \begin{equation*}
+    T(x_j) = \sum_{i=1}^n a_{ij}y_j
+  \end{equation*}
+  for each $j \in \{1, \dots, n\}$, and it follows that $[T]_\beta^\gamma = A$.
+  Thus, there exists
+  $(\Phi_\beta^\gamma)^{-1}: F^{m \times n} \to \mathcal{L}(V, W)$
+  such that $(\Phi_\beta^\gamma)^{-1}(A) = T$ with $[T]_\beta^\gamma = A$ for
+  each $A \in F^{m \times n}$, which completes the proof.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:matrix-representation}
+  If $V$ and $W$ are finite-dimensional vector spaces over $F$ with
+  $\dim(V) = n$ and $\dim(W) = m$, then $\mathcal{L}(V, W)$ is
+  finite-dimensional with $\dim(\mathcal{L}(V, W)) = mn$.
+\end{corollary}
+\begin{proof}
+  Straightforward from \Cref{thm:isomorphism} and
+  \Cref{thm:matrix-representation}.
+\end{proof}
+
+\section{Matrix Multiplication}
+\begin{definition}
+  Let $F$ be a field and let $A \in F^{\ell \times m}$ and
+  $B \in F^{m \times n}$ be matrices.
+  The \emph{product} of $A$ and $B$, denoted by $AB$, is a matrix in
+  $F^{\ell \times n}$ that satisfies
+  \begin{equation*}
+    (AB)_{ik} = \sum_{j=1}^m A_{ij}B_{jk}
+  \end{equation*}
+  for $i \in \{1, \dots, \ell\}$ and $k \in \{1, \dots, n\}$.
+\end{definition}
+
+\begin{proposition}
+  Let $U, V, W$ be vector spaces over $F$.
+  If $T_1: {U \to V}$ and $T_2: {V \to W}$ are linear, then so is $T_2T_1$.
+\end{proposition}
+\begin{proof}
+  For $a \in F$ and $x, y \in U$, we have
+  \begin{align*}
+    (T_2T_1)(ax + y)
+    &= T_2(T_1(ax + y)) \tag{composition of $T_1$ and $T_2$} \\
+    &= T_2(aT_1(x) + T_1(y)) \tag{linearity of $T_1$} \\
+    &= aT_2(T_1(x)) + T_2(T_1(y)) \tag{linearity of $T_2$} \\
+    &= a(T_2T_1)(x) + (T_2T_1)(y). \tag{composition of $T_1$ and $T_2$}
+  \end{align*}
+  Thus, $T_2T_1$ is linear.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:matrix-multiplication}
+  Let $U, V, W$ be finite-dimensional vector spaces with ordered bases
+  \begin{equation*}
+    \alpha = (x_1, \dots, x_n),
+    \quad
+    \beta = (y_1, \dots, y_m),
+    \quad \text{and} \quad
+    \gamma = (z_1, \dots, z_\ell),
+  \end{equation*}
+  respectively.
+  If $T_1: U \to V$ and $T_2: V \to W$ are linear, then
+  \begin{equation*}
+    [T_2T_1]_\alpha^\gamma = [T_2]_\beta^\gamma [T_1]_\alpha^\beta.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $A = [T_2]_\beta^\gamma$, $B = [T_1]_\alpha^\beta$ and
+  $C = [T_2T_1]_\alpha^\gamma$.
+  Then
+  \begin{equation*}
+    T_2(y_j) = \sum_{i=1}^\ell A_{ij}z_i,
+    \quad
+    T_1(x_k) = \sum_{j=1}^m B_{jk}y_j,
+    \quad \text{and} \quad
+    (T_2T_1)(x_k) = \sum_{i=1}^\ell C_{ik}z_i
+  \end{equation*}
+  hold for any $j \in \{1, \dots, m\}$ and $k \in \{1, \dots, n\}$.
+  Since for each $k \in \{1, \dots, n\}$,
+  \begin{align*}
+    \sum_{i=1}^\ell C_{ik}z_i
+    &= (T_2T_1)(x_k) \\
+    &= T_2(T_1(x_k)) \\
+    &= T_2\left(\sum_{j=1}^m B_{jk}y_j\right) \\
+    &= \sum_{j=1}^m B_{jk} T_2(y_j) \\
+    &= \sum_{j=1}^m B_{jk} \sum_{i=1}^\ell A_{ij}z_i \\
+    &= \sum_{i=1}^\ell \left(\sum_{j=1}^m A_{ij}B_{jk}\right)z_i,
+  \end{align*}
+  we have
+  \begin{equation*}
+    C_{ik} = \sum_{j=1}^m A_{ij}B_{jk}
+  \end{equation*}
+  for each $i \in \{1, \dots, \ell\}$ and $k \in \{1, \dots, n\}$.
+  Thus, $C = AB$.
+\end{proof}
+
+\begin{corollary}
+  Let $V$ and $W$ be finite-dimensional vector spaces with ordered bases
+  $\beta$ and $\gamma$ over a field $F$, respectively.
+  If $T: V \to W$ is linear, then
+  \begin{equation*}
+    [T(x)]_\gamma = [T]_\beta^\gamma[x]_\beta
+  \end{equation*}
+  for each $x \in V$.
+\end{corollary}
+\begin{proof}
+  Let $\alpha = (1_F)$ be an ordered basis for $F$.
+  For each $x \in V$, let $\varphi: F \to V$ be the linear transformation with
+  $\varphi(c) = cx$ for each $c \in F$.
+  By \Cref{def:matrix-representation}, we have
+  \begin{equation*}
+    [\varphi]_\alpha^\beta = [\varphi(1_F)]_\beta
+    \quad \text{and} \quad
+    [T\varphi]_\alpha^\gamma = [(T\varphi)(1_F)]_\gamma.
+  \end{equation*}
+  Thus, it follows that
+  \begin{align*}
+    [T(x)]_\gamma
+    &= [T(\varphi(1_F))]_\gamma \\
+    &= [(T\varphi)(1_F)]_\gamma \\
+    &= [T\varphi]_\alpha^\gamma \\
+    &= [T]_\beta^\gamma[\varphi]_\alpha^\beta
+       \tag{\Cref{thm:matrix-multiplication}} \\
+    &= [T]_\beta^\gamma[\varphi(1_F)]_\beta \\
+    &= [T]_\beta^\gamma[x]_\beta.
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\section{Left-Multiplication Transformations}
+\begin{definition}
+  Let $A \in F^{m \times n}$ be a matrix.
+  The \emph{left-multiplication transformation} of $A$, denoted by $L_A$,
+  is the transformation from $F^n$ to $F^m$ with
+  \begin{equation*}
+    L_A(x) = Ax
+  \end{equation*}
+  for each $x \in F^n$.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:left-multiplication-transformation}
+  Let $\alpha$, $\beta$ and $\gamma$ be standard ordered bases for $F^n$, $F^m$
+  and $F^\ell$, respectively.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item $L_A$ is linear for each $A \in F^{m \times n}$.
+    \item $[L_A]_\alpha^\beta = A$ for each $A \in F^{m \times n}$.
+    \item $L_{cA+B} = cL_A + L_B$ for each $c \in F$ and
+    $A, B \in F^{m \times n}$.
+    \item $L_{AB} = L_AL_B$ for each $A \in F^{\ell \times m}$ and
+    $B \in F^{m \times n}$.
+    \item $L_{I_n} = I_{F^n}$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item $L_A$ is linear since for any $c \in F$ and $x, y \in F^n$,
+    \begin{align*}
+      \Bigl[L_A(cx + y)\Bigr]_i
+      &= \Bigl[A(cx + y)\Bigr]_i \\
+      &= \sum_{j=1}^n A_{ij}\bigl[cx + y\bigr]_j \\
+      &= \sum_{j=1}^n A_{ij}(cx_j + y_j) \\
+      &= c\sum_{j=1}^n A_{ij}x_j + \sum_{j=1}^n A_{ij}y_j \\
+      &= c\bigl[Ax\bigr]_i + \bigl[Ay\bigr]_i \\
+      &= \bigl[cAx + Ay\bigr]_i \\
+      &= \Bigl[cL_A(x) + L_A(y)\Bigr]_i
+    \end{align*}
+    holds for each $i \in \{1, \dots, m\}$.
+    
+    \item Let $T \in \mathcal{L}(V, W)$ be the transformation with
+    $[T]_\alpha^\beta = A$.
+    Then we have
+    \begin{equation*}
+      T(x) = [T(x)]_\beta = [T]_\alpha^\beta[x]_\alpha = Ax
+    \end{equation*}
+    for each $x \in F^n$ since $\alpha$ and $\beta$ are standard ordered bases.
+    Thus, $T = L_A$.
+
+    \item It is proved by
+    \begin{equation*}
+      [L_{cA + B}]_\alpha^\beta
+      = cA + B
+      = c[L_A]_\alpha^\beta + [L_B]_\alpha^\beta
+      = [cL_A + L_B]_\alpha^\beta.
+    \end{equation*}
+
+    \item It is proved by
+    \begin{equation*}
+      [L_{AB}]_\alpha^\gamma
+      = AB
+      = [L_A]_\beta^\gamma[L_B]_\alpha^\beta
+      = [L_AL_B]_\alpha^\gamma.
+    \end{equation*}
+    
+    \item Since
+    \begin{equation*}
+      L_{I_n}(x)
+      = I_nx
+      = x
+      = I_{F^n}(x)
+    \end{equation*}
+    holds for each $x \in F^n$, $L_{I_n} = I_{F^n}$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+  \label{lem:composition}
+  Let $U, V, W, X$ be vector spaces.
+  Let
+  \begin{equation*}
+    T_1, T_1' \in \mathcal{L}(U, V),
+    \quad
+    T_2, T_2' \in \mathcal{L}(V, W),
+    \quad \text{and} \quad
+    T_3 \in \mathcal{L}(W, X)
+  \end{equation*}
+  be linear transformations and let $c \in F$ be a scalar.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item $T_1I_U = T_1 = I_VT_1$.
+    \item $T_2(T_1 + T_1') = T_2T_1 + T_2T_1'$.
+    \item $(T_2 + T_2')T_1 = T_2T_1 + T_2'T_1$.
+    \item $c(T_2T_1) = (cT_2)T_1 = T_2(cT_1)$.
+    \item $T_3(T_2T_1) = (T_3T_2)T_1$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Since
+    \begin{equation*}
+      (T_1I_U)(x) = T_1(I_U(x)) = T_1(x) = I_V(T_1(x)) = (I_VT_1)(x)
+    \end{equation*}
+    holds for each $x \in U$, we have $T_1I_U = T_1 = I_VT_1$.
+    
+    \item Since
+    \begin{align*}
+      (T_2(T_1 + T_1'))(x)
+      &= T_2((T_1 + T_1')(x)) \tag{composition} \\
+      &= T_2(T_1(x) + T_1'(x)) \tag{addition} \\
+      &= T_2(T_1(x)) + T_2(T_1'(x)) \tag{linearity} \\
+      &= (T_2T_1)(x) + (T_2T_1')(x) \tag{composition}\\
+      &= (T_2T_1 + T_2T_1')(x) \tag{addition}
+    \end{align*}
+    holds for each $x \in U$, we have $T_2(T_1 + T_1') = T_2T_1 + T_2T_1'$.
+
+    \item Since
+    \begin{align*}
+      ((T_2 + T_2')T_1)(x)
+      &= (T_2 + T_2')(T_1(x)) \tag{composition} \\
+      &= T_2(T_1(x)) + T_2'(T_1(x)) \tag{addition} \\
+      &= (T_2T_1)(x) + (T_2'T_1)(x) \tag{composition} \\
+      &= (T_2T_1 + T_2'T_1)(x) \tag{addition}
+    \end{align*}
+    holds for each $x \in U$, we have $(T_2 + T_2')T_1 = T_2T_1 + T_2'T_1$.
+
+    \item Since
+    \begin{align*}
+      \begin{array}{ccccc}
+        (c(T_2T_1))(x) &=& c(T_2T_1)(x) &=& cT_2(T_1(x)) \\[.5em]
+        ((cT_2)T_1)(x) &=& (cT_2)(T_1(x)) &=& cT_2(T_1(x)) \\[.5em]
+        (T_2(cT_1))(x) &=& T_2(cT_1(x)) &=& cT_2(T_1(x))
+      \end{array}
+    \end{align*}
+    hold for each $x \in U$, we have $c(T_2T_1) = (cT_2)T_1 = T_2(cT_1)$.
+    
+    \item Since
+    \begin{align*}
+      (T_3(T_2T_1))(x)
+      &= T_3((T_2T_1)(x)) \tag{composition of $T_3$ and $T_2T_1$} \\
+      &= T_3(T_2(T_1(x))) \tag{composition of $T_2$ and $T_1$} \\
+      &= (T_3T_2)(T_1(x)) \tag{composition of $T_3$ and $T_2$} \\
+      &= ((T_3T_2)T_1)(x) \tag{composition of $T_3T_2$ and $T_1$}
+    \end{align*}
+    holds for each $x \in U$, we have $T_3(T_2T_1) = (T_3T_2)T_1$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:composition}
+  Let $A, A' \in F^{k \times \ell}$, $B, B' \in F^{\ell \times m}$ and
+  $C \in F^{m \times n}$ be matrices and let $c \in F$ be a scalar.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item $AI_\ell = A = I_kA$.
+    \item $A(B + B') = AB + AB'$.
+    \item $(A + A')B = AB + A'B$.
+    \item $c(AB) = (cA)B = A(cB)$.
+    \item $A(BC) = (AB)C$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Straightforward from \Cref{lem:composition}.
 \end{proof}
