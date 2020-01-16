@@ -899,3 +899,52 @@
 \begin{proof}
   Straightforward from \Cref{lem:composition}.
 \end{proof}
+
+\section{Invertible Matrices}
+\begin{definition}
+  \label{def:invertible-matrix}
+  A matrix $A \in F^{n \times n}$ is \emph{invertible} if $L_A$ is invertible.
+  If $A$ is invertible, then it has an \emph{inverse}, denoted by $A^{-1}$,
+  which is the matrix in $F^{n \times n}$ such that
+  \begin{equation*}
+    L_{A^{-1}} = (L_A)^{-1}.
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  \label{prop:invertible-matrix}
+  The following statements are true for matrices $A, B \in F^{n \times n}$.
+  \begin{enumerate}
+    \item If $A$ is invertible, then $AA^{-1} = I_n = A^{-1}A$.
+    \item If $AB = I_n = BA$, then $A$ is invertible and $B = A^{-1}$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item We have
+    \begin{equation*}
+      L_{AA^{-1}} = L_AL_{A^{-1}} = L_A(L_A)^{-1} = I_{F^n} = L_{I_n}
+    \end{equation*}
+    and
+    \begin{equation*}
+      L_{A^{-1}A} = L_{A^{-1}}L_A = (L_A)^{-1}L_A = I_{F^n} = L_{I_n},
+    \end{equation*}
+    implying $AA^{-1} = I_n = A^{-1}A$.
+
+    \item Since we have
+    \begin{equation*}
+      L_AL_B = L_{AB} = L_{I_n} = I_{F^n}
+    \end{equation*}
+    and
+    \begin{equation*}
+      L_BL_A = L_{BA} = L_{I_n} = I_{F^n},
+    \end{equation*}
+    we can conclude that $L_B = (L_A)^{-1}$.
+    It follows that
+    \begin{equation*}
+      B = BI_n = B(AA^{-1}) = (BA)A^{-1} = I_nA^{-1} = A^{-1}.
+      \qedhere
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
