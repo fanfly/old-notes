@@ -9,6 +9,7 @@
 \usepackage{cleveref}
 \usepackage[shortlabels]{enumitem}
 \usepackage{array}
+\usepackage{pgffor}
 
 \newcommand{\sectionbreak}{\clearpage}
 \setlist[enumerate,1]{label={(\alph*)}}
@@ -28,12 +29,20 @@
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
 \DeclareMathOperator{\tr}{tr}
 
 % use bold fonts to emphasize
 \DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
+\newcommand{\pl}{{}+{}}
+\newcommand{\mi}{{}-{}}
+\newcommand{\eq}{{}={}}
+\newcommand{\ccc}{>{{}}c<{{}}}
+
 \begin{document}
 \input{1-vector-spaces}
 \input{2-linear-transformations}
+\input{3-systems-of-linear-equations}
 \end{document}

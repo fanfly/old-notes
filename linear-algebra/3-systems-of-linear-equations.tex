@@ -1,0 +1,622 @@
+\chapter{Systems of Linear Equations}
+\section{Elementary Matrices}
+\begin{definition}
+  \label{def:elementary-operation}
+  Any one of the following three operations on matrices is called an
+  \emph{elementary row operation}.
+  \begin{enumerate}[leftmargin=5em,label={(Type \arabic*)}]
+    \item Exchanging two different rows.
+    \item Multiplying a row by a nonzero scalar.
+    \item Adding a scalar multiple of a row to another row.
+  \end{enumerate}
+  Similarly, any one of the following three operations on matrices is called an
+  \emph{elementary column operation}.
+  \begin{enumerate}[leftmargin=5em,label={(Type \arabic*)}]
+    \item Exchanging two different columns.
+    \item Multiplying a column by a nonzero scalar.
+    \item Adding a scalar multiple of a column to another column.
+  \end{enumerate}
+  Furthermore, an \emph{elementary operation} is either an elementary row
+  operation or an elementary column operation.
+\end{definition}
+
+\begin{definition}
+  \label{def:elementary-matrix}
+  A matrix $X \in F^{n \times n}$ is \emph{elementary} if it can be obtained
+  from $I_n$ by applying an elementary operation.
+  We say that an elementary matrix is of type 1, 2, or 3 if its corresponding
+  elementary operation is a type 1, 2, or 3 operation, respectively.
+\end{definition}
+
+\begin{proposition}
+  Let $X \in F^{m \times m}$ and $Y \in F^{n \times n}$ be elementary matrices.
+  Then the following statements hold for any matrix $A \in F^{m \times n}$.
+  \begin{enumerate}
+    \item $XA$ is the matrix obtained from $A$ by applying the elementary row
+    operation corresponding to $X$.
+    \item $AY$ is the matrix obtained from $A$ by applying the elementary
+    column operation corresponding to $Y$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  We will prove (a), and the proof of (b) is similar to that of (a) so that we
+  omit it.
+
+  Let $\gamma = (e_1, e_2, \dots, e_m)$ be the standard basis for
+  $F^m$.
+  Also, let
+  \begin{equation*}
+    \row(X) = (x_1, x_2, \dots, x_m)
+    \quad \text{and} \quad
+    \col(A) = (c_1, c_2, \dots, c_n).
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    (XA)_{ij}
+    = \sum_{k=1}^m X_{ik}A_{kj}
+    = \sum_{k=1}^m (x_i)_k (c_j)_k
+  \end{equation*}
+  for each $1 \leq i \leq m$ and $1 \leq j \leq n$.
+
+  First, suppose that $X$ is of type 1, obtained from $I_m$ by exchanging the
+  $p$-th row and the $q$-th row.
+  It follows that $x_p = e_q$, $x_q = e_p$, and $x_i = e_i$ for each
+  $i \in \{1, \dots, m\} \setminus \{p, q\}$.
+  Thus,
+  \begin{equation*}
+    \setlength\arraycolsep{3pt}
+    \begin{array}{ll>{\displaystyle}llllll}
+      (XA)_{pj}&=&\sum_{k=1}^m (e_q)_k(c_j)_k&=&(c_j)_q&=&A_{qj}& \\[1.5em]
+      (XA)_{qj}&=&\sum_{k=1}^m (e_p)_k(c_j)_k&=&(c_j)_p&=&A_{pj}& \\[1.5em]
+      (XA)_{ij}&=&\sum_{k=1}^m (e_i)_k(c_j)_k&=&(c_j)_i&=&A_{ij}&
+      \text{for $i \in \{1, \dots, m\} \setminus \{p, q\}$}
+    \end{array}
+  \end{equation*}
+  hold for any $j \in \{1, \dots, n\}$, implying $XA$ is the matrix obtained
+  from $A$ by exchanging the $p$-th row and the $q$-th row.
+
+  Secondly, suppose that $X$ is of type 2, obtained from $I_m$ by multiplying
+  the $p$-th row by a scalar $a$.
+  It follows that $x_p = ae_p$ and $x_i = e_i$ for
+  $i \in \{1, \dots, m\} \setminus \{p\}$.
+  Thus,
+  \begin{equation*}
+    \setlength\arraycolsep{3pt}
+    \begin{array}{ll>{\displaystyle}llllll}
+      (XA)_{pj}&=&\sum_{k=1}^m (ae_p)_k(c_j)_k&=&a(c_j)_p&=&aA_{pj}& \\[1.5em]
+      (XA)_{ij}&=&\sum_{k=1}^m (e_i)_k(c_j)_k&=&(c_j)_i&=&A_{ij}&
+      \text{for $i \in \{1, \dots, m\} \setminus \{p\}$}
+    \end{array}
+  \end{equation*}
+  hold for any $j \in \{1, \dots, n\}$, implying $XA$ is the matrix obtained
+  from $A$ by multiplying the $p$-th row by a scalar $a$.
+
+  Finally, suppose that $X$ is of type 3, obtained from $I_m$ by adding the
+  $p$-th row multiplied by $a$ to the $q$-th row.
+  It follows that $x_q = ae_p + e_q$ and $x_i = e_i$ for each
+  $i \in \{1, \dots, m\} \setminus \{q\}$.
+  Thus,
+  \begin{equation*}
+    \setlength\arraycolsep{2pt}
+    \begin{array}{ll>{\displaystyle}llllll}
+      (XA)_{qj} &=& \sum_{k=1}^m (ae_p + e_q)_k(c_j)_k &=& a(c_j)_p + (c_j)_q
+        &=& aA_{pj} + A_{qj} & \\[1.5em]
+      (XA)_{ij} &=& \sum_{k=1}^m (e_i)_k(c_j)_k &=& (c_j)_i &=& A_{ij}
+        & \text{for $i \in \{1, \dots, m\} \setminus \{q\}$}
+    \end{array}
+  \end{equation*}
+  hold for any $j \in \{1, \dots, n\}$, implying $XA$ is the matrix obtained
+  from $A$ by adding the $p$-th row multiplied by $a$ to the $q$-th row.
+\end{proof}
+
+\begin{proposition}
+  Let $X \in F^{n \times n}$ be an elementary matrix.
+  Then $X$ is invertible, and $X^{-1}$ is also an elementary matrix.
+\end{proposition}
+\begin{proof}
+  There exists an elementary matrix $Y \in F^{n \times n}$ with $YX = I_n$ as
+  follows.
+  \begin{itemize}
+    \item If $X$ is of type 1 obtained from $I_n$ by exchanging the $p$-th row
+    and the $q$-th row, then $Y$ is also of type 1 obtained from $I_n$ by
+    exchanging the $p$-th row and the $q$-th row.
+    \item If $X$ is of type 2 obtained from $I_n$ by multiplying the $p$-th row
+    by a scalar $a$, then $Y$ is also of type 2 obtained from $I_n$ by
+    multiplying the $p$-th row by $(1/a)$.
+    \item If $X$ is of type 3 obtained from $I_n$ by adding the $p$-th row
+    multiplied by a scalar $a$ to the $q$-th row, then $Y$ is also of type 3
+    obtained from $I_n$ by adding the $p$-th row multiplied by $(-a)$ to the
+    $q$-th row.
+  \end{itemize}
+  Thus, by \Cref{prop:invertible-matrix} (b) we can conclude that $X$ is
+  invertible and $Y = X^{-1}$, which completes the proof.
+\end{proof}
+
+\section{Rank and Nullity of Matrices}
+\begin{definition}
+  The \emph{rank} and \emph{nullity} of a matrix $A \in F^{m \times n}$,
+  denoted by $\rank(A)$ and $\nullity(A)$, respectively, are defined by
+  \begin{align*}
+    \rank(A) &= \rank(L_A) \\
+    \nullity(A) &= \nullity(L_A).
+  \end{align*}
+\end{definition}
+
+\begin{proposition}
+  \label{thm:column-space}
+  The following statements are true for any matrix $A \in F^{m \times n}$.
+  \begin{enumerate}
+    \item $\mathcal{R}(L_A) = \spn(\col(A))$.
+    \item $\rank(A) = \dim(\spn(\col(A)))$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Let $\beta = (x_1, \dots, x_n)$ and $\gamma = (y_1, \dots, y_m)$ be
+    the standard ordered basis for $F^n$ and $F^m$, respectively.
+    Then we have
+    \begin{equation*}
+      Ax_i = [L_A(x_i)]_\gamma,
+    \end{equation*}
+    which is the $i$th column of $[L_A]_\beta^\gamma = A$.
+    Thus, we have $L_A(\beta) = \col(A)$, and it follows that
+    \begin{equation*}
+      \mathcal{R}(L_A)
+      = L_A(F^n)
+      = L_A(\spn(\beta))
+      = \spn(L_A(\beta))
+      = \spn(\col(A)).
+    \end{equation*}
+
+    \item By (a), we have
+    \begin{equation*}
+      \rank(A)
+      = \rank(L_A)
+      = \dim(\mathcal{R}(L_A))
+      = \dim(\spn(\col(A))).
+      \qedhere
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:full-rank}
+  If $A \in F^{n \times n}$, then $A$ is invertible if and only if
+  $\rank(A) = n$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  Suppose that $A$ is invertible.
+  It follows that $L_A: F^n \to F^n$ is also invertible, and thus is
+  bijective.
+  Therefore,
+  \begin{equation*}
+    \rank(A) = \rank(L_A) = \dim(\mathcal{R}(L_A)) = \dim(F^n) = n.
+  \end{equation*}
+  
+  ($\Leftarrow$)
+  Suppose that $\rank(A) = n$.
+  Then we can conclude that $\mathcal{R}(L_A) = F^n$ since $\mathcal{R}(L_A)$
+  is a subspace of $F^n$ with
+  \begin{equation*}
+    \dim(\mathcal{R}(L_A)) = \rank(L_A) = \rank(A) = n = \dim(F^n).
+  \end{equation*}
+  Thus, $L_A$ is surjective.
+  It follows that $L_A$ is bijective by \Cref{lem:same-dimension}, and thus
+  $L_A$ is invertible.
+  Therefore, $A$ is invertible.
+\end{proof}
+
+\begin{lemma}
+  \label{thm:dimension-no-increase}
+  Let $V$ and $W$ be vector spaces and let $T: V \to W$ be linear.
+  Let $U$ be a subspace of $V$.
+  \begin{enumerate}
+    \item $\dim(T(U)) \leq \dim(U)$.
+    \item If $T$ is injective, then $\dim(T(U)) = \dim(U)$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Let $S$ be a basis for $U$. Then we have $T(U) = T(\spn(S)) = \spn(T(S))$.
+  \begin{enumerate}
+    \item Let $Q$ be a basis for $T(U)$.
+    By replacement theorem (\Cref{thm:replacement}),
+    \begin{equation*}
+      \dim(T(U)) = |Q| \leq |T(S)| \leq |S| = \dim(U).
+    \end{equation*}
+    \item If $T$ is injective, then $T(S)$ is linearly independent.
+    Thus, $T(S)$ is a basis for $T(U)$, implying
+    \begin{equation*}
+      \dim(T(U)) = |T(S)| = |S| = \dim(U).
+      \qedhere
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:rank-preserving}
+  The following statements hold for any matrix $A \in F^{m \times n}$.
+  \begin{enumerate}
+    \item If $X \in F^{m \times m}$ is invertible, then $\rank(XA) = \rank(A)$.
+    \item If $Y \in F^{n \times n}$ is invertible, then $\rank(AY) = \rank(A)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Since $X$ is invertible, $L_X$ is invertible, and thus is bijective.
+    It follows that $\dim(L_X(U)) = \dim(U)$ for any subspace $U$ of $F^n$
+    since $L_X$ is injective.
+    Thus,
+    \begin{align*}
+      \rank(XA)
+      &= \rank(L_{XA}) \\
+      &= \dim(L_X(L_A(F^n))) \\
+      &= \dim(L_A(F^n)) \\
+      &= \rank(L_A) \\
+      &= \rank(A).
+    \end{align*}
+
+    \item Since $Y$ is invertible, $L_Y$ is invertible, and thus is bijective.
+    It follows that $L_Y(F^n) = F^n$ since $L_Y$ is surjective.
+    Thus,
+    \begin{align*}
+      \rank(AY)
+      &= \rank(L_{AY}) \\
+      &= \dim(L_A(L_Y(F^n))) \\
+      &= \dim(L_A(F^n)) \\
+      &= \rank(L_A) \\
+      &= \rank(A).
+      \qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:rank-matrix-representation}
+  Let $V$ and $W$ be finite-dimensional vector spaces with bases $\beta$ and
+  $\gamma$, respectively.
+  If $T: V \to W$ is linear, then
+  \begin{equation*}
+    \rank(T) = \rank\left([T]_\beta^\gamma\right).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $A = [T]_\beta^\gamma$.
+  Since $[T(x)]_\gamma = [T]_\beta^\gamma [x]_\beta$ holds for any $x \in V$,
+  we have
+  \begin{equation*}
+    \phi_\gamma T = L_A \phi_\beta.
+  \end{equation*}
+  Thus, since $\phi_\beta$ and $\phi_\gamma$ are invertible, we have
+  \begin{equation*}
+    \rank(T)
+    = \rank(\phi_\gamma T)
+    = \rank(L_A\phi_\beta)
+    = \rank(L_A)
+    = \rank(A).
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:rank-finding}
+  Let $A \in F^{m \times n}$ and let $r$ be a nonnegative integer.
+  Then $\rank(A) = r$ if and only if $A$ can be transformed into a matrix $D$
+  with
+  \begin{equation*}
+    D_{ij} =
+    \begin{cases}
+      1, & \text{if $1 \leq i = j \leq r$} \\
+      0, & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  by performing a finite number of elementary operations.  
+\end{theorem}
+\begin{proof}
+  ($\Leftarrow$)
+  Since $A$ can be transformed into $D$ by a finite number of elementary
+  operations, there exist elementary matrices
+  $X_1, \dots, X_p \in F^{m \times m}$ and
+  $Y_1, \dots, Y_q \in F^{n \times n}$ such that
+  \begin{equation*}
+    X_p \cdots X_1 A Y_1 \cdots Y_q = D.
+  \end{equation*}
+  Since elementary matrices are invertible,
+  \begin{equation*}
+    \rank(A) = \rank(X_p \cdots X_1 A Y_1 \cdots Y_q) = \rank(D) = r.
+  \end{equation*}
+
+  ($\Rightarrow$)
+  If $A$ is the zero matrix, then we have $r = 0$, and thus the theorem holds
+  in this case with $D = A$.
+  Now suppose that $A$ is not the zero matrix.
+  The proof is by induction on $k = \min(m, n)$.
+  
+  First, we show that $A$ can be transformed into some matrix $B$ by a finite
+  number of elementary operations as follows, where $B_{11} = 1$, $B_{1j} = 0$
+  and $B_{i1} = 0$ for $2 \leq i \leq m$ and $2 \leq j \leq n$.
+  \begin{enumerate}[1.]
+    \item First, we turn the $(1, 1)$-entry into a nonzero number by performing
+    type 1 elementary operations.
+    \begin{enumerate}[a.]
+      \item If the first row contains only zeros, perform a type 1 row
+      operation by exchanging the first row and a nonzero row.
+      \item If the $(1, 1)$-entry is zero, perform a type 1 column
+      operation by exchanging the first column and a column whose first entry
+      is not zero.
+    \end{enumerate}
+    \item Then we turn the $(1, 1)$-entry into $1$ by performing a type 2
+    operation.
+    \item Finally, we eliminate all nonzero entries in the first row and the
+    first column except the $(1, 1)$-entry by performing type 3 operations.
+    \begin{enumerate}[a.]
+      \item For $2 \leq i \leq m$, if the $(i, 1)$-entry is nonzero, perform a
+      type 3 row operation by adding a multiple of the first row to the $i$th
+      row such that the $(i, 1)$-entry becomes zero.
+      \item For $2 \leq j \leq n$, if the $(1, j)$-entry is nonzero, perform a
+      type 3 column operation by adding a multiple of the first column to the
+      $j$th column such that the $(1, j)$-entry becomes zero.
+    \end{enumerate}
+  \end{enumerate}
+  By \Cref{thm:rank-preserving}, $\rank(B) = \rank(A) = r$ since $B$ can be
+  obtained from $A$ by performing a finite number of elementary operations.
+
+  Now we prove the theorem by induction on $\min(m, n)$.
+  For the induction basis, assume that $m = 1$ or $n = 1$ holds.
+  Then $\rank(A) = 1$ since $A$ is not the zero matrix, and thus the theorem
+  holds with $D = B$.
+
+  Now assume that the theorem holds for $\min(m, n) = k$ with $k \geq 1$, and
+  we prove that the theorem also holds for $\min(m, n) = k + 1$.
+  Since $\min(m, n) \geq 2$, we have
+  \begin{equation*}
+    B = \left(
+      \begin{array}{c|c}
+        1 & \begin{array}{ccc} 0 & \cdots & 0 \end{array} \\
+        \hline
+        \begin{array}{c} 0 \\ \vdots \\ 0 \end{array} & B'
+      \end{array}
+    \right),
+  \end{equation*}
+  where $B'$ is an $(m-1) \times (n-1)$ matrix.
+  Note that $\rank(B') = \rank(B) - 1 = r - 1$.
+  By induction hypothesis, $B'$ can be transformed into $D'$ by a finite number
+  of elementary row and column operations with
+  \begin{equation*}
+    D'_{ij} =
+    \begin{cases}
+      1, & \text{if $1 \leq i = j \leq r - 1$} \\
+      0, & \text{otherwise}.
+    \end{cases}
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    D = \left(
+      \begin{array}{c|c}
+        1 & \begin{array}{ccc} 0 & \cdots & 0 \end{array} \\
+        \hline
+        \begin{array}{c} 0 \\ \vdots \\ 0 \end{array} & D'
+      \end{array}
+    \right)
+  \end{equation*}
+  is obtained from $B$ by performing these operations.
+  Thus, $A$ can be transformed into $D$ by a finite number of
+  elementary operations, which completes the proof.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:rank-decrease}
+  \leavevmode
+  \begin{enumerate}
+    \item Let $U, V, W$ be finite-dimensional vector spaces over $F$.
+    For any linear transformations $T_1: U \to V$ and $T_2: V \to W$, we have
+    \begin{equation*}
+      \rank(T_2T_1) \leq \rank(T_1)
+      \quad \text{and} \quad
+      \rank(T_2T_1) \leq \rank(T_2).
+    \end{equation*}
+    \item For any matrices $A \in F^{\ell \times m}$ and
+    $B \in F^{m \times n}$, we have
+    \begin{equation*}
+      \rank(AB) \leq \rank(A)
+      \quad \text{and} \quad
+      \rank(AB) \leq \rank(B).
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item By \Cref{thm:dimension-no-increase}, we have
+    \begin{equation*}
+      \rank(T_2T_1)
+      = \dim(T_2(T_1(U)))
+      \leq \dim(T_1(U))
+      = \rank(T_1).
+    \end{equation*}
+    Furthermore, since $T_1(U) \subseteq V$, we have
+    $T_2(T_1(U)) \subseteq T_2(V)$.
+    Thus,
+    \begin{equation*}
+      \rank(T_2T_1)
+      = \dim(T_2(T_1(U)))
+      \leq \dim(T_2(V))
+      = \rank(T_2).
+    \end{equation*}
+    
+    \item By (a), we can conclude that
+    \begin{align*}
+      \rank(AB) &= \rank(L_{AB}) = \rank(L_AL_B) \leq \rank(L_A) = \rank(A) \\
+      \rank(AB) &= \rank(L_{AB}) = \rank(L_AL_B) \leq \rank(L_B) = \rank(B).
+      \qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\section{System of Linear Equations}
+\begin{definition}
+  \label{def:system-linear-equations}
+  The system $E$ of equations
+  \begin{equation*}
+    \setlength\arraycolsep{0pt}
+    \begin{array}{rcrcccrcl}
+      a_{11}x_1 &\pl& a_{12}x_2 &\pl& \cdots &\pl& a_{1n}x_n &\eq& b_1 \\
+      a_{21}x_1 &\pl& a_{22}x_2 &\pl& \cdots &\pl& a_{2n}x_n &\eq& b_2 \\[.5em]
+                &   &           &   & \vdots &   &           &   &     \\[.5em]
+      a_{m1}x_1 &\pl& a_{m2}x_2 &\pl& \cdots &\pl& a_{mn}x_n &\eq& b_m,
+    \end{array}
+  \end{equation*}
+  where $a_{ij}$ and $b_i$ are scalars in a field $F$ and
+  $x_1, x_2, \dots, x_n$ are $n$ variables that take values in $F$,
+  is called a system of $m$ \emph{linear equations} in $n$ unknowns
+  over the field $F$.
+  Furthremore, it can be rewritten as a matrix equation
+  \begin{equation*}
+    E: Ax = b
+  \end{equation*}
+  with
+  \begin{equation*}
+    A =
+    \begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n} \\
+      a_{21} & a_{22} & \cdots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{pmatrix},
+    \quad
+    x = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix},
+    \quad \text{and} \quad
+    b = \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{pmatrix},
+  \end{equation*}
+  and the matrices
+  \begin{equation*}
+    A \in F^{m \times n}
+    \quad \text{and} \quad
+    (A \mid b) \in F^{m \times (n+1)}
+  \end{equation*}
+  are called the \emph{coefficient matrix} and the \emph{augmented matrix} of
+  $E$, respectively.
+\end{definition}
+
+\begin{definition}
+  \label{def:solution-set}
+  For any system $E: Ax = b$ of linear equations with $A \in F^{m \times n}$,
+  the \emph{solution set} of $E$, denoted by $S(E)$, is defined by
+  \begin{equation*}
+    S(E) = \{s \in F^n : As = b\}.
+  \end{equation*}
+  Each element of $S(E)$ is called a \emph{solution} to $E$.
+\end{definition}
+
+\begin{theorem}
+  \label{thm:augmented-matrix}
+  If $E: Ax = b$ is a system of linear equations, then $S(E)$ is nonempty if
+  and only if $\rank(A) = \rank(A \mid b)$.
+\end{theorem}
+\begin{proof}
+  It is proved by
+  \begin{align*}
+    S(E) \neq \varnothing
+    &\; \Leftrightarrow \; \text{$Ax = b$ for some $x \in F^n$} \\
+    &\; \Leftrightarrow \; b \in \mathcal{R}(L_A) \\
+    &\; \Leftrightarrow \; b \in \spn(\col(A)) \\
+    &\; \Leftrightarrow \; \spn(\col(A)) = \spn(\col(A \mid b)) \\
+    &\; \Leftrightarrow \; \rank(A) = \rank(A \mid b).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  A system $E: Ax = b$ of linear equations with $A \in F^{m \times n}$
+  is said to be \emph{homogeneous} if $b = 0_{F^m}$.
+\end{definition}
+
+\begin{proposition}
+  The following statements are true for any homogeneous system
+  $E: Ax = 0_{F^m}$ of linear equations with $A \in F^{m \times n}$.
+  \begin{enumerate}
+    \item $S(E) = \mathcal{N}(L_A)$.
+    \item $S(E)$ is a subspace of $A$ with $\dim(S(E)) = \nullity(A)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Straightforward.
+\end{proof}
+
+\begin{definition}
+  \label{def:homogeneous-system}
+  For any system
+  \begin{equation*}
+    E: Ax = b
+  \end{equation*}
+  of linear equations with $A \in F^{m \times n}$,
+  the system
+  \begin{equation*}
+    E_H: Ax = 0_{F^m}
+  \end{equation*}
+  of linear equations is called the \emph{homogeneous system} corresponding to
+  $E$.
+\end{definition}
+
+\begin{proposition}
+  For any system $E: Ax = b$ of linear equations with $A \in F^{m \times n}$,
+  \begin{equation*}
+    S(E) = \{s\} + S(E_H)
+  \end{equation*}
+  holds for any solution $s \in S(E)$.
+\end{proposition}
+\begin{proof}
+  For any $r \in F^n$, we have
+  \begin{align*}
+    r \in S(E)
+    &\; \Leftrightarrow \; Ar = b \\
+    &\; \Leftrightarrow \; A(r - s) = 0_{F^m} \\
+    &\; \Leftrightarrow \; r - s \in S(E_H) \\
+    &\; \Leftrightarrow \; r \in \{s\} + S(E_H).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:num-solutions}
+  Let $E: Ax = b$ be a system of linear equations with $A \in F^{n \times n}$.
+  Then $A$ is invertible if and only if $E$ has exactly one solution.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  Suppose that $s \in F^n$ is a solution to $E$.
+  Then we have $As = b$, implying $s = A^{-1}b$.
+  Thus, $S(E) = \{A^{-1}b\}$.
+
+  ($\Leftarrow$)
+  Let $s \in F^n$ be the unique solution to $E$.
+  Since $S(E) = \{s\} + S(E_H)$, we can conclude that $S(E_H) = \{0_{F^n}\}$,
+  implying
+  \begin{equation*}
+    \rank(A) = n - \nullity(A) = n - \dim(S(E_H)) = n - 0 = n.
+  \end{equation*}
+  Thus, $A$ is invertible.
+\end{proof}
+
+\begin{theorem}
+  Let $E: Ax = b$ and $E': A'x = b'$ be systems of linear equations with
+  $A, A' \in F^{m \times n}$.
+  If there is an invertible matrix $X \in F^{m \times m}$ with
+  \begin{equation*}
+    X(A \mid b) = (A' \mid b'),
+  \end{equation*}
+  then $S(E) = S(E')$.
+\end{theorem}
+\begin{proof}
+  For any $s \in F^n$, we have
+  \begin{align*}
+    s \in S(E)
+    &\; \Leftrightarrow \; As = b \\
+    &\; \Leftrightarrow \; X(As) = Xb \\
+    &\; \Leftrightarrow \; A's = b' \\
+    &\; \Leftrightarrow \; s \in S(E').
+    \qedhere
+  \end{align*}
+\end{proof}

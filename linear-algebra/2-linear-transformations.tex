@@ -1,19 +1,6 @@
 \chapter{Linear Transformations}
 \section{Linear Transformations}
 \begin{definition}
-  \label{def:bijection}
-  Let $X$ and $Y$ be sets.
-  Let $f: X \to Y$ be a function.
-  \begin{itemize}
-    \item $f$ is \emph{injective} if $T(x) = T(x')$ implies $x = x'$
-    for all $x, x' \in X$.
-    \item $f$ is \emph{surjective} if there exists $x \in X$ with $T(x) = y$
-    for each $y \in Y$.
-    \item $f$ is \emph{bijective} if $f$ is injective and surjective.
-  \end{itemize}
-\end{definition}
-
-\begin{definition}
   \label{def:linear-transformation}
   Let $V$ and $W$ be vector spaces over a field $F$.
   A transformation $T: V \to W$ is said to be \emph{linear} if
@@ -22,9 +9,58 @@
   \end{equation*}
   holds for any scalar $a \in F$ and any vectors $x, y \in V$.
   The set of all linear transformations from $V$ to $W$ is denoted by
-  $\mathcal{L}(V, W)$, and in the case that $V = W$ we write $\mathcal{L}(V)$
-  for short.
+  $\mathcal{L}(V, W)$, and $\mathcal{L}(V)$ for short if $V = W$.
 \end{definition}
+
+\begin{proposition}
+  \label{prop:linear-transformation}
+  Let $V$ and $W$ be vector spaces over a common field $F$.
+  Let ${T: V \to W}$ be linear.
+  Then we have the following properties.
+  \begin{enumerate}
+    \item $T(0_V) = 0_W$.
+    \item For nonnegative integer $n$,
+    \begin{equation*}
+      T\left(\sum_{i=1}^n a_ix_i\right) = \sum_{i=1}^n a_iT(x_i)
+    \end{equation*}
+    hold for any $a_1, \dots, a_n \in F$ and $x_1, \dots, x_n \in V$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Since
+    \begin{equation*}
+      T(0_V) + T(0_V)
+      = 1_FT(0_V) + T(0_V)
+      = T(1_F0_V + 0_V)
+      = T(0_V),
+    \end{equation*}
+    we have $T(0_V) = 0_W$ by \Cref{prop:vector-space-addition} (b).
+    
+    \item The proof is by induction on $n$.
+    The induction basis with $n = 0$ is proved by
+    \begin{equation*}
+      T\left(\sum_{i=1}^0 a_ix_i\right)
+      = T(0_V)
+      = 0_W
+      = \sum_{i=1}^0 a_iT(x_i).
+    \end{equation*}
+    Now assume the induction hypothesis that the property holds for $n = k$.
+    Then it follows that
+    \begin{align*}
+      T\left(\sum_{i=1}^{k+1}a_ix_i\right)
+      &= T\left(a_{k+1}x_{k+1} + \sum_{i=1}^k a_ix_i\right) \\
+      &= a_{k+1}T(x_{k+1}) + T\left(\sum_{i=1}^k a_ix_i\right)
+         \tag{linearity of $T$} \\
+      &= a_{k+1}T(x_{k+1}) + \sum_{i=1}^k a_iT(x_i)
+         \tag{induction hypothesis} \\
+      &= \sum_{i=1}^{k+1} a_iT(x_i),
+    \end{align*}
+    which completes the proof.
+    \qedhere
+  \end{enumerate}
+\end{proof}
 
 \begin{theorem}
   \label{thm:linear-transformation-space}
@@ -47,47 +83,34 @@
   Thus, $\mathcal{L}(V, W)$ is a subspace of $\mathcal{F}(V, W)$.
 \end{proof}
 
-\begin{theorem}\label{thm:linear-span}
-  Let $V$ and $W$ be vector spaces over $F$, and let $T: V \to W$ be linear.
-  Let $S$ be a subset of $V$ and let $U$ be a subspace of $V$.
-  Then the following statements are true.
-  \begin{enumerate}
-    \item If $n$ is a nonnegative integer, then for $a_1, \dots, a_n \in F$
-      and $x_1, \dots, x_n \in V$, we have
-      \begin{equation*}
-        T\left(\sum_{i=1}^n a_ix_i\right) = a_i\sum_{i=1}^n T(x_i).
-      \end{equation*}
-    \item If $S$ spans $U$, then $T(S)$ spans $T(U)$.
-  \end{enumerate}
+\begin{theorem}
+  \label{thm:linear-span}
+  Let $V$ and $W$ be vector spaces and let $T: V \to W$ be linear.
+  Then for any subset $S$ of $V$, we have
+  \begin{equation*}
+    T(\spn(S)) = \spn(T(S)).
+  \end{equation*}
 \end{theorem}
-\begin{proof} \leavevmode
-  \begin{enumerate}
-    \item The proof is by induction on $n$. For $n = 0$, it holds trivially.
-      If the statement is true for some $n \geq 0$, then we have
-      \begin{align*}
-        T(a_1x_1 + \cdots + a_nx_n + a_{n+1}x_{n+1})
-        &= T(a_1x_1 + \cdots + a_nx_n) + T(a_{n+1}x_{n+1}) \\
-        &= a_1T(x_1) + \cdots + a_nT(x_n) + a_{n+1}T(x_{n+1}).
-      \end{align*}
-      Thus, the statement is true for nonnegative integer $n$.
-    \item We prove that $\mathrm{span}(T(S)) = T(U)$.
-      If $y \in \mathrm{span}(T(S))$, then there exist
-      $a_i \in F$, $x_i \in S$ for $i \in \{1, \dots, n\}$ such that
-      \begin{equation*}
-        y = \sum_{i=1}^n a_iT(x_i)
-          = T\left(\sum_{i=1}^n a_ix_i\right) \in T(U),
-      \end{equation*}
-      so $\mathrm{span}(T(S)) \subseteq T(U)$.
-
-      If $y \in T(U)$, then there exist
-      $a_i \in F$, $x_i \in S$ for $i \in \{1, \dots, n\}$ such that
-      \begin{equation*}
-        y = T\left(\sum_{i=1}^n a_ix_i\right)
-          = \sum_{i=1}^n a_iT(x_i) \in \mathrm{span}(T(S)),
-      \end{equation*}
-      so $T(U) \subseteq \mathrm{span}(T(S))$.
-      Thus, $\mathrm{span}(T(S)) = T(U)$. \qedhere
-  \end{enumerate}
+\begin{proof}
+  If $y \in T(\spn(S))$, then there exist $a_i \in F$ and $x_i \in S$ for each
+  $1 \leq i \leq n$ such that
+  \begin{equation*}
+    y
+    = T\left(\sum_{i=1}^n a_ix_i\right)
+    = \sum_{i=1}^n a_iT(x_i)
+    \in \spn(T(S)).
+  \end{equation*}
+  Thus, $T(\spn(S)) \subseteq \spn(T(S))$.
+  
+  On the other hand, if $y \in \spn(T(S))$, then there exist $a_i \in F$ and
+  $x_i \in S$ for each $1 \leq i \leq n$ such that
+  \begin{equation*}
+    y
+    = \sum_{i=1}^n a_iT(x_i)
+    = T\left(\sum_{i=1}^n a_ix_i\right)
+    \in T(\spn(S)).
+  \end{equation*}
+  Thus, $\spn(T(S)) \subseteq T(\spn(S))$, which completes the proof.
 \end{proof}
 
 \section{Rank and Nullity}
@@ -145,6 +168,72 @@
 \end{proof}
 
 \begin{definition}
+  \label{def:types-of-function}
+  Let $X$ and $Y$ be sets.
+  Let $f: X \to Y$ be a function.
+  \begin{itemize}
+    \item $f$ is \emph{injective} if $T(x) = T(x')$ implies $x = x'$
+    for all $x, x' \in X$.
+    \item $f$ is \emph{surjective} if there exists $x \in X$ with $T(x) = y$
+    for each $y \in Y$.
+    \item $f$ is \emph{bijective} if $f$ is injective and surjective.
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  \label{thm:linear-injection}
+  Let $V$ and $W$ be vector spaces and let ${T: V \to W}$ be linear.
+  Let $S$ be a subset of $V$.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item $T$ is injective if and only if $\mathcal{N}(T) = \{0_V\}$.
+    \item If $T$ is injective, then $S$ is linearly dependent if and only of
+    $T(S)$ is linearly dependent.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item
+    ($\Rightarrow$)
+    We have $T(0_V) = 0_W$ since $T$ is linear.
+    If $T(x) = 0_W$, then $x = 0_V$ since $T$ is injective.
+    Thus, $\mathcal{N}(T) = \{0_V\}$.
+
+    ($\Leftarrow$)
+    Suppose that $x, y \in V$ be vectors with $T(x) = T(y)$.
+    Since
+    \begin{equation*}
+      T(x - y) = T(x) - T(y) = 0_W,
+    \end{equation*}
+    we have $x - y \in \mathcal{N}(T)$, and thus $x - y = 0_V$,
+    implying $x = y$.
+    Thus, $T$ is injective.
+
+    \item
+    ($\Rightarrow$)
+    If $x \in \spn(S \setminus \{x\})$ for some $x \in S$, then
+    \begin{align*}
+      T(x)
+      &\; \in \; T(\spn(S \setminus \{x\})) \\
+      &\; = \; \spn(T(S \setminus \{x\})) \tag{$T$ is linear} \\
+      &\; = \; \spn(T(S) \setminus \{T(x)\}). \tag{$T$ is injective}
+    \end{align*}
+
+    ($\Leftarrow$)
+    If $T(x) \in \spn(T(S) \setminus \{T(x)\})$ for some $x \in S$, then
+    \begin{align*}
+      T(x)
+      &\; \in \; \spn(T(S) \setminus \{T(x)\}) \\
+      &\; = \; \spn(T(S \setminus \{x\})) \tag{$T$ is injective} \\
+      &\; = \; T(\spn(S \setminus \{x\})). \tag{$T$ is linear}
+    \end{align*}
+    Thus, $x \in \spn(S \setminus \{x\})$ since $T$ is injective.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
   \label{def:rank-nullity}
   Let $V$ and $W$ be vector spaces. Let $T: V \to W$ be linear.
   \begin{itemize}
@@ -154,6 +243,32 @@
       is the dimension of $\mathcal{N}(T)$.
   \end{itemize}
 \end{definition}
+
+\begin{definition}
+  \label{def:restriction}
+  Let $f: X \to Y$ be a function.
+  Let $D$ be a subset of $X$.
+  Then the \emph{restriction} of $f$ to $D$ is the function $f': D \to Y$
+  with $f'(x) = f(x)$ for each $x \in D$.
+\end{definition}
+
+\begin{proposition}
+  \label{thm:restriction-linear}
+  Let $V$ and $W$ be vector spaces and let $T: V \to W$ be linear.
+  Let $U$ be a subspace of $V$.
+  Then the restriction of $T$ to $U$ is linear.
+\end{proposition}
+\begin{proof}
+  Let $T': U \to W$ be the restriction of $T$ to $U$.
+  Then $T'$ is linear since for each $a \in F$ and $x, y \in U$, we have
+  \begin{equation*}
+    T'(ax + y)
+    = T(ax + y)
+    = aT(x) + T(y)
+    = aT'(x) + T'(y).
+    \qedhere
+  \end{equation*}
+\end{proof}
 
 \begin{theorem}[Rank-nullity Theorem]
   \label{thm:rank-nullity}
@@ -168,52 +283,41 @@
   Let $S$ be a basis for $V$ and $Q$ a basis for $\mathcal{N}(T)$.
   By replacement theorem (\Cref{thm:replacement}), there is
   $R \subseteq S \setminus Q$ such that $Q \cup R$ is a basis for $V$.
-  Since
-  \begin{equation*}
-    |R| = |Q \cup R| - |Q| = \mathrm{dim}(V) - \mathrm{nullity}(T),
-  \end{equation*}
-  it suffices the prove that $|R| = \mathrm{dim}(\mathcal{R}(T))$.
   
-  If there exist different $x, x' \in R$ with $T(x) = T(x')$, then we have
-  $T(x - x') = T(x) - T(x') = 0_W$, and thus
-  $x - x' \in \mathcal{N}(T) = \mathrm{span}(Q)$.
-  It follows that $x \in \mathrm{span}(Q \cup \{x'\})$,
-  contradiction to the fact that $Q \cup R$ is linearly independent.
-  Thus, $T(x) \neq T(x')$ for any different $x, x' \in R$, and it follows that
-  $|R| = |T(R)|$.
-  We claim that $T(R)$ is a basis for $\mathcal{R}(T)$.
-
-  First we prove that $T(R)$ spans $\mathcal{R}(T)$.
-  By \Cref{thm:linear-span} (b) and the fact that $T(Q) = \{0_V\}$, we have
+  We prove that $T(R)$ is a basis for $\mathcal{R}(T)$.
+  First,
   \begin{align*}
-    \mathcal{R}(T) &= T(\mathrm{span}(Q \cup R)) \\
-                   &= \mathrm{span}(T(Q \cup R)) \\
-                   &= \mathrm{span}(T(Q)) + \mathrm{span}(T(R)) \\
-                   &= \mathrm{span}(T(R)).
+    \mathcal{R}(T)
+    &= T(\spn(Q \cup R)) \\
+    &= \spn(T(Q \cup R)) \\
+    &= \spn(T(Q) \cup T(R)) \\
+    &= \spn(T(R)). \tag{$T(Q) = \{0_V\}$}
   \end{align*}
 
-  Then we prove that $T(R)$ is linearly independent.
-  Suppose that
+  Now we prove that $T(R)$ is linearly independent.
+  Let $T'$ be the restriction of $T$ to $R$.
+  Since $R$ is linearly independent, it suffices to prove that $T'$ is
+  injective.
+  Suppose that $T(x) = T(x')$ for some $x, x' \in R$.
+  Then we have $T(x - x') = T(x) - T(x') = 0_W$, and thus
+  $x - x' \in \mathcal{N}(T) = \spn(Q)$.
+  It follows that $x$ is a linear combination of $Q \cup \{x'\}$.
+  If $x \neq x'$, then
   \begin{equation*}
-    a_1T(x_1) + \cdots + a_nT(x_n) = 0_W
+    x \in \spn(Q \cup \{x'\}) \subseteq \spn(Q \cup R \setminus \{x\}),
   \end{equation*}
-  holds for some $a_1, \dots, a_n \in F$ and some different
-  $x_1, \dots, x_n \in R$ with $n \geq 1$.
-  Then by \Cref{thm:linear-span} we have $T(a_1x_1 + \cdots + a_nx_n) = 0_W$,
-  and thus $a_1x_1 + \cdots a_nx_n \in \mathcal{N}(T)$.
-  Hence, there exist some $b_1, \dots, b_m \in F$ and some different
-  $y_1, \dots, y_m \in Q$ such that
+  contradiction to the fact that $Q \cup R$ is linearly independent.
+  Thus, $T'$ is injective, implying $T(R)$ is linearly independent.
+
+  Note that $|T(R)| = |R|$ since $T'$ is injective.
+  Thus,
   \begin{equation*}
-    a_1x_1 + \cdots + a_nx_n = b_1y_1 + \cdots + b_my_m.
+    \nullity(T) + \rank(T)
+    = |Q| + |T(R)|
+    = |Q| + |R|
+    = \dim(V).
+    \qedhere
   \end{equation*}
-  That is,
-  \begin{equation*}
-    a_1x_1 + \cdots + a_nx_n + (-b_1)y_1 + \cdots + (-b_m)y_m = 0_V.
-  \end{equation*}
-  Since $Q \cup R$ is linearly independent, we have
-  $a_1 = \cdots = a_n = b_1 = \cdots = b_m = 0_F$, implying that $T(R)$ is
-  linearly independent.
-  Thus, $T(R)$ is a basis for $\mathcal{R}(T)$, which completes the proof.
 \end{proof}
 
 \section{Isomorphisms}
@@ -916,7 +1020,8 @@
   The following statements are true for matrices $A, B \in F^{n \times n}$.
   \begin{enumerate}
     \item If $A$ is invertible, then $AA^{-1} = I_n = A^{-1}A$.
-    \item If $AB = I_n = BA$, then $A$ is invertible and $B = A^{-1}$.
+    \item If $AB = I_n$, then $A$ and $B$ are invertible.
+    Furthermore, $A = B^{-1}$ and $B = A^{-1}$.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -931,20 +1036,16 @@
       L_{A^{-1}A} = L_{A^{-1}}L_A = (L_A)^{-1}L_A = I_{F^n} = L_{I_n},
     \end{equation*}
     implying $AA^{-1} = I_n = A^{-1}A$.
-
-    \item Since we have
-    \begin{equation*}
-      L_AL_B = L_{AB} = L_{I_n} = I_{F^n}
-    \end{equation*}
-    and
-    \begin{equation*}
-      L_BL_A = L_{BA} = L_{I_n} = I_{F^n},
-    \end{equation*}
-    we can conclude that $L_B = (L_A)^{-1}$.
-    It follows that
-    \begin{equation*}
-      B = BI_n = B(AA^{-1}) = (BA)A^{-1} = I_nA^{-1} = A^{-1}.
-      \qedhere
-    \end{equation*}
+    
+    \item Since $AB$ is invertible, $L_{AB} = L_AL_B$ is injective and
+    surjective.
+    Thus, ${L_A: F^n \to F^n}$ is injective and ${L_B: F^n \to F^n}$ is
+    surjective.
+    It follows that $L_A$ and $L_B$ are bijective by \Cref{lem:same-dimension},
+    and thus are invertible, implying $A$ and $B$ are invertible.
+    By \Cref{prop:inverse} (c), we have $L_A = (L_B)^{-1}$ and
+    $L_B = (L_A)^{-1}$.
+    Thus, we have $A = B^{-1}$ and $B = A^{-1}$.
+    \qedhere
   \end{enumerate}
 \end{proof}
