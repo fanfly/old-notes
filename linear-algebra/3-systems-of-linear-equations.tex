@@ -620,3 +620,42 @@
     \qedhere
   \end{align*}
 \end{proof}
+
+\begin{definition}
+  A matrix is said to be in \emph{reduced row echelon form} if it satisfies the
+  following conditions.
+  \begin{enumerate}
+    \item Any nonzero rows are above rows with all zeros.
+    \item The first nonzero entry in each row is $1_F$ and it occurs to the
+    right of the the first nonzero entry above it.
+    \item The first nonzero entry in each row is the only nonzero entry in its
+    column.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Any matrix can be transformed into a matrix in reduced row echelon form by a
+  finite number of elementary row operations.
+\end{theorem}
+\begin{proof}
+  One can repeat the following steps until all rows are processed or all
+  nonzero columns are processed.
+  At first, all rows and all columns has not been processed.
+  \begin{enumerate}[1.]
+    \item Find $i$ such that the $i$th row is the first row that has
+    not been processed, and find $j$ such that the $j$th column is the first
+    nonzero column that has not been processed.
+    \item If $(i, j)$-entry is zero, perform a type 1 row operation such that
+    the $(i, j)$-entry becomes nonzero.
+    \item Perform a type 2 row operation to turn the $(i, j)$-entry into $1_F$.
+    \item Perform type 3 row operations such that the $(i, j)$-entry becomes
+    the only nonzero entry in the $j$th column.
+    \item Mark the $i$th row and the $j$th column as processed.
+  \end{enumerate}
+  After the process above, any matrix should be transformed into a matrix in
+  reduced row echelon form.
+\end{proof}
+\begin{remark}
+  The algorithm in the proof above is called
+  \emph{Gaussian-Jordan elimination}.
+\end{remark}
