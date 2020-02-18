@@ -16,3 +16,9 @@ This [study note](linear-algebra.pdf) is based on the textbook *Linear Algebra* 
   * Coordinates and Matrix Representations
   * Matrix Multiplication
   * Left-Multiplication Transformations
+* Systems of Linear Equations
+  * Elementary Matrices
+  * Rank and Nullity of Matrices
+  * Systems of Linear Equations
+* Determinants
+  * Characterization of the Determinant

@@ -1,0 +1,229 @@
+\chapter{Determinants}
+\section{Characterization of the Determinant}
+\begin{definition}
+  \label{def:multilinear}
+  A function $\delta: F^{n \times n} \to F$ is \emph{$n$-linear} if for each
+  $i \in \{1, \dots, n\}$ and
+  $x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n \in F^n$,
+  the function $T: F^n \to F$ with
+  \begin{equation*}
+    T(y) = \delta
+    \begin{pmatrix}
+      x_1 \\
+      \vdots \\
+      x_{i-1} \\
+      y \\
+      x_{i+1} \\
+      \vdots \\
+      x_n
+    \end{pmatrix}
+  \end{equation*}
+  for each $y \in F^n$ is linear.
+\end{definition}
+
+\begin{definition}
+  An $n$-linear function $\delta: F^{n \times n} \to F$ is \emph{alternating}
+  if
+  \begin{equation*}
+    \delta(A) = 0_F
+  \end{equation*}
+  for each $A \in F^{n \times n}$ that has two identical rows.
+\end{definition}
+
+\begin{proposition}
+  Let $\delta: F^{n \times n} \to F$ be an alternating $n$-linear function
+  and let $A \in F^{n \times n}$.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item If $E_1 \in F^{n \times n}$ is an elementary matrix of type 1,
+    then $\delta(E_1A) = -\delta(A)$.
+    \item If $E_2 \in F^{n \times n}$ is an elementary matrix of type 2
+    obtained by multiplying one row of $I_n$ by scalar $k \in F$,
+    then $\delta(E_2A) = k\delta(A)$.
+    \item If $E_3 \in F^{n \times n}$ is an elementary matrix of type 3,
+    then $\delta(E_3A) = \delta(A)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Let $\row(A) = (x_1, \dots, x_n)$.
+  \begin{enumerate}
+    \item Let $E_1$ be obtained from $I_n$ by interchanging the $p$th row and
+    the $q$th row with $p < q$.
+    Then we have
+    \begin{align*}
+      0_F
+      &=
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p + x_q \\ \vdots \\ x_p + x_q \\ \vdots \\ x_n
+      \end{pmatrix}
+      =
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ x_p + x_q \\ \vdots \\ x_n
+      \end{pmatrix}
+      +
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_q \\ \vdots \\ x_p + x_q \\ \vdots \\ x_n
+      \end{pmatrix} \\
+      &=
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ x_p \\ \vdots \\ x_n
+      \end{pmatrix}
+      +
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\  x_q \\ \vdots \\ x_n
+      \end{pmatrix}
+      +
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_q \\ \vdots \\ x_p \\ \vdots \\ x_n
+      \end{pmatrix}
+      +
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_q \\ \vdots \\ x_q \\ \vdots \\ x_n
+      \end{pmatrix} \\
+      &= 0_F + \delta(A) + \delta(E_1A) + 0_F.
+    \end{align*}
+    Thus, $\delta(E_1A) = -\delta(A)$.
+
+    \item Let $E_2$ be obtained from $I_n$ by multiplying the $p$th row
+    by some scalar $k$.
+    Then we have
+    \begin{equation*}
+      \delta(E_2A)
+      = \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ kx_p \\ \vdots \\ x_n
+      \end{pmatrix}
+      = k\delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ x_n
+      \end{pmatrix}
+      = k\delta(A).
+    \end{equation*}
+
+    \item Let $E_3$ be obtained from $I_n$ by adding the $p$th row multiplied
+    by some scalar $k$ to the $q$th row.
+    If $p < q$, then we have
+    \begin{equation*}
+      \delta(E_3A)
+      =
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ kx_p + x_q \\ \vdots \\ x_n
+      \end{pmatrix}
+      =
+      k\delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ x_p \\ \vdots \\ x_n
+      \end{pmatrix}
+      +
+      \delta
+      \begin{pmatrix}
+        x_1 \\ \vdots \\ x_p \\ \vdots \\ x_q \\ \vdots \\ x_n
+      \end{pmatrix}
+      = k0_F + \delta(A)
+      = \delta(A).
+    \end{equation*}
+    The case that $q < p$ can be proved similarly.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  Let $\delta: F^{n \times n} \to F$ be an alternating $n$-linear function
+  and let $A \in F^{n \times n}$.
+  If $\rank(A) < n$, then $\delta(A) = 0_F$.
+\end{theorem}
+\begin{proof}
+  Since
+  \begin{equation*}
+    \dim(\spn(\row(A))) = \rank(A^t) = \rank(A) < n,
+  \end{equation*}
+  the rows of $A$ is not a spanning set of $F^n$, and thus is linearly
+  dependent, implying that there exists a row which is a linear combination of
+  the other rows.
+
+  Therefore, $A$ can be transformed into a matrix $B$ that has two identical
+  rows by a finite number of elementary row operations.
+  It follows that
+  \begin{equation*}
+    \delta(A) = \delta(E_p \cdots E_1A) = \delta(B) = 0_F,
+  \end{equation*}
+  where $E_1, \dots, E_p \in F^{n \times n}$ are elementary matrices.
+\end{proof}
+
+\begin{theorem}
+  Let $\delta: F^{n \times n} \to F$ be an alternating $n$-linear function
+  such that $\delta(I_n) = 1_F$.
+  Then for any $A, B \in F^{m \times n}$, we have
+  \begin{equation*}
+    \delta(AB) = \delta(A)\delta(B).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  First, suppose that $\rank(A) < n$.
+  Then we have $\rank(AB) < n$.
+  Thus,
+  \begin{equation*}
+    \delta(AB) = 0_F = \delta(A)\delta(B).
+  \end{equation*}
+  Now suppose that $\rank(A) = n$.
+  That is, $A$ is invertible, and thus $A = E_k \cdots E_1$ for some elementary
+  matrices $E_1, \dots, E_k \in F^{n \times n}$.
+  Then we have
+  \begin{align*}
+    \delta(AB)
+    &= \delta(E_k \cdots E_1B) \\
+    &= \delta(E_k) \cdots \delta(E_1)\delta(B) \\
+    &= \delta(E_k) \cdots \delta(E_1)\delta(I_n)\delta(B)
+       \tag{$\delta(I_n) = 1_F$} \\
+    &= \delta(E_k \cdots E_1I_n)\delta(B) \\
+    &= \delta(A)\delta(B).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  For any alternating $n$-linear functions ${\delta: F^{n \times n} \to F}$ and
+  ${\delta': F^{n \times n} \to F}$,
+  $\delta(I_n) = \delta'(I_n)$ if and only if $\delta = \delta'$.
+\end{theorem}
+\begin{proof}
+  ($\Leftarrow$) Straightforward.
+
+  ($\Rightarrow$)
+  We prove that $\delta(A) = \delta(A')$ for any $A \in F^{n \times n}$.
+  If $\rank(A) < n$, then
+  \begin{equation*}
+    \delta(A) = 0_F = \delta'(A).
+  \end{equation*}
+  If $\rank(A) = n$, then $A$ is invertible, and thus $A = E_p \cdots E_1$
+  for some elementary matrices $E_1, \dots, E_p \in F^{n \times n}$.
+  Suppose that $k_1, \dots, k_p \in F$ are scalars such that
+  $\delta(E_iA) = k_iA$ for each $1 \leq i \leq p$ and $A \in F^{n \times n}$.
+  Then we have
+  \begin{align*}
+    \delta(A)
+    &= \delta(E_p \cdots E_1I_n) \\
+    &= k_p \cdots k_1\delta(I_n) \\
+    &= k_p \cdots k_1\delta'(I_n) \\
+    &= \delta'(E_p \cdots E_1I_n) \\
+    &= \delta'(A).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  The \emph{determinant} of $A \in F^{n \times n}$ is
+  \begin{equation*}
+    \det(A) = \delta(A),
+  \end{equation*}
+  where $\delta: F^{n \times n} \to F$ is the alternating $n$-linear function
+  with $\delta(I_n) = 1_F$.
+\end{definition}
