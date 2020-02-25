@@ -2,23 +2,18 @@
 \section{Characterization of the Determinant}
 \begin{definition}
   \label{def:multilinear}
-  A function $\delta: F^{n \times n} \to F$ is \emph{$n$-linear} if for each
-  $i \in \{1, \dots, n\}$ and
-  $x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n \in F^n$,
-  the function $T: F^n \to F$ with
+  A function $\delta: F^{n \times n} \to F$ is \emph{$n$-linear} if
   \begin{equation*}
-    T(y) = \delta
-    \begin{pmatrix}
-      x_1 \\
-      \vdots \\
-      x_{i-1} \\
-      y \\
-      x_{i+1} \\
-      \vdots \\
-      x_n
-    \end{pmatrix}
+    \delta(A) = k\delta(B) + \delta(C)
   \end{equation*}
-  for each $y \in F^n$ is linear.
+  holds for any matrices $A, B, C \in F^{n \times n}$ satisfying the following
+  properties for any $i \in \{1, \dots, n\}$ and for any $k \in F$.
+  \begin{itemize}
+    \item The $j$th rows of $A, B$ and $C$ are identical for each
+    $j \in \{1, \dots, n\} \setminus \{i\}$.
+    \item The $i$th row of $A$ is the sum of the $i$th row of $B$ multiplied by
+    $k$ and the $i$th row of $C$.
+  \end{itemize}
 \end{definition}
 
 \begin{definition}
@@ -27,7 +22,7 @@
   \begin{equation*}
     \delta(A) = 0_F
   \end{equation*}
-  for each $A \in F^{n \times n}$ that has two identical rows.
+  holds for any matrix $A \in F^{n \times n}$ that has two identical rows.
 \end{definition}
 
 \begin{proposition}
@@ -136,6 +131,7 @@
 \end{proof}
 
 \begin{theorem}
+  \label{thm:zero-determinant}
   Let $\delta: F^{n \times n} \to F$ be an alternating $n$-linear function
   and let $A \in F^{n \times n}$.
   If $\rank(A) < n$, then $\delta(A) = 0_F$.
@@ -190,29 +186,29 @@
 \end{proof}
 
 \begin{theorem}
-  For any alternating $n$-linear functions ${\delta: F^{n \times n} \to F}$ and
-  ${\delta': F^{n \times n} \to F}$,
-  $\delta(I_n) = \delta'(I_n)$ if and only if $\delta = \delta'$.
+  \label{thm:determinant-uniqueness}
+  There exists a unique alternating $n$-linear function
+  $\delta: F^{n \times n} \to F$ with $\delta(I_n) = 1_F$.
 \end{theorem}
 \begin{proof}
-  ($\Leftarrow$) Straightforward.
-
-  ($\Rightarrow$)
+  Suppose that $\delta, \delta': F^{n \times n} \to F$ are alternating
+  $n$-linear functions with $\delta(I_n) = 1_F = \delta'(I_n)$.
   We prove that $\delta(A) = \delta(A')$ for any $A \in F^{n \times n}$.
   If $\rank(A) < n$, then
   \begin{equation*}
     \delta(A) = 0_F = \delta'(A).
   \end{equation*}
-  If $\rank(A) = n$, then $A$ is invertible, and thus $A = E_p \cdots E_1$
+  If $\rank(A) = n$, then $A$ is invertible, and thus
+  \begin{equation*}
+    A = E_p \cdots E_1
+  \end{equation*}
   for some elementary matrices $E_1, \dots, E_p \in F^{n \times n}$.
-  Suppose that $k_1, \dots, k_p \in F$ are scalars such that
-  $\delta(E_iA) = k_iA$ for each $1 \leq i \leq p$ and $A \in F^{n \times n}$.
-  Then we have
+  It follows that
   \begin{align*}
     \delta(A)
     &= \delta(E_p \cdots E_1I_n) \\
-    &= k_p \cdots k_1\delta(I_n) \\
-    &= k_p \cdots k_1\delta'(I_n) \\
+    &= \delta(E_p)\cdots\delta(E_1)\delta(I_n) \\
+    &= \delta'(E_p)\cdots\delta'(E_1)\delta(I_n) \\
     &= \delta'(E_p \cdots E_1I_n) \\
     &= \delta'(A).
     \qedhere
@@ -227,3 +223,102 @@
   where $\delta: F^{n \times n} \to F$ is the alternating $n$-linear function
   with $\delta(I_n) = 1_F$.
 \end{definition}
+
+\section{Permutations}
+\begin{definition}
+  \label{def:permutation}
+  \leavevmode
+  \begin{itemize}
+    \item A function $\sigma: \{1, 2, \dots, n\} \to \{1, 2, \dots, n\}$
+    is a \emph{permutation} over $\{1, 2, \dots, n\}$ if $\sigma$ is
+    bijective. The set of all permutations over $\{1, 2, \dots, n\}$ is denoted
+    by $S_n$.
+    \item An inversion of $\sigma \in S_n$ is a pair $(i, j)$ with
+    $1 \leq i < j \leq n$ and $\sigma(i) > \sigma(j)$.
+    The number of inversions of $\sigma$ is denoted by $\rho(\sigma)$.
+    \item The \emph{sign} of $\sigma \in S_n$ is defined by
+    \begin{equation*}
+      \sgn(\sigma) = (-1)^{\rho(\sigma)}.
+    \end{equation*}
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  \label{thm:determinant-permutation}
+  For any matrix $A \in F^{n \times n}$,
+  \begin{equation*}
+    \det(A)
+    = \sum_{\sigma \in S_n} \sgn(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $\delta: F^{n \times n} \to F$ be the function
+  \begin{equation*}
+    \delta(A)
+    = \sum_{\sigma \in S_n} \sgn(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}.
+  \end{equation*}
+  We prove that $\delta$ is an alternating $n$-linear function with
+  $\delta(I_n) = 1_F$.
+
+  First, we show that $\delta$ is $n$-linear.
+  Suppose that $A, B, C \in F^{n \times n}$ are matrices satisfying the
+  following properties for any $p \in \{1, \dots, n\}$ and for any $k \in F$.
+  \begin{itemize}
+    \item The $i$th rows of $A, B$ and $C$ are identical for each
+    $i \in \{1, \dots, n\} \setminus \{p\}$.
+    \item The $p$th row of $A$ is the sum of the $p$th row of $B$ multiplied by
+    $k$ and the $p$th row of $C$.
+  \end{itemize}
+  Then we have
+  \begin{align*}
+    \delta(A)
+    &= \sum_{\sigma \in S_n} \sgn(\sigma) A_{p,\sigma(p)}
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} A_{i,\sigma(i)} \\
+    &= \sum_{\sigma \in S_n} \sgn(\sigma) (kB_{p,\sigma(p)} + C_{p,\sigma(p)})
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} A_{i,\sigma(i)} \\
+    &= k\sum_{\sigma \in S_n} \sgn(\sigma) B_{p,\sigma(p)}
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} A_{i,\sigma(i)}
+    + \sum_{\sigma \in S_n} \sgn(\sigma) C_{p,\sigma(p)}
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} A_{i,\sigma(i)} \\
+    &= k\sum_{\sigma \in S_n} \sgn(\sigma) B_{p,\sigma(p)}
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} B_{i,\sigma(i)}
+    + \sum_{\sigma \in S_n} \sgn(\sigma) C_{p,\sigma(p)}
+    \prod_{\substack{1 \leq i \leq n \\ i \neq p}} C_{i,\sigma(i)} \\
+    &= k\delta(B) + \delta(C).
+  \end{align*}
+  Now we show that $\delta$ is alternating.
+  Suppose that $D \in F^{n \times n}$ is a matrix whose $p$th row and $q$th row
+  are identical with $p \neq q$.
+  For each $\sigma \in S_n$, let $\sigma' \in S_n$ be the permutation that
+  satisfies the following properties.
+  \begin{itemize}
+    \item $\sigma'(p) = \sigma(q)$ and $\sigma'(q) = \sigma(p)$.
+    \item $\sigma'(i) = \sigma(i)$ for each
+    $i \in \{1, \dots, n\} \setminus \{p, q\}$.
+  \end{itemize}
+  Then we have
+  \begin{align*}
+    \delta(D)
+    &= \sum_{\sigma \in S_n} \sgn(\sigma)
+    \prod_{1 \leq i \leq n} D_{i,\sigma(i)} \\
+    &= \sum_{\substack{\sigma \in S_n \\ \sigma(p) < \sigma(q)}} \sgn(\sigma)
+    \prod_{1 \leq i \leq n} D_{i,\sigma(i)}
+    + \sum_{\substack{\sigma \in S_n \\ \sigma(p) > \sigma(q)}} \sgn(\sigma)
+    \prod_{1 \leq i \leq n} D_{i,\sigma(i)} \\
+    &= \sum_{\substack{\sigma \in S_n \\ \sigma(p) < \sigma(q)}} \sgn(\sigma)
+    \prod_{1 \leq i \leq n} D_{i,\sigma(i)}
+    + \sum_{\substack{\sigma \in S_n \\ \sigma(p) < \sigma(q)}} \sgn(\sigma')
+    \prod_{1 \leq i \leq n} D_{i,\sigma'(i)} \\
+    &= \sum_{\substack{\sigma \in S_n \\ \sigma(p) < \sigma(q)}}
+    (\sgn(\sigma) + \sgn(\sigma')) \prod_{1 \leq i \leq n} D_{i,\sigma(i)} \\
+    &= 0_F.
+  \end{align*}
+  Finally, we have
+  \begin{equation*}
+    \delta(I_n) = \sgn(\sigma_0) = 1_F,
+  \end{equation*}
+  where $\sigma_0$ is the identity permutation.
+  Therefore, $\delta$ is an alternating $n$-linear function with
+  $\delta(I_n) = 1_F$, and by \Cref{thm:determinant-uniqueness} we can conclude
+  that it is exactly the determinant function.
+\end{proof}
