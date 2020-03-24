@@ -142,14 +142,14 @@
   \end{align*}
 \end{definition}
 
-\begin{proposition}
+\begin{theorem}
   \label{thm:column-space}
   The following statements are true for any matrix $A \in F^{m \times n}$.
   \begin{enumerate}
     \item $\mathcal{R}(L_A) = \spn(\col(A))$.
     \item $\rank(A) = \dim(\spn(\col(A)))$.
   \end{enumerate}
-\end{proposition}
+\end{theorem}
 \begin{proof}
   \leavevmode
   \begin{enumerate}
@@ -301,16 +301,15 @@
 \end{proof}
 
 \begin{theorem}
-  \label{thm:rank-finding}
+  \label{thm:mille-feuille}
   Let $A \in F^{m \times n}$ and let $r$ be a nonnegative integer.
-  Then $\rank(A) = r$ if and only if $A$ can be transformed into a matrix $D$
-  with
+  Then $\rank(A) = r$ if and only if $A$ can be transformed into
   \begin{equation*}
-    D_{ij} =
-    \begin{cases}
-      1, & \text{if $1 \leq i = j \leq r$} \\
-      0, & \text{otherwise}
-    \end{cases}
+    D =
+    \begin{pmatrix}
+      I_r & O_1 \\
+      O_2 & O_3
+    \end{pmatrix}
   \end{equation*}
   by performing a finite number of elementary operations.  
 \end{theorem}
@@ -382,15 +381,15 @@
   \end{equation*}
   where $B'$ is an $(m-1) \times (n-1)$ matrix.
   Note that $\rank(B') = \rank(B) - 1 = r - 1$.
-  By induction hypothesis, $B'$ can be transformed into $D'$ by a finite number
-  of elementary row and column operations with
+  By induction hypothesis, $B'$ can be transformed into
   \begin{equation*}
-    D'_{ij} =
-    \begin{cases}
-      1, & \text{if $1 \leq i = j \leq r - 1$} \\
-      0, & \text{otherwise}.
-    \end{cases}
+    D' =
+    \begin{pmatrix}
+      I_{r-1} & O_1 \\
+      O_2 & O_3
+    \end{pmatrix}
   \end{equation*}
+  by a finite number of elementary row and column operations.
   It follows that
   \begin{equation*}
     D = \left(
@@ -404,6 +403,66 @@
   is obtained from $B$ by performing these operations.
   Thus, $A$ can be transformed into $D$ by a finite number of
   elementary operations, which completes the proof.
+\end{proof}
+
+\begin{corollary}
+  \label{thm:sandwich}
+  Let $A \in F^{m \times n}$ and let $r$ be a nonnegative integer.
+  Then $\rank(A) = r$ if and only if there exist invertible
+  $X \in F^{m \times m}$ and $Y \in F^{n \times n}$ such that
+  \begin{equation*}
+    XAY =
+    \begin{pmatrix}
+      I_r & O_1 \\
+      O_2 & O_3
+    \end{pmatrix}.
+  \end{equation*}
+\end{corollary}
+\begin{proof}
+  ($\Leftarrow$)
+  It is proved by
+  \begin{equation*}
+    \rank(A) = \rank(XAY) = r.
+  \end{equation*}
+
+  ($\Rightarrow$)
+  By \Cref{thm:mille-feuille}, there exist elementary matrices
+  $X_1, \dots, X_p \in F^{m \times m}$ and $Y_1, \dots, Y_q \in F^{n \times n}$
+  such that
+  \begin{equation*}
+    X_p \cdots X_1 A Y_1 \cdots Y_q =
+    \begin{pmatrix}
+      I_r & O_1 \\
+      O_2 & O_3
+    \end{pmatrix}.
+  \end{equation*}
+  Thus, the theorem holds by assigning
+  $X = X_p \cdots X_1$ and $Y = Y_1 \cdots Y_q$.
+\end{proof}
+
+\begin{theorem}
+  For any $A \in F^{m \times n}$, $\rank(A^t) = \rank(A)$.
+\end{theorem}
+\begin{proof}
+  Let $r = \rank(A)$.
+  By \Cref{thm:sandwich}, there exist invertible matrices
+  $X \in F^{m \times m}$ and $Y \in F^{n \times n}$ such that
+  \begin{equation*}
+    XAY = D =
+    \begin{pmatrix}
+      I_r & O_1 \\
+      O_2 & O_3,
+    \end{pmatrix}
+  \end{equation*}
+  implying
+  \begin{equation*}
+    Y^tA^tX^t = D^t.
+  \end{equation*}
+  Thus,
+  \begin{equation*}
+    \rank(A^t) = \rank(Y^tA^tX^t) = \rank(D^t) = r.
+    \qedhere
+  \end{equation*}
 \end{proof}
 
 \begin{theorem}
@@ -453,6 +512,25 @@
       \qedhere
     \end{align*}
   \end{enumerate}
+\end{proof}
+
+\section{Matrix Inverses}
+\begin{theorem}
+  Every invertible matrix is a product of elementary matrices.
+\end{theorem}
+\begin{proof}
+  Suppose $A$ is an invertible $n \times n$ matrix.
+  Since $\rank(A) = n$, there exist elementary matrices
+  $X_1, \dots, X_p, Y_1, \dots, Y_q \in F^{n \times n}$ such that
+  \begin{equation*}
+    X_p \cdots X_1 A Y_1 \cdots Y_q = I_n,
+  \end{equation*}
+  implying
+  \begin{equation*}
+    A = X_1^{-1} \cdots X_p^{-1} Y_q^{-1} \cdots Y_1^{-1}.
+  \end{equation*}
+  Since the inverses of elementary matrices are elementary matrices,
+  we can conclude that $A$ is a product of elementary matrices.
 \end{proof}
 
 \section{Systems of Linear Equations}
