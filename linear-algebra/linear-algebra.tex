@@ -15,6 +15,14 @@
 \newcommand{\sectionbreak}{\clearpage}
 \setlist[enumerate,1]{label={(\alph*)}}
 
+% let the theorem title have the same attribute as the theorem heading
+\makeatletter
+\def\th@definition{
+  \thm@notefont{}
+  \normalfont
+}
+\makeatother
+
 % different types of "theorems"
 \declaretheorem[style=definition,numberwithin=chapter]{theorem}
 \declaretheorem[style=definition,sibling=theorem]{proposition}
@@ -44,10 +52,14 @@
 \newcommand{\ccc}{>{{}}c<{{}}}
 \newcommand{\cond}[1]{[\![#1]\!]}
 
+% inner product
+\newcommand{\inner}[2]{\left\langle #1 \; \middle| \; #2 \right\rangle}
+
 \begin{document}
 \input{1-vector-spaces}
 \input{2-linear-transformations}
 \input{3-systems-of-linear-equations}
 \input{4-determinants}
 \input{5-diagonalization}
+\input{6-inner-product-spaces}
 \end{document}

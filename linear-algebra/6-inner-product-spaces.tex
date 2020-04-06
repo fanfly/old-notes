@@ -1,0 +1,179 @@
+\chapter{Inner Product Spaces}
+\section{Inner Products and Norms}
+\begin{definition}
+  \label{def:inner-product}
+  Let $V$ be a vector space over a field $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  A function
+  \begin{equation*}
+    \inner{\cdot}{\cdot}: V \times V \to F
+  \end{equation*}
+  is called an \emph{inner product} on $V$ if it satisfies the following
+  properties for all $x, x', y \in V$.
+  \begin{enumerate}
+    \item $\inner{ax + x'}{y} = a\inner{x}{y} + \inner{x'}{y}$.
+    \item $\inner{x}{y} = \overline{\inner{y}{x}}$.
+    \item $\inner{x}{x} \in \mathbb{R}^+$ for any $x \in V \setminus \{0_V\}$.
+  \end{enumerate}
+  A vector space equipped with an inner product is called an
+  \emph{inner product space}.
+\end{definition}
+
+\begin{proposition}
+  Let $V$ be an inner product space over a field
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Then the following statements are true for $x, y, y' \in V$ and $a \in F$.
+  \begin{enumerate}
+    \item $\inner{x}{ay + y'} = \overline{a}\inner{x}{y} + \inner{x}{y'}$.
+    \item $\inner{x}{0_V} = 0_F = \inner{0_V}{x}$.
+    \item $\inner{x}{x} = 0_F$ if and only if $x = 0_V$.
+    \item If $\inner{x}{y} = \inner{x}{y'}$ holds for all $x \in V$, then
+    $y = y'$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item It is proved by
+    \begin{equation*}
+      \inner{x}{ay + y'}
+      = \overline{\inner{ay + y'}{x}}
+      = \overline{a\inner{y}{x} + \inner{y'}{x}}
+      = \overline{a}\inner{x}{y} + \inner{x}{y'}.
+    \end{equation*}
+
+    \item By
+    \begin{equation*}
+      \inner{x}{x}
+      = \inner{x}{1_Fx + 0_V}
+      = \overline{1_F}\inner{x}{x} + \inner{x}{0_V}
+      = \inner{x}{x} + \inner{x}{0_V}
+    \end{equation*}
+    and
+    \begin{equation*}
+      \inner{x}{x}
+      = \inner{1_Fx + 0_V}{x}
+      = 1_F\inner{x}{x} + \inner{0_V}{x}
+      = \inner{x}{x} + \inner{0_V}{x},
+    \end{equation*}
+    we have $\inner{x}{0_V} = 0_F = \inner{0_V}{x}$.
+
+    \item ($\Leftarrow$) If $x = 0_V$, then $\inner{x}{x} = 0_F$ by (b).
+
+    ($\Rightarrow$) If $\inner{x}{x} = 0_F$, then $x = 0_V$ by
+    \Cref{def:inner-product} (c).
+
+    \item Note that
+    \begin{equation*}
+      \inner{x}{y - y'} = \inner{x}{y} + \overline{(-1_F)}\inner{x}{y'} = 0_F
+    \end{equation*}
+    holds for all $x \in V$.
+    Since $\inner{y - y'}{y - y'} = 0_F$, we have $y - y' = 0_V$,
+    and thus $y = y'$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Let $V$ be an inner product space over a field $F$.
+  \begin{itemize}
+    \item Vectors $x$ and $y$ in $V$ are \emph{orthogonal} if
+    \begin{equation*}
+      \inner{x}{y} = 0_F.
+    \end{equation*}
+    \item A subset $S$ of $V$ is \emph{orthogonal} if any two distinct vectors
+    in $S$ are orthogonal.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be an inner product space over a field $F$.
+  Let $S$ be an orthogonal subset of $V \setminus \{0_V\}$ and let
+  $x_1, \dots, x_n$ be distinct vectors in $S$.
+  Then for $y \in V$, if
+  \begin{equation*}
+    y = \sum_{i=1}^n a_ix_i
+  \end{equation*}
+  for some $a_1, \dots, a_n \in F$, then
+  \begin{equation*}
+    a_i = \frac{\inner{y}{x_i}}{\inner{x_i}{x_i}}
+  \end{equation*}
+  for each $i \in \{1, \dots, n\}$.
+\end{theorem}
+\begin{proof}
+  For each $i \in \{1, \dots, n\}$, we have
+  \begin{equation*}
+    \inner{y}{x_i}
+    = \inner{\sum_{j=1}^n a_jx_j}{x_i}
+    = \sum_{j=1}^n a_j \inner{x_j}{x_i}
+    = a_i \inner{x_i}{x_i},
+  \end{equation*}
+  implying
+  \begin{equation*}
+    a_i = \frac{\inner{y}{x_i}}{\inner{x_i}{x_i}}.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{corollary}
+  \label{thm:orthogonal-linearly-independent}
+  Let $V$ be an inner product space over a field $F$.
+  If $S$ is an orthogonal subset of $V \setminus \{0_V\}$, then $S$ is linearly
+  independent.
+\end{corollary}
+\begin{proof}
+  Suppose that there exist scalars $a_1, \dots, a_n \in F$ and distinct vectors
+  $x_1, \dots, x_n \in S$ such that
+  \begin{equation*}
+    \sum_{i=1}^n a_ix_i = 0_V.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    a_i = \frac{\inner{0_V}{x_i}}{\inner{x_i}{x_i}} = 0_F
+  \end{equation*}
+  for each $i \in \{1, \dots, n\}$.
+  Thus, $S$ is linearly independent.
+\end{proof}
+
+\begin{theorem}[Gram-Schmidt Process]
+  Let $V$ be a finite-dimensional inner product space over a field $F$.
+  Let $R = \{x_1, \dots, x_n\}$ be a linearly independent subset of $V$.
+  Then the set $S = \{y_1, \dots, y_n\}$ with
+  \begin{equation*}
+    y_i = x_i - \sum_{j=1}^{i-1} \frac{\inner{x_i}{y_j}}{\inner{y_j}{y_j}}y_j
+  \end{equation*}
+  for $1 \leq i \leq n$ is an orthogonal set of nonzero vectors
+  satisfying $\spn(S) = \spn(R)$.
+\end{theorem}
+\begin{proof}
+  The proof is by induction on $n$.
+  The theorem holds for $n = 0$.
+  To show the induction step, let $n \geq 1$.
+  By the induction hypothesis, $\inner{y_j}{y_i} = 0_F$ for distinct
+  $i, j \in \{1, \dots, n - 1\}$.
+  Then since for $i \in \{1, \dots, n - 1\}$, we have
+  \begin{align*}
+    \inner{y_n}{y_i}
+    &= \inner{x_n - \sum_{j=1}^{n-1}
+              \frac{\inner{x_n}{y_j}}{\inner{y_j}{y_j}}y_j}
+             {y_i} \\
+    &= \inner{x_n}{y_i} - \sum_{j=1}^{n-1}
+       \frac{\inner{x_n}{y_j}}{\inner{y_j}{y_j}}\inner{y_j}{y_i} \\
+    &= \inner{x_n}{y_i}
+       - \frac{\inner{x_n}{y_i}}{\inner{y_i}{y_i}}\inner{y_i}{y_i} \\
+    &= 0_F,
+  \end{align*}
+  we can conclude that $S$ is orthogonal.
+  Furthermore, if $y_n = 0_V$, then
+  \begin{equation*}
+    x_n \in \spn(\{y_1, \dots, y_{n-1}\}) = \spn(\{x_1, \dots, x_{n-1}\})
+  \end{equation*}
+  because
+  \begin{equation*}
+    x_n = y_n + \sum_{j=1}^{n-1} \frac{\inner{x_n}{y_j}}{\inner{y_j}{y_j}}y_j,
+  \end{equation*}
+  contradiction to the fact that $R$ is linearly independent.
+  Thus, $y_n \neq 0_V$, implying $0_V \notin S$.
+  It follows that $S$ is linearly independent by
+  \Cref{thm:orthogonal-linearly-independent}.
+  Therefore, since $|S| = \dim(\spn(R))$, we have $\spn(S) = \spn(R)$.
+\end{proof}
