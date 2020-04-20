@@ -1,27 +1,40 @@
 \documentclass[12pt]{report}
 \usepackage[a4paper,left=2.5cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amsfonts}
 \usepackage{thmtools}
-\declaretheorem[style=definition,numberwithin=section]{theorem}
-\declaretheorem[style=definition,sibling=theorem]{proposition}
-\declaretheorem[style=definition,sibling=theorem]{lemma}
-\declaretheorem[style=definition,sibling=theorem]{definition}
-\declaretheorem[style=definition,numbered=no]{example}
-\declaretheorem[style=definition,numbered=no]{notation}
-\declaretheorem[style=definition,numbered=no]{remark}
-\declaretheorem[style=definition,numbered=no]{corollary}
 \usepackage{cleveref}
 \usepackage[shortlabels]{enumitem}
 \usepackage{array}
+\usepackage{pgffor}
+\usepackage{xcolor}
+
+\newcommand{\sectionbreak}{\clearpage}
 \setlist[enumerate,1]{label={(\alph*)}}
 
-% math operators
-\newcommand{\NN}{\mathbb{N}}
+% let the theorem title have the same attribute as the theorem heading
+\makeatletter
+\def\th@definition{
+  \thm@notefont{}
+  \normalfont
+}
+\makeatother
 
+% different types of "theorems"
+\declaretheorem[style=definition,numberwithin=chapter]{theorem}
+\declaretheorem[style=definition,sibling=theorem]{proposition}
+\declaretheorem[style=definition,sibling=theorem]{lemma}
+\declaretheorem[style=definition,sibling=theorem]{corollary}
+\declaretheorem[style=definition,sibling=theorem]{definition}
+\declaretheorem[style=definition,numbered=no]{example}
+\declaretheorem[style=definition,numbered=no]{examples}
+\declaretheorem[style=definition,numbered=no]{notation}
+\declaretheorem[style=definition,numbered=no]{remark}
+
+% use bold fonts to emphasize
 \DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
 \begin{document}

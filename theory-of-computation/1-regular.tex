@@ -1,164 +1,205 @@
 \chapter{Regular Languages}
-\section{Deterministic Finite State Automata}
-\begin{definition}\label{def:string}
-  An \emph{alphabet} $\Sigma$ is a finite set of symbols.
-  \begin{itemize}
-    \item A \emph{string} over $\Sigma$ is a finite sequence of symbols from
-      $\Sigma$.
-    \item The \emph{length} of a string $w$, denoted by $|w|$, is the number of
-      symbols it contains.
-    \item The string of length $0$ is called the \emph{empty string}, denoted
-      by $\epsilon$.
-  \end{itemize}
+\section{Languages}
+\begin{definition}
+  \label{def:alphabet}
+  An \emph{alphabet} is a finite nonempty set of symbols.
 \end{definition}
 
-\begin{definition}\label{def:language}
+\begin{definition}
+  \label{def:string}
   Let $\Sigma$ be an alphabet.
   \begin{itemize}
-    \item For any nonnegative integer $n$, $\Sigma^n$ denotes the set of words
-      of length $n$.
-    \item $\Sigma^*$ denotes the set of all strings over $\Sigma$.
-    \item A \emph{language} over $\Sigma$ is a subset of $\Sigma^*$.
+    \item A \emph{string} over $\Sigma$ is a finite sequence of symbols from
+    $\Sigma$.
+    The collection of all strings over $\Sigma$ is denoted by $\Sigma^*$.
+    \item The \emph{length} of a string $w$, denoted by $|w|$, is the number of
+    symbols it contains.
+    \item The string containing no symbols is called the \emph{empty string},
+    denoted by $\epsilon$.
   \end{itemize}
 \end{definition}
 
-\begin{definition}\label{def:dfa}
-  A \emph{deterministic finite state automaton} (DFA) is a system
-  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
-  follows.
-  \begin{itemize}
-    \item $\Sigma$ is the alphabet.
-    \item $Q$ is a finite set of \emph{states}.
-    \item $q_0 \in Q$ is the \emph{initial} state.
-    \item $F \subseteq Q$ is the set of \emph{accepting} states.
-    \item $\delta$ is the \emph{transition function} from $Q \times \Sigma$ to
-      $Q$.
-  \end{itemize}
+\begin{definition}
+  \label{def:language}
+  A subset of $\Sigma^*$ is called a \emph{language} over $\Sigma$.
 \end{definition}
 
-\begin{definition}\label{def:dfa-run}
-  The \emph{run} of DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ on an input
-  string $w = a_1 \cdots a_n$ over $\Sigma$ is the sequence of states
+\section{Deterministic Finite State Automata}
+\begin{definition}
+  \label{def:dfa}
+  A \emph{deterministic finite state automaton} (DFA) is a tuple
   \begin{equation*}
-    r = (r_0, r_1, \dots, r_n)
+    A = (Q, \Sigma, \delta, q_0, F),
   \end{equation*}
-  where $r_0 = q_0$ and $\delta(r_{i-1}, a_i) = r_i$ for each
-  $i \in \{1, \dots, n\}$.
+  where each component is as follows.
   \begin{itemize}
-    \item $r$ is an \emph{accepting} run if $r_n \in F$.
-    \item We say that $\mathcal{A}$ \emph{accepts} $w$ if the run of
-      $\mathcal{A}$ on $w$ is an accepting run.
-    \item The language of all strings accepted by $\mathcal{A}$ is denoted by
-      $L(\mathcal{A})$.
-    \item A language $L$ is \emph{regular} if there is a DFA $\mathcal{A}$ with
-      $L = L(\mathcal{A})$.
+    \item $Q$ is a finite set of \emph{states}.
+    \item $\Sigma$ is a finite set of input symbols.
+    \item $\delta: Q \times \Sigma \to Q$ is a function, called the
+    \emph{transition function}.
+    \item $q_0 \in Q$ is called the \emph{start state}.
+    \item $F \subseteq Q$ is called the \emph{accepting states}.
   \end{itemize}
 \end{definition}
 
-\begin{remark}
-  \leavevmode
+\begin{definition}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.
+  \begin{enumerate}
+    \item For each symbol $a \in \Sigma$, we define $\delta_a: Q \to Q$ to be
+    the function such that $\delta_a(p) = \delta(p, a)$
+    for any states $p, q \in Q$.
+    \item For each string $w \in \Sigma^*$, we define $\delta_w: Q \to Q$ as
+    follows.
+    \begin{itemize}
+      \item $\delta_\epsilon$ is the identity function.
+      \item For any strings $x \in \Sigma^*$ and any symbol $a \in \Sigma$,
+      the function $\delta_{xa}$ satisfies
+      $\delta_{xa}(p) = \delta_a(\delta_x(p))$ for any $p \in Q$.
+    \end{itemize}
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.
   \begin{itemize}
-    \item For DFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, the empty string
-      $\epsilon$ is accepted by $\mathcal{A}$ if and only if $q_0 \in F$.
+    \item We say that $A$ accepts a string $w \in \Sigma^*$ if
+    $\delta_w(q_0) \in F$.
+    \item The \emph{language} of $A$, denoted $L(A)$, is defined as the set of
+    strings that are accepted by $A$.
   \end{itemize}
-\end{remark}
+\end{definition}
+
+\begin{definition}
+  A language $L$ is \emph{regular} if there exists a DFA $A$ such that
+  $L(A) = L$.
+\end{definition}
 
 \section{Nondeterministic Finite State Automata}
-\begin{definition}\label{def:nfa}
-  A \emph{nondeterministic finite state automaton} (NFA) is a system
-  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$, where each component is as
-  follows.
-  \begin{itemize}
-    \item $\Sigma$ is the alphabet.
-    \item $Q$ is a finite set of \emph{states}.
-    \item $q_0 \in Q$ is the \emph{initial} state.
-    \item $F \subseteq Q$ is the set of \emph{accepting} states.
-    \item $\delta \subseteq Q \times \Sigma \times Q$ is the
-      \emph{transition relation}.
-  \end{itemize}
-\end{definition}
-
-\begin{definition}\label{def:nfa-run}
-  A \emph{run} of NFA $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ on an input
-  string $w = a_1 \cdots a_n$ over $\Sigma$ is the sequence of states
+\begin{definition}
+  \label{def:nfa}
+  A \emph{nondeterministic finite state automaton} (NFA) is a tuple
   \begin{equation*}
-    r = (r_0, r_1, \dots, r_n)
+    A = (Q, \Sigma, \delta, q_0, F),
   \end{equation*}
-  where $r_0 = q_0$ and $(r_{i-1}, a_i, r_i) \in \delta$ for each
-  $i \in \{1, \dots, n\}$.
+  where each component is as follows.
   \begin{itemize}
-    \item $r$ is an \emph{accepting} run if $r_n \in F$.
-    \item We say that $\mathcal{A}$ \emph{accepts} $w$ if there is an accepting
-      run of $\mathcal{A}$ on $w$.
-    \item The language of all strings accepted by $\mathcal{A}$ is denoted by
-      $L(\mathcal{A})$.
+    \item $Q$ is a finite set of \emph{states}.
+    \item $\Sigma$ is a finite set of input symbols.
+    \item $\delta: Q \times \Sigma \times Q$ is a relation, called the
+    \emph{transition relation}.
+    \item $q_0 \in Q$ is called the \emph{start state}.
+    \item $F \subseteq Q$ is called the \emph{accepting states}.
   \end{itemize}
 \end{definition}
 
-\begin{theorem}\label{thm:dfa-nfa-equivalence}
-  For every NFA $\mathcal{A}$, there is a DFA $\widehat{\mathcal{A}}$ with
-  $L(\mathcal{A}) = L(\widehat{\mathcal{A}})$.
+\begin{definition}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an NFA.
+  \begin{enumerate}
+    \item For each symbol $a \in \Sigma$, we define
+    $\delta_a \subseteq Q \times Q$ to be the relation such that
+    $(p, q) \in \delta_a$ if and only if $(p, a, q) \in \delta$ for any states
+    $p, q \in Q$.
+    \item For each string $w \in \Sigma^*$, we define
+    $\delta_w \subseteq Q \times Q$ as follows.
+    \begin{itemize}
+      \item $\delta_\epsilon$ is the identity relation.
+      \item For any strings $x \in \Sigma^*$, any symbol $a \in \Sigma$ and
+      any states $p, q \in Q$,
+      \begin{equation*}
+        (p, q) \in \delta_{xa}
+      \end{equation*}
+      if and only if there exists a state $r \in Q$ such that
+      \begin{equation*}
+        (p, r) \in \delta_x \quad \text{and} \quad (r, q) \in \delta_a.
+      \end{equation*}
+    \end{itemize}
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an NFA.
+  \begin{itemize}
+    \item We say that $A$ accepts a string $w \in \Sigma^*$ if there exists
+    $q \in F$ such that $(q_0, q) \in \delta_w$.
+    \item The \emph{language} of $A$, denoted $L(A)$, is defined as the set of
+    strings that are accepted by $A$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  For every NFA $A$, there is a DFA $A'$ with $L(A') = L(A)$.
 \end{theorem}
 \begin{proof}
-  Let $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$.
-  We construct $\widehat{\mathcal{A}} = (\Sigma, \widehat{Q}, \widehat{q_0},
-  \widehat{F}, \widehat{\delta})$ as follows.
+  Let $A = (Q, \Sigma, \delta, q_0, F)$.
+  We construct $A' = (\mathcal{P}(Q), \Sigma, \Delta, \{q_0\}, \Phi)$
+  as follows.
   \begin{itemize}
-    \item $\widehat{Q} = \mathcal{P}(Q)$.
-    \item $\widehat{q_0} = \{q_0\}$.
-    \item $\widehat{F} = \{\widehat{q} \in \widehat{Q}:
-      q \in \widehat{q}\ \text{for some}\ q \in F\}$.
-    \item $\widehat{\delta}: \widehat{Q} \times \Sigma \to \widehat{Q}$ is the
-      transition function such that
-      \begin{equation*}
-        \widehat{\delta}(\widehat{q}, a) = \{q \in Q:
-          (p, a, q) \in \delta\ \text{for some}\ p \in \widehat{q}\,\}.
-      \end{equation*}
-      holds for each $\widehat{q} \in \widehat{Q}$ and $a \in \Sigma$.
+    \item $\Delta: \mathcal{P}(Q) \times \Sigma \to \mathcal{P}(Q)$ is the
+    function with
+    \begin{equation*}
+      \Delta_a(P) = \bigcup_{p \in P} \; \{q \in Q: (p, q) \in \delta_a\}
+    \end{equation*}
+    for any $P \subseteq Q$ and $a \in \Sigma$.
+    \item $\Phi = \{P \subseteq Q: P \cap F \neq \varnothing\}$.
   \end{itemize}
-  Now we prove that $L(\mathcal{A}) = L(\widehat{\mathcal{A}})$.
-  For $w \in \Sigma^*$, let
-  $\widehat{r} = (\widehat{r}_0, \widehat{r}_1, \dots, \widehat{r}_n)$ be
-  the run of $\widehat{\mathcal{A}}$ on $w$.
-  \begin{enumerate}[(i)]
-    \item Suppose that $r = (r_0, r_1, \dots, r_n)$ is an accepting run of
-      $\mathcal{A}$ on $w$, and we prove that $\widehat{r}$ is an accepting run
-      on $w$.
-      It is obvious that $r_0 \in \widehat{r}_0$.
-      If $r_{i-1} \in \widehat{r}_{i-1}$ for some $i \in \{1, \dots, n\}$, then 
-      we have $r_i \in \widehat\delta(\widehat{r}_{i-1}, a_i) = \widehat{r}_i$
-      since $(r_{i-1}, a_i, r_i) \in \delta$.
-      Thus, $r_n \in \widehat{r}_n$, and it follows that
-      $\widehat{r}_n \in \widehat{F}$.
-      Therefore, we have $L(\mathcal{A}) \subseteq L(\widehat{\mathcal{A}})$.
-    \item Suppose that $\widehat{r}$ is an accepting run.
-      Then due to the construction of $\widehat{F}$ and $\widehat\delta$, we
-      can construct an accepting run $r = (r_0, r_1, \dots, r_n)$ of
-      $\mathcal{A}$ on $w$ as follows.
-      \begin{itemize}
-        \item Let $r_n$ be a state in $\widehat{r}_n \cap F$.
-        \item For $i \in \{0, \dots, n-1\}$, let $r_i$ be a state in
-          $\widehat{r}_i$ such that $(r_i, a_{i+1}, r_{i+1}) \in \delta$.
-      \end{itemize}
-      Thus, we have $L(\widehat{\mathcal{A}}) \subseteq L(\mathcal{A})$,
-      which completes the proof. \qedhere
-  \end{enumerate}
+  Now we prove that for any $w \in \Sigma^*$, for any $q \in Q$ and for any
+  $P \subseteq Q$, we have $q \in \Delta_w(P)$ if and only if
+  $(p, q) \in \delta_w$ for some $p \in P$.
+  For the induction basis, let $w = \epsilon$, and we have
+  \begin{equation*}
+    q \in \Delta_\epsilon(P)
+    \quad \Leftrightarrow \quad
+    q \in P
+    \quad \Leftrightarrow \quad
+    \text{$(p, q) \in \delta_\epsilon$ for some $p \in P$}.
+  \end{equation*}
+  For the induction step, let $w = xa$, where $a$ is the last symbol of $w$.
+  Note that by the construction of $\Delta$, we have $q \in \Delta_a(P)$ if and
+  only if $(p, q) \in \delta_a$ for some $p \in P$.
+  Thus, we can conclude that
+  \begin{align*}
+    q \in \Delta_{xa}(P)
+    \quad &\Leftrightarrow \quad
+    q \in \Delta_a(\Delta_x(P)) \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \text{$(r, q) \in \delta_a$ for some $r \in \Delta_x(P)$} \\
+    &\hspace*{2.6em} \text{and $(p, r) \in \delta_x$ for some $p \in P$}
+    \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \text{$(p, q) \in \delta_{xa}$ for some $p \in P$}.
+  \end{align*}
+  Finally we prove that $L(A') = L(A)$, which is given by
+  \begin{align*}
+    w \in L(A')
+    \quad &\Leftrightarrow \quad
+    \Delta_w(\{q_0\}) \in \Phi \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \Delta_w(\{q_0\}) \cap F \neq \varnothing \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \text{$q \in \Delta_w(\{q_0\})$ for some $q \in F$} \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \text{$(p, q) \in \delta_w$ for some $q \in F$ and $p \in \{q_0\}$} \\[.5em]
+    \quad &\Leftrightarrow \quad
+    \text{$(q_0, q) \in \delta_w$ for some $q \in F$} \\[.5em]
+    \quad &\Leftrightarrow \quad
+    w \in L(A).
+    \qedhere
+  \end{align*}
 \end{proof}
 
 \section{Regular Expressions}
 \begin{definition}
   Let $\Sigma$ be an alphabet.
   A \emph{regular expression} over $\Sigma$ is a string in the minimal language
-  over $\Sigma \cup \{\varnothing, \epsilon, {}^*, \cdot, \cup, (, )\}$
+  over $\Sigma \cup \{\varnothing, \epsilon, {}^*, \cup, (, )\}$
   that satisfies the following conditions.
   \begin{enumerate}[1.]
     \item $\varnothing$ is a regular expression.
     \item $\epsilon$ is a regular expression.
     \item If $a \in \Sigma$, then $a$ is a regular expression.
+    \item If $e_1$ and $e_2$ are regular expressions, then so is $(e_1e_2)$.
     \item If $e_1$ and $e_2$ are regular expressions, then so is
-      $(e_1 \cdot e_2)$.
-    \item If $e_1$ and $e_2$ are regular expressions, then so is
-      $(e_1 \cup e_2)$.
+    $(e_1 + e_2)$.
     \item If $e$ is a regular expression, then so is $(e)^*$.
   \end{enumerate}
 \end{definition}
@@ -170,101 +211,116 @@
     \item $L(\varnothing) = \varnothing$.
     \item $L(\epsilon) = \{\epsilon\}$.
     \item $L(a) = \{a\}$ for each $a \in \Sigma$.
-    \item $L((e_1 \cdot e_2)) = L(e_1) \cdot L(e_2)$ for each regular
-      expressions $e_1$ and $e_2$.
-    \item $L((e_1 \cup e_2)) = L(e_1) \cup L(e_2)$ for each regular
-      expressions $e_1$ and $e_2$.
+    \item $L((e_1e_2)) = L(e_1)L(e_2)$ for each regular expressions $e_1$ and
+    $e_2$.
+    \item $L((e_1 + e_2)) = L(e_1) \cup L(e_2)$ for each regular
+    expressions $e_1$ and $e_2$.
     \item $L((e)^*) = L(e^*)$ for each regular expression $e$.
   \end{enumerate}
 \end{definition}
 
 \begin{remark}
-  We will write $(e_1e_2)$ instead of $(e_1 \cdot e_2)$ for simplification.
-  Furthermore, we may omit parentheses if there is no ambiguity.
+  We may omit parentheses if there is no ambiguity.
 \end{remark}
 
-\begin{theorem}
-  Let $\Sigma$ be an alphabet.
-  A language $L$ over $\Sigma$ is regular if and only if there is a regular
-  expression $e$ over $\Sigma$ such that $L = L(e)$.
-\end{theorem}
+\begin{lemma}
+  If $L$ is a regular language over an alphabet $\Sigma$, then there is a
+  regular expression $e$ over $\Sigma$ such that $L(e) = L$.
+\end{lemma}
 \begin{proof}
-  $(\Leftarrow)$
-  It holds trivially since all finite languages are regular, and regular
-  languages are closed under union, cancatenation and star operations.
-
-  $(\Rightarrow)$
-  Since $L$ is regular, there is a DFA
-  $\mathcal{A} = (\Sigma, Q, q_0, F, \delta)$ with $L = L(\mathcal{A})$.
-  For $p, q \in Q$ and $S \subseteq Q$, define $L(p, S, q)$ to be the language
-  of strings $w \in \Sigma^*$ such that the run $r$ of $w = a_1 \cdots a_n$
-  on $\mathcal{A}$ with
-  \begin{equation*}
-    r = (r_0, r_1, \dots, r_{n-1}, r_n)
-  \end{equation*}
-  satisfying $r_0 = p$, $r_n = q$ and $r_i \in S$ for each
-  $i \in \{1, \dots, n-1\}$.
-  Then it suffices to prove that there exists a regular expression $e$ with
-  $L(e) = L(p, S, q)$ for each $p, q \in Q$ and $S \subseteq Q$ since
-  \begin{equation*}
-    L = \bigcup_{q \in F} L(q_0, Q, q).
-  \end{equation*}
-  The proof is by induction on $|S|$.
-  For the induction basis, let $|S| = 0$, i.e., $S = \varnothing$.
-  Then we have
-  \begin{equation*}
-    L(p, \varnothing, p)
-    = \{\epsilon\} \cup \{a \in \Sigma: \delta(p, a) = p\}
-  \end{equation*}
-  and
-  \begin{equation*}
-    L(p, \varnothing, q)
-    = \{a \in \Sigma: \delta(p, a) = q\}
-  \end{equation*}
-  for all $p, q \in Q$ with $p \neq q$, and thus the induction basis is proved.
-  Now assume the induction hypothesis that the statement holds for $|S| = k$,
-  and we prove that it is true for $|S| = k + 1$.
-  Let $s$ be an arbitrary state in $S$ and let $S' = S \setminus \{s\}$.
-  Then it suffices to prove that
-  \begin{equation*}
-    L(p, S, q)
-      \quad = \quad L(p, S', q)
-      \quad \cup \quad
-      L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q).
-  \end{equation*}
-  since $|S'| = k$.
-  \begin{enumerate}[(i)]
-    \item It is obvious that 
-      \begin{equation*}
-        L(p, S, q)
-          \quad \supseteq \quad L(p, S', q)
-          \quad \cup \quad
-          L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q)
-      \end{equation*}
-      since $S = S' \cup \{s\}$.
-    \item Then we prove that
-      \begin{equation*}
-        L(p, S, q)
-          \quad \subseteq \quad L(p, S', q)
-          \quad \cup \quad
-          L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q).
-      \end{equation*}
-      Suppose that $w \in L(p, S, q)$.
-      Let $i_1, i_2, \dots, i_\ell$ be all indices in $\{1, \dots, n - 1\}$
-      such that $r_{i_j} = s$ for each $j \in \{1, \dots, \ell\}$,
-      where $i_1 < i_2 < \cdots < i_\ell$.
-
-      If $\ell = 0$, then $w \in L(p, S', q)$ since $r_i \neq s$ for all
-      $i \in \{1, \dots, n - 1\}$.
-      Otherwise, we have
-      \begin{align*}
-        a_1 \cdots a_{i_1} &\in L(p, S', s) \\
-        a_{i_1+1} \cdots a_{i_2} &\in L(s, S', s) \\
-        &\vdots \\
-        a_{i_{\ell-1}+1} \cdots a_{i_\ell} &\in L(s, S', s) \\
-        a_{i_\ell+1} \cdots a_n &\in L(s, S', q),
-      \end{align*}
-      and thus $w \in L(p, S', s) \cdot (L(s, S', s))^* \cdot L(s, S', q)$.
-      This completes the proof. \qedhere
+  Since $L$ is regular, there exists a DFA $A = (Q, \Sigma, \delta, q_0, F)$
+  with $L(A) = L$.
+  Suppose that $Q = \{p_1, p_2, \dots, p_n\}$ with $p_1 = q_0$.
+  For any $1 \leq i \leq n$, for any $1 \leq j \leq n$ and for any
+  $0 \leq k \leq n$, let $L_{ij}^{(k)}$ be the language of strings $w$
+  satisfying the following conditions (a) and (b).
+  \begin{enumerate}
+    \item $\delta_w(p_i) = p_j$.
+    \item For any nonempty prefix $x$ of $w$, $\delta_x(p_i) = p_\ell$ for some
+    $\ell \leq k$.
+    (A nonempty proper prefix $x$ of $w$ is a string $x$ such that $w = xy$
+    with $x \neq \epsilon$ and $y \neq \epsilon$.)
   \end{enumerate}
+  We are going to prove that for all $1 \leq i \leq n$, $1 \leq j \leq n$ and
+  $0 \leq k \leq n$, there exists a regular expression $e_{ij}^{(k)}$
+  such that
+  \begin{equation*}
+    L\bigl(e_{ij}^{(k)}\bigr) = L_{ij}^{(k)}.
+  \end{equation*}
+
+  The proof is by induction on $k$. For the induction basis, let $k = 0$.
+  Let $\Pi_{ij} \subseteq \Sigma$ be the collection of symbols $a$ with
+  $\delta_a(p_i) = p_j$.
+  If $i \neq j$, we have
+  \begin{equation*}
+    L_{ij}^{(0)} = \bigcup_{a \in \Pi_{ij}} \{a\},
+  \end{equation*}
+  and thus we can construct $e_{ij}^{(0)}$ by
+  \begin{equation*}
+    e_{ij}^{(0)} = \sum_{a \in \Pi_{ij}} a.
+  \end{equation*}
+  (If $\Pi_{ij} = \varnothing$, then the summation is defined as
+  $\varnothing$.)
+  If $i = j$, we have
+  \begin{equation*}
+    L_{ii}^{(0)} = \{\epsilon\} \cup \bigcup_{a \in \Pi_{ii}} \{a\},
+  \end{equation*}
+  and thus we can construct $e_{ii}^{(0)}$ by
+  \begin{equation*}
+    e_{ii}^{(0)} = \epsilon + \sum_{a \in \Pi_{ii}} a.
+  \end{equation*}
+  Now for the induction step, let $k \geq 1$.
+  Suppose that $w \in L_{ij}^{(k)}$.
+  \begin{itemize}
+    \item If there is no nonempty proper prefix $x$ of $w$ such that
+    $\delta_x(p_i) = p_k$, then we have $w \in L_{ij}^{(k-1)}$.
+    \item Otherwise, let $x_0, x_1, \dots, x_\ell$ be all nonempty
+    proper prefixes of $w$ such that
+    \begin{equation*}
+      \delta_{x_0}(p_i)
+      = \delta_{x_1}(p_i)
+      = \cdots
+      = \delta_{x_\ell}(p_i)
+      = p_k,
+    \end{equation*}
+    where $x_{h-1}$ is a proper prefix of $x_h$ for $1 \leq h \leq \ell$.
+    Then there exist $u_0, u_1, \dots, u_{\ell+1}$ such that
+    $w = u_0u_1 \cdots u_{\ell+1}$, $x_0 = u_0$, and $x_h = x_{h-1}u_h$
+    for $1 \leq h \leq \ell$.
+    Note that we have $u_0 \in L_{ik}^{(k-1)}$,
+    $u_{\ell+1} \in L_{kj}^{(k-1)}$, and
+    $u_h \in L_{kk}^{(k-1)}$ for $1 \leq h \leq \ell$.
+    Thus, we can conclude that
+    \begin{equation*}
+      w \in L_{ik}^{(k-1)}\left(L_{kk}^{(k-1)}\right)^*L_{kj}^{(k-1)}.
+    \end{equation*}
+  \end{itemize}
+  As a result, we have
+  \begin{equation*}
+    L_{ij}^{(k)} \subseteq L_{ij}^{(k-1)} \cup
+    L_{ik}^{(k-1)}\left(L_{kk}^{(k-1)}\right)^*L_{kj}^{(k-1)},
+  \end{equation*}
+  implying
+  \begin{equation*}
+    L_{ij}^{(k)} = L_{ij}^{(k-1)} \cup
+    L_{ik}^{(k-1)}\left(L_{kk}^{(k-1)}\right)^*L_{kj}^{(k-1)}.
+  \end{equation*}
+  Therefore, we can construct $e_{ij}^{(k)}$ by
+  \begin{equation*}
+    e_{ij}^{(k)} = e_{ij}^{(k-1)}
+    + e_{ik}^{(k-1)}\left(e_{kk}^{(k-1)}\right)^*e_{kj}^{(k-1)}.
+  \end{equation*}
+
+  Now we construct the regular expression $e$ with $L(e) = L$.
+  Let $\Phi$ be the set of integers $j \in \{1, \dots, n\}$ such that
+  $p_j \in F$.
+  Note that we have
+  \begin{equation*}
+    L = \bigcup_{j \in \Phi} L_{1j}^{(n)},
+  \end{equation*}
+  and thus $e$ can be constructed by
+  \begin{equation*}
+    e = \sum_{j \in \Phi} e_{1j}^{(n)},
+  \end{equation*}
+  which completes the proof.
 \end{proof}
