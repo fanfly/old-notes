@@ -1,0 +1,189 @@
+\chapter{Propositional Logic}
+\section{The Language of Propositional Logic}
+\begin{definition}
+  An \emph{alphabet} for propositional logic is a pair
+  $\mathcal{A} = (\mathcal{V}, \mathcal{C})$, where each component is as
+  follows.
+  \begin{itemize}
+    \item $\mathcal{V}$ is a countably infinite set of
+    \emph{propositional variables}.
+    \item $\mathcal{C}$ is a finite set of \emph{connectives} with
+    \begin{equation*}
+      \mathcal{C} = \bigcup_{i \geq 0} \mathcal{C}_i,
+    \end{equation*}
+    where $\mathcal{C}_i$ is the set of connectives of arity $i$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  In the default setting, we usually let
+  \begin{align*}
+    \mathcal{C}_0 &= \{\bot, \top\} \\
+    \mathcal{C}_1 &= \{\neg\} \\
+    \mathcal{C}_2 &= \{\wedge, \vee, \to, \leftrightarrow\}
+  \end{align*}
+  and $\mathcal{C}_j = \varnothing$ for $j \geq 3$.
+\end{remark}
+
+\begin{definition}
+  The language $\mathcal{L}$ of \emph{formulas} over alphabet
+  $\mathcal{A} = (\mathcal{V}, \mathcal{C})$ is the minimal set that satisfies
+  the following statements.
+  \begin{itemize}
+    \item Each propositional variable in $\mathcal{V}$ is a formula.
+    \item If $\star$ is a connective in $\mathcal{C}_k$ and
+    $\alpha_1, \alpha_2, \dots, \alpha_k$ are formulas,
+    then $\star\alpha_1\alpha_2\cdots\alpha_k$ is a formula.
+  \end{itemize}
+\end{definition}
+
+\section{Truth Assignment}
+\begin{definition}
+  A \emph{truth assignment} is a function $\tau: \mathcal{V} \to \{0, 1\}$.
+  It can be extended to $\bar\tau: \mathcal{L} \to \{0, 1\}$ by assigning each
+  connective with arity $k$ to a boolean function from $\{0, 1\}^k$ to
+  $\{0, 1\}$.
+\end{definition}
+
+\begin{remark}
+  By convention, we use the truth table as follows.
+  \begin{table}[h!]
+    \centering
+    \begin{tabular}{cc}
+      $\bar\tau(\bot)$ & $\bar\tau(\top)$ \\
+      \hline
+      0 & 1
+    \end{tabular}
+    \qquad
+    \begin{tabular}{c|c}
+      $\bar\tau(\alpha)$ & $\bar\tau(\neg\alpha)$ \\
+      \hline
+      0 & 1 \\
+      1 & 0
+    \end{tabular}
+    \\[1em]
+    \begin{tabular}{cc|cccc}
+      $\bar\tau(\alpha)$ & $\bar\tau(\beta)$
+        & $\bar\tau(\alpha \wedge \beta)$
+        & $\bar\tau(\alpha \vee \beta)$
+        & $\bar\tau(\alpha \to \beta)$
+        & $\bar\tau(\alpha \leftrightarrow \beta)$ \\
+      \hline
+      0 & 0 & 0 & 0 & 1 & 1 \\
+      0 & 1 & 0 & 1 & 1 & 0 \\
+      1 & 0 & 0 & 1 & 0 & 0 \\
+      1 & 1 & 1 & 1 & 1 & 1
+    \end{tabular}
+    \caption{Truth Table}
+    \label{table:truth-table}
+  \end{table}
+\end{remark}
+
+\begin{definition}
+  We say that a truth assignment $\tau$ \emph{satisfies} a formula $\alpha$
+  if $\bar\tau(\alpha) = 1$.
+  Also, we say that $\tau$ satisfies a set $\Sigma$ of formulas if it satisfies
+  each formula in $\Sigma$.
+\end{definition}
+
+\begin{definition}
+  Let $\Sigma$ be a set of formulas and let $\alpha$ be a formula.
+  We say that $\Sigma$ \emph{tautologically implies} $\alpha$, denoted by
+  $\Sigma \models \alpha$, if every truth assignment satisfying $\Sigma$
+  also satisfies $\alpha$.
+\end{definition}
+
+\section{Proof System}
+\begin{definition}
+  The collection $\Lambda$ of \emph{axioms} consists of the formulas listed
+  below, where $\alpha, \beta, \gamma$ are formulas.
+  \begin{enumerate}[leftmargin=3.5em]
+    \item[(A1)] $\alpha \to (\beta \to \alpha)$.
+    \item[(A2)] $(\alpha \to (\beta \to \gamma)) \to
+    ((\alpha \to \beta) \to (\alpha \to \gamma))$.
+    \item[(A3)] $(\neg \beta \to \neg \alpha) \to (\alpha \to \beta)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  A \emph{proof} of a formula $\alpha$ from a collection $\Gamma$ of formulas
+  is a sequence of formulas
+  \begin{equation*}
+    (\alpha_1, \alpha_2, \dots, \alpha_n)
+  \end{equation*}
+  satisfying the following properties.
+  \begin{enumerate}
+    \item $\alpha_n = \alpha$.
+    \item For $2 \leq k \leq n$, either
+    $\alpha_k \in \Lambda \cup \Gamma$ or there exist
+    $1 \leq i < k$ and $1 \leq j < k$ with $\alpha_j = \alpha_i \to \alpha_k$.
+  \end{enumerate}
+  If there exists a proof of $\varphi$ from $\Gamma$, we write
+  $\Gamma \vdash \varphi$.
+  If $\varnothing \vdash \varphi$, we write $\vdash \varphi$ for short.
+\end{definition}
+
+\begin{theorem}
+  \label{thm:identity}
+  For any formula $\alpha$, we have $\vdash \alpha \to \alpha$.
+\end{theorem}
+\begin{proof}
+  The proof of $\alpha \to \alpha$ is as follows.
+  \begin{enumerate}[1.]
+    \item $(\alpha \to ((\alpha \to \alpha) \to \alpha)) \to
+    ((\alpha \to (\alpha \to \alpha)) \to (\alpha \to \alpha))$.
+    \item $\alpha \to ((\alpha \to \alpha) \to \alpha)$.
+    \item $(\alpha \to (\alpha \to \alpha)) \to (\alpha \to \alpha)$.
+    \item $\alpha \to (\alpha \to \alpha)$.
+    \item $\alpha \to \alpha$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Let $\Gamma$ and $\Delta$ be sets of formulas and let $\alpha$ be a formula.
+  If $\Gamma \vdash \alpha$ and $\Gamma \subseteq \Delta$, then
+  $\Delta \vdash \alpha$.
+\end{proposition}
+\begin{proof}
+  To be completed.
+\end{proof}
+
+\begin{theorem}
+  Let $\Gamma$ be a set of formulas and let $\alpha$ and $\beta$ be formulas.
+  If $\Gamma \cup \{\alpha\} \vdash \beta$, then
+  $\Gamma \vdash \alpha \to \beta$.
+\end{theorem}
+\begin{proof}
+  If $\beta \in \Lambda \cup \Gamma$, then we have
+  $\Gamma \vdash \alpha \to \beta_k$ since
+  $\vdash \beta_k \to (\alpha \to \beta_k)$.
+  Furthermore, if $\beta = \alpha$, then we also have
+  $\Gamma \vdash \alpha \to \beta$ since $\vdash \beta \to \beta$ by
+  \Cref{thm:identity}.
+  Thus, one only needs to consider the case that
+  $\beta \notin \Lambda \cup \Gamma \cup \{\alpha\}$.
+
+  Suppose that $(\beta_1, \beta_2, \dots, \beta_n)$ is a proof of $\beta$ from
+  $\Gamma \cup \{\alpha\}$.
+  For $1 \leq k \leq n$, we prove that $\Gamma \vdash \alpha \to \beta_k$ by
+  induction on $k$.
+  The induction basis holds for $k = 1$ since
+  $\beta_1 \in \Lambda \cup \Gamma \cup \{\alpha\}$.
+  For the induction step, let $k \geq 2$ and assume that
+  $\Gamma \vdash \alpha \to \beta_\ell$ for $1 \leq \ell < k$.
+  We have proved for the case that
+  $\beta \in \Lambda \cup \Gamma \cup \{\alpha\}$, and thus we assume without
+  loss of generality that there exist $1 \leq i < k$ and $1 \leq j < k$
+  such that $\beta_j = \beta_i \to \beta_k$.
+  Note that $\Gamma \vdash \alpha \to \beta_i$ and
+  $\Gamma \vdash \alpha \to (\beta_i \to \beta_k)$
+  hold by induction hypothesis.
+  Therefore, since
+  \begin{equation*}
+    \vdash (\alpha \to (\beta_i \to \beta_k)) \to
+    ((\alpha \to \beta_i) \to (\alpha \to \beta_k)),
+  \end{equation*}
+  we can conclude that $\Gamma \vdash \alpha \to \beta_k$,
+  which completes the proof.
+\end{proof}

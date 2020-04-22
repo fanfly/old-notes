@@ -6,3 +6,4 @@ FanFly's study notes.
 * [Linear Algebra](linear-algebra)
 * [Probability](probability)
 * [Theory of Computation](theory-of-computation)
+* [Logic](logic)
