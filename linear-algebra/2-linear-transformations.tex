@@ -1048,3 +1048,185 @@
     \qedhere
   \end{enumerate}
 \end{proof}
+
+\section{Projections}
+\begin{definition}
+  \label{def:direct-sum}
+  Let $V_1, \dots, V_k$ be subspaces of a vector space $U$.
+  We say that $U$ is the \emph{direct sum} of $V_1, \dots, V_k$, denoted
+  \begin{equation*}
+    U = V_1 \oplus \cdots \oplus V_k,
+  \end{equation*}
+  if both of the following conditions hold.
+  \begin{enumerate}
+    \item $U = V_1 + \cdots + V_k$.
+    \item For each $i \in \{1, \dots, k\}$,
+    $V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots V_k) = \{0_U\}$.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  If $V_1, \dots, V_k$ are subspaces of a finite-dimensional vector space $U$,
+  then the following statements are equivalent.
+  \begin{enumerate}
+    \item $W = V_1 \oplus \cdots \oplus V_k$.
+    \item $W = V_1 + \cdots + V_k$.
+    Moreover, if $x_1 + \cdots + x_k = 0_U$ with $x_i \in V_i$ for each
+    $1 \leq i \leq k$, then $x_i = 0_U$ for each $1 \leq i \leq k$.
+    \item Each vector $x \in U$ can be uniquely written as
+    $x = x_1 + \cdots + x_k$, where $x_i \in V_i$ for $1 \leq i \leq k$.
+    \item If $\beta_i$ with $1 \leq i \leq k$ is an ordered basis for $V_i$,
+    then $\beta_1 \cup \cdots \cup \beta_k$ is an ordered basis for $U$.
+    \item For $1 \leq i \leq k$, there exists an ordered basis $\beta_i$ for
+    $V_i$, such that $\beta_1 \cup \cdots \cup \beta_k$ is an ordered basis for
+    $U$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  First we assume (a) and prove (b).
+  Clearly we have $W = V_1 + \cdots + V_k$ by \Cref{def:direct-sum} (a).
+  Now suppose that $x_1 + \cdots + x_k = 0_U$ with $x_i \in V_i$ for
+  $1 \leq i \leq k$.
+  For each $i \in \{1, \dots, k\}$, we have
+  \begin{equation*}
+    -x_i
+    = x_1 + \cdots + x_{i-1} + x_{i+1} + \cdots + x_k,
+  \end{equation*}
+  implying
+  \begin{equation*}
+    -x_i
+    \in V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots V_k)
+    = \{0_U\}.
+  \end{equation*}
+  Thus, $x_i = 0_U$, which proves (b).
+
+  Now we assume (b) and prove (c).
+  For each vector $x \in U$, there exist vectors $x_i \in V_i$ for
+  $1 \leq i \leq k$ such that $x = x_1 + \cdots + x_k$ since
+  $V = V_1 + \cdots + V_k$.
+  If there also exist $x_i' \in V_i$ for $1 \leq i \leq k$ such that
+  $x = x_1' + \cdots + x_k'$, then we have
+  \begin{equation*}
+    (x_1 - x_1') + \cdots + (x_k - x_k') = 0_U,
+  \end{equation*}
+  implying $x_i = x_i'$ for $1 \leq i \leq k$.
+  Thus, (c) is proved.
+
+  Now we assume (c) and prove (d).
+  Let $\beta = \beta_1 \cup \cdots \cup \beta_k$.
+  Since $U = V_1 + \cdots + V_k$ by (c), it follows that $\spn(\beta) = U$.
+  Thus, we only need to show that $\beta$ is linearly independent.
+  Suppose that for $1 \leq i \leq k$, the ordered basis $\beta_i$ has $m_i$
+  elements with $\beta_i = \{x_{ij}: 1 \leq j \leq m_i\}$.
+  If there exist scalars $a_{ij} \in F$ for $1 \leq i \leq k$ and
+  $1 \leq j \leq m_i$ such that
+  \begin{equation*}
+    \sum_{i=1}^{k} \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U,
+  \end{equation*}
+  then by (c) we have
+  \begin{equation*}
+    \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U
+  \end{equation*}
+  for each $i \in \{1, \dots, k\}$.
+  Since $\beta_i$ is linearly independent, we can conclude that
+  $a_{ij} = 0_F$ for any $j$ with $1 \leq j \leq m_i$.
+  Thus, $\beta$ is linearly independent, which proves (d).
+  Note that (e) follows from (d) immediately.
+
+  Finally, we assume (e) and prove (a).
+  Since
+  \begin{align*}
+    U
+    &= \spn(\beta_1 \cup \cdots \cup \beta_k) \\
+    &= \spn(\beta_1) + \cdots + \spn(\beta_k) \\
+    &= V_1 + \cdots + V_k,
+  \end{align*}
+  it suffices to prove that
+  $V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots + V_k) = \{0_U\}$
+  holds for all $1 \leq i \leq k$.
+  Suppose that there is a nonzero vector $y \in U$ such that
+  \begin{equation*}
+    y \in V_h \cap (V_1 + \cdots + V_{h-1} + V_{h+1} + \cdots + V_k)
+  \end{equation*}
+  for some $h \in \{1, \dots, k\}$.
+  For each $i \in \{1, \dots, k\}$, let
+  $\beta_i = \{x_{ij}: 1 \leq j \leq m_i\}$, where $m_i$ is the number of
+  vectors in $\beta_i$.
+  Then we have
+  \begin{equation*}
+    \sum_{j=1}^{m_h} -a_{hj}x_{hj}
+    = y
+    = \sum_{\substack{i \neq h \\ 1 \leq i \leq k}}
+      \sum_{j=1}^{m_i} a_{ij}x_{ij}.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \sum_{i=1}^k \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U,
+  \end{equation*}
+  implying $a_{ij} = 0_F$ for each $i \in \{1, \dots, k\}$ and for each
+  $j \in \{1, \dots, m_i\}$, contradiction.
+  Hence (a) is proved, and thus the proof is completed.
+\end{proof}
+
+\begin{definition}
+  \label{def:projection}
+  Let $V$ and $W$ be subspaces of a vector space $U$ with $U = V \oplus W$.
+  Then the \emph{projection} on $V$ along $W$ is a transformation $T: U \to U$
+  such that for any $x \in U$, $y \in V$ and $w \in W$ with $x = y + z$,
+  we have $T(x) = y$.
+\end{definition}
+
+\begin{theorem}
+  Let $V$ and $W$ be subspaces of a vector space $U$ with $U = V \oplus W$.
+  Let $T: U \to U$ be the projection on $V$ along $W$.
+  Then $T$ is linear.
+\end{theorem}
+\begin{proof}
+  Let $a \in F$ and $x, x' \in U$.
+  Furthermore, let
+  \begin{equation*}
+    y = T(x),
+    \quad
+    z = x - T(x)
+  \end{equation*}
+  and
+  \begin{equation*}
+    y' = T(x'),
+    \quad
+    z' = x' - T(x').
+  \end{equation*}
+  Then we have
+  \begin{align*}
+    T(ax + x')
+    &= T(a(y + z) + (y' + z')) \\
+    &= T((ay + y') + (az + z')) \\
+    &= ay + y' \\
+    &= aT(x) + T(x').
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  Let $V$ and $W$ be subspaces of a vector space $U$ with $U = V \oplus W$.
+  Let $T: U \to U$ be linear.
+  Then $T$ is the projectioon on $V$ along $W$ if and only if the following
+  statements are satisfied.
+  \begin{enumerate}
+    \item For any $y \in V$, $T(y) = y$.
+    \item For any $z \in W$, $T(z) = 0_U$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$) Straightforward.
+  ($\Leftarrow$)
+  For any $x \in U$, let $y \in V$ and $w \in W$ be vectors with $x = y + z$.
+  Then
+  \begin{equation*}
+    T(x)
+    = T(y + z)
+    = T(y) + T(z)
+    = y + 0_U
+    = y.
+  \end{equation*}
+  Thus, $T$ is the projection on $V$ along $W$.
+\end{proof}
