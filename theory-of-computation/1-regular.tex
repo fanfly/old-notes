@@ -44,19 +44,13 @@
 
 \begin{definition}
   Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.
-  \begin{enumerate}
-    \item For each symbol $a \in \Sigma$, we define $\delta_a: Q \to Q$ to be
-    the function such that $\delta_a(p) = \delta(p, a)$
-    for any states $p, q \in Q$.
-    \item For each string $w \in \Sigma^*$, we define $\delta_w: Q \to Q$ as
-    follows.
-    \begin{itemize}
-      \item $\delta_\epsilon$ is the identity function.
-      \item For any strings $x \in \Sigma^*$ and any symbol $a \in \Sigma$,
-      the function $\delta_{xa}$ satisfies
-      $\delta_{xa}(p) = \delta_a(\delta_x(p))$ for any $p \in Q$.
-    \end{itemize}
-  \end{enumerate}
+  For each string $w \in \Sigma^*$, we define $\delta_w: Q \to Q$ as follows,
+  where $a \in \Sigma$ and $x \in \Sigma^*$.
+  \begin{itemize}
+    \item $\delta_\epsilon(p) = p$ for each $p \in Q$.
+    \item $\delta_a(p) = \delta(p, a)$ for each $p \in Q$.
+    \item $\delta_{xa}(p) = \delta(\delta_x(p), a)$ for each $p \in Q$.
+  \end{itemize}
 \end{definition}
 
 \begin{definition}
@@ -73,6 +67,100 @@
   A language $L$ is \emph{regular} if there exists a DFA $A$ such that
   $L(A) = L$.
 \end{definition}
+
+\begin{example}
+  Let $A = (\{q_0, q_1\}, \{0, 1\}, \delta, q_0, \{q_1\})$ be a DFA, where the
+  transition function $\delta$ is as follows.
+  \begin{center}
+    \begin{tabular}{c|cc}
+      & 0 & 1 \\
+      \hline
+      $q_0$ & $q_0$ & $q_1$ \\
+      $q_1$ & $q_0$ & $q_1$
+    \end{tabular}
+  \end{center}
+  Instead of using the formal definition, one can also draw a state diagram of
+  $A$ as follows.
+  \begin{center}
+    \begin{tikzpicture}[every state/.style={initial text=}]
+      \node[state,initial] (q0) at (0, 0) {$q_0$};
+      \node[state,accepting] (q1) at (4, 0) {$q_1$};
+      \path[->] (q0) edge[loop above] node[above] {0} (q0);
+      \path[->] (q0) edge[bend left] node[above] {1} (q1);
+      \path[->] (q1) edge[loop above] node[above] {1} (q0);
+      \path[->] (q1) edge[bend left] node[below] {0} (q0);
+    \end{tikzpicture}
+  \end{center}
+  It can be shown that a string $w \in \{0, 1\}^*$ is accepted by $A$ if and
+  only if $w$ ends with $1$.
+  Thus, the language $L = \{w \in \{0, 1\}^* : \text{$w$ ends with 1} \}$
+  is regular.
+\end{example}
+
+\begin{theorem}
+  If $L$ is a regular language over $\Sigma$, then $\Sigma^* \setminus L$
+  is also regular.
+\end{theorem}
+\begin{proof}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA with $L = L(A)$.
+  Let $A' = (Q, \Sigma, \delta, q_0, Q \setminus F)$.
+  Then for each $w \in \Sigma^*$, we have
+  \begin{equation*}
+    w \in L(A')
+    \quad \Leftrightarrow \quad \delta_w(q_0) \in Q \setminus F
+    \quad \Leftrightarrow \quad w \notin L(A).
+  \end{equation*}
+  Thus, $L(A') = \Sigma^* \setminus L(A)$, implying that $\Sigma^* \setminus L$
+  is regular.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:regular-union}
+  If $L_1$ and $L_2$ are regular languages over $\Sigma$, then $L_1 \cup L_2$
+  is also regular.
+\end{theorem}
+\begin{proof}
+  Let
+  \begin{equation*}
+    A_1 = (Q_1, \Sigma, \delta^{(1)}, q_1, F_1)
+    \quad \text{and} \quad
+    A_2 = (Q_2, \Sigma, \delta^{(2)}, q_2, F_2)
+  \end{equation*}
+  be DFAs with $L_1 = L(A_1)$ and $L_2 = L(A_2)$.
+  We construct the DFA
+  \begin{equation*}
+    A = (Q_1 \times Q_2, \Sigma, \delta, (q_1, q_2), F)
+  \end{equation*}
+  as follows.
+  \begin{itemize}
+    \item $\delta((p, q), a) = (\delta^{(1)}(p, a), \delta^{(2)}(q, a))$ for
+    each $p \in Q_1$, $q \in Q_2$ and $a \in \Sigma$.
+    \item $F = \{(p, q): \text{$p \in F_1$ or $q \in F_2$}\}$.
+  \end{itemize}
+  It can be shown that for each string $w \in \Sigma^*$, we have
+  \begin{align*}
+    w \in L(A)
+    &\quad \Leftrightarrow \quad \delta_w((q_1, q_2)) \in F \\
+    &\quad \Leftrightarrow \quad \text{$\delta^{(1)}_w(q_1) \in F_1$ or
+    $\delta^{(2)}_w(q_2) \in F_2$} \\
+    &\quad \Leftrightarrow \quad \text{$w \in L(A_1)$ or $w \in L(A_2)$}.
+  \end{align*}
+  Thus, $L(A) = L(A_1) \cup L(A_2)$, implying that $L_1 \cup L_2$ is regular.
+\end{proof}
+
+\begin{corollary}
+  If $L_1$ and $L_2$ are regular languages over $\Sigma$, then $L_1 \cap L_2$
+  is also regular.
+\end{corollary}
+\begin{proof}
+  Straightforward since by De Morgan's law we have
+  \begin{equation*}
+    L_1 \cap L_2
+    = \Sigma^* \setminus
+    ((\Sigma^* \setminus L_1) \cup (\Sigma^* \setminus L_2)).
+    \qedhere
+  \end{equation*}
+\end{proof}
 
 \section{Nondeterministic Finite State Automata}
 \begin{definition}
@@ -94,26 +182,14 @@
 
 \begin{definition}
   Let $A = (Q, \Sigma, \delta, q_0, F)$ be an NFA.
-  \begin{enumerate}
-    \item For each symbol $a \in \Sigma$, we define
-    $\delta_a \subseteq Q \times Q$ to be the relation such that
-    $(p, q) \in \delta_a$ if and only if $(p, a, q) \in \delta$ for any states
-    $p, q \in Q$.
-    \item For each string $w \in \Sigma^*$, we define
-    $\delta_w \subseteq Q \times Q$ as follows.
-    \begin{itemize}
-      \item $\delta_\epsilon$ is the identity relation.
-      \item For any strings $x \in \Sigma^*$, any symbol $a \in \Sigma$ and
-      any states $p, q \in Q$,
-      \begin{equation*}
-        (p, q) \in \delta_{xa}
-      \end{equation*}
-      if and only if there exists a state $r \in Q$ such that
-      \begin{equation*}
-        (p, r) \in \delta_x \quad \text{and} \quad (r, q) \in \delta_a.
-      \end{equation*}
-    \end{itemize}
-  \end{enumerate}
+  For each string $w \in \Sigma^*$, we define $\delta_w \subseteq Q \times Q$
+  as follows, where $a \in \Sigma$ and $x \in \Sigma^*$.
+  \begin{itemize}
+    \item $\delta_\epsilon = \{(p, q): p = q\}$.
+    \item $\delta_a = \{(p, q): (p, a, q) \in \delta\}$.
+    \item $\delta_{xa} = \{(p, q): \text{$(p, r) \in \delta_x$ and
+    $(r, q) \in \delta_a$ for some $r \in Q$}\}$.
+  \end{itemize}
 \end{definition}
 
 \begin{definition}
@@ -153,7 +229,9 @@
     \quad \Leftrightarrow \quad
     \text{$(p, q) \in \delta_\epsilon$ for some $p \in P$}.
   \end{equation*}
-  For the induction step, let $w = xa$, where $a$ is the last symbol of $w$.
+
+  For the induction step, let $w = xa$, where $x$ is any string and $a$ is any
+  symbol.
   Note that by the construction of $\Delta$, we have $q \in \Delta_a(P)$ if and
   only if $(p, q) \in \delta_a$ for some $p \in P$.
   Thus, we can conclude that
@@ -168,6 +246,7 @@
     \quad &\Leftrightarrow \quad
     \text{$(p, q) \in \delta_{xa}$ for some $p \in P$}.
   \end{align*}
+
   Finally we prove that $L(A') = L(A)$, which is given by
   \begin{align*}
     w \in L(A')
@@ -185,6 +264,47 @@
     w \in L(A).
     \qedhere
   \end{align*}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:regular-concatenation}
+  If $L_1$ and $L_2$ are regular languages over $\Sigma$, then $L_1L_2$
+  is also regular.
+\end{theorem}
+\begin{proof}
+  Let $A_1 = (Q_1, \Sigma, \delta^{(1)}, q_1, F_1)$ and
+  $A_2 = (Q_2, \Sigma, \delta^{(2)}, q_2, F_2)$ be NFAs such that
+  $L_1 = L(A_1)$ and $L_2 = L(A_2)$.
+  We construct an NFA
+  \begin{equation*}
+    A = (Q_1 \cup Q_2, \Sigma, \delta, q_1, F)
+  \end{equation*}
+  as follows.
+  \begin{itemize}
+    \item $\delta = \delta^{(1)} \cup \delta^{(2)} \cup
+    \{(p, a, q) \in Q \times \Sigma \times Q:
+    \text{$p \in F_1$ and $(q_2, a, q) \in \delta^{(2)}$}\}$.
+    \item If $q_2 \in F_2$, let $F = F_1 \cup F_2$. Otherwise, let $F = F_2$.
+  \end{itemize}
+  It can be shown that $L(A) = L(A_1)L(A_2)$, and thus $L_1L_2$ is regular.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:regular-closure}
+  If $L$ is a regular language over $\Sigma$, then $L^*$ is also regular.
+\end{theorem}
+\begin{proof}
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an NFA with $L = L(A)$.
+  We construct an NFA
+  \begin{equation*}
+    A' = (Q \cup \{q_0'\}, \Sigma, \delta', q_0', F \cup \{q_0'\})
+  \end{equation*}
+  with
+  \begin{equation*}
+    \delta' = \delta \cup \{(p, a, q) \in Q \times \Sigma \times Q:
+    \text{$p \in F \cup \{q_0'\}$ and $(q_0, a, q) \in \delta$}\}.
+  \end{equation*}
+  It can be shown that $L(A') = (L(A))^*$, and thus $L^*$ is regular.
 \end{proof}
 
 \section{Regular Expressions}
@@ -224,6 +344,20 @@
 \end{remark}
 
 \begin{lemma}
+  \label{thm:regex-to-regular}
+  If $e$ is a regular expression over an alphabet $\Sigma$, then $L(e)$ is
+  regular.
+\end{lemma}
+\begin{proof}
+  It can be easily shown that $\varnothing$ and $\{\epsilon\}$ are regular.
+  Moreover, $\{a\}$ is regular for each $a \in \Sigma$.
+  Thus, by \Cref{thm:regular-union}, \Cref{thm:regular-concatenation} and
+  \Cref{thm:regular-closure}, we can conclude that for all regular expressions
+  $e$, $L(e)$ is regular.
+\end{proof}
+
+\begin{lemma}
+  \label{thm:regular-to-regex}
   If $L$ is a regular language over an alphabet $\Sigma$, then there is a
   regular expression $e$ over $\Sigma$ such that $L(e) = L$.
 \end{lemma}
@@ -323,4 +457,14 @@
     e = \sum_{j \in \Phi} e_{1j}^{(n)},
   \end{equation*}
   which completes the proof.
+\end{proof}
+
+\begin{theorem}
+  Let $\Sigma$ be an alphabet.
+  A language $L$ over $\Sigma$ is regular if and only if there is a regular
+  expression $e$ over $\Sigma$ such that $L(e) = L$.
+\end{theorem}
+\begin{proof}
+  Straightforward by \Cref{thm:regex-to-regular} and
+  \Cref{thm:regular-to-regex}.
 \end{proof}

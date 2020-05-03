@@ -4,6 +4,7 @@ This [study note](theory-of-computation.pdf) is based on the textbook *Introduct
 
 ## Table of Contents
 * Regular Languages
+  * Languages
   * Deterministic Finite State Automata
   * Nondeterministic Finite State Automata
   * Regular Expressions
