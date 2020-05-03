@@ -191,7 +191,7 @@
 \begin{definition}
   Let $\Sigma$ be an alphabet.
   A \emph{regular expression} over $\Sigma$ is a string in the minimal language
-  over $\Sigma \cup \{\varnothing, \epsilon, {}^*, \cup, (, )\}$
+  over $\Sigma \cup \{\varnothing, \epsilon, {}^*, +, (, )\}$
   that satisfies the following conditions.
   \begin{enumerate}[1.]
     \item $\varnothing$ is a regular expression.
@@ -220,7 +220,7 @@
 \end{definition}
 
 \begin{remark}
-  We may omit parentheses if there is no ambiguity.
+  From now on, we may omit parentheses if there is no ambiguity.
 \end{remark}
 
 \begin{lemma}
@@ -231,25 +231,22 @@
   Since $L$ is regular, there exists a DFA $A = (Q, \Sigma, \delta, q_0, F)$
   with $L(A) = L$.
   Suppose that $Q = \{p_1, p_2, \dots, p_n\}$ with $p_1 = q_0$.
-  For any $1 \leq i \leq n$, for any $1 \leq j \leq n$ and for any
-  $0 \leq k \leq n$, let $L_{ij}^{(k)}$ be the language of strings $w$
-  satisfying the following conditions (a) and (b).
-  \begin{enumerate}
-    \item $\delta_w(p_i) = p_j$.
-    \item For any nonempty prefix $x$ of $w$, $\delta_x(p_i) = p_\ell$ for some
-    $\ell \leq k$.
-    (A nonempty proper prefix $x$ of $w$ is a string $x$ such that $w = xy$
-    with $x \neq \epsilon$ and $y \neq \epsilon$.)
-  \end{enumerate}
-  We are going to prove that for all $1 \leq i \leq n$, $1 \leq j \leq n$ and
-  $0 \leq k \leq n$, there exists a regular expression $e_{ij}^{(k)}$
+  For any $i, j \in \{1, \dots, n\}$ and for any $k \in \{0, \dots, n\}$,
+  let $L_{ij}^{(k)}$ denote the language of strings $w$ such that 
+  \begin{itemize}
+    \item $\delta_w(p_i) = p_j$, and
+    \item for each string $x$ with $\epsilon \sqsubset x \sqsubset w$, we have
+    $\delta_x(p_i) = p_\ell$ for some $\ell \in \{1, \dots, k\}$.
+  \end{itemize}
+  We are going to prove that for all $i, j \in \{1, \dots, n\}$ and
+  $k \in \{0, \dots, n\}$, there exists a regular expression $e_{ij}^{(k)}$
   such that
   \begin{equation*}
     L\bigl(e_{ij}^{(k)}\bigr) = L_{ij}^{(k)}.
   \end{equation*}
 
   The proof is by induction on $k$. For the induction basis, let $k = 0$.
-  Let $\Pi_{ij} \subseteq \Sigma$ be the collection of symbols $a$ with
+  Let $\Pi_{ij} \subseteq \Sigma$ denote the set of symbols $a$ with
   $\delta_a(p_i) = p_j$.
   If $i \neq j$, we have
   \begin{equation*}
@@ -269,32 +266,35 @@
   \begin{equation*}
     e_{ii}^{(0)} = \epsilon + \sum_{a \in \Pi_{ii}} a.
   \end{equation*}
+
   Now for the induction step, let $k \geq 1$.
   Suppose that $w \in L_{ij}^{(k)}$.
-  \begin{itemize}
-    \item If there is no nonempty proper prefix $x$ of $w$ such that
-    $\delta_x(p_i) = p_k$, then we have $w \in L_{ij}^{(k-1)}$.
-    \item Otherwise, let $x_0, x_1, \dots, x_\ell$ be all nonempty
-    proper prefixes of $w$ such that
-    \begin{equation*}
-      \delta_{x_0}(p_i)
-      = \delta_{x_1}(p_i)
-      = \cdots
-      = \delta_{x_\ell}(p_i)
-      = p_k,
-    \end{equation*}
-    where $x_{h-1}$ is a proper prefix of $x_h$ for $1 \leq h \leq \ell$.
-    Then there exist $u_0, u_1, \dots, u_{\ell+1}$ such that
-    $w = u_0u_1 \cdots u_{\ell+1}$, $x_0 = u_0$, and $x_h = x_{h-1}u_h$
-    for $1 \leq h \leq \ell$.
-    Note that we have $u_0 \in L_{ik}^{(k-1)}$,
-    $u_{\ell+1} \in L_{kj}^{(k-1)}$, and
-    $u_h \in L_{kk}^{(k-1)}$ for $1 \leq h \leq \ell$.
-    Thus, we can conclude that
-    \begin{equation*}
-      w \in L_{ik}^{(k-1)}\left(L_{kk}^{(k-1)}\right)^*L_{kj}^{(k-1)}.
-    \end{equation*}
-  \end{itemize}
+  If there is no string $x$ with $\epsilon \sqsubset x \sqsubset w$
+  such that $\delta_x(p_i) = p_k$, then we have
+  \begin{equation*}
+    w \in L_{ij}^{(k-1)}.
+  \end{equation*}
+  Otherwise, let $x_0, x_1, \dots, x_\ell$ be all strings with
+  $\epsilon \sqsubset x_0 \sqsubset x_1 \sqsubset \cdots \sqsubset x_\ell
+  \sqsubset w$ such that
+  \begin{equation*}
+    \delta_{x_0}(p_i)
+    = \delta_{x_1}(p_i)
+    = \cdots
+    = \delta_{x_\ell}(p_i)
+    = p_k.
+  \end{equation*}
+  Let $u_0, u_1, \dots, u_{\ell+1}$ be strings such that
+  \begin{equation*}
+    w = u_0u_1 \cdots u_{\ell+1},
+  \end{equation*}
+  and $x_h = u_0u_1 \cdots u_h$ for each $h \in \{0, \dots, \ell\}$.
+  Since $u_0 \in L_{ik}^{(k-1)}$, $u_{\ell+1} \in L_{kj}^{(k-1)}$, and
+  $u_h \in L_{kk}^{(k-1)}$ for each $h \in \{1, \dots, \ell\}$,
+  it follows that
+  \begin{equation*}
+    w \in L_{ik}^{(k-1)}\left(L_{kk}^{(k-1)}\right)^*L_{kj}^{(k-1)}.
+  \end{equation*}
   As a result, we have
   \begin{equation*}
     L_{ij}^{(k)} \subseteq L_{ij}^{(k-1)} \cup
@@ -311,14 +311,14 @@
     + e_{ik}^{(k-1)}\left(e_{kk}^{(k-1)}\right)^*e_{kj}^{(k-1)}.
   \end{equation*}
 
-  Now we construct the regular expression $e$ with $L(e) = L$.
+  Now we can construct the regular expression $e$ with $L(e) = L$ as follows.
   Let $\Phi$ be the set of integers $j \in \{1, \dots, n\}$ such that
   $p_j \in F$.
-  Note that we have
+  Since
   \begin{equation*}
     L = \bigcup_{j \in \Phi} L_{1j}^{(n)},
   \end{equation*}
-  and thus $e$ can be constructed by
+  we can construct $e$ by
   \begin{equation*}
     e = \sum_{j \in \Phi} e_{1j}^{(n)},
   \end{equation*}
