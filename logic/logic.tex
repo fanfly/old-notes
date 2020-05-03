@@ -1,32 +1,10 @@
 \documentclass[12pt]{report}
-\usepackage[a4paper,left=2.5cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
-\usepackage{titlesec}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amsopn}
-\usepackage{thmtools}
-\usepackage{cleveref}
-\usepackage[shortlabels]{enumitem}
-\usepackage{array}
+\usepackage{../common}
 
-\newcommand{\sectionbreak}{\clearpage}
-\setlist[enumerate,1]{label={(\alph*)}}
-
-% different types of "theorems"
-\declaretheorem[style=definition,numberwithin=chapter]{theorem}
-\declaretheorem[style=definition,sibling=theorem]{proposition}
-\declaretheorem[style=definition,sibling=theorem]{lemma}
-\declaretheorem[style=definition,sibling=theorem]{corollary}
-\declaretheorem[style=definition,sibling=theorem]{definition}
-\declaretheorem[style=definition,numbered=no]{example}
-\declaretheorem[style=definition,numbered=no]{examples}
-\declaretheorem[style=definition,numbered=no]{notation}
-\declaretheorem[style=definition,numbered=no]{remark}
-
-% use bold fonts to emphasize
-\DeclareTextFontCommand{\emph}{\boldmath\bfseries}
+% title of table of contents
+\renewcommand*\contentsname{Logic}
 
 \begin{document}
-\input{1-propositional}
+  \tableofcontents
+  \input{1-propositional}
 \end{document}

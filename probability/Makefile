@@ -1,5 +1,6 @@
 TEX := pdflatex -interaction=nonstopmode -halt-on-error
 
+.PHONY: all clean
 all: probability.pdf
 
 %.pdf: %.tex *.tex

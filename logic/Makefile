@@ -1,5 +1,6 @@
 TEX := pdflatex -interaction=nonstopmode -halt-on-error
 
+.PHONY: all clean
 all: logic.pdf
 
 %.pdf: %.tex *.tex

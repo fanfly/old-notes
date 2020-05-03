@@ -1,38 +1,5 @@
 \documentclass[12pt]{report}
-\usepackage[a4paper,left=2.5cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
-\usepackage{titlesec}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amsfonts}
-\usepackage{thmtools}
-\usepackage{cleveref}
-\usepackage[shortlabels]{enumitem}
-\usepackage{array}
-\usepackage{pgffor}
-\usepackage{xcolor}
-
-\newcommand{\sectionbreak}{\clearpage}
-\setlist[enumerate,1]{label={(\alph*)}}
-
-% let the theorem title have the same attribute as the theorem heading
-\makeatletter
-\def\th@definition{
-  \thm@notefont{}
-  \normalfont
-}
-\makeatother
-
-% different types of "theorems"
-\declaretheorem[style=definition,numberwithin=chapter]{theorem}
-\declaretheorem[style=definition,sibling=theorem]{proposition}
-\declaretheorem[style=definition,sibling=theorem]{lemma}
-\declaretheorem[style=definition,sibling=theorem]{corollary}
-\declaretheorem[style=definition,sibling=theorem]{definition}
-\declaretheorem[style=definition,numbered=no]{example}
-\declaretheorem[style=definition,numbered=no]{examples}
-\declaretheorem[style=definition,numbered=no]{notation}
-\declaretheorem[style=definition,numbered=no]{remark}
+\usepackage{../common}
 
 % math operators for simplification
 \DeclareMathOperator{\spn}{span}
@@ -43,8 +10,8 @@
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\sgn}{sgn}
 
-% use bold fonts to emphasize
-\DeclareTextFontCommand{\emph}{\boldmath\bfseries}
+% title of table of contents
+\renewcommand*\contentsname{Linear Algebra}
 
 \newcommand{\pl}{{}+{}}
 \newcommand{\mi}{{}-{}}
@@ -56,10 +23,11 @@
 \newcommand{\inner}[2]{\left\langle #1 \; \middle| \; #2 \right\rangle}
 
 \begin{document}
-\input{1-vector-spaces}
-\input{2-linear-transformations}
-\input{3-systems-of-linear-equations}
-\input{4-determinants}
-\input{5-diagonalization}
-\input{6-inner-product-spaces}
+  \tableofcontents
+  \input{1-vector-spaces}
+  \input{2-linear-transformations}
+  \input{3-systems-of-linear-equations}
+  \input{4-determinants}
+  \input{5-diagonalization}
+  \input{6-inner-product-spaces}
 \end{document}
