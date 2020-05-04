@@ -114,9 +114,9 @@
   satisfying the following properties.
   \begin{enumerate}
     \item $\alpha_n = \alpha$.
-    \item For $2 \leq k \leq n$, either
+    \item For $k \in \{1, 2, \dots, n\}$, either
     $\alpha_k \in \Lambda \cup \Gamma$ or there exist
-    $1 \leq i < k$ and $1 \leq j < k$ with $\alpha_j = \alpha_i \to \alpha_k$.
+    $i, j \in \{1, 2, \dots, k-1\}$ with $\alpha_j = \alpha_i \to \alpha_k$.
   \end{enumerate}
   If there exists a proof of $\varphi$ from $\Gamma$, we write
   $\Gamma \vdash \varphi$.
@@ -128,16 +128,18 @@
   For any formula $\alpha$, we have $\vdash \alpha \to \alpha$.
 \end{theorem}
 \begin{proof}
-  The proof of $\alpha \to \alpha$ is as follows.
+  We have a proof of $\alpha \to \alpha$ as follows.
   \begin{enumerate}[1.]
     \item $(\alpha \to ((\alpha \to \alpha) \to \alpha)) \to
     ((\alpha \to (\alpha \to \alpha)) \to (\alpha \to \alpha))$.
-    \item $\alpha \to ((\alpha \to \alpha) \to \alpha)$.
+    \hfill (A2)
+    \item $\alpha \to ((\alpha \to \alpha) \to \alpha)$. \hfill (A1)
     \item $(\alpha \to (\alpha \to \alpha)) \to (\alpha \to \alpha)$.
-    \item $\alpha \to (\alpha \to \alpha)$.
-    \item $\alpha \to \alpha$.
-    \qedhere
+    \hfill (1, 2)
+    \item $\alpha \to (\alpha \to \alpha)$. \hfill (A1)
+    \item $\alpha \to \alpha$. \hfill (3, 4)
   \end{enumerate}
+  Thus, we can conclude that $\vdash \alpha \to \alpha$.
 \end{proof}
 
 \begin{proposition}
@@ -149,7 +151,8 @@
   To be completed.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}[Deduction Theorem]
+  \label{thm:deduction}
   Let $\Gamma$ be a set of formulas and let $\alpha$ and $\beta$ be formulas.
   If $\Gamma \cup \{\alpha\} \vdash \beta$, then
   $\Gamma \vdash \alpha \to \beta$.
@@ -186,4 +189,29 @@
   \end{equation*}
   we can conclude that $\Gamma \vdash \alpha \to \beta_k$,
   which completes the proof.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:contradiction}
+  For any formula $\alpha$ and $\beta$, we have
+  $\vdash \neg\alpha \to (\alpha \to \beta)$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $\neg\alpha \to (\alpha \to \beta)$ as follows.
+  \begin{enumerate}[1.]
+    \item $((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))
+    \to (\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))$.
+    \hfill (A1)
+    \item $(\neg\beta \to \neg\alpha) \to (\alpha \to \beta)$. \hfill (A3)
+    \item $\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))$.
+    \hfill (1, 2)
+    \item $(\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))
+    \to ((\neg\alpha \to (\neg\beta \to \neg\alpha))
+    \to (\neg\alpha \to (\alpha \to \beta)))$. \\ \hbox{} \hfill (A2)
+    \item $(\neg\alpha \to (\neg\beta \to \neg\alpha))
+    \to (\neg\alpha \to (\alpha \to \beta))$. \hfill (3, 4)
+    \item $\neg\alpha \to (\neg\beta \to \neg\alpha)$. \hfill (A1)
+    \item $\neg\alpha \to (\alpha \to \beta)$. \hfill (5, 6)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash \neg\alpha \to (\alpha \to \beta)$.
 \end{proof}
