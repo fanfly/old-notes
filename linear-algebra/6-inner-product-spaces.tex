@@ -19,6 +19,7 @@
 \end{definition}
 
 \begin{proposition}
+  \label{thm:inner-product-basic}
   Let $V$ be an inner product space over a field
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   Then the following statements are true for $x, y, y' \in V$ and $a \in F$.
@@ -86,6 +87,7 @@
 \end{definition}
 
 \begin{theorem}
+  \label{thm:orthogonal-decomposition}
   Let $V$ be an inner product space over a field $F$.
   Let $S$ be an orthogonal subset of $V \setminus \{0_V\}$ and let
   $x_1, \dots, x_n$ be distinct vectors in $S$.
@@ -177,3 +179,197 @@
   \Cref{thm:orthogonal-linearly-independent}.
   Therefore, since $|S| = \dim(\spn(R))$, we have $\spn(S) = \spn(R)$.
 \end{proof}
+
+\begin{definition}
+  Let $V$ be an inner product space.
+  For each vector $x \in S$, the \emph{norm} of $x$ is a nonnegative real
+  number, defined as
+  \begin{equation*}
+    \norm{x} = \sqrt{\inner{x}{x}}.
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}
+  Let $V$ be an inner produce space over a field
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Then the following statements are true for any vectors $x, y \in V$ and any
+  scalar $a \in F$.
+  \begin{enumerate}
+    \item $\norm{ax} = |a| \cdot \norm{x}$.
+    \item $\norm{x} = 0_F$ if and only if $x = 0_V$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item We have
+    \begin{equation*}
+      \norm{ax}
+      = \sqrt{\inner{ax}{ax}}
+      = \sqrt{a\overline{a}\inner{x}{x}}
+      = \sqrt{|a|^2 \inner{x}{x}}
+      = |a| \cdot \norm{x}.
+    \end{equation*}
+
+    \item We have
+    \begin{equation*}
+      \norm{x} = 0_F
+      \quad \Leftrightarrow \quad
+      \inner{x}{x} = 0_F
+      \quad \Leftrightarrow \quad
+      x = 0_V.
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Pythagorean Theorem]
+  \label{thm:pythagoras}
+  Let $V$ be an inner produce space over a field
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Then for any vectors $x, y \in V$ with $\inner{x}{y} = 0_F$, we have
+  \begin{equation*}
+    \norm{x + y}^2 = \norm{x}^2 + \norm{y}^2.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  We have
+  \begin{align*}
+    \norm{x + y}^2
+    &= \inner{x + y}{x + y} \\
+    &= \inner{x}{x + y} + \inner{y}{x + y} \\
+    &= \inner{x}{x} + \inner{x}{y} + \inner{y}{x} + \inner{y}{y} \\
+    &= \inner{x}{x} + 0_F + 0_F + \inner{y}{y} \\
+    &= \norm{x}^2 + \norm{y}^2.
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  Let $V$ be an inner produce space over a field
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  We say that a subset $S$ of $V$ is \emph{orthonormal} if $S$ is orthogonal
+  and $\norm{x} = 1_F$ for each $x \in S$.
+\end{definition}
+
+\begin{theorem}
+  \label{thm:orthonormal-decomposition}
+  Let $V$ be an inner produce space over a field
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Let $S$ be an orthonormal subset of $V$ and let
+  $x_1, \dots, x_n$ be distinct vectors in $S$.
+  Then for $y \in V$, if
+  \begin{equation*}
+    y = \sum_{i=1}^n a_ix_i
+  \end{equation*}
+  for some $a_1, \dots, a_n \in F$, then
+  \begin{equation*}
+    a_i = \inner{y}{x_i}
+  \end{equation*}
+  for each $i \in \{1, \dots, n\}$.
+\end{theorem}
+\begin{proof}
+  Since $S$ is orthonormal, we have $0_V \notin S$.
+  It follows that
+  \begin{equation*}
+    a_i
+    = \frac{\inner{y}{x_i}}{\inner{x_i}{x_i}}
+    = \frac{\inner{y}{x_i}}{1_F}
+    = \inner{y}{x_i}
+  \end{equation*}
+  for each $i \in \{1, \dots, n\}$ by \Cref{thm:orthogonal-decomposition}.
+\end{proof}
+
+\section{Adjoints}
+\begin{theorem}
+  \label{thm:functional}
+  Let $V$ be a finite-dimensional inner produce space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Let $f: V \to F$ be a linear transformation.
+  Then there exists a unique vector $y \in V$ such that
+  \begin{equation*}
+    f(x) = \inner{x}{y}
+  \end{equation*}
+  for all $x \in V$.
+\end{theorem}
+\begin{proof}
+  Let $S = \{x_1, x_2, \dots, x_n\}$ be an orthonormal basis
+  for $V$.
+  Then we have
+  \begin{align*}
+    f(x)
+    &= f\left(\sum_{i=1}^n \inner{x}{x_i} \cdot x_i\right) \\
+    &= \sum_{i=1}^n \inner{x}{x_i} \cdot f(x_i) \\
+    &= \inner{x}{\sum_{i=1}^n \overline{f(x_i)} \cdot x_i}.
+  \end{align*}
+  Thus, there exists
+  \begin{equation*}
+    y = \sum_{i=1}^n \overline{f(x_i)} \cdot x_i
+  \end{equation*}
+  such that $f(x) = \inner{x}{y}$ for all $x \in V$.
+
+  Furthermore, if there exists $y' \in V$ such that $f(x) = \inner{x}{y'}$
+  for all $x \in V$, then we have $y' = y$ by \Cref{thm:inner-product-basic}
+  (d), which completes the proof.
+\end{proof}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner produce space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  For any linear operator $T: V \to V$, there exists a unique operator
+  $T': V \to V$ such that
+  \begin{equation*}
+    \inner{T(x)}{y} = \inner{x}{T'(y)}
+  \end{equation*}
+  for all $x, y \in V$.
+  Also, $T'$ is linear.
+\end{theorem}
+\begin{proof}
+  Suppose that $y \in V$ is an arbitrary vector.
+  Let $f: V \to F$ be a function such that $f(x) = \inner{T(x)}{y}$ for each
+  $x \in V$.
+  Then $f$ is linear since
+  \begin{align*}
+    f(ax_1 + x_2)
+    &= \inner{T(ax_1 + x_2)}{y} \\
+    &= \inner{aT(x_1) + T(x_2)}{y} \\
+    &= a\inner{T(x_1)}{y} + \inner{T(x_2)}{y} \\
+    &= af(x_1) + f(x_2)
+  \end{align*}
+  holds for each $a \in F$ and for each $x_1, x_2 \in V$.
+  Since $f$ is linear, there exists a vector $y' \in V$ such that
+  $f(x) = \inner{x}{y'}$ by \Cref{thm:functional}.
+  Thus, we can define $T': V \to V$ as the functoin with $T'(y) = y'$,
+  implying $\inner{T(x)}{y} = \inner{x}{T'(y)}$ for each $x, y \in V$.
+
+  Now we prove that $T'$ is linear.
+  For any $a \in F$ and $x, y_1, y_2 \in V$, we have
+  \begin{align*}
+    \inner{x}{T'(ay_1 + y_2)}
+    &= \inner{T(x)}{ay_1 + y_2} \\
+    &= \overline{a}\inner{T(x)}{y_1} + \inner{T(x)}{y_2} \\
+    &= \overline{a}\inner{x}{T'(y_1)} + \inner{x}{T'(y_2)} \\
+    &= \inner{x}{aT'(y_1) + T'(y_2)}.
+  \end{align*}
+  Thus, we can conclude that $T'(ay_1 + y_2) = aT'(y_1) + T'(y_2)$ for any
+  $a \in F$ and $y_1, y_2 \in V$ by \Cref{thm:inner-product-basic} (d).
+
+  To show that $T'$ is unique, suppose that $T'': V \to V$ is linear and
+  satisfies $\inner{T(x)}{y} = \inner{x}{T''(y)}$ for any $x, y \in V$.
+  Then we have
+  \begin{equation*}
+    \inner{x}{T''(y)} = \inner{T(x)}{y} = \inner{x}{T'(y)},
+  \end{equation*}
+  implying $T''(y) = T(y)$ for any $y \in V$ by \Cref{thm:inner-product-basic}
+  (d).
+  Thus, $T'' = T'$.
+\end{proof}
+
+\begin{definition}
+  Let $V$ be a finite-dimensional inner produce space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$ and let $T: V \to V$ be linear.
+  The \emph{adjoint} of $T$, denoted $T^*$, is the linear operator satisfying
+  \begin{equation*}
+    \inner{T(x)}{y} = \inner{x}{T^*(y)}
+  \end{equation*}
+  for all $x, y \in V$.
+\end{definition}
