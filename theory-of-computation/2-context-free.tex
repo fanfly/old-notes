@@ -1,0 +1,54 @@
+\chapter{Context-Free Languages}
+\section{Context-Free Grammars}
+\begin{definition}
+  A \emph{context-free grammar (CFG)} is a $4$-tuple
+  \begin{equation*}
+    G = (V, \Sigma, R, S),
+  \end{equation*}
+  where each component is as follows.
+  \begin{itemize}
+    \item $V$ is a finite set of symbols, called \emph{variables}.
+    \item $\Sigma$ is a finite set of symbols, called \emph{terminals}, and we
+    have $V \cap \Sigma = \varnothing$.
+    \item $R$ is a finite set of \emph{rules}, where each rule is a pair
+    $(A, \gamma)$ with $A \in V$ and $\gamma \in (V \cup \Sigma^*)$.
+    \item $S \in V$ is the \emph{start variable}.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $G = (V, \Sigma, R, S)$ be a CFG.
+  \begin{itemize}
+    \item For any variable $A \in V$ and for any strings
+    $\alpha, \beta, \gamma \in (V \cup \Sigma)^*$, we say that $\alpha A \beta$
+    \emph{yields} $\alpha\gamma\beta$ under $G$, denoted by
+    \begin{equation*}
+      \alpha A \beta \mathrel{\mathop\Rightarrow\limits_G} \alpha\gamma\beta,
+    \end{equation*}
+    if there is a rule $(A, \gamma) \in R$.
+    \item For any strings $\alpha, \beta \in (V \cup \Sigma)^*$, we say that
+    $\alpha$ \emph{derives} $\beta$ under $G$, denoted by
+    \begin{equation*}
+      \alpha \mathrel{\mathop\Rightarrow\limits_G^*} \beta,
+    \end{equation*}
+    if $\alpha = \beta$ or there exists a string $\gamma \in (V \cup \Sigma)^*$
+    such that $\alpha \mathrel{\mathop\Rightarrow\limits_G^*} \gamma$ and
+    $\gamma \mathrel{\mathop\Rightarrow\limits_G} \beta$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $G = (V, \Sigma, R, S)$ be a CFG.
+  \begin{itemize}
+    \item We say that $G$ \emph{accepts} a string $w \in \Sigma^*$ if
+    \begin{equation*}
+      S \mathrel{\mathop\Rightarrow\limits_G^*} w.
+    \end{equation*}
+    \item The \emph{language} of $G$, denoted $L(G)$, is the set of strings
+    that are accepted by $G$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A language $L$ is \emph{context-free} if there is a CFG $G$ with $L(G) = L$.
+\end{definition}
