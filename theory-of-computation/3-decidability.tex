@@ -1,0 +1,53 @@
+\chapter{Decidability}
+\section{Turing Machines}
+\begin{definition}
+  A \emph{Turing machine (TM)} is an 8-tuple
+  \begin{equation*}
+    M = (Q, \Sigma, \Gamma, \delta, q_0, B, F, F'),
+  \end{equation*}
+  where each component is as follows.
+  \begin{itemize}
+    \item $Q$ is the finite set of \emph{states}.
+    \item $\Sigma$ is the finite set of \emph{input symbols}.
+    \item $\Gamma$ is the finite set of \emph{tape symbols} with
+    $\Sigma \subseteq \Gamma$.
+    \item $\delta : Q \times \Gamma \to Q \times \Gamma \times \{-1, +1\}$
+    is the \emph{transition function}.
+    \item $q_0 \in Q$ is the \emph{initial state}.
+    \item $B \in \Gamma \setminus \Sigma$ is a special symbol, called the
+    \emph{blank symbol}.
+    \item $F, F' \subseteq Q$ are the sets of \emph{accepting states} and
+    \emph{rejecting states}, respectively, with $F \cap F' = \varnothing$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, B, F, F')$ be a TM.
+  A \emph{configuration} of $M$ is a pair $(q, \alpha)$, where
+  $q \in Q$, $\alpha$ is a string over $\Gamma \cup \{\head\}$, and the
+  symbol $\head$ appears exactly once before some symbol in $\alpha$.
+  For each configuration $(p, \alpha)$ of $M$, with
+  \begin{equation*}
+    \alpha = X_1 \cdots X_{i-2}X_{i-1} \head X_iX_{i+1} \cdots X_k
+  \end{equation*}
+  and $\delta(p, X_i) = (q, Y, d)$, we define its
+  \emph{subsequent configuration} $(q, \beta)$ as follows.
+  \begin{itemize}
+    \item If $d = -1$ and $i \geq 2$, then
+    \begin{equation*}
+      \beta = X_1 \cdots X_{i-2} \head X_{i-1}YX_{i+1} \cdots X_k.
+    \end{equation*}
+    \item If $d = -1$ and $i = 1$, then
+    \begin{equation*}
+      \beta = \head BYX_2 \cdots X_k.
+    \end{equation*}
+    \item If $d = +1$ and $i \leq k - 1$, then
+    \begin{equation*}
+      \beta = X_1 \cdots X_{i-1}Y \head X_{i+1} \cdots X_k.
+    \end{equation*}
+    \item If $d = +1$ and $i = k$, then
+    \begin{equation*}
+      \beta = X_1 \cdots X_{k-1}Y \head B.
+    \end{equation*}
+  \end{itemize}
+\end{definition}
