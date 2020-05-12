@@ -52,3 +52,51 @@
 \begin{definition}
   A language $L$ is \emph{context-free} if there is a CFG $G$ with $L(G) = L$.
 \end{definition}
+
+\section{Pushdown Automata}
+\begin{definition}
+  A \emph{pushdown automata (PDA)} is a 7-tuple
+  \begin{equation*}
+    A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F),
+  \end{equation*}
+  where each component is as follows.
+  \begin{itemize}
+    \item $Q$ is a finite set of states.
+    \item $\Sigma$ is a finite alphabet, called the input alphabet.
+    \item $\Gamma$ is a finite alphabet, called the stack alphabet.
+    \item $\delta \subseteq (Q \times \Sigma \times \Gamma) \times
+    (Q \times \Gamma^*)$ is the transition relation.
+    \item $q_0 \in Q$ is the initial state.
+    \item $Z \in \Gamma$ is the initial symbol.
+    \item $F \subseteq Q$ is the set of accepting states.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F)$ be a PDA.
+  For each string $w \in \Sigma^*$, we define
+  $\delta_w \subseteq (Q \times \Gamma^*) \times (Q \times \Gamma^*)$ such that
+  the following properties are satisfied for each $a \in \Sigma$ and
+  $x \in \Sigma^*$.
+  \begin{itemize}
+    \item $\delta_\epsilon = \{(p, \alpha, p, \alpha) :
+    \text{$p \in Q$ and $\alpha \in \Gamma^*$}\}$.
+    \item $\delta_a = \{(p, X\alpha, q, \gamma\alpha) :
+    \text{$(p, a, X, q, \gamma) \in \delta$ and $\alpha \in \Gamma^*$}\}$.
+    \item $\delta_{xa} = \{(p, \alpha, q, \beta):
+    \text{$(p, \alpha, r, \gamma) \in \delta_x$ and
+    $(r, \gamma, q, \beta) \in \delta_a$
+    for some $(r, \gamma) \in Q \times \Gamma^*$}\}$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F)$ be a PDA.
+  \begin{itemize}
+    \item We say that $A$ \emph{accepts} a string $w \in \Sigma^*$ if
+    $(q_0, Z, q, \gamma) \in \delta_w$ for some $q \in F$ and
+    $\gamma \in \Gamma^*$.
+    \item The \emph{language} of $A$, denoted $L(A)$, is the set of strings
+    that are accepted by $A$.
+  \end{itemize}
+\end{definition}
