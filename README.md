@@ -3,7 +3,7 @@ Study Notes
 FanFly's study notes.
 
 ## List
-* [Linear Algebra](linear-algebra)
-* [Probability](probability)
-* [Theory of Computation](theory-of-computation)
-* [Logic](logic)
+* [Linear Algebra](linear-algebra/linear-algebra.pdf)
+* [Probability](probability/probability.pdf)
+* [Theory of Computation](theory-of-computation/theory-of-computation.pdf)
+* [Logic](logic/logic.pdf)
