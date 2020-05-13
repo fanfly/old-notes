@@ -13,11 +13,101 @@
 \end{definition}
 
 \begin{definition}
-  Let $V$ be a vector space over a field $F$ with $\dim(V) = n$.
+  Let $V$ be a finite-dimensional vector space over a field $F$.
   Let $T \in \mathcal{L}(V)$.
   An \emph{eigenbasis} of $V$ for $T$ is an ordered basis of $V$ in which every
   vector is an eigenvector of $T$.
 \end{definition}
+
+\begin{theorem}
+  \label{thm:diagonalization}
+  Let $V$ be a vector space over a field $F$ and let $T: V \to V$ be linear.
+  Let $\beta = (x_1, x_2, \dots, x_n)$ be an ordered basis for $T$.
+  Let $\lambda_1, \lambda_2, \dots, \lambda_n \in F$ be scalars.
+  Then
+  \begin{equation*}
+    [T]_\beta^\beta =
+    \begin{pmatrix}
+      \lambda_1 & 0 & \cdots & 0 \\
+      0 & \lambda_2 & \cdots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \cdots & \lambda_n
+    \end{pmatrix}
+  \end{equation*}
+  if and only if
+  $T(x_i) = \lambda_ix_i$ for each $i \in \{1, 2, \dots, n\}$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  For each $i \in \{1, 2, \dots, n\}$, we have
+  \begin{equation*}
+    [T(x_i)]_\beta = \lambda_ie_i = [\lambda_ix_i]_\beta.
+  \end{equation*}
+  Thus, $T(x_i) = \lambda_ix_i$.
+  ($\Leftarrow$)
+  For each $i \in \{1, 2, \dots, n\}$, we have
+  $[T(x_i)]_\beta = [\lambda_ix_i]_\beta = \lambda_ie_i$,
+  and it follows that
+  \begin{equation*}
+    [T]_\beta^\beta =
+    \begin{pmatrix}
+      \lambda_1 & 0 & \cdots & 0 \\
+      0 & \lambda_2 & \cdots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \cdots & \lambda_n
+    \end{pmatrix}.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{corollary}
+  Let $V$ be a finite-dimensional vector space and let $T: V \to V$ be linear.
+  Let $\beta$ be an ordered basis of $T$.
+  Then $[T]_\beta^\beta$ is diagonal if and only if $\beta$ is an eigenbasis
+  of $V$ for $T$.
+\end{corollary}
+\begin{proof}
+  Straightforward from \Cref{thm:diagonalization}.
+\end{proof}
+
+\begin{definition}
+  Let $A \in F^{n \times n}$.
+  If
+  \begin{equation*}
+    Ax = \lambda x
+  \end{equation*}
+  holds for some scalar $\lambda \in F$ and some vector
+  $x \in V \setminus \{0_V\}$, then $(\lambda, x)$ is called an
+  \emph{eigenpair} of $A$, with $\lambda$ and $x$ called an
+  \emph{eigenvalue} and an \emph{eigenvector} of $A$, respectively.
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space with an ordered basis $\beta$.
+  Let $\lambda \in F$ be a scalar and $x \in V$ be a vector.
+  Then $(\lambda, x)$ is an eigenpair of $T$ if and only if
+  $(\lambda, [x]_\beta)$ is an eigenpair of $[T]_\beta^\beta$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  Suppose that $T(x) = \lambda x$.
+  Then we have
+  \begin{equation*}
+    [T]_\beta^\beta[x]_\beta
+    = [T(x)]_\beta
+    = [\lambda x]_\beta
+    = \lambda [x]_\beta.
+  \end{equation*}
+  ($\Leftarrow$)
+  Since
+  \begin{equation*}
+    [T(x)]_\beta
+    = [T]_\beta^\beta[x]_\beta
+    = \lambda[x]_\beta
+    = [\lambda x]_\beta,
+  \end{equation*}
+  we can conclude that $T(x) = \lambda x$.
+\end{proof}
 
 \section{Characteristic Polynomials and Eigenspaces}
 \begin{definition}

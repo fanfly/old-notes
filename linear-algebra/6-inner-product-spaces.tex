@@ -279,7 +279,7 @@
   for each $i \in \{1, \dots, n\}$ by \Cref{thm:orthogonal-decomposition}.
 \end{proof}
 
-\section{Adjoints}
+\section{The Adjoint of a Linear Operator}
 \begin{theorem}
   \label{thm:functional}
   Let $V$ be a finite-dimensional inner produce space over
@@ -372,4 +372,13 @@
     \inner{T(x)}{y} = \inner{x}{T^*(y)}
   \end{equation*}
   for all $x, y \in V$.
+\end{definition}
+
+\section{Normal and Self-Adjoint Operators}
+\begin{definition}
+  A polynomial $f$ in $\mathcal{P}(F)$ \emph{splits over} $F$ if there are
+  scalars $c, a_1, \dots, a_n$ in $F$ such that
+  \begin{equation*}
+    f(t) = c\prod_{i=1}^n (t - a_i).
+  \end{equation*}
 \end{definition}
