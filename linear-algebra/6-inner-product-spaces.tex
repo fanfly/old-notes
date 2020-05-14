@@ -365,7 +365,7 @@
 \end{proof}
 
 \begin{definition}
-  Let $V$ be a finite-dimensional inner produce space over
+  Let $V$ be a finite-dimensional inner product space over
   $F \in \{\mathbb{R}, \mathbb{C}\}$ and let $T: V \to V$ be linear.
   The \emph{adjoint} of $T$, denoted $T^*$, is the linear operator satisfying
   \begin{equation*}
@@ -374,11 +374,115 @@
   for all $x, y \in V$.
 \end{definition}
 
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space and let $\beta$ be an
+  ordered orthonormal basis of $V$.
+  If $T: V \to V$ is linear, then
+  \begin{equation*}
+    [T^*]_\beta^\beta = \Bigl([T]_\beta^\beta\Bigr)^*.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Suppose that $\dim(V) = n$ and $\beta = (x_1, x_2, \dots, x_n)$.
+  Let $A = [T^*]_\beta^\beta$ and $B = [T]_\beta^\beta$ be $n \times n$
+  matrices.
+  Then for any $i, j \in \{1, \dots, n\}$, we have
+  \begin{equation*}
+    A_{ij}
+    = \inner{T^*(x_j)}{x_i}
+    = \inner{x_j}{T(x_i)}
+    = \overline{\inner{T(x_i)}{x_j}}
+    = \overline{B_{ji}},
+  \end{equation*}
+  and thus $A = B^*$.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:adjoint-properties}
+  Let $V$ be a finite-dimensional inner product space over $F$.
+  Then the following statements hold for any $a \in F$ and $T_1, T_2, T \in
+  \mathcal{L}(V)$.
+  \begin{enumerate}
+    \item $(aT_1 + T_2)^* = \overline{a}T_1^* + T_2^*$.
+    \item $(T_1T_2)^* = T_2^*T_1^*$.
+    \item $(T^*)^* = T$.
+    \item $I_V^* = I_V$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
+
+\begin{corollary}
+  Let $F \in \{\mathbb{R}, \mathbb{C}\}$ be a field.
+  Then the following statements are true for any $c \in F$ and
+  $A, B \in F^{n \times n}$.
+  \begin{enumerate}
+    \item $(cA + B)^* = \overline{c}A^* + B^*$.
+    \item $(AB)^* = B^*A^*$.
+    \item $(A^*)^* = A$.
+    \item $I_n^* = I_n$.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  Straightforward from \Cref{thm:adjoint-properties}.
+\end{proof}
+
 \section{Normal and Self-Adjoint Operators}
 \begin{definition}
-  A polynomial $f$ in $\mathcal{P}(F)$ \emph{splits over} $F$ if there are
+  A polynomial $f$ in $\mathcal{P}(F)$ \emph{splits} if there are
   scalars $c, a_1, \dots, a_n$ in $F$ such that
   \begin{equation*}
     f(t) = c\prod_{i=1}^n (t - a_i).
   \end{equation*}
 \end{definition}
+
+\begin{theorem}[Schur's Theorem]
+  Let $V$ be a finite-dimensional inner product space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$ and let $T: V \to V$ be linear.
+  If $f_T$ splits, then there is an ordered orthonormal basis $\beta$ of $V$
+  such that $[T]_\beta^\beta$ is upper triangular.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
+
+\begin{definition}
+  Let $V$ be a finite-dimensional inner product space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  \begin{itemize}
+    \item We say that $T \in \mathcal{L}(V)$ is \emph{normal} if $TT^* = T^*T$.
+    \item We say that $A \in F^{n \times n}$ is \emph{normal} if $AA^* = A^*A$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space over $\mathbb{C}$ and let
+  $T: V \to V$ be linear.
+  Then $T$ is normal if and only if there is an orthonormal eigenbasis of $V$
+  for $T$.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
+
+\begin{definition}
+  Let $V$ be a finite-dimensional inner product space over
+  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  \begin{itemize}
+    \item We say that $T \in \mathcal{L}(V)$ is \emph{self-adjoint} if
+    $T^* = T$.
+    \item We say that $A \in F^{n \times n}$ is \emph{self-adjoint} if
+    $A^* = A$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space over $\mathbb{R}$ and let
+  $T: V \to V$ be linear.
+  Then $T$ is self-adjoint if and only if there is an orthonormal eigenbasis of
+  $V$ for $T$.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
