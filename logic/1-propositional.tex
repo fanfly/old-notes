@@ -123,13 +123,13 @@
   If $\varnothing \vdash \varphi$, we write $\vdash \varphi$ for short.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}[Law of Identity]
   \label{thm:identity}
   For any formula $\alpha$, we have $\vdash \alpha \to \alpha$.
 \end{theorem}
 \begin{proof}
   We have a proof of $\alpha \to \alpha$ as follows.
-  \begin{enumerate}[1.]
+  \begin{enumerate}[(1)]
     \item $(\alpha \to ((\alpha \to \alpha) \to \alpha)) \to
     ((\alpha \to (\alpha \to \alpha)) \to (\alpha \to \alpha))$.
     \hfill (A2)
@@ -142,14 +142,251 @@
   Thus, we can conclude that $\vdash \alpha \to \alpha$.
 \end{proof}
 
-\begin{proposition}
-  Let $\Gamma$ and $\Delta$ be sets of formulas and let $\alpha$ be a formula.
-  If $\Gamma \vdash \alpha$ and $\Gamma \subseteq \Delta$, then
-  $\Delta \vdash \alpha$.
-\end{proposition}
+\begin{theorem}[Duns Scotus Law]
+  \label{thm:contradiction}
+  For any formula $\alpha$ and $\beta$, we have
+  $\vdash \neg\alpha \to (\alpha \to \beta)$.
+\end{theorem}
 \begin{proof}
-  To be completed.
+  We have a proof of $\neg\alpha \to (\alpha \to \beta)$ as follows.
+  \begin{enumerate}[(1)]
+    \item $((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))
+    \to (\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))$.
+    \hfill (A1)
+    \item $(\neg\beta \to \neg\alpha) \to (\alpha \to \beta)$. \hfill (A3)
+    \item $\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))$.
+    \hfill (1, 2)
+    \item $(\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))
+    \to ((\neg\alpha \to (\neg\beta \to \neg\alpha))
+    \to (\neg\alpha \to (\alpha \to \beta)))$. \\ \hbox{} \hfill (A2)
+    \item $(\neg\alpha \to (\neg\beta \to \neg\alpha))
+    \to (\neg\alpha \to (\alpha \to \beta))$. \hfill (3, 4)
+    \item $\neg\alpha \to (\neg\beta \to \neg\alpha)$. \hfill (A1)
+    \item $\neg\alpha \to (\alpha \to \beta)$. \hfill (5, 6)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash \neg\alpha \to (\alpha \to \beta)$.
 \end{proof}
+
+\begin{theorem}[Modus Ponens]
+  \label{thm:modus-ponens}
+  For any formula $\alpha$ and $\beta$, we have
+  $\vdash \alpha \to ((\alpha \to \beta) \to \beta)$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $\alpha \to ((\alpha \to \beta) \to \beta)$ as follows.
+  \begin{enumerate}[(1)]
+    \item $(\alpha \to \beta) \to (\alpha \to \beta)$.
+    \hfill (\Cref{thm:identity})
+    \item $((\alpha \to \beta) \to (\alpha \to \beta)) \to
+    (((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta) \to \beta))$.
+    \hfill (A2)
+    \item $((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta) \to \beta)$.
+    \hfill (1, 2)
+    \item $(((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta) \to \beta))
+    \to (\alpha \to (((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta)
+    \to \beta)))$. \hfill (A1)
+    \item $\alpha \to (((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta)
+    \to \beta))$. \hfill (3, 4)
+    \item $(\alpha \to (((\alpha \to \beta) \to \alpha) \to ((\alpha \to \beta)
+    \to \beta))) \to ((\alpha \to ((\alpha \to \beta) \to \alpha)) \to (\alpha
+    \to ((\alpha \to \beta) \to \beta)))$. \hfill (A2)
+    \item $(\alpha \to ((\alpha \to \beta) \to \alpha)) \to (\alpha \to
+    ((\alpha \to \beta) \to \beta))$. \hfill (5, 6)
+    \item $\alpha \to ((\alpha \to \beta) \to \alpha)$. \hfill (A1)
+    \item $\alpha \to ((\alpha \to \beta) \to \beta)$. \hfill (7, 8)
+  \end{enumerate}
+  Thus, we can conclude that
+  $\vdash \alpha \to ((\alpha \to \beta) \to \beta)$.
+\end{proof}
+
+\begin{theorem}[Hypothetical Syllogism]
+  \label{thm:syl}
+  For any formulas $\alpha$, $\beta$ and $\gamma$, we have
+  $\vdash (\beta \to \gamma) \to ((\alpha \to \beta) \to (\alpha \to \gamma))$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $(\beta \to \gamma) \to ((\alpha \to \beta) \to (\alpha
+  \to \gamma))$ as follows.
+  \begin{enumerate}[(1)]
+    \item $(\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to
+    (\alpha \to \gamma))$. \hfill (A2)
+    \item $((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to
+    (\alpha \to \gamma))) \to ((\beta \to \gamma) \to ((\alpha \to (\beta \to
+    \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma))))$. \hfill (A1)
+    \item $(\beta \to \gamma) \to ((\alpha \to (\beta \to \gamma)) \to
+    ((\alpha \to \beta) \to (\alpha \to \gamma)))$. \hfill (1, 2)
+    \item $((\beta \to \gamma) \to ((\alpha \to (\beta \to \gamma)) \to
+    ((\alpha \to \beta) \to (\alpha \to \gamma)))) \to (((\beta \to \gamma) \to
+    (\alpha \to (\beta \to \gamma))) \to ((\beta \to \gamma) \to
+    ((\alpha \to \beta) \to (\alpha \to \gamma))))$. \hfill (A2)
+    \item $((\beta \to \gamma) \to (\alpha \to (\beta \to \gamma))) \to ((\beta
+    \to \gamma) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))$.
+    \hfill (3, 4)
+    \item $(\beta \to \gamma) \to (\alpha \to (\beta \to \gamma))$. \hfill (A1)
+    \item $(\beta \to \gamma) \to ((\alpha \to \beta) \to
+    (\alpha \to \gamma))$. \hfill (5, 6)
+  \end{enumerate}
+  Thus, we can conclude that
+  $\vdash (\beta \to \gamma) \to ((\alpha \to \beta) \to (\alpha \to \gamma))$.
+\end{proof}
+
+\begin{theorem}[Clavius's Law]
+  \label{thm:clavius}
+  For any formula $\alpha$, we have $\vdash (\neg\alpha \to \alpha) \to
+  \alpha$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $(\neg\alpha \to \alpha) \to \alpha$ as follows.
+  \begin{enumerate}[(1)]
+    \item $(\neg\alpha \to (\alpha \to \neg(\neg\alpha \to \alpha))) \to
+    ((\neg\alpha \to \alpha) \to (\neg\alpha \to \neg(\neg\alpha \to
+    \alpha)))$. \hfill (A2)
+    \item $\neg\alpha \to (\alpha \to \neg(\neg\alpha \to \alpha))$.
+    \hfill (\Cref{thm:contradiction})
+    \item $(\neg\alpha \to \alpha) \to (\neg\alpha \to \neg(\neg\alpha \to
+    \alpha))$. \hfill (1, 2)
+    \item $(\neg\alpha \to \neg(\neg\alpha \to \alpha)) \to ((\neg\alpha \to
+    \alpha) \to \alpha)$. \hfill (A3)
+    \item $((\neg\alpha \to \neg(\neg\alpha \to \alpha)) \to ((\neg\alpha \to
+    \alpha) \to \alpha)) \to (((\neg\alpha \to \alpha) \to (\neg\alpha \to
+    \neg(\neg\alpha \to \alpha))) \to ((\neg\alpha \to \alpha) \to ((\neg\alpha
+    \to \alpha) \to \alpha)))$. \hfill (\Cref{thm:syl})
+    \item $((\neg\alpha \to \alpha) \to (\neg\alpha \to \neg(\neg\alpha \to
+    \alpha))) \to ((\neg\alpha \to \alpha) \to ((\neg\alpha \to \alpha) \to
+    \alpha))$. \hfill (4, 5)
+    \item $(\neg\alpha \to \alpha) \to ((\neg\alpha \to \alpha) \to \alpha)$.
+    \hfill (3, 6)
+    \item $((\neg\alpha \to \alpha) \to ((\neg\alpha \to \alpha) \to \alpha))
+    \to (((\neg\alpha \to \alpha) \to (\neg\alpha \to \alpha)) \to
+    ((\neg\alpha \to \alpha) \to \alpha))$. \hfill (A2)
+    \item $((\neg\alpha \to \alpha) \to (\neg\alpha \to \alpha)) \to
+    ((\neg\alpha \to \alpha) \to \alpha)$ \hfill (7, 8)
+    \item $(\neg\alpha \to \alpha) \to (\neg\alpha \to \alpha)$.
+    \hfill (\Cref{thm:identity})
+    \item $(\neg\alpha \to \alpha) \to \alpha$. \hfill (9, 10)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash (\neg\alpha \to \alpha) \to \alpha$.
+\end{proof}
+
+\begin{theorem}[Elimination of Double Negation]
+  \label{thm:dn-elim}
+  For any formula $\alpha$, we have $\vdash \neg\neg\alpha \to \alpha$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $\neg\neg\alpha \to \alpha$ as follows.
+  \begin{enumerate}[(1)]
+    \item $((\neg\alpha \to \alpha) \to \alpha) \to ((\neg\neg\alpha \to
+    (\neg\alpha \to \alpha)) \to (\neg\neg\alpha \to \alpha))$.
+    \hfill (\Cref{thm:syl})
+    \item $(\neg\alpha \to \alpha) \to \alpha$. \hfill (\Cref{thm:clavius})
+    \item $(\neg\neg\alpha \to (\neg\alpha \to \alpha)) \to (\neg\neg\alpha \to
+    \alpha)$. \hfill (1, 2)
+    \item $\neg\neg\alpha \to (\neg\alpha \to \alpha)$.
+    \hfill (\Cref{thm:contradiction})
+    \item $\neg\neg\alpha \to \alpha$. \hfill (3, 4)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash \neg\neg\alpha \to \alpha$.
+\end{proof}
+
+\begin{theorem}[Introduction of Double Negation]
+  \label{thm:dn-intro}
+  For any formula $\alpha$, we have $\vdash \alpha \to \neg\neg\alpha$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $\alpha \to \neg\neg\alpha$ as follows.
+  \begin{enumerate}[(1)]
+    \item $(\neg\neg\neg\alpha \to \neg\alpha) \to (\alpha \to
+    \neg\neg\alpha)$. \hfill (A3)
+    \item $\neg\neg\neg\alpha \to \neg\alpha$. \hfill (\Cref{thm:dn-elim})
+    \item $\alpha \to \neg\neg\alpha$. \hfill (1, 2)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash \alpha \to \neg\neg\alpha$.
+\end{proof}
+
+\begin{theorem}[Law of Contraposition]
+  \label{thm:contraposition}
+  For any formulas $\alpha$ and $\beta$, we have $\vdash (\alpha \to \beta) \to
+  (\neg\beta \to \neg\alpha)$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $(\alpha \to \beta) \to (\neg\beta \to \neg\alpha)$
+  as follows.
+  \begin{enumerate}[(1)]
+    \item $(\beta \to \neg\neg\beta) \to ((\neg\neg\alpha \to \beta) \to
+    (\neg\neg\alpha \to \neg\neg\beta))$. \hfill (\Cref{thm:syl})
+    \item $\beta \to \neg\neg\beta$. \hfill (\Cref{thm:dn-intro})
+    \item $(\neg\neg\alpha \to \beta) \to (\neg\neg\alpha \to \neg\neg\beta)$.
+    \hfill (1, 2)
+    \item $((\neg\neg\alpha \to \beta) \to (\neg\neg\alpha \to \neg\neg\beta))
+    \to ((\alpha \to \beta) \to ((\neg\neg\alpha \to \beta) \to (\neg\neg\alpha
+    \to \neg\neg\beta)))$. \hfill (A1)
+    \item $(\alpha \to \beta) \to ((\neg\neg\alpha \to \beta) \to
+    (\neg\neg\alpha \to \neg\neg\beta))$. \hfill (3, 4)
+    \item $(\alpha \to \beta) \to ((\neg\neg\alpha \to \alpha) \to
+    (\neg\neg\alpha \to \beta))$. \hfill (\Cref{thm:syl})
+    \item $((\alpha \to \beta) \to ((\neg\neg\alpha \to \alpha) \to
+    (\neg\neg\alpha \to \beta))) \to (((\alpha \to \beta) \to (\neg\neg\alpha
+    \to \alpha)) \to ((\alpha \to \beta) \to (\neg\neg\alpha \to \beta)))$.
+    \hfill (A2)
+    \item $((\alpha \to \beta) \to (\neg\neg\alpha \to \alpha)) \to ((\alpha
+    \to \beta) \to (\neg\neg\alpha \to \beta))$. \hfill (6, 7)
+    \item $(\neg\neg\alpha \to \alpha) \to ((\alpha \to \beta) \to
+    (\neg\neg\alpha \to \alpha))$. \hfill (A1)
+    \item $\neg\neg\alpha \to \alpha$. \hfill (\Cref{thm:dn-elim})
+    \item $(\alpha \to \beta) \to (\neg\neg\alpha \to \alpha)$. \hfill (9, 10)
+    \item $(\alpha \to \beta) \to (\neg\neg\alpha \to \beta)$. \hfill (8, 11)
+    \item $((\alpha \to \beta) \to ((\neg\neg\alpha \to \beta) \to
+    (\neg\neg\alpha \to \neg\neg\beta))) \to (((\alpha \to \beta) \to
+    (\neg\neg\alpha \to \beta)) \to ((\alpha \to \beta) \to (\neg\neg\alpha \to
+    \neg\neg\beta)))$. \hfill (A2)
+    \item $((\alpha \to \beta) \to (\neg\neg\alpha \to \beta)) \to ((\alpha \to
+    \beta) \to (\neg\neg\alpha \to \neg\neg\beta))$. \hfill (5, 13)
+    \item $(\alpha \to \beta) \to (\neg\neg\alpha \to \neg\neg\beta)$.
+    \hfill (12, 14)
+    \item $((\neg\neg\alpha \to \neg\neg\beta) \to (\neg\beta \to \neg\alpha))
+    \to (((\alpha \to \beta) \to (\neg\neg\alpha \to \neg\neg\beta)) \to
+    ((\alpha \to \beta) \to (\neg\beta \to \neg\alpha)))$.
+    \hfill (\Cref{thm:syl})
+    \item $(\neg\neg\alpha \to \neg\neg\beta) \to (\neg\beta \to \neg\alpha)$.
+    \hfill (A3)
+    \item $((\alpha \to \beta) \to (\neg\neg\alpha \to \neg\neg\beta)) \to
+    ((\alpha \to \beta) \to (\neg\beta \to \neg\alpha))$. \hfill (16, 17)
+    \item $(\alpha \to \beta) \to (\neg\beta \to \neg\alpha)$. \hfill (15, 18)
+  \end{enumerate}
+  Thus, we can conclude that
+  $\vdash (\alpha \to \beta) \to (\neg\beta \to \neg\alpha)$.
+\end{proof}
+
+\begin{theorem}
+  For any formulas $\alpha$ and $\beta$, we have $\vdash \alpha \to (\neg\beta
+  \to \neg(\alpha \to \beta))$.
+\end{theorem}
+\begin{proof}
+  We have a proof of $\alpha \to (\neg\beta \to \neg(\alpha \to \beta))$
+  as follows.
+  \begin{enumerate}[(1)]
+    \item $((\alpha \to \beta) \to \beta) \to (\neg\beta \to \neg(\alpha \to
+    \beta))$. \hfill (\Cref{thm:contraposition})
+    \item $(((\alpha \to \beta) \to \beta) \to (\neg\beta \to \neg(\alpha \to
+    \beta))) \to (\alpha \to (((\alpha \to \beta) \to \beta) \to (\neg\beta \to
+    \neg(\alpha \to \beta))))$. \hfill (A1)
+    \item $\alpha \to (((\alpha \to \beta) \to \beta) \to (\neg\beta \to
+    \neg(\alpha \to \beta)))$. \hfill (1, 2)
+    \item $(\alpha \to (((\alpha \to \beta) \to \beta) \to (\neg\beta \to
+    (\neg(\alpha \to \beta))))) \to ((\alpha \to ((\alpha \to \beta) \to
+    \beta)) \to (\alpha \to (\neg\beta \to (\neg(\alpha \to \beta)))))$.
+    \hfill (A2)
+    \item $(\alpha \to ((\alpha \to \beta) \to \beta)) \to (\alpha \to
+    (\neg\beta \to (\neg(\alpha \to \beta))))$. \hfill (3, 4)
+    \item $\alpha \to ((\alpha \to \beta) \to \beta)$. \hfill
+    (\Cref{thm:modus-ponens})
+    \item $\alpha \to (\neg\beta \to \neg(\alpha \to \beta))$. \hfill (5, 6)
+  \end{enumerate}
+  Thus, we can conclude that $\vdash \alpha \to (\neg\beta \to \neg(\alpha \to
+  \beta))$.
+\end{proof}
+
+\section{Soundness and Completeness}
 
 \begin{theorem}[Deduction Theorem]
   \label{thm:deduction}
@@ -189,29 +426,4 @@
   \end{equation*}
   we can conclude that $\Gamma \vdash \alpha \to \beta_k$,
   which completes the proof.
-\end{proof}
-
-\begin{theorem}
-  \label{thm:contradiction}
-  For any formula $\alpha$ and $\beta$, we have
-  $\vdash \neg\alpha \to (\alpha \to \beta)$.
-\end{theorem}
-\begin{proof}
-  We have a proof of $\neg\alpha \to (\alpha \to \beta)$ as follows.
-  \begin{enumerate}[1.]
-    \item $((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))
-    \to (\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))$.
-    \hfill (A1)
-    \item $(\neg\beta \to \neg\alpha) \to (\alpha \to \beta)$. \hfill (A3)
-    \item $\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta))$.
-    \hfill (1, 2)
-    \item $(\neg\alpha \to ((\neg\beta \to \neg\alpha) \to (\alpha \to \beta)))
-    \to ((\neg\alpha \to (\neg\beta \to \neg\alpha))
-    \to (\neg\alpha \to (\alpha \to \beta)))$. \\ \hbox{} \hfill (A2)
-    \item $(\neg\alpha \to (\neg\beta \to \neg\alpha))
-    \to (\neg\alpha \to (\alpha \to \beta))$. \hfill (3, 4)
-    \item $\neg\alpha \to (\neg\beta \to \neg\alpha)$. \hfill (A1)
-    \item $\neg\alpha \to (\alpha \to \beta)$. \hfill (5, 6)
-  \end{enumerate}
-  Thus, we can conclude that $\vdash \neg\alpha \to (\alpha \to \beta)$.
 \end{proof}
