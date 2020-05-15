@@ -1,7 +1,7 @@
 TEX := pdflatex -interaction=nonstopmode -halt-on-error
 
 .PHONY: all clean
-all: probability.pdf
+all: set-theory.pdf
 
 %.pdf: %.tex *.tex
 	$(TEX) $^ && $(TEX) $^

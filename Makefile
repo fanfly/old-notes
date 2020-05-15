@@ -1,4 +1,4 @@
-DIRS=linear-algebra probability logic theory-of-computation
+DIRS=linear-algebra probability logic theory-of-computation set-theory
 
 .PHONY: all clean
 all:
