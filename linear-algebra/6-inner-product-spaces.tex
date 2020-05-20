@@ -279,6 +279,32 @@
   for each $i \in \{1, \dots, n\}$ by \Cref{thm:orthogonal-decomposition}.
 \end{proof}
 
+\begin{definition}
+  Let $V$ be an inner produce space over $F$ and let $S$ be a subspace of $V$.
+  The \emph{orthogonal complement} of $S$, denoted $S^\perp$, is the set of
+  vectors that are orthogonal to every vector in $S$, i.e.,
+  \begin{equation*}
+    S^\perp = \{x \in V: \text{$\inner{x}{y} = 0_F$ for all $y \in S$}\}.
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be an inner produce space over $F$.
+  For any subset $S$ of $V$, $S^\perp$ is a subspace of $V$.
+\end{theorem}
+\begin{proof}
+  We have $0_V \in S^\perp$ since $\inner{0_V}{z} = 0_F$ for any $z \in S$.
+  For any $a \in F$ and $x, y \in S^\perp$, we have
+  \begin{align*}
+    \inner{ax + y}{z}
+    &= a\inner{x}{z} + \inner{y}{z} \\
+    &= a0_F + 0_F \\
+    &= 0_F
+  \end{align*}
+  for any $z \in S$, implying $ax + y \in S^\perp$.
+  Thus, $S^\perp$ is a subspace of $V$ by \Cref{cor:subspace}.
+\end{proof}
+
 \section{The Adjoint of a Linear Operator}
 \begin{theorem}
   \label{thm:functional}
