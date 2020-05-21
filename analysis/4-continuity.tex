@@ -1,0 +1,18 @@
+\chapter{Continuity}
+\begin{definition}
+  Let $(X, d_X)$ and $(Y, d_Y)$ be a metric spaces and let $S \subseteq X$.
+  Let $f: S \to Y$ be a map.
+  Then we say that $b \in Y$ is the \emph{limit} of $f$ at $a \in X$, denoted
+  by
+  \begin{equation*}
+    \lim_{x \to a} f(x) = b,
+  \end{equation*}
+  if for any $\epsilon > 0$ there exists $\delta > 0$ such that
+  \begin{equation*}
+    d_Y(f(x), b) < \epsilon
+  \end{equation*}
+  holds for any $x \in S$ with
+  \begin{equation*}
+    0 < d_X(x, a) < \delta.
+  \end{equation*}
+\end{definition}

@@ -1,0 +1,64 @@
+\chapter{Basic Topology}
+\section{Metric Spaces}
+\begin{definition}
+  A set $X$ with a function $d: X \times X \to \mathbb{R}$ is a
+  \emph{metric space} if the following statements hold for any $x, y, z \in X$.
+  \begin{enumerate}
+    \item $d(x, y) \geq 0$.
+    \item $d(x, y) = 0$ if and only if $x = y$.
+    \item $d(x, y) = d(y, x)$.
+    \item $d(x, y) \leq d(x, z) + d(z, y)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let $(X, d)$ be a metric space.
+  Let $r > 0$ be a real number and let $x_0 \in X$.
+  The \emph{open ball} of radius $r$ centered at $x_0$, denoted by $B_r(x_0)$,
+  is defined by
+  \begin{equation*}
+    B_r(x_0) = \{x \in X: d(x, x_0) < r\}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $(X, d)$ be a metric space and let $S \subseteq X$.
+  \begin{itemize}
+    \item $S$ is \emph{open} if for any $x \in S$, there is a real number
+    $r > 0$ such that $B_r(x) \subseteq S$.
+    \item $S$ is \emph{closed} if $X \setminus S$ is open.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $(X, d)$ be a metric space.
+  \begin{enumerate}
+    \item $X$ and $\varnothing$ are open.
+    \item If $S_1, S_2$ are open subsets of $X$, then $S_1 \cap S_2$ is open.
+    \item If $\{S_i: i \in I\}$ is a collection of open subsets of $X$, then
+    \begin{equation*}
+      \bigcup_{i \in I} S_i
+    \end{equation*}
+    is open.
+  \end{enumerate}
+\end{theorem}
+
+\section{Compact Sets}
+\begin{definition}
+  Let $(X, d)$ be a metric space and let $S \subseteq X$.
+  An \emph{open cover} of $S$ is a collection $\{R_i: i \in I\}$ of open
+  subsets of $X$ such that
+  \begin{equation*}
+    S \subseteq \bigcup_{i \in I} R_i.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let $(X, d)$ be a metric space and let $S \subseteq X$.
+  We say that $S$ is \emph{compact} if for any open cover $\{R_i: i \in I\}$
+  of $S$ there exist finitely many indices $i_1, \dots, i_n \in I$
+  such that
+  \begin{equation*}
+    S \subseteq \bigcup_{k=1}^n R_{i_k}.
+  \end{equation*}
+\end{definition}
