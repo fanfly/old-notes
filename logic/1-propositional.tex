@@ -386,8 +386,6 @@
   \beta))$.
 \end{proof}
 
-\section{Soundness and Completeness}
-
 \begin{theorem}[Deduction Theorem]
   \label{thm:deduction}
   Let $\Gamma$ be a set of formulas and let $\alpha$ and $\beta$ be formulas.
@@ -426,4 +424,92 @@
   \end{equation*}
   we can conclude that $\Gamma \vdash \alpha \to \beta_k$,
   which completes the proof.
+\end{proof}
+
+\section{Soundness and Completeness}
+\begin{theorem}
+  Let $\alpha$ be a formula which consists of only the propositional variables
+  $p_1, \dots, p_k$ and let $\tau$ be a truth assignment.
+  Let $p_1^*, \dots, p_k^*$ be formulas such that for each
+  $i \in \{1, \dots, k\}$,
+  \begin{equation*}
+    p_i^* =
+    \begin{cases}
+      p_i, & \text{if $\tau(p_i) = 1$} \\
+      \neg p_i, & \text{if $\tau(p_i) = 0$}.
+    \end{cases}
+  \end{equation*}
+  Furthermore, let $\alpha^*$ be the formula defined by
+  \begin{equation*}
+    \alpha^* =
+    \begin{cases}
+      \alpha, & \text{if $\bar\tau(\alpha) = 1$} \\
+      \neg \alpha, & \text{if $\bar\tau(\alpha) = 0$}.
+    \end{cases}
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \alpha^*.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  The proof is by induction on the complexity of $\alpha$.
+  It is straightforward that the theorem holds when $\alpha = p_i$ for some
+  $i \in \{1, \dots, k\}$.
+
+  Now suppose that $\{p_1^*, \dots, p_k^*\} \vdash \alpha^*$, and we prove
+  that
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \beta^*
+  \end{equation*}
+  with $\beta = \neg\alpha$.
+  If $\bar\tau(\alpha) = 0$, then $\bar\tau(\beta) = 1$, and we have
+  $\alpha^* = \neg\alpha = \beta^*$.
+  Thus, $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$.
+  If $\bar\tau(\alpha) = 1$, then $\bar\tau(\beta) = 0$, and we have
+  $\alpha^* = \alpha$ and $\beta^* = \neg\neg\alpha$.
+  Since
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \alpha
+    \quad \text{and} \quad
+    \vdash \alpha \to \neg\neg\alpha,
+  \end{equation*}
+  we have $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$.
+
+  Now suppose that $\{p_1^*, \dots, p_k^*\} \vdash \alpha^*$ and
+  $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$, and we prove that
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \gamma^*
+  \end{equation*}
+  with $\gamma = \alpha \to \beta$.
+  If $\bar\tau(\alpha) = 0$, then $\bar\tau(\gamma) = 1$, and we have
+  $\alpha^* = \neg\alpha$ and $\gamma^* = \alpha \to \beta$.
+  Since $\{p_1^*, \dots, p_k^*\} \vdash \neg\alpha$
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \neg\alpha
+    \quad \text{and} \quad
+    \vdash \neg\alpha \to (\alpha \to \beta)
+  \end{equation*}
+  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
+  If $\bar\tau(\beta) = 1$, then $\bar\tau(\gamma) = 1$, and we have
+  $\beta^* = \beta$ and $\gamma^* = \alpha \to \beta$.
+  Since
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \beta
+    \quad \text{and} \quad
+    \vdash \beta \to (\alpha \to \beta)
+  \end{equation*}
+  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
+  If $\bar\tau(\alpha) = 1$ and $\bar\tau(\beta) = 0$, then
+  $\bar\tau(\gamma) = 0$, and we have $\alpha^* = \alpha$, 
+  $\beta^* = \neg\beta$ and $\gamma^* = \neg(\alpha \to \beta)$.
+  Since
+  \begin{equation*}
+    \{p_1^*, \dots, p_k^*\} \vdash \alpha,
+    \quad
+    \{p_1^*, \dots, p_k^*\} \vdash \neg\beta,
+    \quad \text{and} \quad
+    \vdash \alpha \to (\neg\beta \to \neg(\alpha \to \beta)),
+  \end{equation*}
+  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$, completing the proof.
 \end{proof}
