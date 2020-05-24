@@ -77,7 +77,7 @@
 \begin{definition}
   Let $V$ be an inner product space over a field $F$.
   \begin{itemize}
-    \item Vectors $x$ and $y$ in $V$ are \emph{orthogonal} if
+    \item For $x, y \in V$, we say that $x$ and $y$ are \emph{orthogonal} if
     \begin{equation*}
       \inner{x}{y} = 0_F.
     \end{equation*}
@@ -190,7 +190,7 @@
 \end{definition}
 
 \begin{proposition}
-  Let $V$ be an inner produce space over a field
+  Let $V$ be an inner product space over a field
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   Then the following statements are true for any vectors $x, y \in V$ and any
   scalar $a \in F$.
@@ -224,7 +224,7 @@
 
 \begin{theorem}[Pythagorean Theorem]
   \label{thm:pythagoras}
-  Let $V$ be an inner produce space over a field
+  Let $V$ be an inner product space over a field
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   Then for any vectors $x, y \in V$ with $\inner{x}{y} = 0_F$, we have
   \begin{equation*}
@@ -245,7 +245,7 @@
 \end{proof}
 
 \begin{definition}
-  Let $V$ be an inner produce space over a field
+  Let $V$ be an inner product space over a field
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   We say that a subset $S$ of $V$ is \emph{orthonormal} if $S$ is orthogonal
   and $\norm{x} = 1_F$ for each $x \in S$.
@@ -253,7 +253,7 @@
 
 \begin{theorem}
   \label{thm:orthonormal-decomposition}
-  Let $V$ be an inner produce space over a field
+  Let $V$ be an inner product space over a field
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   Let $S$ be an orthonormal subset of $V$ and let
   $x_1, \dots, x_n$ be distinct vectors in $S$.
@@ -280,7 +280,7 @@
 \end{proof}
 
 \begin{definition}
-  Let $V$ be an inner produce space over $F$ and let $S$ be a subspace of $V$.
+  Let $V$ be an inner product space over $F$ and let $S$ be a subspace of $V$.
   The \emph{orthogonal complement} of $S$, denoted $S^\perp$, is the set of
   vectors that are orthogonal to every vector in $S$, i.e.,
   \begin{equation*}
@@ -289,7 +289,7 @@
 \end{definition}
 
 \begin{theorem}
-  Let $V$ be an inner produce space over $F$.
+  Let $V$ be an inner product space over $F$.
   For any subset $S$ of $V$, $S^\perp$ is a subspace of $V$.
 \end{theorem}
 \begin{proof}
@@ -305,10 +305,43 @@
   Thus, $S^\perp$ is a subspace of $V$ by \Cref{cor:subspace}.
 \end{proof}
 
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space over $F$.
+  If $W$ is a subspace of $V$, then $W \oplus W^\perp = V$.
+\end{theorem}
+\begin{proof}
+  Let $R = \{y_1, \dots, y_k\}$ be an orthonormal basis of $W$.
+  We have $W + W^\perp \subseteq V$ since $W$ and $W^\perp$ are subspaces of
+  $V$.
+  To prove $V \subseteq W + W^\perp$, suppose that $x \in V$, and let
+  \begin{equation*}
+    y = \sum_{i=1}^k \inner{x}{y_i}y_i
+  \end{equation*}
+  be a vector in $W$.
+  Then $x - y \in V^\perp$ since
+  \begin{align*}
+    \inner{x - y}{y_j}
+    &= \inner{x - \sum_{i=1}^k \inner{x}{y_i}y_i}{y_j} \\
+    &= \inner{x}{y_j} - \sum_{i=1}^k \inner{x}{y_i} \inner{y_i}{y_j} \\
+    &= \inner{x}{y_j} - \inner{x}{y_j} \\
+    &= 0_F.
+  \end{align*}
+  Thus,
+  \begin{equation*}
+    x = y + (x - y) \in V + V^\perp,
+  \end{equation*}
+  implying $V \subseteq W + W^\perp$, and thus $W + W^\perp = V$.
+
+  Furthermore, for any $x \in W \cap W^\perp$, we have $\inner{x}{x} = 0_F$,
+  implying $x = 0_V$.
+  Thus, we have $W \cap W^\perp = \{0_V\}$, which implies
+  $W \oplus W^\perp = V$.
+\end{proof}
+
 \section{The Adjoint of a Linear Operator}
 \begin{theorem}
   \label{thm:functional}
-  Let $V$ be a finite-dimensional inner produce space over
+  Let $V$ be a finite-dimensional inner product space over
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   Let $f: V \to F$ be a linear transformation.
   Then there exists a unique vector $y \in V$ such that
@@ -339,7 +372,7 @@
 \end{proof}
 
 \begin{theorem}
-  Let $V$ be a finite-dimensional inner produce space over
+  Let $V$ be a finite-dimensional inner product space over
   $F \in \{\mathbb{R}, \mathbb{C}\}$.
   For any linear operator $T: V \to V$, there exists a unique operator
   $T': V \to V$ such that
@@ -385,7 +418,7 @@
   \begin{equation*}
     \inner{x}{T''(y)} = \inner{T(x)}{y} = \inner{x}{T'(y)},
   \end{equation*}
-  implying $T''(y) = T(y)$ for any $y \in V$ by \Cref{thm:inner-product-basic}
+  implying $T''(y) = T'(y)$ for any $y \in V$ by \Cref{thm:inner-product-basic}
   (d).
   Thus, $T'' = T'$.
 \end{proof}
@@ -452,6 +485,34 @@
 \end{corollary}
 \begin{proof}
   Straightforward from \Cref{thm:adjoint-properties}.
+\end{proof}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space over $F$ and let
+  $T \in \mathcal{L}(V)$.
+  If $\lambda$ is an eigenvalue of $T$, then $\overline{\lambda}$ is an
+  eigenvalue of $T^*$.
+\end{theorem}
+\begin{proof}
+  To prove $\overline{\lambda}$ is an eigenvalue of $T^*$, it suffices to prove
+  that $\mathcal{N}(T^* - \overline{\lambda}I_V)$ consists of an nonzero
+  vector, i.e.,
+  \begin{equation*}
+    \nullity(T^* - \overline{\lambda}I_V) \geq 1.
+  \end{equation*}
+
+  Suppose that $(\lambda, x)$ be an eigenpair of $T$.
+  Then for any $y \in V$, we have
+  \begin{align*}
+    \inner{x}{(T^* - \overline{\lambda}I_V)(y)}
+    &= \inner{x}{(T - \lambda I_V)^*(y)} \\
+    &= \inner{(T - \lambda I_V)(x)}{y} \\
+    &= \inner{0_V}{y} \\
+    &= 0_F.
+  \end{align*}
+  Thus, $x \in (\mathcal{R}(T^* - \overline{\lambda} I_V))^\perp \setminus
+  \{0_V\}$.
+  (To be completed.)
 \end{proof}
 
 \section{Normal and Self-Adjoint Operators}
