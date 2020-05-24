@@ -1,95 +1,42 @@
 \chapter{Propositional Logic}
 \section{The Language of Propositional Logic}
 \begin{definition}
-  An \emph{alphabet} for propositional logic is a pair
-  $\mathcal{A} = (\mathcal{V}, \mathcal{C})$, where each component is as
-  follows.
-  \begin{itemize}
-    \item $\mathcal{V}$ is a countably infinite set of
-    \emph{propositional variables}.
-    \item $\mathcal{C}$ is a finite set of \emph{connectives} with
-    \begin{equation*}
-      \mathcal{C} = \bigcup_{i \geq 0} \mathcal{C}_i,
-    \end{equation*}
-    where $\mathcal{C}_i$ is the set of connectives of arity $i$.
-  \end{itemize}
-\end{definition}
-
-\begin{remark}
-  In the default setting, we usually let
-  \begin{align*}
-    \mathcal{C}_0 &= \{\bot, \top\} \\
-    \mathcal{C}_1 &= \{\neg\} \\
-    \mathcal{C}_2 &= \{\wedge, \vee, \to, \leftrightarrow\}
-  \end{align*}
-  and $\mathcal{C}_j = \varnothing$ for $j \geq 3$.
-\end{remark}
-
-\begin{definition}
-  The language $\mathcal{L}$ of \emph{formulas} over alphabet
-  $\mathcal{A} = (\mathcal{V}, \mathcal{C})$ is the minimal set that satisfies
-  the following statements.
-  \begin{itemize}
-    \item Each propositional variable in $\mathcal{V}$ is a formula.
-    \item If $\star$ is a connective in $\mathcal{C}_k$ and
-    $\alpha_1, \alpha_2, \dots, \alpha_k$ are formulas,
-    then $\star\alpha_1\alpha_2\cdots\alpha_k$ is a formula.
-  \end{itemize}
+  Let $V = \{p_1, p_2, \dots\}$ be a countably infinite set, whose elements are
+  called \emph{propositional variables}.
+  We define the set of \emph{formulas} on $V$ as the minimal set of strings on
+  the alphabet $V \cup \{\neg, \to, (, )\}$ satisfying the following
+  properties.
+  \begin{enumerate}
+    \item Each propositional variable in $V$ is a formula on $V$.
+    \item If $\alpha$ is a formula on $A$, then $\neg\alpha$ is a
+    formula on $A$.
+    \item If $\alpha$ and $\beta$ are formulas on $A$, then
+    $(\alpha \to \beta)$ is a formula on $A$.
+  \end{enumerate}
 \end{definition}
 
 \section{Truth Assignment}
 \begin{definition}
-  A \emph{truth assignment} is a function $\tau: \mathcal{V} \to \{0, 1\}$.
-  It can be extended to $\bar\tau: \mathcal{L} \to \{0, 1\}$ by assigning each
-  connective with arity $k$ to a boolean function from $\{0, 1\}^k$ to
-  $\{0, 1\}$.
+  A \emph{truth assignment} is a function $\tau: V \to \{0, 1\}$, and it can be
+  extended to have its domain the set of formulas on $V$ as follows.
+  \begin{enumerate}
+    \item $\tau(\neg\alpha) = 1 - \tau(\alpha)$ for any formula $\alpha$.
+    \item $\tau((\alpha \to \beta)) = 1 - \tau(\alpha)
+    (1 - \tau(\beta))$ for any formulas $\alpha$ and $\beta$.
+  \end{enumerate}
 \end{definition}
-
-\begin{remark}
-  By convention, we use the truth table as follows.
-  \begin{table}[h!]
-    \centering
-    \begin{tabular}{cc}
-      $\bar\tau(\bot)$ & $\bar\tau(\top)$ \\
-      \hline
-      0 & 1
-    \end{tabular}
-    \qquad
-    \begin{tabular}{c|c}
-      $\bar\tau(\alpha)$ & $\bar\tau(\neg\alpha)$ \\
-      \hline
-      0 & 1 \\
-      1 & 0
-    \end{tabular}
-    \\[1em]
-    \begin{tabular}{cc|cccc}
-      $\bar\tau(\alpha)$ & $\bar\tau(\beta)$
-        & $\bar\tau(\alpha \wedge \beta)$
-        & $\bar\tau(\alpha \vee \beta)$
-        & $\bar\tau(\alpha \to \beta)$
-        & $\bar\tau(\alpha \leftrightarrow \beta)$ \\
-      \hline
-      0 & 0 & 0 & 0 & 1 & 1 \\
-      0 & 1 & 0 & 1 & 1 & 0 \\
-      1 & 0 & 0 & 1 & 0 & 0 \\
-      1 & 1 & 1 & 1 & 1 & 1
-    \end{tabular}
-    \caption{Truth Table}
-    \label{table:truth-table}
-  \end{table}
-\end{remark}
 
 \begin{definition}
   We say that a truth assignment $\tau$ \emph{satisfies} a formula $\alpha$
-  if $\bar\tau(\alpha) = 1$.
-  Also, we say that $\tau$ satisfies a set $\Sigma$ of formulas if it satisfies
-  each formula in $\Sigma$.
+  if $\tau(\alpha) = 1$.
+  Also, we say that $\tau$ \emph{satisfies} a set $\Sigma$ of formulas if it
+  satisfies each formula in $\Sigma$.
 \end{definition}
 
 \begin{definition}
-  Let $\Sigma$ be a set of formulas and let $\alpha$ be a formula.
-  We say that $\Sigma$ \emph{tautologically implies} $\alpha$, denoted by
-  $\Sigma \models \alpha$, if every truth assignment satisfying $\Sigma$
+  Let $\Gamma$ be a set of formulas and let $\alpha$ be a formula.
+  We say that $\Gamma$ \emph{tautologically implies} $\alpha$, denoted by
+  $\Gamma \vDash \alpha$, if every truth assignment satisfying $\Gamma$
   also satisfies $\alpha$.
 \end{definition}
 
@@ -443,8 +390,8 @@
   \begin{equation*}
     \alpha^* =
     \begin{cases}
-      \alpha, & \text{if $\bar\tau(\alpha) = 1$} \\
-      \neg \alpha, & \text{if $\bar\tau(\alpha) = 0$}.
+      \alpha, & \text{if $\tau(\alpha) = 1$} \\
+      \neg \alpha, & \text{if $\tau(\alpha) = 0$}.
     \end{cases}
   \end{equation*}
   Then we have
@@ -463,10 +410,10 @@
     \{p_1^*, \dots, p_k^*\} \vdash \beta^*
   \end{equation*}
   with $\beta = \neg\alpha$.
-  If $\bar\tau(\alpha) = 0$, then $\bar\tau(\beta) = 1$, and we have
+  If $\tau(\alpha) = 0$, then $\tau(\beta) = 1$, and we have
   $\alpha^* = \neg\alpha = \beta^*$.
   Thus, $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$.
-  If $\bar\tau(\alpha) = 1$, then $\bar\tau(\beta) = 0$, and we have
+  If $\tau(\alpha) = 1$, then $\tau(\beta) = 0$, and we have
   $\alpha^* = \alpha$ and $\beta^* = \neg\neg\alpha$.
   Since
   \begin{equation*}
@@ -482,7 +429,7 @@
     \{p_1^*, \dots, p_k^*\} \vdash \gamma^*
   \end{equation*}
   with $\gamma = \alpha \to \beta$.
-  If $\bar\tau(\alpha) = 0$, then $\bar\tau(\gamma) = 1$, and we have
+  If $\tau(\alpha) = 0$, then $\tau(\gamma) = 1$, and we have
   $\alpha^* = \neg\alpha$ and $\gamma^* = \alpha \to \beta$.
   Since $\{p_1^*, \dots, p_k^*\} \vdash \neg\alpha$
   \begin{equation*}
@@ -491,7 +438,7 @@
     \vdash \neg\alpha \to (\alpha \to \beta)
   \end{equation*}
   we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
-  If $\bar\tau(\beta) = 1$, then $\bar\tau(\gamma) = 1$, and we have
+  If $\tau(\beta) = 1$, then $\tau(\gamma) = 1$, and we have
   $\beta^* = \beta$ and $\gamma^* = \alpha \to \beta$.
   Since
   \begin{equation*}
@@ -500,8 +447,8 @@
     \vdash \beta \to (\alpha \to \beta)
   \end{equation*}
   we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
-  If $\bar\tau(\alpha) = 1$ and $\bar\tau(\beta) = 0$, then
-  $\bar\tau(\gamma) = 0$, and we have $\alpha^* = \alpha$, 
+  If $\tau(\alpha) = 1$ and $\tau(\beta) = 0$, then
+  $\tau(\gamma) = 0$, and we have $\alpha^* = \alpha$, 
   $\beta^* = \neg\beta$ and $\gamma^* = \neg(\alpha \to \beta)$.
   Since
   \begin{equation*}
