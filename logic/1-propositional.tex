@@ -1,24 +1,23 @@
 \chapter{Propositional Logic}
 \section{The Language of Propositional Logic}
 \begin{definition}
-  Let $V = \{p_1, p_2, \dots\}$ be a countably infinite set, whose elements are
-  called \emph{propositional variables}.
-  We define the set of \emph{formulas} on $V$ as the minimal set of strings on
+  Let $V$ be a countably infinite set, whose elements are called
+  \emph{propositional variables}.
+  We define the set of \emph{formulas} as the minimal set of strings on
   the alphabet $V \cup \{\neg, \to, (, )\}$ satisfying the following
   properties.
   \begin{enumerate}
     \item Each propositional variable in $V$ is a formula on $V$.
-    \item If $\alpha$ is a formula on $A$, then $\neg\alpha$ is a
-    formula on $A$.
-    \item If $\alpha$ and $\beta$ are formulas on $A$, then
-    $(\alpha \to \beta)$ is a formula on $A$.
+    \item If $\alpha$ is a formula, then so is $\neg\alpha$.
+    \item If $\alpha$ and $\beta$ are formulas, then so is
+    $(\alpha \to \beta)$.
   \end{enumerate}
 \end{definition}
 
 \section{Truth Assignment}
 \begin{definition}
   A \emph{truth assignment} is a function $\tau: V \to \{0, 1\}$, and it can be
-  extended to have its domain the set of formulas on $V$ as follows.
+  extended to have its domain the set of formulas as follows.
   \begin{enumerate}
     \item $\tau(\neg\alpha) = 1 - \tau(\alpha)$ for any formula $\alpha$.
     \item $\tau((\alpha \to \beta)) = 1 - \tau(\alpha)
