@@ -1,0 +1,76 @@
+\chapter{Relations and Functions}
+\section{Ordered Pairs}
+\begin{definition}
+  For sets $x$ and $y$, we define
+  \begin{equation*}
+    (x, y) = \{\{x\}, \{x, y\}\}.
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}
+  Let $x, y, y'$ be sets.
+  If $\{x, y\} = \{x, y'\}$, then $y = y'$.
+\end{lemma}
+\begin{proof}
+  Suppose that $y \neq y'$.
+  Since $y \in \{x, y\} = \{x, y'\}$ and $y \neq y'$, we have $y = x$.
+  Then we have $y' \in \{x, y'\} = \{x, y\} = \{x\}$, implying $y' = x = y$,
+  contradiction.
+  Thus, $y = y'$.
+\end{proof}
+
+\begin{theorem}
+  For sets $x, x', y, y'$, we have
+  \begin{equation*}
+    (x, y) = (x', y')
+  \end{equation*}
+  if and only if $x = x'$ and $y = y'$.
+\end{theorem}
+\begin{proof}
+  ($\Leftarrow$)
+  Straightforward.
+  ($\Rightarrow$)
+  Suppose that $x \neq x'$.
+  Since
+  \begin{equation*}
+    \{\{x\}, \{x, y\}\} = \{\{x'\}, \{x', y'\}\},
+  \end{equation*}
+  either $\{x\} = \{x', y'\}$ or $\{x\} = \{x'\}$ holds.
+  For both cases we all have $x' \in \{x\}$, implying $x' = x$, contradiction.
+  Hence we have $x = x'$, and it follows that $\{x\} = \{x'\}$, implying
+  $\{x, y\} = \{x', y'\}$, and thus $y = y'$.
+\end{proof}
+
+\begin{lemma}
+  If $x, y \in C$, then $(x, y) \in \mathcal{P}(\mathcal{P}(C))$.
+\end{lemma}
+\begin{proof}
+  Since $\{x\}$ and $\{y\}$ are subsets of $C$, we have
+  $\{x\}, \{x, y\} \in \mathcal{P}(C)$.
+  It follows that $\{\{x\}, \{x, y\}\}$ is a subset of $\mathcal{P}(C)$,
+  implying
+  \begin{equation*}
+    (x, y) = \{\{x\}, \{x, y\}\} \in \mathcal{P}(\mathcal{P}(C)).
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  For any sets $A$ and $B$, there is a set whose members are exactly the
+  pairs $(x, y)$ with $x \in A$ and $y \in B$.
+\end{theorem}
+\begin{proof}
+  Since $x, y \in A \cup B$, the set of pairs $(x, y)$ with $x \in A$ and
+  $y \in B$ can be given by
+  \begin{equation*}
+    \{z \in \mathcal{P}(\mathcal{P}(A \cup B)):
+    \text{$z = (x, y)$ for some $x \in A$ and $y \in B$}\}.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  For any sets $A$ and $B$, the \emph{Cartesian product} of $A$ and $B$,
+  denoted by $A \times B$, is the set whose memebers are exactly the pairs
+  $(x, y)$ with $x \in A$ and $y \in B$.
+\end{definition}
