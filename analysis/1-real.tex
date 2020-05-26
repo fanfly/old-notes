@@ -1,1 +1,29 @@
 \chapter{Real Numbers}
+\section{Ordered Fields}
+\begin{definition}
+  An \emph{ordered field} is a set $F$ on which addition $+: F \times F \to F$,
+  multiplication $\cdot: F \times F \to F$ and a binary relation $<$ are
+  defined that satisfies the following axioms.
+  \begin{enumerate}[leftmargin=3.5em]
+    \item[(A 1)] $x + y  = y + x$ for any $x, y \in F$.
+    \item[(A 2)] $(x + y) + z = x + (y + z)$ for any $x, y, z \in F$.
+    \item[(A 3)] There is an element $0$ in $F$ such that $x + 0 = x$ for any
+    $x \in F$.
+    \item[(A 4)] For each $x \in F$ there is an element $-x$ in $F$ such that
+    $x + (-x) = 0$.
+    \item[(M 1)] $x \cdot y  = y \cdot x$ for any $x, y \in F$.
+    \item[(M 2)] $(x \cdot y) \cdot z = x \cdot (y \cdot z)$ for any
+    $x, y, z \in F$.
+    \item[(M 3)] There is an element $1$ in $F \setminus \{0\}$ such that
+    $x \cdot 1 = x$ for any $x \in F$.
+    \item[(M 4)] For each $x \in F \setminus \{0\}$ there is an element
+    $x^{-1}$ in $F$ such that $x \cdot x^{-1} = 0$.
+    \item[(D)] $x \cdot (y + z) = x \cdot y + x \cdot z$ for any
+    $x, y, z \in F$.
+    \item[(O 1)] Exactly one of the statements $x = y$, $x < y$, $y < x$ holds
+    for any $x, y \in F$.
+    \item[(O 2)] $x < y$ and $y < z$ implies $x < z$ for any $x, y, z \in F$.
+    \item[(O 3)] $x < y$ implies $x + z < y + z$ for any $x, y, z \in F$.
+    \item[(O 4)] $0 < x$ and $0 < y$ implies $0 < xy$ for any $x, y \in F$.
+  \end{enumerate}
+\end{definition}
