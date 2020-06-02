@@ -1,18 +1,120 @@
 \chapter{Sequences and Series}
 \begin{definition}
   Let $(X, d)$ be a metric space.
-  Let $(x_n)_{n \geq 1}$ be a sequence in $X$.
-  We say that $(x_n)_{n \geq 1}$ \emph{converges} to a point $x \in X$, denoted
-  by
+  Let $\{x_n\}$ be a sequence in $X$.
+  We say that $\{x_n\}$ \emph{converges} to a point $x \in X$, denoted by
   \begin{equation*}
     \lim_{n \to \infty} x_n = x,
   \end{equation*}
   if for any real number $\epsilon > 0$ there is a positive integer $N$
   such that $n \geq N$ implies $d(x_n, x) < \epsilon$.
   \begin{itemize}
-    \item We say that $(x_n)_{n \geq 1}$ is \emph{convergent} if it converges
-    to some point in $X$.
-    \item We say that $(x_n)_{n \geq 1}$ is \emph{divergent} if it is not
-    convergent.
+    \item We say that $\{x_n\}$ is \emph{convergent} if it converges to some
+    point in $X$.
+    \item We say that $\{x_n\}$ is \emph{divergent} if it is not convergent.
   \end{itemize}
 \end{definition}
+
+\begin{theorem}
+  Let $\{x_n\}$ be a sequence in a metric space $(X, d)$.
+  If $\{x_n\}$ converges to both $x \in X$ and $x' \in X$, then $x = x'$.
+\end{theorem}
+\begin{proof}
+  For any $\epsilon > 0$, there exists a positive integer $N$ such that
+  \begin{align*}
+    d(x_n, x) < \frac{\epsilon}{2}
+    \quad \text{and} \quad
+    d(x_n, x') < \frac{\epsilon}{2}
+  \end{align*}
+  for each $n \geq N$, implying
+  \begin{equation*}
+    d(x, x') \leq d(x_n, x) + d(x_n, x') < \epsilon.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Let $\{a_n\}$ and $\{b_n\}$ be complex sequences with
+  \begin{equation*}
+    \lim_{n \to \infty} a_n = L
+    \quad \text{and} \quad
+    \lim_{n \to \infty} b_n = M.
+  \end{equation*}
+  Let $c$ be a complex number.
+  Then the following statements are true.
+  \begin{enumerate}
+    \item We have
+    \begin{equation*}
+      \lim_{n \to \infty} (a_n + b_n) = L + M.
+    \end{equation*}
+    \item We have
+    \begin{equation*}
+      \lim_{n \to \infty} a_nb_n = LM.
+    \end{equation*}
+    \item If $L \neq 0$ and $a_n \neq 0$ for each positive integer $n$, we have
+    \begin{equation*}
+      \lim_{n \to \infty} \frac{1}{a_n} = \frac{1}{L}.
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item For any $\epsilon > 0$, there exists a positive integer $N$ such that
+    for any $n \geq N$, we have
+    \begin{equation*}
+      |a_n - L| < \frac{\epsilon}{2}
+      \quad \text{and} \quad
+      |b_n - M| < \frac{\epsilon}{2},
+    \end{equation*}
+    implying
+    \begin{equation*}
+      |(a_n + b_n) - (L + M)|
+      \leq |a_n - L| + |b_n - M|
+      < \frac{\epsilon}{2} + \frac{\epsilon}{2}
+      = \epsilon.
+    \end{equation*}
+    
+    \item Let $C > 0$ such that $|L| \leq C$ and $|b_n| \leq C$ for any
+    positive integer $n$.
+    For any $\epsilon > 0$, there exists a positive integer $N$ such that for
+    any $n \geq N$, we have
+    \begin{equation*}
+      |a_n - L| < \frac{\epsilon}{2C}
+      \quad \text{and} \quad
+      |b_n - M| < \frac{\epsilon}{2C},
+    \end{equation*}
+    implying
+    \begin{align*}
+      |a_nb_n - LM|
+      &= |(a_n - L)b_n + (b_n - M)L| \\
+      &\leq |a_n - L||b_n| + |b_n - M||L| \\
+      &< \frac{\epsilon (|b_n| + L)}{2C} \\
+      &\leq \epsilon.
+    \end{align*}
+  
+    \item For any $\epsilon > 0$, there exists a positive integer $N$ such that
+    for any $n \geq N$, we have
+    \begin{equation*}
+      |a_n - L| < \frac{|L|^2\epsilon}{2}
+      \quad \text{and} \quad
+      |a_n - L| < \frac{|L|}{2}.
+    \end{equation*}
+    It follows that
+    \begin{equation*}
+      |a_n|
+      = |L + (a_n - L)|
+      \geq |L| - |a_n - L|
+      > \frac{|L|}{2},
+    \end{equation*}
+    implying
+    \begin{equation*}
+      \left|\frac{1}{a_n} - \frac{1}{L}\right|
+      = \left|\frac{a_n - L}{a_nL}\right|
+      = \frac{|a_n - L|}{|a_n||L|}
+      < \frac{2|a_n - L|}{|L|^2}
+      < \epsilon.
+      \qedhere
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
