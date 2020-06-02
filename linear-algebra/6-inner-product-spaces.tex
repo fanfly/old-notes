@@ -462,7 +462,7 @@
   Then the following statements hold for any $a \in F$ and $T_1, T_2, T \in
   \mathcal{L}(V)$.
   \begin{enumerate}
-    \item $(aT_1 + T_2)^* = \overline{a}T_1^* + T_2^*$.
+    \item $(a \cdot T_1 + T_2)^* = \overline{a} \cdot T_1^* + T_2^*$.
     \item $(T_1T_2)^* = T_2^*T_1^*$.
     \item $(T^*)^* = T$.
     \item $I_V^* = I_V$.
@@ -488,31 +488,44 @@
 \end{proof}
 
 \begin{theorem}
-  Let $V$ be a finite-dimensional inner product space over $F$ and let
-  $T \in \mathcal{L}(V)$.
-  If $\lambda$ is an eigenvalue of $T$, then $\overline{\lambda}$ is an
-  eigenvalue of $T^*$.
+  Let $V$ be a inner product space over $F$ and let $T: V \to V$ be linear.
+  Then $\mathcal{R}(T^*)^\perp = \mathcal{N}(T)$.
 \end{theorem}
 \begin{proof}
-  To prove $\overline{\lambda}$ is an eigenvalue of $T^*$, it suffices to prove
-  that $\mathcal{N}(T^* - \overline{\lambda}I_V)$ consists of an nonzero
-  vector, i.e.,
-  \begin{equation*}
-    \nullity(T^* - \overline{\lambda}I_V) \geq 1.
-  \end{equation*}
-
-  Suppose that $(\lambda, x)$ be an eigenpair of $T$.
-  Then for any $y \in V$, we have
+  The theorem is proved by
   \begin{align*}
-    \inner{x}{(T^* - \overline{\lambda}I_V)(y)}
-    &= \inner{x}{(T - \lambda I_V)^*(y)} \\
-    &= \inner{(T - \lambda I_V)(x)}{y} \\
-    &= \inner{0_V}{y} \\
-    &= 0_F.
+    x \in \mathcal{R}(T^*)^\perp
+    \quad &\Leftrightarrow \quad
+    \text{$\inner{x}{T^*(y)} = 0_F$ for all $y \in V$} \\
+    \quad &\Leftrightarrow \quad
+    \text{$\inner{T(x)}{y} = 0_F$ for all $y \in V$} \\
+    \quad &\Leftrightarrow \quad
+    T(x) = 0_V \\
+    \quad &\Leftrightarrow \quad
+    x \in \mathcal{N}(T).
+    \qedhere
   \end{align*}
-  Thus, $x \in (\mathcal{R}(T^* - \overline{\lambda} I_V))^\perp \setminus
-  \{0_V\}$.
-  (To be completed.)
+\end{proof}
+
+\begin{theorem}
+  \label{thm:adjoint-eigenvalue}
+  Let $V$ be a finite-dimensional inner product space over $F$ and let
+  $T \in \mathcal{L}(V)$.
+  Then $\overline{\lambda}$ is an eigenvalue of $T^*$ if and only if $\lambda$
+  is an eigenvalue of $T$.
+\end{theorem}
+\begin{proof}
+  The theorem is proved by
+  \begin{align*}
+    \mathcal{N}(T^* - \overline{\lambda}I_V) = \{0_V\}
+    \quad &\Leftrightarrow \quad
+    \mathcal{R}(T^* - \overline{\lambda}I_V) = V \\
+    \quad &\Leftrightarrow \quad
+    \mathcal{R}(T^* - \overline{\lambda}I_V)^\perp = \{0_V\} \\
+    \quad &\Leftrightarrow \quad
+    \mathcal{N}(T - \lambda I_V) = \{0_V\}.
+    \qedhere
+  \end{align*}
 \end{proof}
 
 \section{Normal and Self-Adjoint Operators}
@@ -525,23 +538,72 @@
 \end{definition}
 
 \begin{theorem}[Schur's Theorem]
+  \label{thm:schur}
   Let $V$ be a finite-dimensional inner product space over
   $F \in \{\mathbb{R}, \mathbb{C}\}$ and let $T: V \to V$ be linear.
-  If $f_T$ splits, then there is an ordered orthonormal basis $\beta$ of $V$
+  If $f_T$ splits, then there is an orthonormal ordered basis $\beta$ of $V$
   such that $[T]_\beta^\beta$ is upper triangular.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  The proof is by induction on $n = \dim(V)$.
+  The theorem holds trivially for $n = 1$.
+  For $n \geq 2$, since $f_T$ splits, $T$ has an eigenvalue, and thus $T^*$
+  has an eigenvalue by \Cref{thm:adjoint-eigenvalue}.
+
+  Suppose that $(\lambda, x)$ is an eigenpair of $T^*$ with
+  $\Vert x \Vert = 1_F$.
+  Let $W = \{x\}^\perp$.
+  Then $\dim(W) = n - 1$, and we can conclude that $W$ is $T$-invariant since
+  \begin{equation*}
+    \inner{x}{T(y)}
+    = \inner{T^*(x)}{y}
+    = \inner{\lambda x}{y}
+    = \lambda \inner{x}{y}
+    = 0_F
+  \end{equation*}
+  for any $y \in W$.
+  Define $T': W \to W$ with $T'(y) = T(y)$ for each $y \in W$.
+  It follows that $f_{T'}(t) \mid f_T(t)$, and thus $f_{T'}(t)$ splits.
+  By induction hypothesis, there is an orthonormal ordered basis
+  \begin{equation*}
+    \beta' = (x_1, \dots, x_{n-1})
+  \end{equation*}
+  of $W$ such that $A = [T']_{\beta'}^{\beta'}$
+  is upper triangular.
+  We can conclude that
+  \begin{equation*}
+    \beta = (x_1, \dots, x_{n-1}, x)
+  \end{equation*}
+  is an orthonormal ordered basis of $V$, and it follows that
+  $B = [T]_\beta^\beta$ is upper triangular since $B_{ij} = A_{ij}$ for all
+  $i, j \in \{1, \dots, n-1\}$, which completes the proof.
 \end{proof}
 
 \begin{definition}
-  Let $V$ be a finite-dimensional inner product space over
-  $F \in \{\mathbb{R}, \mathbb{C}\}$.
+  Let $V$ be an inner product space over $F \in \{\mathbb{R}, \mathbb{C}\}$.
   \begin{itemize}
     \item We say that $T \in \mathcal{L}(V)$ is \emph{normal} if $TT^* = T^*T$.
     \item We say that $A \in F^{n \times n}$ is \emph{normal} if $AA^* = A^*A$.
   \end{itemize}
 \end{definition}
+
+\begin{theorem}
+  Let $V$ be an inner product space over $F \in \{\mathbb{R}, \mathbb{C}\}$,
+  and let $T: V \to V$ be normal.
+  Then the following statements hold.
+  \begin{enumerate}
+    \item $\Vert T(x) \Vert = \Vert T^*(x) \Vert$ for any $x \in V$.
+    \item $T - cI_V$ is normal for any $c \in F$.
+    \item If $(\lambda, x)$ is an eigenpair of $T$, then
+    $(\overline\lambda, x)$ is an eigenpair of $T^*$.
+    \item If $\lambda_1$ and $\lambda_2$ are distinct eigenvalues of $T$, then
+    for any $x \in E_T(\lambda_1)$ and $y \in E_T(\lambda_2)$ we have
+    $\inner{x}{y} = 0_F$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
 
 \begin{theorem}
   Let $V$ be a finite-dimensional inner product space over $\mathbb{C}$ and let
@@ -550,7 +612,48 @@
   for $T$.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  ($\Rightarrow$)
+  It can be shown that $f_T(t)$ splits by fundamental theorem of algebra.
+  Thus, by Schur's theorem (\Cref{thm:schur}), there is an orthonormal ordered
+  basis $\beta = (x_1, \dots, x_n)$ such that $A = [T]_\beta^\beta$ is upper
+  triangular.
+  By induction on $j \in \{1, \dots, n\}$, we show that $(A_{jj}, x_j)$ is an
+  eigenpair of $T$.
+  The induction basis with $j = 1$ holds trivially since $A$ is upper
+  triangular, implying $T(x_1) = A_{11}x_1$.
+  For $j \geq 2$, we have
+  \begin{equation*}
+    T(x_j) = \sum_{i=1}^j A_{ij}x_i,
+  \end{equation*}
+  and since
+  \begin{equation*}
+    A_{ij}
+    = \inner{T(x_j)}{x_i}
+    = \inner{x_j}{T^*(x_i)}
+    = \inner{x_j}{\overline{A_{ii}}x_i}
+    = A_{ii}\inner{x_j}{x_i}
+    = 0_F
+  \end{equation*}
+  holds for any $i \in \{1, \dots, j-1\}$, it follows that
+  $T(x_j) = A_{jj}x_j$.
+  Thus, $x_1, \dots, x_n$ are eigenvectors of $T$, implying $\beta$ is an
+  orthonormal eigenbasis of $V$.
+
+  ($\Leftarrow$)
+  Suppose that $\beta$ is an orthonormal eigenbasis of $T$.
+  Then $[T]_\beta^\beta$ is diagonal, implying
+  \begin{equation*}
+    [T^*]_\beta^\beta = \left([T]_\beta^\beta\right)^*
+  \end{equation*}
+  is diagonal.
+  It follows that
+  \begin{equation*}
+    [TT^*]_\beta^\beta
+    = [T]_\beta^\beta[T^*]_\beta^\beta
+    = [T^*]_\beta^\beta[T]_\beta^\beta
+    = [T^*T]_\beta^\beta,
+  \end{equation*}
+  implying $TT^* = T^*T$.
 \end{proof}
 
 \begin{definition}
