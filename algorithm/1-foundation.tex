@@ -1,0 +1,97 @@
+\chapter{Foundations}
+\section{Computational Problems and Algorithms}
+\begin{definition}
+  A \emph{computational problem} is a relation
+  \begin{equation*}
+    P \subseteq X \times Y,
+  \end{equation*}
+  where $X$ is called the set of \emph{instances} and $Y$ is called the sets of
+  \emph{solutions}.
+\end{definition}
+
+\begin{example}
+  Let $X$ be the set of nonempty sequence of distinct integers and let $Y$
+  be the set of positive integers.
+  Then we can define $P \subseteq X \times Y$ such that
+  \begin{equation*}
+    ((a_1, a_2, \dots, a_n), i) \in P
+  \end{equation*}
+  if and only if $1 \leq i \leq n$ and $a_i \geq a_j$ for all
+  $j \in \{1, \dots, n\}$.
+  We can write this problem in the following form.
+\end{example}
+\begin{problem}[Champion Problem]
+  \label{prob:champion}
+  \leavevmode
+  \begin{itemize}
+    \item Input: A sequence of $n$ distinct integers $A[1], A[2], \dots, A[n]$.
+    \item Output: The index $i \in \{1, \dots, n\}$ such that $A[i] \geq A[j]$
+    for all $j \in \{1, \dots, n\}$.
+  \end{itemize}
+\end{problem}
+
+\begin{definition}
+  We will assume the \emph{random-access machine (RAM)} model of computation as
+  our implementaion technology for most of this note.
+  In this model, we have an infinite sequence of $w$-bit words, and we assume
+  $w = \lceil c \lg n \rceil$ for some constant $c \geq 1$, where $n$ is the
+  input size.
+  We can perform some basic operations on these words, including
+  \begin{itemize}
+    \item arithmetic operations (e.g., addition, subtraction, multiplication,
+    division),
+    \item data movement operations (e.g., load, store, copy), and
+    \item control operations (e.g., branch, subroutine call, return).
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Given a computational model, an \emph{algorithm} is defined as a finite
+  sequence of basic operations that transforms a given input into a unique
+  output.
+  \begin{itemize}
+    \item We say that an algorithm \emph{solves} a computational problem
+    $P \subseteq X \times Y$ if it transforms every instance $x \in X$ into a
+    solution $y \in Y$ such that $(x, y) \in P$.
+    \item The \emph{running time} of an algorithm on a specific input is
+    defined as the number of basic operations performed.
+  \end{itemize}
+\end{definition}
+
+\begin{example}
+  We can find the index of maximum of a sequence by the following algorithm
+  \textsc{Max-Index}.
+  \begin{codebox}
+    \Procname{$\proc{Max-Index}(A)$}
+    \li $n \gets \attrib{A}{size}$
+    \li $i \gets 1$
+    \li \For $j \gets 2$ \To $n$ \Do
+    \li     \If $A[i] < A[j]$ \Then
+    \li         $i \gets j$
+            \End
+        \End
+    \li \Return $i$
+  \end{codebox}
+  Note that we will describe algorithm is pseudocode so that implementaion
+  details can be hidden.
+\end{example}
+
+\begin{theorem}
+  The algorithm \textsc{Max-Index} solves the champion problem using the least
+  number of comparisons.
+\end{theorem}
+\begin{proof}
+  We show that \textsc{Max-Index} solves the champion problem as follows.
+  We focus on the loop invariant that at the start of each iteration of the
+  \For loop of lines 3 -- 5, $A[i]$ is the maximum of the subarray
+  $A[1 \twodots j-1]$.
+  The loop invariant is obviously true when entering the loop, and it remains
+  true between iterations since $A[i] \geq A[j]$ must hold at the end of each
+  iteration due to lines 4 and 5.
+  Thus, when the \For loop terminates, $A[i]$ should be the maximum of
+  $A[1 \twodots n]$.
+
+  Furthremore, the algorithm \textsc{Max-Index} uses $n-1$ comparisons, and it
+  is optimal with respect to the number of comparisons performed, since at
+  least $n-1$ comparisons are necessary to determine the maximum.
+\end{proof}

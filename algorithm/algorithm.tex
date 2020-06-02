@@ -1,5 +1,11 @@
 \documentclass[12pt]{report}
 \usepackage{../common}
+\usepackage{clrscode3e}
+
+\renewcommand*{\gets}{\leftarrow}
+
+\declaretheorem[style=definition,numberwithin=chapter]{problem}
+\renewcommand*{\theproblem}{\thechapter.\Alph{problem}}
 
 % title of table of contents
 \renewcommand*\contentsname{Algorithm}
@@ -7,7 +13,7 @@
 \begin{document}
   \tableofcontents
   % \part{Foundations}
-  \input{1-hardness}
+  \input{1-foundation}
   % \input{growth}
   % \input{sorting}
   % \part{Algorithm Design}
