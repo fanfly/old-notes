@@ -588,6 +588,7 @@
 \end{definition}
 
 \begin{theorem}
+  \label{thm:normal-properties}
   Let $V$ be an inner product space over $F \in \{\mathbb{R}, \mathbb{C}\}$,
   and let $T: V \to V$ be normal.
   Then the following statements hold.
@@ -668,11 +669,55 @@
 \end{definition}
 
 \begin{theorem}
+  \label{thm:self-adjoint-properties}
+  Let $V$ be a finite-dimensional inner product space over $F \in \{\mathbb{R},
+  \mathbb{C}\}$ and let $T: V \to V$ be self-adjoint.
+  Then the following statements hold.
+  \begin{enumerate}
+    \item Every eigenvalue of $T$ is real.
+    \item $f_T(t)$ splits.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Suppose that $(\lambda, x)$ is an eigenpair of $T$.
+    Note that $T$ is normal since $T$ is self-adjoint.
+    By \Cref{thm:normal-properties}, $(\overline\lambda, x)$ is an eigenpair of
+    $T^* = T$.
+    Thus, $\overline\lambda = \lambda$, implying $\lambda$ is real.
+
+    \item Define $g_T(t) \in \mathcal{P}(\mathbb{C})$ such that
+    $g_T(t) = f_T(t)$.
+    By the fundamental theorem of algebra, we have
+    \begin{equation*}
+      g_T(t) = \prod_{i=1}^n (t - \lambda_i)
+    \end{equation*}
+    for some $\lambda_1, \dots, \lambda_n \in \mathbb{C}$.
+    By (a), we can conclude that $\lambda_1, \dots, \lambda_n \in \mathbb{R}$.
+    Thus, $f_T(t)$ splits even if $F = \mathbb{R}$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
   Let $V$ be a finite-dimensional inner product space over $\mathbb{R}$ and let
   $T: V \to V$ be linear.
   Then $T$ is self-adjoint if and only if there is an orthonormal eigenbasis of
   $V$ for $T$.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  ($\Rightarrow$)
+  By \Cref{thm:self-adjoint-properties} (b), $f_T(t)$ splits.
+  Thus, by Schur's theorem (\Cref{thm:schur}), there is an orthonormal ordered
+  basis $\beta$ such that $A = [T]_\beta^\beta$ is upper triangular.
+  Moreover, $A^t = A$ since $T$ is self-adjoint.
+  Thus, $A$ is diagonal, implying $\beta$ is an orthonormal eigenbasis of $V$
+  for $T$.
+
+  ($\Leftarrow$)
+  Suppose that $\beta$ is an orthonormal eigenbasis of $V$ for $T$.
+  It follows that $A = [T]_\beta^\beta$ is diagonal, implying that $A$ is
+  self-adjoint.
+  Thus, $T$ is self-adjoint.
 \end{proof}
