@@ -155,6 +155,7 @@
 \end{proof}
 
 \begin{theorem}
+  \label{thm:determinant-multiplication}
   Let $\delta: F^{n \times n} \to F$ be an alternating $n$-linear function
   such that $\delta(I_n) = 1_F$.
   Then for any $A, B \in F^{m \times n}$, we have
@@ -321,4 +322,96 @@
   Therefore, $\delta$ is an alternating $n$-linear function with
   $\delta(I_n) = 1_F$, and by \Cref{thm:determinant-uniqueness} we can conclude
   that it is exactly the determinant function.
+\end{proof}
+
+\section{Properties of Determinants}
+\begin{theorem}
+  For any $A, B \in F^{n \times n}$, we have $\det(AB) = \det(A)\det(B)$.
+\end{theorem}
+\begin{proof}
+  Striaghtforward from \Cref{thm:determinant-multiplication}.
+\end{proof}
+
+\begin{theorem}
+  If $A \in F^{n \times n}$ is invertible, then $\det(A^{-1}) =
+  (\det(A))^{-1}$.
+\end{theorem}
+\begin{proof}
+  It follows by
+  \begin{equation*}
+    \det(A^{-1})\det(A)
+    = \det(A^{-1}A)
+    = \det(I_n)
+    = 1_F.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  Let $A, B \in F^{n \times n}$.
+  We say that $A$ and $B$ are \emph{similar}, denoted
+  \begin{equation*}
+    A \sim B,
+  \end{equation*}
+  if there is an invertible matrix $Q \in F^{n \times n}$ such that
+  $B = QAQ^{-1}$.
+\end{definition}
+
+\begin{theorem}
+  For any $A, B \in F^{n \times n}$, if $A \sim B$, then $\det(A) = \det(B)$.
+\end{theorem}
+\begin{proof}
+  Suppose that $Q$ is invertible such that $B = QAQ^{-1}$.
+  Then
+  \begin{align*}
+    \det(B)
+    &= \det(QAQ^{-1}) \\
+    &= \det(Q) \cdot \det(A) \cdot \det(Q^{-1}) \\
+    &= \det(Q) \cdot \det(Q^{-1}) \cdot \det(A) \\
+    &= \det(I_n) \cdot \det(A) \\
+    &= \det(A).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  Let $n \geq 2$.
+  For any $A \in F^{n \times n}$ and for any $i, j \in \{1, \dots, n\}$,
+  let $\tilde A_{ij}$ denote the $(n-1) \times (n-1)$ matrix obtained from $A$
+  by deleting the $i$th row and the $j$th column.
+\end{definition}
+
+\begin{theorem}[Laplace Expansion]
+  Let $n \geq 2$.
+  For any $A \in F^{n \times n}$ and $i \in \{1, \dots, n\}$, we have
+  \begin{equation*}
+    \det(A) = \sum_{j=1}^n A_{ij} (-1)^{i+j} \det(\tilde A_{ij}).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  For $j \in \{1, \dots, n\}$, let $B^{(j)}$ be the matrix obtained from $A$
+  by replacing its $i$th row with $e_j$.
+  Note that we can turn $B^{(j)}$ into a matrix
+  \begin{equation*}
+    C^{(j)} =
+    \begin{pmatrix}
+      1 & O \\
+      X & \tilde A_{ij}
+    \end{pmatrix}
+  \end{equation*}
+  by $i-1$ row swaps and $j-1$ column swaps, where $X$ is an $(n-1) \times 1$
+  matrix, and $O$ is the $1 \times (n-1)$ zero matrix.
+  Thus, we have
+  \begin{equation*}
+    \det(B^{(j)})
+    = (-1)^{(i-1)+(j-1)} \det(C^{j})
+    = (-1)^{i+j} \det(\tilde A_{ij}).
+  \end{equation*}
+  Since $\det(\cdot)$ is $n$-linear, we have
+  \begin{equation*}
+    \det(A)
+    = \sum_{j=1}^n A_{ij} \det(B^{(j)})
+    = \sum_{j=1}^n A_{ij} (-1)^{i+j} \det(\tilde A_{ij}).
+    \qedhere
+  \end{equation*}
 \end{proof}
