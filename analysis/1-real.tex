@@ -1,29 +1,194 @@
 \chapter{Real Numbers}
-\section{Ordered Fields}
+\section{Fields}
 \begin{definition}
-  An \emph{ordered field} is a set $F$ on which addition $+: F \times F \to F$,
-  multiplication $\cdot: F \times F \to F$ and a binary relation $<$ are
-  defined that satisfies the following axioms.
+  A nonempty set $F$ and two operations $+$ and $\cdot$ form a \emph{field} if
+  the following axioms (A 1) -- (A 5), (M 1) -- (M 5) and (D) are satisfied.
   \begin{enumerate}[leftmargin=3.5em]
-    \item[(A 1)] $x + y  = y + x$ for any $x, y \in F$.
-    \item[(A 2)] $(x + y) + z = x + (y + z)$ for any $x, y, z \in F$.
-    \item[(A 3)] There is an element $0$ in $F$ such that $x + 0 = x$ for any
+    \item[(A 1)] $x + y \in F$ for any $x, y \in F$.
+    \item[(A 2)] $x + y  = y + x$ for any $x, y \in F$.
+    \item[(A 3)] $(x + y) + z = x + (y + z)$ for any $x, y, z \in F$.
+    \item[(A 4)] There is an element $0 \in F$ such that $x + 0 = x$ for any
     $x \in F$.
-    \item[(A 4)] For each $x \in F$ there is an element $-x$ in $F$ such that
+    \item[(A 5)] For each $x \in F$ there is an element $-x$ in $F$ such that
     $x + (-x) = 0$.
+    \item[(M 1)] $x \cdot y \in F$ for any $x, y \in F$.
     \item[(M 1)] $x \cdot y  = y \cdot x$ for any $x, y \in F$.
     \item[(M 2)] $(x \cdot y) \cdot z = x \cdot (y \cdot z)$ for any
     $x, y, z \in F$.
-    \item[(M 3)] There is an element $1$ in $F \setminus \{0\}$ such that
+    \item[(M 3)] There is an element $1 \in F \setminus \{0\}$ such that
     $x \cdot 1 = x$ for any $x \in F$.
     \item[(M 4)] For each $x \in F \setminus \{0\}$ there is an element
     $x^{-1}$ in $F$ such that $x \cdot x^{-1} = 0$.
     \item[(D)] $x \cdot (y + z) = x \cdot y + x \cdot z$ for any
     $x, y, z \in F$.
-    \item[(O 1)] Exactly one of the statements $x = y$, $x < y$, $y < x$ holds
-    for any $x, y \in F$.
-    \item[(O 2)] $x < y$ and $y < z$ implies $x < z$ for any $x, y, z \in F$.
-    \item[(O 3)] $x < y$ implies $x + z < y + z$ for any $x, y, z \in F$.
-    \item[(O 4)] $0 < x$ and $0 < y$ implies $0 < xy$ for any $x, y \in F$.
   \end{enumerate}
 \end{definition}
+
+\begin{theorem}
+  Let $F$ be a field.
+  Then the following statements are true for any $x, y, z \in F$.
+  \begin{enumerate}
+    \item If $x + y = x + z$, then $y = z$.
+    \item If $x + y = x$, then $y = 0$.
+    \item If $x + y = 0$, then $y = -x$.
+    \item $-(-x) = x$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Note that these statements are consequence of axioms (A 1) -- (A 5).
+  \begin{enumerate}
+    \item We have
+    \begin{align*}
+      y
+      &= 0 + y \\
+      &= (-x + x) + y \\
+      &= -x + (x + y) \\
+      &= -x + (x + z) \\
+      &= (-x + x) + z \\
+      &= 0 + z \\
+      &= z.
+    \end{align*}
+    \item Since $x + y = x = x + 0$, we have $y = 0$ by (a).
+    \item Since $x + y = 0 = x + (-x)$, we have $y = -x$ by (a).
+    \item Since $-x + x = 0$, we have $-(-x) = x$ by (c). \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  Let $F$ be a field.
+  Then the following statements are true for any $x \in F \setminus \{0\}$
+  and $y, z \in F$.
+  \begin{enumerate}
+    \item If $x \cdot y = x \cdot z$, then $x = y$.
+    \item If $x \cdot y = x$, then $y = 1$.
+    \item If $x \cdot y = 1$, then $y = x^{-1}$.
+    \item $(x^{-1})^{-1} = x$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Note that these statements are consequence of axioms (M 1) -- (M 5).
+  \begin{enumerate}
+    \item We have
+    \begin{align*}
+      y
+      &= 1 \cdot y \\
+      &= (x^{-1} \cdot x) \cdot y \\
+      &= x^{-1} \cdot (x \cdot y) \\
+      &= x^{-1} \cdot (x \cdot z) \\
+      &= (x^{-1} \cdot x) \cdot z \\
+      &= 1 \cdot z \\
+      &= z.
+    \end{align*}
+    \item Since $x \cdot y = x = x \cdot 1$, we have $y = 1$ by (a).
+    \item Since $x \cdot y = 1 = x \cdot x^{-1}$, we have $y = x^{-1}$ by (a).
+    \item Since $x^{-1} + x = 1$, we have $(x^{-1})^{-1} = x$ by (c). \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  Let $F$ be a field.
+  Then the following statements are true for any $x, y \in F$.
+  \begin{enumerate}
+    \item $0 \cdot x = 0$.
+    \item $(-x) \cdot y = -(x \cdot y) = x \cdot (-y)$.
+    \item $(-x) \cdot (-y) = x \cdot y$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item We have
+    \begin{equation*}
+      0 \cdot x + 0 \cdot x = (0 + 0) \cdot x = 0 \cdot x,
+    \end{equation*}
+    implying $0 \cdot x = 0$.
+    \item Since
+    \begin{equation*}
+      (-x) \cdot y + x \cdot y = (-x + x) \cdot y = 0 \cdot y = 0,
+    \end{equation*}
+    we have $(-x) \cdot y = -(x \cdot y)$.
+    One can prove $x \cdot (-y) = -(x \cdot y)$ similarly.
+    \item We have
+    \begin{equation*}
+      (-x) \cdot (-y) = -(x \cdot (-y)) = -(-(x \cdot y)) = x \cdot y
+    \end{equation*}
+    by applying (b) twice. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\section{Ordered Fields}
+\begin{definition}
+  An \emph{ordered field} is a field on which relation $<$ is defined such
+  that the following axioms (O 1) -- (O 4) hold for any $x, y, z \in F$.
+  \begin{enumerate}[leftmargin=3.5em]
+    \item[(O 1)] One and only one of the statements $x = y$, $x < y$, $y < x$
+    is true.
+    \item[(O 2)] If $x < y$ and $y < z$, then $x < z$.
+    \item[(O 3)] If $x < y$, then $x + z < y + z$.
+    \item[(O 4)] If $0 < x$ and $0 < y$, then $0 < x \cdot y$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let $F$ be an ordered field.
+  The relations $>$, $\leq$ and $\geq$ are defined as follows for any
+  $x, y \in F$.
+  \begin{align*}
+    x > y \quad &\Leftrightarrow \quad y < x \\
+    x \leq y \quad &\Leftrightarrow \quad x < y \;\;\text{or}\;\; x = y \\
+    x \geq y \quad &\Leftrightarrow \quad x > y \;\;\text{or}\;\; x = y.
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Let $F$ be an ordered field and let $S \subseteq F$.
+  \begin{itemize}
+    \item An \emph{upper bound} of $S$ is an element $x$ in $F$ such that
+    $x \geq y$ for any $y \in S$.
+    We say that $S$ is \emph{bounded above} if $S$ has an upper bound.
+    \item A \emph{lower bound} of $S$ is an element $x$ in $F$ such that
+    $x \leq y$ for any $y \in S$.
+    We say that $S$ is \emph{bounded below} if $S$ has a lower bound.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $F$ be an ordered field and let $S \subseteq F$.
+  \begin{itemize}
+    \item An element of $S$ is called the \emph{maximum} of $S$, denoted by
+    $\max(S)$, if it is an upper bound of $S$.
+    \item An element of $S$ is called the \emph{minimum} of $S$, denoted by
+    $\min(S)$, if it is a lower bound of $S$.
+    \item The minimum of the set of upper bounds of $S$ is called the
+    \emph{supremum} of $S$, denoted by $\sup(S)$.
+    \item The maximum of the set of lower bounds of $S$ is called the
+    \emph{infimum} of $S$, denoted by $\inf(S)$.
+  \end{itemize}
+\end{definition}
+
+\section{The Real Field}
+\begin{definition}
+  $\mathbb{R}$ is an ordered field such that every nonempty subset $S$ of
+  $\mathbb{R}$ that is bounded above has a supremum.
+  The elements of $\mathbb{R}$ are called the \emph{real numbers}.
+\end{definition}
+
+\begin{theorem}[Archimedean Property]
+  For any $x, y \in \mathbb{R}$ with $x > 0$, there is a positive integer $n$
+  such that
+  \begin{equation*}
+    n \cdot x > y.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let
+  \begin{equation*}
+    S = \{nx : \text{$n$ is a positive integer}\}.
+  \end{equation*}
+  Suppose that $y$ is an upper bound of $S$.
+  It follows that $S$ has a supremum $z$.
+  Note that $z - x$ is not an upper bound of $S$ since $z - x < z$.
+  Thus, $z - x < mx$ for some positive integer $m$, implying $z < (m + 1)x$,
+  contradiction to the fact that $z$ is an upper bound of $S$.
+  Hence, $y$ is not an upper bound of $S$, completing the proof.
+\end{proof}
