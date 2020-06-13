@@ -1,0 +1,55 @@
+\chapter{Sorting}
+\section{Basic Sorting Algorithms}
+\begin{problem}[Sorting Problem]
+  \label{prob:sorting}
+  \leavevmode
+  \begin{itemize}
+    \item Input: A sequence $A$ of $n$ distinct integers
+    $A[1], A[2], \dots, A[n]$.
+    \item Output: A permutation of $A$ that is non-decreasing.
+  \end{itemize}
+\end{problem}
+We introduce some basic sorting algorithms.
+\emph{Bubble sort} is a sorting algorithm that swaps adjacent elements in the
+wrong order.
+\begin{codebox}
+  \Procname{$\proc{Bubble-Sort}(A)$}
+  \li $n \gets \attrib{A}{length}$
+  \li \For $i \gets 1$ \To $n - 1$ \Do
+  \li     \For $j \gets 1$ \To $n - i$ \Do
+  \li         \If $A[j] > A[j + 1]$ \Then
+  \li             exchange $A[j]$ with $A[j + 1]$
+              \End
+          \End
+      \End
+\end{codebox}
+
+\emph{Selection sort} is a sorting algorithm that exchanges the leftmost
+element with the smallest one in the unsorted part of the array.
+\begin{codebox}
+  \Procname{$\proc{Selection-Sort}(A)$}
+  \li $n \gets \attrib{A}{length}$
+  \li \For $i \gets 1$ \To $n - 1$ \Do
+  \li     $j \gets i$
+  \li     \For $k \gets j + 1$ \To $n$ \Do
+  \li         \If $A[j] > A[k]$ \Then
+  \li             $j \gets k$
+              \End
+          \End
+  \li     exchange $A[i]$ with $A[j]$
+      \End
+\end{codebox}
+
+\emph{Insertion sort} is a sorting algorithm that repeatedly inserts elements
+to the correct position in the sorted part of the array.
+\begin{codebox}
+  \Procname{$\proc{Insertion-Sort}(A)$}
+  \li $n \gets \attrib{A}{length}$
+  \li \For $i \gets 2$ \To $n$ \Do
+  \li     $j \gets i - 1$
+  \li     \While $j \geq 1$ and $A[j] > A[j + 1]$ \Do
+  \li         exchange $A[j]$ with $A[j + 1]$
+  \li         $j \gets j - 1$
+          \End
+      \End
+\end{codebox}

@@ -18,15 +18,14 @@
   \end{equation*}
   if and only if $1 \leq i \leq n$ and $a_i \geq a_j$ for all
   $j \in \{1, \dots, n\}$.
-  We can write this problem in the following form.
+  We can write this problem as follows.
 \end{example}
 \begin{problem}[Champion Problem]
   \label{prob:champion}
   \leavevmode
   \begin{itemize}
-    \item Input: A sequence of $n$ distinct integers $A[1], A[2], \dots, A[n]$.
-    \item Output: The index $i \in \{1, \dots, n\}$ such that $A[i] \geq A[j]$
-    for all $j \in \{1, \dots, n\}$.
+    \item Input: A sequence $A$ of $n$ distinct integers $A[1], \dots, A[n]$.
+    \item Output: The index of the maximum element of $A$.
   \end{itemize}
 \end{problem}
 
@@ -63,7 +62,7 @@
   \textsc{Max-Index}.
   \begin{codebox}
     \Procname{$\proc{Max-Index}(A)$}
-    \li $n \gets \attrib{A}{size}$
+    \li $n \gets \attrib{A}{length}$
     \li $i \gets 1$
     \li \For $j \gets 2$ \To $n$ \Do
     \li     \If $A[i] < A[j]$ \Then
