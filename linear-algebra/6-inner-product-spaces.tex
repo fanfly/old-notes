@@ -607,6 +607,7 @@
 \end{proof}
 
 \begin{theorem}
+  \label{thm:orthonormal-eigenbasis-complex}
   Let $V$ be a finite-dimensional inner product space over $\mathbb{C}$ and let
   $T: V \to V$ be linear.
   Then $T$ is normal if and only if there is an orthonormal eigenbasis of $V$
@@ -701,6 +702,7 @@
 \end{proof}
 
 \begin{theorem}
+  \label{thm:orthonormal-eigenbasis-real}
   Let $V$ be a finite-dimensional inner product space over $\mathbb{R}$ and let
   $T: V \to V$ be linear.
   Then $T$ is self-adjoint if and only if there is an orthonormal eigenbasis of
@@ -720,4 +722,246 @@
   It follows that $A = [T]_\beta^\beta$ is diagonal, implying that $A$ is
   self-adjoint.
   Thus, $T$ is self-adjoint.
+\end{proof}
+
+\section{Unitary and Orthogonal Operators}
+\begin{definition}
+  Let $V$ be an inner product space over $F$.
+  Let $T: V \to V$ be linear.
+  \begin{itemize}
+    \item We say that $T$ is \emph{unitary} if $F = \mathbb{C}$ and
+    $\norm{T(x)} = \norm{x}$ for any $x \in V$.
+    \item We say that $T$ is \emph{orthogonal} if $F = \mathbb{R}$ and
+    $\norm{T(x)} = \norm{x}$ for any $x \in V$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  \label{thm:unitary-equivalence}
+  Let $V$ be a finite-dimensional inner product space over $F$.
+  Then the following statements are equivalent.
+  \begin{enumerate}
+    \item $\norm{T(x)} = \norm{x}$ for any $x \in V$.
+    \item $T^*T = I_V$.
+    \item $\inner{T(x)}{T(y)} = \inner{x}{y}$ for any $x, y \in V$.
+    \item If $S$ is an orthonormal basis of $V$, so is $T(S)$.
+    \item There is a subset $S$ of $V$ such that both $S$ and $T(S)$ are
+    orthonormal bases of $V$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  First we prove (b) from (a).
+  Note that $T^*T$ is self-adjoint and normal since
+  $(T^*T)^* = T^*(T^*)^* = T^*T$.
+  Thus, there exists an orthonormal basis $S = \{x_1, \dots, x_n\}$ of $V$ such
+  that for any $i \in \{1, \dots, n\}$, $T^*T(x_i) = \lambda_ix_i$ holds for
+  some $\lambda_i \in F$.
+  Since
+  \begin{equation*}
+    \lambda_i
+    = \lambda_i\inner{x_i}{x_i}
+    = \inner{\lambda_ix_i}{x_i}
+    = \inner{T^*T(x_i)}{x_i}
+    = \inner{T(x_i)}{T(x_i)}
+    = \inner{x_i}{x_i}
+    = 1_F
+  \end{equation*}
+  holds for each $i \in \{1, \dots, n\}$, we have $T^*T(x) = x$ for any
+  $x \in V$ by \Cref{lem:linear-uniqueness}.
+  Thus, $T^*T = I_V$.
+
+  Now we prove (c) from (b).
+  The proof is given by
+  \begin{equation*}
+    \inner{T(x)}{T(y)}
+    = \inner{x}{T^*T(y)}
+    = \inner{x}{y}
+  \end{equation*}
+  for any $x, y \in V$.
+
+  Now we prove (d) from (c).
+  Let $S = \{x_1, \dots, x_n\}$ be an orthonormal basis of $V$.
+  Then for any $i, j \in \{1, \dots, n\}$ we have
+  \begin{equation*}
+    \inner{T(x_i)}{T(x_j)}
+    = \inner{x_i}{x_j}
+    = [\![i = j]\!],
+  \end{equation*}
+  implying $T(S)$ is an orthonormal basis of $V$.
+
+  The proof of (e) from (d) is trivial.
+  To prove (e) from (a), let $S = \{x_1, \dots, x_n\}$.
+  Then for any $x \in V$ with $x = a_1x_1 + \cdots + a_nx_n$ for some
+  $a_1, \dots, a_n \in F$, we have
+  \begin{align*}
+    \inner{T(x)}{T(x)}
+    &= \inner{\sum_{i=1}^n a_iT(x_i)}{\sum_{j=1}^n a_jT(x_j)} \\
+    &= \sum_{i=1}^n \sum_{j=1}^n a_i\overline{a_j}\inner{T(x_i)}{T(x_j)} \\
+    &= \sum_{i=1}^n \sum_{j=1}^n a_i\overline{a_j}\inner{x_i}{x_j} \\
+    &= \inner{\sum_{i=1}^n a_ix_i}{\sum_{j=1}^n a_jx_j} \\
+    &= \inner{x}{x},
+  \end{align*}
+  completing the proof.
+\end{proof}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional inner product space over $F$ and let
+  $T: V \to V$ be linear.
+  \begin{enumerate}
+    \item Let $F = \mathbb{C}$.
+    Then $T$ is unitary if and only if $V$ has an orthonormal eigenbasis for
+    $T$ and $|\lambda| = 1_F$ holds for each eigenvalue $\lambda$ of $T$.
+    \item Let $F = \mathbb{R}$.
+    Then $T$ is orthogonal and self-adjoint if and only if $V$ has an
+    orthonormal eigenbasis for $T$ and $|\lambda| = 1_F$ holds for each
+    eigenvalue $\lambda$ of $T$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We prove both statements simultaneously.
+
+  ($\Rightarrow$)
+  $V$ has an orthonormal eigenbasis by
+  \Cref{thm:orthonormal-eigenbasis-complex} and
+  \Cref{thm:orthonormal-eigenbasis-real}.
+  For each eigenpair $(\lambda, x)$ of $T$, $(\overline\lambda, x)$ is an
+  eigenpair of $T^*$ by \Cref{thm:normal-properties} (c), and we have
+  \begin{equation*}
+    |\lambda|^2x
+    = \lambda\overline\lambda x
+    = \lambda T^*(x)
+    = T^*(\lambda x)
+    = T^*(T(x))
+    = x
+  \end{equation*}
+  by \Cref{thm:unitary-equivalence}, implying $|\lambda| = 1_F$.
+
+  ($\Leftarrow$)
+  Let $\beta = (x_1, \dots, x_n)$ be an orthonormal eigenbasis of $V$ for $T$.
+  For each $i \in \{1, \dots, n\}$, let $\lambda_i$ be the corresponding
+  eigenvalue of $x_i$ for $T$.
+  Since $T$ is normal by
+  \Cref{thm:orthonormal-eigenbasis-complex} and
+  \Cref{thm:orthonormal-eigenbasis-real}, we have
+  \begin{equation*}
+    T^*(T(x_i))
+    = T^*(\lambda_i x_i)
+    = \lambda_iT^*(x_i)
+    = \lambda_i\overline{\lambda_i}x_i
+    = |\lambda_i|^2x_i
+    = x_i
+  \end{equation*}
+  for any $i \in \{1, \dots, n\}$, implying $T^*T = I_V$.
+  The proof is completed due to \Cref{thm:unitary-equivalence}.
+\end{proof}
+
+\begin{definition}
+  Let $Q \in F^{n \times n}$ with $F \in \{\mathbb{C}, \mathbb{R}\}$.
+  \begin{itemize}
+    \item We say that $Q$ is \emph{unitary} if $Q^*Q = I_n$.
+    \item We say that $Q$ is \emph{orthogonal} if $Q^tQ = I_n$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  Let $A, B \in F^{n \times n}$ with $F \in \{\mathbb{C}, \mathbb{R}\}$.
+  \begin{itemize}
+    \item We say that $A$ and $B$ are \emph{unitarily equivalent} if
+    $B = QAQ^*$ for some unitary $Q \in F^{n \times n}$.
+    \item We say that $A$ and $B$ are \emph{orthogonally equivalent} if
+    $B = QAQ^t$ for some orthogonal $Q \in F^{n \times n}$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $A \in F^{n \times n}$.
+  \begin{enumerate}
+    \item If $F = \mathbb{C}$, then $A$ is normal if and only if $A$ is
+    unitarily equivalent to a diagonal matrix in $F^{n \times n}$.
+    \item If $F = \mathbb{R}$, then $A$ is self-adjoint if and only if $A$ is
+    orthogonally equivalent to a diagonal matrix in $F^{n \times n}$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  We prove both statements simultaneously.
+
+  ($\Rightarrow$)
+  Let $\alpha$ be the standard ordered basis of $F^n$, and let
+  $\beta = (x_1, \dots, x_n)$ be an orthonormal eigenbasis of $F^n$ for $L_A$.
+  Then $B = [L_A]_\beta^\beta$ is diagonal.
+  Define $Q = [I_{F^n}]_\beta^\alpha$, and we have
+  \begin{equation*}
+    (Q^*Q)_{ij}
+    = \sum_{k=1}^n \overline{Q_{ki}}Q_{kj}
+    = \sum_{k=1}^n \overline{(x_i)_k}{(x_j)_k}
+    = x_i^*x_j
+    = [\![i = j]\!]
+  \end{equation*}
+  for any $i, j \in \{1, \dots, n\}$, implying $Q^*Q = I_n$.
+  Thus, $A$ and $B$ are unitarily equivalent since
+  \begin{equation*}
+    B
+    = [L_A]_\beta^\beta
+    = [I_{F^n}]_\alpha^\beta[L_A]_\alpha^\alpha[I_{F^n}]_\beta^\alpha
+    = Q^{-1}AQ
+    = Q^*AQ.
+  \end{equation*}
+
+  ($\Leftarrow$)
+  Let $Q$ be a unitary matrix such that $B = QAQ^*$ is diagonal.
+  We have $A = Q^*BQ$.
+  Thus, $A$ is normal since
+  \begin{equation*}
+    A^*A
+    = (Q^*B^*Q)(Q^*BQ)
+    = Q^*B^*BQ
+    = Q^*BB^*Q
+    = (Q^*BQ)(Q^*B^*Q)
+    = AA^*.
+  \end{equation*}
+  If $F = \mathbb{R}$, then $B^* = B$, and it follows that $A$ is self-adjoint
+  since
+  \begin{equation*}
+    A^*
+    = Q^*B^*Q
+    = Q^*BQ
+    = A.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\section{The Singular Value Decomposition}
+\begin{definition}
+  Let $V$ be an inner product space over $F$.
+  \begin{itemize}
+    \item A self-adjoint operator $T: V \to V$ is said to be
+    \emph{positive semidefinite} and \emph{positive definite} if
+    $\inner{T(x)}{x}$ is nonnegative and positive for any $x \in V$,
+    respectively.
+    \item A self-adjoint matrix $A \in F^{n \times n}$ is said to be
+    \emph{positive semidefinite} and \emph{positive definite} if
+    $L_A$ is positive semidefinite and positive definite, respectively.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ and $W$ be finite-dimensional inner product spaces over $F$ with
+  $\dim(V) = n$ and $\dim(W) = m$.
+  Let $T: V \to W$ be linear with $\rank(T) = r$.
+  Then there exist positive real numbers $\sigma_1, \dots, \sigma_r$
+  and orthonormal bases $\{x_1, \dots, x_n\}$ and $\{y_1, \dots, y_m\}$
+  of $V$ and $W$, respectively, such that the following statements hold with
+  $\sigma_k = 0_F$ for $k > r$, $x_k = 0_V$ for $k > n$, and $y_k = 0_W$ for
+  $k > m$.
+  \begin{enumerate}
+    \item $T(x_i) = \sigma_iy_i$ for any $i \in \{1, \dots, n\}$.
+    \item $T^*(y_j) = \sigma_jx_j$ for any $j \in \{1, \dots, m\}$.
+    \item $(\sigma_i^2, x_i)$ is an eigenpair of $T^*T$ for any
+    $i \in \{1, \dots, n\}$.
+    \item $(\sigma_j^2, y_j)$ is an eigenpair of $TT^*$ for any
+    $j \in \{1, \dots, m\}$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  To be completed.
 \end{proof}
