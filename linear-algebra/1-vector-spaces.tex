@@ -1,6 +1,7 @@
 \chapter{Vector Spaces}
 \section{Fields}
-\begin{definition}\label{def:field}
+\begin{definition}
+  \label{def:field}
   A \emph{field} is a set $F$ with two operations, called \emph{addition}
   (denoted by $+$) and \emph{multiplication} (denoted by $\cdot$), which
   satisfy the following axioms.
@@ -23,46 +24,10 @@
       $a, b, c \in F$.
   \end{enumerate}
 \end{definition}
-\begin{remark} \leavevmode
-  \begin{itemize}
-    \item For simplification, we usually write $ab$ instead of $a \cdot b$.
-    \item The axioms labeled with ``A'' and ``M'' are usually called the
-      \emph{axioms of addition} and the \emph{axioms of multiplication},
-      respectively. The axiom labeld with ``D'' is the \emph{distributive law}.
-    \item The elements $0_F$ and $1_F$ are usually called the
-      \emph{additive identity} and the \emph{multiplicative identity} of $F$,
-      respectively.
-      Also, $-a$ and $a^{-1}$ are called the \emph{additive inverse} and the
-      \emph{multiplicative inverse} of $a$, respectively.
-    \item \emph{Subtraction} and \emph{division} can be defined using additive
-      and multiplicative inverses.
-  \end{itemize}
-\end{remark}
 
 \begin{example}
-  $\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$ are fields.
-\end{example}
-
-\begin{example}
-  Let $\mathbb{B} = \{0, 1\}$ and the operations $\oplus$ and $\odot$ are
-  defined as follows.
-  \begin{align*}
-    \begin{array}{c|cc}
-      \oplus & 0 & 1 \\
-      \hline
-      0      & 0 & 1 \\
-      1      & 1 & 0 \\
-    \end{array}
-    \quad
-    \begin{array}{c|cc}
-      \odot & 0 & 1 \\
-      \hline
-      0     & 0 & 0 \\
-      1     & 0 & 1 \\
-    \end{array}
-  \end{align*}
-  Then $\mathbb{B}$ is a field with $\oplus$ and $\odot$ as addition and
-  multiplication, respectively.
+  The set $\mathbb{Q}$ of rational numbers, the set $\mathbb{R}$ of real
+  numbers, and the set $\mathbb{C}$ of complex numbers are fields.
 \end{example}
 
 \begin{proposition}\label{prop:field-addition}
@@ -187,56 +152,14 @@
 \end{examples}
 
 \begin{examples}
-  \leavevmode
+  Let $F$ be a field.
   \begin{itemize}
-    \item The set of \emph{$n$-tuples} with elements from a field $F$ is
-      denoted by $F^n$.
-      For $x = (x_1, \dots, x_n) \in F^n$, $y = (y_1, \dots, y_n) \in F^n$, and
-      $c \in F$, we define the operations of addition and scalar multiplication
-      by
-      \begin{equation*}
-        x + y = (x_1 + y_1, \dots, x_n + y_n)
-        \quad \text{and} \quad
-        c \cdot x = (c \cdot x_1, \dots, c \cdot x_n).
-      \end{equation*}
-      Then $F^n$ is a vector space over $F$.
-    \item The set of all $m \times n$ \emph{matrices} with elements from a
-      field $F$ is denoted by $F^{m \times n}$.
-      For $A, B \in F^{m \times n}$ and $c \in F$, we define the operations of
-      addition and scalar multiplication by
-      \begin{equation*}
-        (A + B)_{ij} = A_{ij} + B_{ij}
-        \quad \text{and} \quad
-        (c \cdot A)_{ij} = c \cdot A_{ij}
-      \end{equation*}
-      for $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
-      Then $F^{m \times n}$ is a vector space over $F$.
-    \item The set of \emph{functions} from a nonempty set $S$ to a field $F$ is
-      denoted by $\mathcal{F}(S, F)$.
-      For $f, g \in \mathcal{F}(S, F)$ and $c \in F$, we define the operations
-      of addition and scalar multiplication by
-      \begin{equation*}
-        (f + g)(s) = f(s) + g(s)
-        \quad \text{and} \quad
-        (c \cdot f)(s) = c \cdot f(s)
-      \end{equation*}
-      for all $s \in S$.
-      Then $\mathcal{F}(S, F)$ is a vector space over $F$.
-    \item The set of \emph{polynomials} with coefficients from a field $F$ is
-      denoted by $\mathcal{P}(F)$.
-      For $f, g \in \mathcal{P}(F)$ and $c \in F$ with
-      \begin{equation*}
-        f(t) = \sum_{i=0}^n a_it^i
-        \quad \text{and} \quad
-        g(t) = \sum_{i=0}^n b_it^i,
-      \end{equation*}
-      we define the operations of addition and scalar multiplication by
-      \begin{equation*}
-        (f + g)(t) = \sum_{i=0}^n (a_i + b_i)t^i
-        \quad \text{and} \quad
-        (c \cdot f)(t) = \sum_{i=0}^n (c \cdot a_i)t^i.
-      \end{equation*}
-      Then $\mathcal{P}(F)$ is a vector space over $F$.
+    \item The set of \emph{$n$-tuples} with entries from $F$, denoted $F^n$,
+    is a vector space over $F$.
+    \item The set of all $m \times n$ \emph{matrices} with entries from $F$,
+    denoted $F^{m \times n}$, is a vector space over $F$.
+    \item The set of \emph{polynomials} with coefficients from $F$, denoted
+    $\mathcal{P}(F)$, is a vector space over $F$.
   \end{itemize}
 \end{examples}
 
@@ -268,171 +191,92 @@
 \end{proof}
 
 \section{Subspaces}
-\begin{definition}\label{def:subspace}
-  Let $V$ be a vector space over a field $F$.
-  Then a subset $W$ of $V$ is called a \emph{subspace} of $V$ if $W$ is a
-  vector space over $F$ with the operations of addition and scalar
-  multiplication defined on $V$.
+\begin{definition}
+  \label{def:subspace}
+  Let $V$ be a vector space over $F$.
+  A \emph{subspace} of $V$ is a subset $W$ of $V$ such that $W$ is a vector
+  space over $F$, where addition and scalar multiplication are the same as
+  those defined on $V$.
 \end{definition}
 
-\begin{theorem}\label{thm:subspace}
-  Let $V$ be a vector space over a field $F$ and $W \subseteq V$.
-  Then $W$ is a subspace of $V$ if the following conditions hold.
-  \begin{enumerate}
-    \item $0_V \in W$.
-    \item $x + y \in W$ for all $x, y \in W$.
-    \item $ax \in W$ for all $x \in W$ and $a \in F$.
-  \end{enumerate}
+\begin{theorem}
+  \label{thm:subspace}
+  Let $V$ be a vector space over $F$ and let $W \subseteq V$.
+  Then $W$ is a subspace of $V$ if and only if $0_V \in W$ and $ax + y \in W$
+  for any $a \in F$ and $x, y \in W$.
 \end{theorem}
 \begin{proof}
-  Since a vector in $W$ is also in $V$, (V 2), (V 3), (V 7), (V 8), (V 9) and
-  (V 10) in \Cref{def:vector-space} hold trivially.
-  Furthermore, (a) implies (V 4), (b) implies (V 1), (c) implies (V 6), and
-  (V 5) is also true since
+  ($\Rightarrow$)
+  Straightforward.
+  ($\Leftarrow$)
+  It suffices to prove the closeness of addition and scalar multiplication,
+  and the existence of additive inverses.
+  For any $a \in F$ and $x, y \in W$, we have
   \begin{equation*}
-    -x = -(1_Fx) = (-1_F)x \in W
-  \end{equation*}
-  holds for all $x \in W$.
-  Thus, $W$ is a vector space over $F$.
-\end{proof}
-
-\begin{corollary}\label{cor:subspace}
-  Let $V$ be a vector space over a field $F$ and $W \subseteq V$.
-  Then $W$ is a subspace of $V$ if and only if the following conditions hold.
-  \begin{enumerate}
-    \item $0_V \in W$.
-    \item $ax + y \in W$ for all $x, y \in W$ and $a \in F$.
-  \end{enumerate}
-\end{corollary}
-\begin{proof}
-  $(\Rightarrow)$ Straightforward.
-  $(\Leftarrow)$ For all $x, y \in W$ and $a \in F$, we have
-  \begin{equation*}
-    x + y = 1_F x + y \in W
+    a \cdot x = a \cdot x + 0_W \in W
     \quad \text{and} \quad
-    ax = ax + 0_V \in W.
+    x + y = 1_F \cdot x + y \in W.
   \end{equation*}
-  Thus, $W$ is a subspace of $V$ by \Cref{thm:subspace}.
+  Furthermore, we have
+  \begin{equation*}
+    x + (-1_F) \cdot x
+    = 1_F \cdot x + (-1_F) \cdot x
+    = (1_F + (-1_F)) \cdot x
+    = 0_F \cdot x
+    = 0_V,
+  \end{equation*}
+  for any $x \in W$, which completes the proof.
 \end{proof}
 
 \begin{example}
-  The set of polynomials in $\mathcal{P}(F)$ with degree not greater than
-  $n$ is denoted by $\mathcal{P}_n(F)$, where the \emph{degree} of a nonzero
-  polynomial
-  \begin{equation*}
-    f(t) = a_0 + a_1t + a_2t^2 + \cdots + a_mt^m
-  \end{equation*}
-  is defined to be the largest integer $n$ such that $a_n \neq 0_F$, and the
-  degree of zero polynomial is defined to be $-1$.
-  Then one can verify that $\mathcal{P}_n(F)$ is a subspace of
-  $\mathcal{P}(F)$.
+  The set $\mathcal{P}_n(F)$ of polynomials in $\mathcal{P}(F)$ with
+  degree less than or equal to $n$ is a subspace of $\mathcal{P}(F)$.
 \end{example}
 
-\begin{examples}
-  \leavevmode
-  \begin{itemize}
-    \item An $n \times n$ matrix $A$ is called \emph{diagonal} if
-      $A_{ij} = 0_F$ for all $i, j \in \{1, \dots, n\}$ with $i \neq j$.
-      Then one can verify that the set of $n \times n$ diagonal matrices is a
-      subspace of $F^{n \times n}$.
-    \item The \emph{trace} of an $n \times n$ matrix $A$, denoted by $\tr(A)$,
-      is defined by
-      \begin{equation*}
-        \tr(A) = \sum_{i=1}^n A_{ii}.
-      \end{equation*}
-      Then one can verify that the set of $n \times n$ matrices that have trace
-      equal to $0_F$ is a subspace of $F^{n \times n}$.
-  \end{itemize}
-\end{examples}
-
-\begin{proposition}\label{prop:subspace-intersection}
-  Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$.
-  Then $W_1 \cap W_2$ is a subspace of $V$.
-\end{proposition}
-\begin{proof}
-  Since $W_1$ and $W_2$ are subspaces of $V$, we have $0_V \in W_1 \cap W_2$.
-  Furthermore, for each $x, y \in W_1 \cap W_2$ and for each $a \in F$, we have
-  $ax + y \in W_1 \cap W_2$ by \Cref{cor:subspace}.
-  Thus, $W_1 \cap W_2$ is a subspace of $V$.
-\end{proof}
-
-\begin{example}
-  Let $W_1$ be the set of $n \times n$ diagonal matrices.
-  Let $W_2$ be the set of $n \times n$ matrices that have trace equal to $0_F$.
-  Then since both $W_1$ and $W_2$ are subspaces of $F^{n \times n}$,
-  we can conclude that $W_1 \cap W_2$ is also a subspace of $F^{n \times n}$.
-\end{example}
-
-\begin{definition}\label{def:sum}
-  Let $V$ be a vector space and let $S_1, S_2 \subseteq V$.
-  Then the \emph{sum} of $S_1$ and $S_2$, denoted by $S_1 + S_2$, is the set
-  \begin{equation*}
-    \{x + y: x \in S_1\ \text{and}\ y \in S_2\}.
-  \end{equation*}
+\begin{definition}
+  Let $V$ be a vector space and let $S_1$ and $S_2$ be subsets of $V$.
+  Then the \emph{sum} of $S_1$ and $S_2$ is
+  \begin{align*}
+    S_1 + S_2 &= \{x + y: \text{$x \in S_1$ and $y \in S_2$}\}.
+  \end{align*}
 \end{definition}
 
-\begin{proposition}\label{prop:subspace-sum}
+\begin{theorem}
+  \label{thm:subspace-sum}
   Let $V$ be a vector space and let $W_1$ and $W_2$ be subspaces of $V$.
-  Then the following statements are true.
-  \begin{enumerate}
-    \item $W_1 + W_2$ is a subspace of $V$.
-    \item If $U$ is a subspace of $V$ with $W_1 \cup W_2 \subseteq U$,
-      then $W_1 + W_2 \subseteq U$.
-  \end{enumerate}
-\end{proposition}
-\begin{proof} \leavevmode
-  \begin{enumerate}
-    \item We have $0_V = 0_V + 0_V \in W_1 + W_2$.
-      For each $x, y \in W_1 + W_2$ and for each $a \in F$, by \Cref{def:sum}
-      there exist $x_1, y_1 \in W_1$ and $x_2, y_2 \in W_2$ such that
-      $x = x_1 + x_2$ and $y = y_1 + y_2$.
-      Thus,
-      \begin{align*}
-        ax + y
-        &= a(x_1 + x_2) + (y_1 + y_2) \\
-        &= (ax_1 + ax_2) + (y_1 + y_2) \\
-        &= (ax_1 + y_1) + (ax_2 + y_2) \\
-        &\in W_1 + W_2.
-      \end{align*}
-    \item Let $x$ be a vector in $W_1 + W_2$.
-      Then by \Cref{def:sum} there exists $x_1 \in W_1$ and $x_2 \in W_2$ such
-      that $x = x_1 + x_2$.
-      We have $x_1 \in U$ since $W_1 \subseteq U$.
-      Also, we have $x_2 \in U$ since $W_2 \subseteq U$.
-      It follows that $x = x_1 + x_2 \in U$, and thus $W_1 + W_2 \subseteq U$.
-      \qedhere
-  \end{enumerate}
+  Then $W_1 + W_2$ is the minimal subspace of $V$ that contains $W_1 \cup W_2$.
+\end{theorem}
+\begin{proof}
+  First we prove that $W_1 + W_2$ is a subspace of $V$.
+  We have $0_V = 0_V + 0_V \in W_1 + W_2$, and for any $a \in F$,
+  $x_1, y_1 \in W_1$ and $x_2, y_2 \in W_2$, we have
+  \begin{align*}
+    a(x_1 + x_2) + (y_1 + y_2)
+    &= ax_1 + ax_2 + y_1 + y_2 \\
+    &= (ax_1 + y_1) + (ax_2 + y_2) \\
+    &\in W_1 + W_2.
+  \end{align*}
+  Thus, it follows from \Cref{thm:subspace} that $W_1 + W_2$ is a subspace of
+  $V$.
+
+  Now we prove the minimality.
+  Suppose that $W$ is a subspace of $V$ that contains $W_1 \cup W_2$.
+  For any $x_1 \in W_1$ and $x_2 \in W_2$, we have $x_1 + x_2 \in W$.
+  Thus, $W_1 + W_2 \subseteq W$, completing the proof.
 \end{proof}
 
 \section{Spanning Sets}
-\begin{definition}\label{def:linear-combination}
-  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
-  Then a vector $x \in V$ is called a \emph{linear combination} of $S$ if
-  there exist scalars $a_1, \dots, a_n \in F$ and vectors
-  $x_1, \dots, x_n \in S$ for some nonnegative integer $n$ such that
+\begin{definition}
+  \label{def:linear-combination}
+  Let $V$ be a vector space over $F$ and let $S \subseteq V$.
+  A vector $x \in V$ is called a \emph{linear combination} of $S$ if $x = 0_V$
+  or there exist scalars $a_1, \dots, a_n \in F$ and vectors
+  $x_1, \dots, x_n \in S$ such that
   \begin{equation*}
-    x = \sum_{i=1}^n a_ix_i.
+    x = \sum_{i=1}^n a_ix_i = a_1x_1 + a_2x_2 + \cdots + a_nx_n.
   \end{equation*}
-\end{definition}
-\begin{remark}
-  \leavevmode
-  \begin{itemize}
-    \item If $n = 0$, then the sum in the right hand side is $0_V$ since
-      nothing are added up.
-      Thus, $0_V$ is a linear combination of any subset of $V$.
-    \item Note that $n$ should be finite. Thus, in the vector space
-      $\mathbb{R}$ over the field $\mathbb{Q}$, $e$ is not a linear combination
-      of $\mathbb{Q}$ even if we have
-      \begin{equation*}
-        e = \sum_{i=0}^\infty \frac{1}{i!}.
-      \end{equation*}
-  \end{itemize}
-\end{remark}
-
-\begin{definition}\label{def:span}
-  Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
-  Then the \emph{span} of $S$, denoted $\spn(S)$, is defined as the
-  set of all linear combinations of $S$.
+  The set of all linear combinations of $S$ is called the \emph{span} of $S$,
+  denoted by $\spn(S)$.
 \end{definition}
 
 \begin{theorem}\label{thm:span}
