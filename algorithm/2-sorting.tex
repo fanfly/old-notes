@@ -1,30 +1,8 @@
 \chapter{Sorting}
-\section{Selection Sort}
-\begin{definition}
-  An \emph{array} is a pair of addresses
-  \begin{equation*}
-    A = (r, s),
-  \end{equation*}
-  representing the words located in the memory with address from $r$ to $s$
-  (inclusive).
-  \begin{itemize}
-    \item The \emph{length} of array $A$, denoted $|A|$, is defined by
-    \begin{equation*}
-      |A| = s - r + 1.
-    \end{equation*}
-    \item The $i$th element of $A$, denoted $A[i]$, is the word located in the
-    memory with address $r + i - 1$.
-    We say that $i$ is the \emph{index} of $A[i]$.
-    \item For $i, j \in \{1, \dots, n\}$ with $i \leq j$, we define
-    \begin{equation*}
-      A[i \twodots j] = (r + i - 1, r + j - 1).
-    \end{equation*}
-    Note that if $|A| = n$, then $A = A[1 \twodots n]$.
-  \end{itemize}
-\end{definition}
-
+\section{Insertion Sort}
+In this chapter, we consider algorithms that solves the sorting problem, which
+is stated as follows.
 \begin{problem}[Sorting Problem]
-  \label{prob:sorting}
   \leavevmode
   \begin{itemize}
     \item Input: An array $A$ of $n$ integers.
@@ -32,37 +10,57 @@
   \end{itemize}
 \end{problem}
 
+\noindent
+Let us begin with \emph{insertion sort}, which is a simple sorting algorithm.
 \begin{codebox}
-  \Procname{$\proc{Index-Of-Minimum}(A[1 \twodots n])$}
-  \li $i \gets 1$
-  \li \For $j \gets 2$ \To $n$ \Do
-  \li     \If $A[i] > A[j]$ \Then
-  \li         $i \gets j$
+  \Procname{$\proc{Insertion-Sort}(A)$}
+  \li \For $i \gets 2$ \To $\attrib{A}{length}$ \Do
+  \li     $k \gets A[i]$
+  \li     $j \gets i$
+  \li     \While $j > 1$ and $k < A[j - 1]$ \Do
+  \li         $A[j] \gets A[j - 1]$
+  \li         $j \gets j - 1$
           \End
-      \End
-  \li \Return $i$
-\end{codebox}
-
-\begin{theorem}
-  $\proc{Index-Of-Minimum}(A[1 \twodots n])$ returns the index of the smallest
-  element of $A[1 \twodots n]$ in $O(n)$ time.
-\end{theorem}
-\begin{proof}
-  To be completed.
-\end{proof}
-
-\begin{codebox}
-  \Procname{$\proc{Selection-Sort}(A[1 \twodots n])$}
-  \li \For $i \gets 1$ \To $n - 1$ \Do
-  \li     $j \gets \proc{Index-Of-Minimum}(A[i \twodots n]) + i - 1$
-  \li     swap $A[i]$ and $A[j]$
+  \li     $A[j] \gets k$
       \End
 \end{codebox}
 
 \begin{theorem}
-  The algorithm $\proc{Selection-Sort}$ solves the sorting problem in $O(n^2)$
-  time.
+  $\proc{Insertion-Sort}$ solves the sorting problem in $\Theta(n^2)$ time in
+  the worst case, where $n$ is the length of the input array.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  We prove the loop invariant that at the start of each iteration of the \For
+  loop, the subarray $A[1 \twodots i-1]$ is a non-decreasing permutation of the
+  elements originally in $A[1 \twodots i-1]$.
+
+  The loop invariant is trivially true for $i = 2$, and is maintained by each
+  iteration as follows.
+  First, $A[i]$ is copied into $k$.
+  The \While loop of lines 4 -- 6 moves the elements in $A[1 \twodots i-1]$
+  that are greater than $k$ by one position to the right.
+  Thus, at the end of itertaion, $A[1 \twodots j-1]$ stores the elements
+  originally in $A[1 \twodots i-1]$ that are less than or equal to $k$, and
+  $A[j+1 \twodots i]$ stores the elements originally in $A[1 \twodots i-1]$
+  that are greater than $k$.
+  After storing $k$ into $A[j]$, $A[1 \twodots i]$ is a nondecreasing
+  permutation of the elements originally in $A[1 \twodots i]$, and incrementing
+  $i$ preserves the loop invariant.
+
+  When the \For loop terminates, we have $j = n + 1$.
+  Hence, the entire array $A[1 \twodots n]$ is sorted due to the loop
+  invariant, implying that $\proc{Insertion-Sort}$ correctly solves the sorting
+  problem.
+
+  Now we analyze the running time of $\proc{Insertion-Sort}$.
+  Let $t_i$ denote the number of times the \While loop test in line 4 is
+  executed for that value of $i$.
+  Then the running time $T(n)$ is given by
+  \begin{equation*}
+    T(n) = \Theta\left(\sum_{i=2}^n t_i\right).
+  \end{equation*}
+  We have $T(n) = O(n^2)$ since $t_i \leq i$ for each $i \in \{2, \dots, n\}$.
+  If the original array is strictly decreasing, then $t_i = i$ for each $i \in
+  \{2, \dots, n\}$, and we have $T(n) = \Omega(n^2)$ in this case.
+  Thus, $T(n)  = \Theta(n^2)$ in the worst case, which completes the proof.
 \end{proof}
