@@ -3,7 +3,7 @@
 \begin{definition}
   For sets $x$ and $y$, we define
   \begin{equation*}
-    (x, y) = \{\{x\}, \{x, y\}\}.
+    \langle x, y \rangle = \{\{x\}, \{x, y\}\}.
   \end{equation*}
 \end{definition}
 
@@ -22,7 +22,7 @@
 \begin{theorem}
   For sets $x, x', y, y'$, we have
   \begin{equation*}
-    (x, y) = (x', y')
+    \langle x, y \rangle = \langle x', y' \rangle
   \end{equation*}
   if and only if $x = x'$ and $y = y'$.
 \end{theorem}
@@ -42,7 +42,7 @@
 \end{proof}
 
 \begin{lemma}
-  If $x, y \in C$, then $(x, y) \in \mathcal{P}(\mathcal{P}(C))$.
+  If $x, y \in C$, then $\langle x, y \rangle \in \mathcal{P}(\mathcal{P}(C))$.
 \end{lemma}
 \begin{proof}
   Since $\{x\}$ and $\{y\}$ are subsets of $C$, we have
@@ -50,7 +50,7 @@
   It follows that $\{\{x\}, \{x, y\}\}$ is a subset of $\mathcal{P}(C)$,
   implying
   \begin{equation*}
-    (x, y) = \{\{x\}, \{x, y\}\} \in \mathcal{P}(\mathcal{P}(C)).
+    \langle x, y \rangle = \{\{x\}, \{x, y\}\} \in \mathcal{P}(\mathcal{P}(C)).
     \qedhere
   \end{equation*}
 \end{proof}
@@ -60,11 +60,11 @@
   pairs $(x, y)$ with $x \in A$ and $y \in B$.
 \end{theorem}
 \begin{proof}
-  Since $x, y \in A \cup B$, the set of pairs $(x, y)$ with $x \in A$ and
-  $y \in B$ can be given by
+  Since $x, y \in A \cup B$, the set of pairs $\langle x, y \rangle$ with
+  $x \in A$ and $y \in B$ can be given by
   \begin{equation*}
     \{z \in \mathcal{P}(\mathcal{P}(A \cup B)):
-    \text{$z = (x, y)$ for some $x \in A$ and $y \in B$}\}.
+    \text{$z = \langle x, y \rangle$ for some $x \in A$ and $y \in B$}\}.
     \qedhere
   \end{equation*}
 \end{proof}
@@ -72,11 +72,65 @@
 \begin{definition}
   For any sets $A$ and $B$, the \emph{Cartesian product} of $A$ and $B$,
   denoted by $A \times B$, is the set whose memebers are exactly the pairs
-  $(x, y)$ with $x \in A$ and $y \in B$.
+  $\langle x, y \rangle$ with $x \in A$ and $y \in B$.
 \end{definition}
 
 \section{Relations}
+\begin{definition}
+  A \emph{relation} is a set of ordered pairs.
+  For any relation $R$, the \emph{domain} and the \emph{range} of $R$, denoted
+  by $\dom(R)$ and $\ran(R)$, respectively, are defined as follows.
+  \begin{itemize}
+    \item $\dom(R)$ is the collection of sets $x$ with
+    $\langle x, y \rangle \in R$ for some $y$.
+    \item $\ran(R)$ is the collection of sets $y$ with
+    $\langle x, y \rangle \in R$ for some $x$.
+  \end{itemize}
+\end{definition}
 
-\section{Functions}
+\begin{definition}
+  Let $R$ and $S$ be relations and let $X$ be a set.
+  \begin{itemize}
+    \item The \emph{inverse} of $R$, denoted by $R^{-1}$, is the set of all
+    pairs $\langle y, x \rangle$ with $\langle x, y \rangle \in R$.
+    \item The \emph{restriction} of $R$ to $X$, denoted by
+    $R \upharpoonright X$, is the set of all pairs $\langle x, y \rangle \in R$
+    with $x \in X$.
+    \item The \emph{composition} of $R$ and $S$, denoted by $R \circ S$, is the
+    set of all pairs $\langle x, z \rangle$ with $\langle x, y \rangle \in R$
+    and $\langle y, z \rangle \in S$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A \emph{function} is a relation $f$ such that for any set $x \in \dom(f)$,
+  there exists a unique set $y$ such that $\langle x, y \rangle \in f$.
+  The unique set $y$ with respect to $x$ is called the \emph{value} of $f$
+  at $x$ and is denoted $f(x)$.
+  \begin{itemize}
+    \item We say that $f$ is a function from $A$ to $B$, denoted by
+    $f: A \to B$, if $\dom(f) = A$ and $\ran(f) \subseteq B$.
+    \item $f$ is \emph{one-to-one} if for any $y \in \ran(f)$, there exists a
+    unique set $x \in \dom(f)$ with $f(x) = y$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  For any sets $A$ and $B$, the set of functions from $A$ to $B$ is denoted by
+  $B^A$.
+\end{definition}
 
 \section{Equivalence Relations and Ordering Relations}
+\begin{definition}
+  Let $A$ be a set.
+  An \emph{equivalence relation} on $A$ is a relation $R \subseteq A \times A$
+  that satisfies the following three conditions.
+  \begin{itemize}
+    \item Reflexivity: $\langle x, x \rangle \in R$ for any $x \in A$.
+    \item Symmetry: $\langle x, y \rangle \in R$ implies
+    $\langle y, x \rangle \in R$ for any $x, y \in A$.
+    \item Transitivity: $\langle x, y \rangle \in R$ and
+    $\langle y, z \rangle \in R$ implies $\langle x, z \rangle \in R$ for any
+    $x, y, z \in A$.
+  \end{itemize}
+\end{definition}

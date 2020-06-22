@@ -5,12 +5,8 @@
   \begin{equation*}
     x^+ = x \cup \{x\}.
   \end{equation*}
-  We say that a set $A$ is \emph{inductive} if it satisfies the following
-  conditions.
-  \begin{itemize}
-    \item $\varnothing \in A$.
-    \item For any $x \in A$, $x^+ \in A$.
-  \end{itemize}
+  We say that a set $A$ is \emph{inductive} if $\varnothing \in A$ and for any
+  $x \in A$, we have $x^+ \in A$.
 \end{definition}
 
 \begin{axiom}[Infinity]
@@ -21,6 +17,17 @@
   A \emph{natural number} is a set belonging to all inductive sets.
   The set of natural numbers is denoted by $\omega$.
 \end{definition}
+
+\begin{theorem}
+  $\omega$ is inductive.
+\end{theorem}
+\begin{proof}
+  First, $\varnothing \in \omega$ since $\varnothing$ belongs to all inductive
+  sets by definition.
+  For any set $x \in \omega$, $x$ belongs to all inductive sets, implying that
+  $x^+$ belongs to all inductive sets, and thus $x^+ \in \omega$.
+  Thus, $\omega$ is inductive.
+\end{proof}
 
 \section{Recursion}
 

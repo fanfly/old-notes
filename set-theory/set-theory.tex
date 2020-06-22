@@ -1,6 +1,13 @@
 \documentclass[12pt]{report}
 \usepackage{../common}
 
+\declaretheorem[style=definition]{axiom}
+\renewcommand*{\theaxiom}{\Roman{axiom}}
+
+% math operators for simplification
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+
 % title of table of contents
 \renewcommand*\contentsname{Set Theory}
 

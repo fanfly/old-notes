@@ -3,157 +3,161 @@
 \begin{definition}
   \label{def:field}
   A \emph{field} is a set $F$ with two operations, called \emph{addition}
-  (denoted by $+$) and \emph{multiplication} (denoted by $\cdot$), which
-  satisfy the following axioms.
-  \begin{enumerate}[leftmargin=3.5em]
-    \item[(A 1)] If $a \in F$ and $b \in F$, then $a + b \in F$.
-    \item[(A 2)] $a + b = b + a$ for all $a, b \in F$.
-    \item[(A 3)] $(a + b) + c = a + (b + c)$ for all $a, b, c \in F$.
-    \item[(A 4)] There is an element $0_F$ in $F$ such that $0_F + a = a$ for
-      all $a \in F$. 
-    \item[(A 5)] For each $a \in F$ there is an element $-a$ in $F$ such that
-      $a + (-a) = 0_F$.
-    \item[(M 1)] If $a \in F$ and $b \in F$, then $a \cdot b \in F$.
-    \item[(M 2)] $a \cdot b = b \cdot a$ for all $a, b \in F$.
-    \item[(M 3)] $(a \cdot b) + c = a + (b \cdot c)$ for all $a, b, c \in F$.
-    \item[(M 4)] There is an element $1_F$ in $F \setminus \{0_F\}$ such that
-      $1_F \cdot a = a$ for all $a \in F$.
-    \item[(M 5)] For each $a \in F \setminus \{0_F\}$ there is an element
-      $a^{-1}$ in $F$ such that $a \cdot a^{-1} = 1_F$.
-    \item[(D)] $a \cdot (b + c) = a \cdot b + a \cdot c$ for all
-      $a, b, c \in F$.
-  \end{enumerate}
+  (denoted by $+$) and \emph{multiplication} (denoted by $\cdot$), such that
+  the following properties hold.
+  \begin{itemize}
+    \item Closeness: If $a \in F$ and $b \in F$, then $a + b \in F$ and
+    $a \cdot b \in F$.
+    \item Commutativity: $a + b = b + a$ and $a \cdot b = b \cdot a$ hold for
+    any $a, b \in F$.
+    \item Associativity: $(a + b) + c = a + (b + c)$ and
+    $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ hold for any $a, b, c \in F$.
+    \item Identity elements: There is an element $0_F$ in $F$, called the
+    \emph{additive identity}, such that $a + 0_F = a$ for any $a \in F$.
+    Also, there is an element $1_F$ in $F \setminus \{0_F\}$, called the
+    \emph{multiplicative identity}, such that $a \cdot 1_F = a$ for any
+    $a \in F$.
+    \item Inverse elements: For each $a \in F$ there is an element $-a$ in $F$,
+    called the \emph{additive inverse} of $a$, such that $a + (-a) = 0_F$.
+    Also, for each $a \in F \setminus \{0_F\}$ there is an element $a^{-1}$ in
+    $F$, called the \emph{multiplicative inverse} of $a$, such that
+    $a \cdot a^{-1} = 1_F$.
+    \item Distributivity: $a \cdot (b + c) = a \cdot b + a \cdot c$ for any
+    $a, b, c \in F$.
+  \end{itemize}
+  For any $a, b \in F$, we define $a - b = a + (-b)$.
+  For any $a, b \in F$ with $b \neq 0_F$, we define $a / b = a \cdot b^{-1}$.
 \end{definition}
+\begin{remark}
+  For simplification, we usually write $ab$ instead of $a \cdot b$ in this
+  note.
+\end{remark}
 
-\begin{example}
+\begin{examples}
   The set $\mathbb{Q}$ of rational numbers, the set $\mathbb{R}$ of real
   numbers, and the set $\mathbb{C}$ of complex numbers are fields.
-\end{example}
+\end{examples}
 
-\begin{proposition}\label{prop:field-addition}
+\begin{theorem}[Cancellation Laws]
+  \label{thm:cancellation-law}
   Let $F$ be a field with $a, b, c \in F$.
   \begin{enumerate}
-    \item If $a + b = a + c$, then $b = c$.
-    \item If $a + b = a$, then $b = 0_F$.
-    \item If $a + b = 0_F$, then $b = -a$.
-    \item $-(-a) = a$.
+    \item If $a + c = b + c$, then $a = b$.
+    \item If $a \cdot c = b \cdot c$ and $c \neq 0_F$, then $a = b$.
   \end{enumerate}
-\end{proposition}
-\begin{proof} \leavevmode
-  \begin{enumerate}
-    \item It can be proved by
-      \begin{align*}
-        b
-        &= 0_F + b      \\
-        &= (-a + a) + b \\
-        &= -a + (a + b) \\
-        &= -a + (a + c) \\
-        &= (-a + a) + c \\
-        &= 0_F + c      \\
-        &= c.
-      \end{align*}
-    \item By applying (a), it follows from $a + b = a + 0_F$ that $b = 0_F$.
-    \item By applying (a), it follows from $a + b = a + (-a)$ that $b = -a$.
-    \item Since $-a + a = 0_F$, we have $a = -(-a)$ by (c). \qedhere
-  \end{enumerate}
-\end{proof}
-
-\begin{proposition}\label{prop:field-multiplication}
-  Let $F$ be a field with $a, b, c \in F$ and $a \neq 0_F$.
-  \begin{enumerate}
-    \item If $a \cdot b = a \cdot c$, then $b = c$.
-    \item If $a \cdot b = a$, then $b = 1_F$.
-    \item If $a \cdot b = 1_F$, then $b = a^{-1}$.
-    \item $(a^{-1})^{-1} = a$.
-  \end{enumerate}
-\end{proposition}
+\end{theorem}
 \begin{proof}
-  The proof is omitted since it is similar to that of
-  \Cref{prop:field-addition}.
+  The proof of (a) follows from the definition of fields.
+  We have
+  \begin{align*}
+    a
+    &= a + 0_F \\
+    &= a + (c + (-c)) \\
+    &= (a + c) + (-c) \\
+    &= (b + c) + (-c) \\
+    &= b + (c + (-c)) \\
+    &= b + 0_F \\
+    &= b.      
+  \end{align*}
+  The proof of (b) is similar to the proof of (a).
 \end{proof}
 
-\begin{proposition}\label{prop:field-operation}
-  Let $F$ be a field with $a, b \in F$.
+\begin{corollary}
+  The identity and inverse elements in a field are unique.
+  That is, the following statements are true for any field $F$ with
+  $a, b \in F$.
   \begin{enumerate}
-    \item $0_F \cdot a = 0_F$.
+    \item If $a + b = a$, then $b = 0_F$.
+    If $a + b = 0_F$, then $b = -a$.
+    \item If $a \cdot b = a$ and $a \neq 0_F$, then $b = 1_F$.
+    If $a \cdot b = 1_F$ and $a \neq 0_F$, then $b = a^{-1}$.
+  \end{enumerate}
+\end{corollary}
+
+\begin{theorem}
+  Let $F$ be a field and let $a \in F$.
+  Then we have $-(-a) = a$.
+  Also, if $a \neq 0_F$, we have $(a^{-1})^{-1} = a$.
+\end{theorem}
+\begin{proof}
+  Since $-(-a) + (-a) = 0_F = a + (-a)$, we have $-(-a) = a$.
+  If $a \neq 0_F$, then we have $(a^{-1})^{-1} \cdot a^{-1} = 1_F = a \cdot
+  a^{-1}$, and thus $(a^{-1})^{-1} = a$.
+\end{proof}
+
+\begin{theorem}
+  The following statements are true for any field $F$ with $a, b \in F$.
+  \begin{enumerate}
+    \item $a \cdot 0_F = 0_F = 0_F \cdot a$.
     \item $(-a) \cdot b = -(a \cdot b) = a \cdot (-b)$.
     \item $(-a) \cdot (-b) = a \cdot b$.
   \end{enumerate}
-\end{proposition}
-\begin{proof} \leavevmode
+\end{theorem}
+\begin{proof}
+  \leavevmode
   \begin{enumerate}
-    \item Since
-      \begin{equation*}
-        0_F \cdot a + 0_F \cdot a
-        = (0_F + 0_F) \cdot a
-        = 0_F \cdot a,
-      \end{equation*}
-      we have $0_F \cdot a = 0_F$ by \Cref{prop:field-addition} (b).
-    \item Since
-      \begin{equation*}
-        (-a) \cdot b + a \cdot b
-        = (-a + a) \cdot b
-        = 0_F \cdot b
-        = 0_F,
-      \end{equation*}
-      we have $(-a) \cdot b = -(a \cdot b)$ by \Cref{prop:field-addition} (c).
-      The other half can be proved similarly.
-    \item By applying (b) twice, we have
-      \begin{equation*}
-        (-a) \cdot (-b)
-        = -(a \cdot (-b))
-        = -(-(a \cdot b))
-        = a \cdot b. \qedhere
-      \end{equation*}
+    \item It suffices to prove the first equality.
+    Since
+    \begin{equation*}
+      0_F + a \cdot 0_F
+      = a \cdot 0_F
+      = a \cdot (0_F + 0_F)
+      = a \cdot 0_F + a \cdot 0_F,
+    \end{equation*}
+    it follows from cancellation law (\Cref{thm:cancellation-law}) that
+    $a \cdot 0_F = 0_F$.
+    \item It suffices to prove the first equality.
+    We have
+    \begin{equation*}
+      a \cdot b + (-a) \cdot b
+      = (a + (-a)) \cdot b
+      = 0_F \cdot b
+      = 0_F,
+    \end{equation*}
+    where the last equality follows from (a).
+    Thus, $(-a) \cdot b = -(a \cdot b)$ due to the uniqueness of additive
+    inverses.
+    \item We have $(-a) \cdot (-b) = -(a \cdot (-b)) = -(-(a \cdot b))
+    = a \cdot b$ by applying (b) twice.
+    \qedhere
   \end{enumerate}
 \end{proof}
 
 \section{Vector Spaces}
-\begin{definition}\label{def:vector-space}
+\begin{definition}
+  \label{def:vector-space}
   A \emph{vector space} over a field $F$ is a set $V$ with two operations,
   called \emph{addition} (denoted by $+$) and \emph{scalar multiplication}
   (denoted by $\cdot$), which satisfy the following axioms.
-  \begin{enumerate}[leftmargin=3.5em]
-    \item[(V 1)] If $x \in V$ and $y \in V$, then $x + y \in V$.
-    \item[(V 2)] $x + y = y + x$ for all $x, y \in V$. 
-    \item[(V 3)] $(x + y) + z = x + (y + z)$ for all $x, y, z \in V$.
-    \item[(V 4)] There is an element $0_V$ in $V$ such that $0_V + x = x$ for
-      all $x \in V$.
-    \item[(V 5)] For each $x \in V$ there is an element $-x$ such that
-      $x + (-x) = 0_V$.
-    \item[(V 6)] If $a \in F$ and $x \in V$, then $a \cdot x \in V$. 
-    \item[(V 7)] $(a \cdot b) \cdot x = a \cdot (b \cdot x)$ for all
-      $a, b \in F$ and $x \in V$. 
-    \item[(V 8)] $1_F \cdot x = x$ for all $x \in V$.
-    \item[(V 9)] $a \cdot (x + y) = a \cdot x + a \cdot y$ for all $a \in F$
-      and $x, y \in V$.
-    \item[(V 10)] $(a + b) \cdot x = a \cdot x + b \cdot x$ for all
-      $a, b \in F$ and $x \in V$.
-  \end{enumerate}
+  \begin{itemize}
+    \item Closeness: If $a \in F$ and $x, y \in V$, then $x + y \in V$ and
+    $a \cdot x \in V$.
+    \item Commutativity: $x + y = y + x$ holds for any $x, y \in V$.
+    \item Associativity: $(x + y) + z = x + (y + z)$ and
+    $(a \cdot b) \cdot x = a \cdot (b \cdot x)$ hold for any
+    $a, b \in F$ and $x, y, z \in V$.
+    \item Identity elements: There is an element $0_V$ in $V$, called the
+    \emph{additive identity} of $V$, such that $x + 0_V = x$ for any $x \in V$.
+    Also, $1_F \cdot x = x$ for any $x \in V$.
+    \item Inverse elements: For each $x \in V$ there is an element $-x$ in $V$,
+    called the \emph{additive inverse} of $x$, such that $x + (-x) = 0_V$.
+    \item Distributivity: $a \cdot (x + y) = a \cdot x + a \cdot y$ and
+    $(a + b) \cdot x = a \cdot x + b \cdot x$ hold for any $a, b \in F$ and
+    $x, y \in V$.
+  \end{itemize}
+  The elements of $F$ and the elements of $V$ are usually called \emph{scalars}
+  and \emph{vectors}, respectively.
+  Subtraction of vectors is defined by $x - y = x + (-y)$ for any $x, y \in V$.
 \end{definition}
-
-\begin{remark} \leavevmode
-  \begin{itemize}
-    \item For simplification, we usually write $ax$ instead of $a \cdot x$.
-    \item The elements $0_V$ is usually called the \emph{additive identity} of
-      $V$, and $-x$ is called the \emph{additive inverse} of $x$ in $V$.
-    \item \emph{Subtraction} can be defined using additive inverses.
-  \end{itemize}
+\begin{remark}
+  For simplification, we usually write $ax$ instead of $a \cdot x$ in this
+  note.
 \end{remark}
-
-\begin{examples}
-  \leavevmode
-  \begin{itemize}
-    \item A field is a vector space over itself, e.g., $\mathbb{R}$ is a vector
-      space over $\mathbb{R}$.
-    \item $\mathbb{C}$ is a vector space over $\mathbb{R}$.
-    \item $\mathbb{R}$ is a vector space over $\mathbb{Q}$.
-  \end{itemize}
-\end{examples}
 
 \begin{examples}
   Let $F$ be a field.
   \begin{itemize}
+    \item $F$ is a vector space over $F$.
     \item The set of \emph{$n$-tuples} with entries from $F$, denoted $F^n$,
     is a vector space over $F$.
     \item The set of all $m \times n$ \emph{matrices} with entries from $F$,
@@ -162,33 +166,6 @@
     $\mathcal{P}(F)$, is a vector space over $F$.
   \end{itemize}
 \end{examples}
-
-\begin{proposition}\label{prop:vector-space-addition}
-  Let $V$ be a vector space with $x, y, z \in F$.
-  \begin{enumerate}
-    \item If $x + y = x + z$, then $y = z$.
-    \item If $x + y = x$, then $y = 0_V$.
-    \item If $x + y = 0_V$, then $y = -x$.
-    \item $-(-x) = x$.
-  \end{enumerate}
-\end{proposition}
-\begin{proof}
-  The proof is omitted since it is similar to that of
-  \Cref{prop:field-addition}.
-\end{proof}
-
-\begin{proposition}\label{prop:vector-space-operation}
-  Let $V$ be a vector space over a field $F$ with $x \in V$ and $a \in F$.
-  \begin{enumerate}
-    \item $0_F \cdot x = 0_V$.
-    \item $a \cdot 0_V = 0_V$.
-    \item $(-a) \cdot x = -(a \cdot x) = a \cdot (-x)$.
-  \end{enumerate}
-\end{proposition}
-\begin{proof}
-  The proof is omitted since it is similar to that of
-  \Cref{prop:field-operation}.
-\end{proof}
 
 \section{Subspaces}
 \begin{definition}
@@ -229,13 +206,17 @@
 \end{proof}
 
 \begin{example}
+  For any vector space $V$, $V$ and $\{0_V\}$ are subspaces of $V$.
+\end{example}
+
+\begin{example}
   The set $\mathcal{P}_n(F)$ of polynomials in $\mathcal{P}(F)$ with
   degree less than or equal to $n$ is a subspace of $\mathcal{P}(F)$.
 \end{example}
 
 \begin{definition}
   Let $V$ be a vector space and let $S_1$ and $S_2$ be subsets of $V$.
-  Then the \emph{sum} of $S_1$ and $S_2$ is
+  Then the \emph{sum} of $S_1$ and $S_2$ is defined by
   \begin{align*}
     S_1 + S_2 &= \{x + y: \text{$x \in S_1$ and $y \in S_2$}\}.
   \end{align*}
@@ -273,130 +254,111 @@
   or there exist scalars $a_1, \dots, a_n \in F$ and vectors
   $x_1, \dots, x_n \in S$ such that
   \begin{equation*}
-    x = \sum_{i=1}^n a_ix_i = a_1x_1 + a_2x_2 + \cdots + a_nx_n.
+    x = \sum_{i=1}^n a_ix_i.
   \end{equation*}
   The set of all linear combinations of $S$ is called the \emph{span} of $S$,
   denoted by $\spn(S)$.
+  If $W = \spn(S)$, then we say that $W$ is \emph{spanned} by $S$, or $S$ is a
+  \emph{spanning set} of $W$.
 \end{definition}
 
-\begin{theorem}\label{thm:span}
+\begin{theorem}
+  \label{thm:span}
   Let $V$ be a vector space over $F$ and let $S \subseteq V$.
-  Then the following statements are true.
-  \begin{enumerate}
-    \item $\spn(S)$ is a subspace of $V$.
-    \item If $U$ is a subspace of $V$ such that $S \subseteq U$, then
-      $\spn(S) \subseteq U$.
-  \end{enumerate}
+  Then $\spn(S)$ is the minimal subspace of $V$ that contains $S$.
 \end{theorem}
 \begin{proof}
-  \leavevmode
-  \begin{enumerate}
-    \item Let $c \in F$ and $x, y \in \spn(S)$.
-      Then there exist scalars $a_1, \dots, a_n \in F$
-      and vectors $x_1, \dots, x_n \in S$ such that
-      \begin{equation*}
-        x = a_1x_1 + \cdots + a_nx_n.
-      \end{equation*}
-      Also, there exist scalars $b_1, \dots, b_n \in F$
-      and vectors $y_1, \dots, y_m \in S$ such that
-      \begin{equation*}
-        y = b_1y_1 + \cdots + b_ny_m.
-      \end{equation*}
-      Thus, we have
-      \begin{align*}
-        cx + y
-        &= c(x_1 + \cdots + x_n) + (y_1 + \cdots + y_m) \\
-        &= cx_1 + \cdots + cx_n + y_1 + \cdots + y_m \\
-        &\in \spn(S).
-      \end{align*}
-      Furthermore, $0_V \in \spn(S)$.
-      Hence, $\spn(S)$ is a subspace of $V$ by \Cref{cor:subspace}.
-    \item Let $x \in \spn(S)$.
-      Then there exist scalars $a_1, \dots, a_n \in F$
-      and vectors $x_1, \dots, x_n \in S$ such that
-      \begin{equation*}
-        x = a_1x_1 + \cdots + a_nx_n.
-      \end{equation*}
-      Since $S \subseteq U$, we have $x_1, \dots, x_n \in U$, and it follows that
-      $x = a_1x_1 + \cdots + a_nx_n \in U$ due to the closeness of $U$.
-      Thus, $\spn(S) \subseteq U$. \qedhere
-  \end{enumerate}
-\end{proof}
-
-\begin{definition}\label{def:spanning-set}
-  Let $V$ be a vector space and let $S \subseteq V$.
-  If $\spn(S) = V$, then $S$ is called a \emph{spanning set} of $V$, and we
-  also say $S$ \emph{spans} $V$.
-\end{definition}
-
-\begin{example}
-  $\{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ is a spanning set of $\mathbb{R}^3$
-  since for any $x, y, z \in \mathbb{R}$,
+  First we prove that $\spn(S)$ is a subspace of $V$.
+  Obviously $0_V \in \spn(S)$.
+  For any $a_1, a_2, \dots, a_n, b_1, b_2, \dots, b_m, c \in F$ and
+  for any $x_1, x_2, \dots, x_n, y_1, y_2, \dots, y_m \in S$, we have
   \begin{equation*}
-    (x, y, z)
-      = \frac{-x+y+z}{2} \cdot (0, 1, 1)
-      + \frac{x-y+z}{2} \cdot (1, 0, 1)
-      + \frac{x+y-z}{2} \cdot (1, 1, 0).
+    c\sum_{i=1}^n a_ix_i + \sum_{j=1}^m b_jy_j
+    = \sum_{i=1}^n ca_ix_i + \sum_{j=1}^m b_jy_j
+    \in \spn(S).
   \end{equation*}
-\end{example}
+  Thus, $\spn(S)$ is a subspace of $V$.
 
-\begin{proposition}\label{prop:span}
-  Let $V$ be a vector space and let $R, S \subseteq V$.
-  \begin{enumerate}
-    \item $S \subseteq \spn(S)$.
-    \item If $R \subseteq S$, then $\spn(R) \subseteq \spn(S)$.
-    \item $S = \spn(S)$ if and only if $S$ is a subspace of $V$.
-    \item $\spn(R \cup S) = \spn(R) + \spn(S)$.
-  \end{enumerate}
-\end{proposition}
-\begin{proof}
-  \leavevmode
-  \begin{enumerate}
-    \item Straightforward.
-    \item It is true since a linear combination of a subset of $S$ is also a
-      linear combination of $S$.
-    \item $(\Rightarrow)$ Straightforward from \Cref{thm:span} (a).
-
-      $(\Leftarrow)$ Note that any linear combination of $S$ is in $S$ due to
-      closeness of addition and scalar multiplication in $S$.
-      Thus, $\spn(S) \subseteq S$, and it follows that $S = \spn(S)$.
-    \item Since $R \subseteq \spn(R)$ and $S \subseteq \spn(S)$, we have
-      $R \cup S \subseteq \spn(R) + \spn(S)$. Thus, by \Cref{thm:span}, we have
-      $\spn(R \cup S) \subseteq \spn(R) + \spn(S)$.
-      On the other side, since
-      \begin{equation*}
-        \spn(R) \subseteq \spn(R \cup S)
-        \quad \text{and} \quad
-        \spn(S) \subseteq \spn(R \cup S),
-      \end{equation*}
-      we can conclude that $\spn(R) \cup \spn(S) \subseteq \spn(R \cup S)$.
-      Thus, $\spn(R) + \spn(S) \subseteq \spn(R \cup S)$
-      by \Cref{prop:subspace-sum}. \qedhere
-  \end{enumerate}
+  Now we prove the minimality.
+  Let $W$ be a subspace of $V$ such that $S \subseteq W$.
+  Then each element of $\spn(S)$ belongs to $W$ due to the closeness of $W$.
+  Thus, $\spn(S) \subseteq W$, which completes the proof.
 \end{proof}
 
 \section{Linearly Independent Sets}
-\begin{definition}\label{def:linear-independence}
+\begin{definition}
+  \label{def:linear-independence}
   Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
-  \begin{itemize}
-    \item $S$ is \emph{linearly dependent} if there exist scalars
-      $a_1, a_2, \dots, a_n \in F \setminus \{0_F\}$ and distinct vectors
-      $x_1, x_2, \dots, x_n \in S$ for some positive integer $n$ such that
-      \begin{equation*}
-        a_1x_1 + a_2x_2 + \cdots + a_nx_n = 0_V.
-      \end{equation*}
-    \item $S$ is \emph{linearly independent} if it is not linearly dependent.
-  \end{itemize}
+  We say that $S$ is \emph{linearly dependent} if there exist nonzero scalars
+  $a_1, \dots, a_n \in F$ and distinct vectors $x_1, \dots, x_n \in S$ such
+  that
+  \begin{equation*}
+    \sum_{i=1}^n a_ix_i = 0_V.
+  \end{equation*}
+  We say that $S$ is \emph{linearly independent} is it is not linearly
+  dependent.
+  The empty set $\varnothing$ is considered to be linearly independent.
 \end{definition}
 
-\begin{remark}
-  \leavevmode
-  \begin{itemize}
-    \item Note that $\varnothing$ is linearly independent.
-  \end{itemize}
-\end{remark}
+\begin{lemma}
+  \label{lem:linear-dependence-equivalence-first}
+  Let $V$ be a vector space over $F$ and let $S \subseteq V$.
+  Then $S$ is linearly dependent if and only if $x \in \spn(S \setminus \{x\})$
+  for some $x \in S$.
+\end{lemma}
+\begin{proof}
+  ($\Rightarrow$)
+  Suppose that there exist nonzero scalars $a_1, \dots, a_n \in F$ and distinct
+  vectors $x_1, \dots, x_n \in S$ such that
+  \begin{equation*}
+    \sum_{i=1}^n a_ix_i = 0_V.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    x_1
+    = (-a_1)^{-1}\sum_{i=2}^n a_ix_i
+    = \sum_{i=2}^n (-a_1)^{-1}a_ix_i
+    \in \spn(S \setminus \{x_1\}).
+  \end{equation*}
 
-\begin{theorem}\label{thm:linear-dependence-equivalence}
+  ($\Leftarrow$)
+  Suppose that $x \in \spn(S \setminus \{x\})$.
+  Then there exist nonzero scalars $a_1, \dots, a_n \in F$ and distinct
+  vectors $x_1, \dots, x_n \in S \setminus \{x\}$ such that
+  \begin{equation*}
+    x = \sum_{i=1}^n a_ix_i,
+  \end{equation*}
+  implying
+  \begin{equation*}
+    (-1_F)x + \sum_{i=1}^n a_ix_i = 0_V.
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \label{lem:linear-dependence-equivalence-second}
+  Let $V$ be a vector space over $F$ and let $S \subseteq V$.
+  For any $x \in S$, we have $x \in \spn(S \setminus \{x\})$ if and only if
+  $\spn(S) = \spn(S \setminus \{x\})$.
+\end{lemma}
+\begin{proof}
+  ($\Leftarrow$)
+  Straightforward since $x \in S \subseteq \spn(S) = \spn(S \setminus \{x\})$.
+  ($\Rightarrow$)
+  Note that we have
+  \begin{equation*}
+    x \in \spn(S \setminus \{x\})
+    \quad \text{and} \quad
+    S \setminus \{x\} \subseteq \spn(S \setminus \{x\}).
+  \end{equation*}
+  Thus, $S \subseteq \spn(S \setminus \{x\})$, and it follows that
+  $\spn(S) \subseteq \spn(S \setminus \{x\})$.
+  Obviously we have $\spn(S \setminus \{x\}) \subseteq \spn(S)$, and we
+  conclude that $\spn(S) = \spn(S \setminus \{x\})$.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:linear-dependence-equivalence}
   Let $V$ be a vector space over a field $F$ and let $S \subseteq V$.
   Then the following statements are equivalent.
   \begin{enumerate}
@@ -406,92 +368,22 @@
   \end{enumerate}
 \end{theorem}
 \begin{proof}
-  \leavevmode
-  \begin{enumerate}[(i)]
-    \item First we assume (a) and prove (b). Suppose that
-      \begin{equation*}
-        a_0x_0 + a_1x_1 + \cdots + a_nx_n = 0_V,
-      \end{equation*}
-      where $a_0, a_1, \dots, a_n$ are nonzero scalars and
-      $x_0, x_1, \dots, x_n$ are distinct vectors. Then
-      \begin{align*}
-        x_0
-        &= (-a_0)^{-1}(a_1x_1 + \cdots + a_nx_n) \\
-        &= ((-a_0)^{-1}a_1)x_1 + \cdots + ((-a_0)^{-1}a_n)x_n \\
-        &\in \spn(S \setminus \{x_0\}).
-      \end{align*}
-    \item Then we assume (b) and prove (c). Since
-      \begin{equation*}
-        x \in \spn(S \setminus \{x\})
-        \quad \text{and} \quad
-        S \setminus \{x\} \subseteq \spn(S \setminus \{x\}),
-      \end{equation*}
-      we have $S \subseteq \spn(S \setminus \{x\})$.
-      Thus, $\spn(S) \subseteq \spn(S \setminus \{x\})$ by \Cref{thm:span},
-      and we can conclude that $\spn(S) = \spn(S \setminus \{x\})$.
-    \item Then we assume (c) and prove (b). It is straightforward
-      since $x \in S \subseteq \spn(S) = \spn(S \setminus \{x\})$.
-    \item Finally we assume (b) and prove (a).
-      Without loss of generality, let $a_1, \dots, a_n \in F$ be nonzero
-      scalars and $x_1, \dots, x_n \in S \setminus \{x\}$ be distinct vectors
-      such that $x = a_1x_1 + \cdots + a_nx_n$. Then we have
-      \begin{equation*}
-        (-1_F)x + a_1x_1 + \cdots + a_nx_n = 0_V,
-      \end{equation*}
-      which completes the proof. \qedhere
-  \end{enumerate}
+  Immediately from \Cref{lem:linear-dependence-equivalence-first} and
+  \Cref{lem:linear-dependence-equivalence-second}.
 \end{proof}
 
-\begin{example}
-  Let $S = \{(0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ be a subset of $\mathbb{R}^3$.
-  Suppose that $a_1, a_2, a_3 \in \mathbb{R}$ are scalars such that
-  \begin{equation*}
-    a_1(0, 1, 1) + a_2(1, 0, 1) + a_3(1, 1, 0) = (0, 0, 0).
-  \end{equation*}
-  Then we have the following system of equations.
-  \begin{equation*}
-    \setlength\arraycolsep{0pt}
-    \begin{array}{r>{{}}c<{{}}r>{{}}c<{{}}r@{{}={}}r}
-          & & a_2 &+& a_3 & 0 \\
-      a_1 & &     &+& a_3 & 0 \\
-      a_1 &+& a_2 & &     & 0 \\
-    \end{array}
-  \end{equation*}
-  Since the only solution to this system of equations is $a_1 = a_2 = a_3 = 0$,
-  we can conclude that $S$ is linearly independent by
-  \Cref{def:linear-independence}.
-\end{example}
-
-\begin{example}
-  Let $S = \{(1, 1, 1), (0, 1, 1), (1, 0, 1), (1, 1, 0)\}$ be a subset of
-  $\mathbb{R}^3$.
-  We can conclude that $S$ is linearly dependent since
-  \begin{equation*}
-    (1, 1, 1)
-    = \frac{1}{2} \cdot (0, 1, 1) + \frac{1}{2} \cdot (1, 0, 1)
-      + \frac{1}{2} \cdot (1, 1, 0).
-  \end{equation*}
-\end{example}
-
-\begin{proposition}\label{prop:linear-independence-subset}
-  Let $V$ be a vector space and let $R, S$ be subsets of $V$ with
-  $R \subseteq S$.
-  \begin{enumerate}
-    \item If $R$ is linearly dependent, then so is $S$.
-    \item If $S$ is linearly independent, then so is $R$.
-  \end{enumerate}
-\end{proposition}
+\begin{theorem}
+  \label{thm:linear-independence-subset}
+  Let $V$ be a vector space.
+  Let $R$ and $S$ be subsets of $V$ with $R \subseteq S$.
+  If $S$ is linearly independent, then $R$ is linearly independent.
+\end{theorem}
 \begin{proof}
-  \leavevmode
-  \begin{enumerate}
-    \item Suppose that $R$ is linearly dependent. Then by
-      \Cref{def:linear-independence} there exists $x \in R$
-      such that $x \in \spn(R \setminus \{x\})$. Also, we have
-      $R \setminus \{x\} \subseteq S \setminus \{x\}$ since $R \subseteq S$.
-      Thus, $x \in \spn{S \setminus \{x\}}$, and it follows that $S$ is
-      linearly dependent.
-    \item Straightforward from (a). \qedhere
-  \end{enumerate}
+  Suppose that $R$ is linearly dependent, i.e., there exists a vector $x \in R$
+  such that $x \in \spn(R \setminus \{x\})$.
+  It follows that $x \in \spn(S \setminus \{x\})$, implying that $S$ is
+  linearly dependent, contradiction.
+  Thus, $R$ is linearly independent.
 \end{proof}
 
 \section{Bases and Dimension}

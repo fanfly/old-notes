@@ -18,6 +18,11 @@
   If $x = y$, then we write $\{x\}$ for short.
 \end{axiom}
 
+\begin{example}
+  By axiom of pairing, $\{\varnothing\}$ and $\{\varnothing, \{\varnothing\}\}$
+  are sets.
+\end{example}
+
 \begin{axiom}[Power Set]
   For any set $x$, there exists a set $y$ such that for any set $z$, $z \in y$
   if and only if $z \subseteq x$.
@@ -36,4 +41,53 @@
   \end{equation*}
 \end{axiom}
 
+\begin{theorem}
+  There is no set to which every set belongs.
+  That is, for any set $x$, there exists a set $y$ such that $y \notin x$.
+\end{theorem}
+\begin{proof}
+  Let $y = \{z \in x: z \notin z\}$.
+  Then we have $y \in y$ if and only if $y \in x$ and $y \notin y$.
+  If $y \in x$, then $y \in y$ if and only if $y \notin y$, contradiction.
+  Thus, $y \notin x$.
+\end{proof}
+
 \section{Arbitrary Unions and Intersections}
+\begin{axiom}[Union]
+  For any set $x$, there exists a set $y$ whose elements are exactly the
+  members of the members of $x$.
+  That is,
+  \begin{equation*}
+    \forall x \exists y \forall z
+    (z \in y \leftrightarrow \exists w (w \in x \wedge z \in w)).
+  \end{equation*}
+  The set $y$ is called the \emph{union} of $x$, denoted by $\bigcup x$.
+\end{axiom}
+
+\begin{theorem}
+  For any nonempty set $x$, there exists a unique set $y$ such that for any
+  set $z$, $z \in y$ if and only if $z$ belongs to every member of $x$.
+\end{theorem}
+\begin{proof}
+  Since $x$ is nonempty, there is a member $w_0$ of $x$.
+  Then by a subset axiom there exists a set $y$ such that
+  \begin{equation*}
+    y = \{z \in w_0: \forall w (w \in x \to z \in w)\},
+  \end{equation*}
+  and uniqueness of $y$ follows from extensionality.
+\end{proof}
+
+\begin{definition}
+  For any nonempty set $x$, we define the \emph{intersection} of $x$ as the set
+  $y$ such that for any set $z$, $z \in y$ if and only if $z$ belongs to every
+  member of $x$.
+  Let $\bigcap x$ denote the intersection of $x$.
+\end{definition}
+
+\begin{definition}
+  For any sets $x$ and $y$, we define
+  \begin{align*}
+    x \cup y &= \bigcup \{x, y\} \\
+    x \cap y &= \bigcap \{x, y\}.
+  \end{align*}
+\end{definition}
