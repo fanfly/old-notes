@@ -13,8 +13,8 @@ is stated as follows.
 \noindent
 Let us begin with \emph{insertion sort}, which is a simple sorting algorithm.
 \begin{codebox}
-  \Procname{$\proc{Insertion-Sort}(A)$}
-  \li \For $i \gets 2$ \To $\attrib{A}{length}$ \Do
+  \Procname{$\proc{Insertion-Sort}(A, n)$}
+  \li \For $i \gets 2$ \To $n$ \Do
   \li     $k \gets A[i]$
   \li     $j \gets i$
   \li     \While $j > 1$ and $k < A[j - 1]$ \Do
@@ -64,3 +64,38 @@ Let us begin with \emph{insertion sort}, which is a simple sorting algorithm.
   \{2, \dots, n\}$, and we have $T(n) = \Omega(n^2)$ in this case.
   Thus, $T(n)  = \Theta(n^2)$ in the worst case, which completes the proof.
 \end{proof}
+
+\section{Heap Sort}
+This section is under construction.
+\begin{codebox}
+  \Procname{$\proc{Max-Heapify}(A, i, n)$}
+  \li $l \gets 2i$
+  \li $r \gets 2i + 1$
+  \li $k \gets i$
+  \li \If $l \leq n$ and $A[l] > A[i]$ \Then
+  \li     $k \gets l$
+      \End
+  \li \If $r \leq n$ and $A[r] > A[i]$ \Then
+  \li     $k \gets r$
+      \End
+  \li \If $k \neq i$ \Then
+  \li     swap $A[i]$ and $A[k]$
+  \li     $\proc{Max-Heapify}(A, k)$
+      \End
+\end{codebox}
+
+\begin{codebox}
+  \Procname{$\proc{Build-Max-Heap}(A, n)$}
+  \li \For $i \gets \lfloor n / 2 \rfloor$ \Downto $1$ \Do
+  \li     $\proc{Max-Heapify}(A, i, n)$
+      \End
+\end{codebox}
+
+\begin{codebox}
+  \Procname{$\proc{Heap-Sort}(A, n)$}
+  \li $\proc{Build-Max-Heap}(A, n)$
+  \li \For $i \gets n$ \Downto $2$ \Do
+  \li     swap $A[1]$ and $A[i]$
+  \li     $\proc{Max-Heapify}(A, 1, i - 1)$
+      \End
+\end{codebox}
