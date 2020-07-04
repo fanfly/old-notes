@@ -1,0 +1,48 @@
+\chapter{Divide and Conquer}
+\section{Selection}
+\begin{problem}[Selection Problem]
+  \leavevmode
+  \begin{itemize}
+    \item Input: An array $A$ of $n$ numbers and an integer $k$ with $1 \leq k
+    \leq n$.
+    \item Output: The $k$th smallest number of $A$.
+  \end{itemize}
+\end{problem}
+
+\begin{codebox}
+  \Procname{$\proc{Partition}(A)$}
+  \li $n \gets |A|$
+  \li $i \gets 1$
+  \li \For $j \gets 1$ \To $n - 1$ \Do
+  \li     \If $A[j] \leq A[n]$ \Then
+  \li         swap $A[i]$ and $A[j]$
+  \li         $i \gets i + 1$
+          \End
+      \End
+  \li swap $A[i]$ and $A[n]$
+  \li \Return $i$
+\end{codebox}
+
+\begin{codebox}
+  \Procname{$\proc{Select}(A, i)$}
+  \li $n \gets |A|$
+  \li \If $n \leq 5$ \Then
+  \li     $\proc{Insertion-Sort}(A)$
+  \li \Else
+  \li     $\ell \gets \lfloor n/5 \rfloor$
+  \li     \For $i \gets 1$ \To $\ell$ \Do
+  \li         $\proc{Insertion-Sort}(A[(5i-4) \twodots 5i])$
+  \li         swap $A[i]$ and $A[5i-2]$
+          \End
+  \li     $m \gets \lceil \ell/2 \rceil$
+  \li     $\proc{Select}(A[1 \twodots \ell], m)$
+  \li     swap $A[m]$ and $A[n]$
+  \li     $j \gets \proc{Partition}(A)$
+  \li     \If $j > i$ \Then
+  \li         $\proc{Select}(A[1 \twodots j-1], i)$
+  \li     \ElseIf $j < i$ \Then
+  \li         $\proc{Select}(A[j+1 \twodots n], i - j)$
+          \End
+      \End
+\end{codebox}
+

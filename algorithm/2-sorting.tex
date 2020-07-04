@@ -1,101 +1,82 @@
 \chapter{Sorting}
 \section{Insertion Sort}
-In this chapter, we consider algorithms that solves the sorting problem, which
-is stated as follows.
 \begin{problem}[Sorting Problem]
   \leavevmode
   \begin{itemize}
-    \item Input: An array $A$ of $n$ integers.
-    \item Output: A permutation of $A$ that is non-decreasing.
+    \item Input: An array $A$ of $n$ numbers.
+    \item Output: A permutation of $A$ that is nondecreasing.
   \end{itemize}
 \end{problem}
 
-\noindent
-Let us begin with \emph{insertion sort}, which is a simple sorting algorithm.
 \begin{codebox}
-  \Procname{$\proc{Insertion-Sort}(A, n)$}
+  \Procname{$\proc{Insertion-Sort}(A)$}
+  \li $n \gets |A|$
   \li \For $i \gets 2$ \To $n$ \Do
-  \li     $k \gets A[i]$
+  \li     $\tau \gets A[i]$
   \li     $j \gets i$
-  \li     \While $j > 1$ and $k < A[j - 1]$ \Do
+  \li     \While $j > 1$ and $A[j - 1] > \tau$ \Do
   \li         $A[j] \gets A[j - 1]$
   \li         $j \gets j - 1$
           \End
-  \li     $A[j] \gets k$
+  \li     $A[j] \gets \tau$
       \End
 \end{codebox}
-
-\begin{theorem}
-  $\proc{Insertion-Sort}$ solves the sorting problem in $\Theta(n^2)$ time in
-  the worst case, where $n$ is the length of the input array.
-\end{theorem}
-\begin{proof}
-  We prove the loop invariant that at the start of each iteration of the \For
-  loop, the subarray $A[1 \twodots i-1]$ is a non-decreasing permutation of the
-  elements originally in $A[1 \twodots i-1]$.
-
-  The loop invariant is trivially true for $i = 2$, and is maintained by each
-  iteration as follows.
-  First, $A[i]$ is copied into $k$.
-  The \While loop of lines 4 -- 6 moves the elements in $A[1 \twodots i-1]$
-  that are greater than $k$ by one position to the right.
-  Thus, at the end of itertaion, $A[1 \twodots j-1]$ stores the elements
-  originally in $A[1 \twodots i-1]$ that are less than or equal to $k$, and
-  $A[j+1 \twodots i]$ stores the elements originally in $A[1 \twodots i-1]$
-  that are greater than $k$.
-  After storing $k$ into $A[j]$, $A[1 \twodots i]$ is a nondecreasing
-  permutation of the elements originally in $A[1 \twodots i]$, and incrementing
-  $i$ preserves the loop invariant.
-
-  When the \For loop terminates, we have $j = n + 1$.
-  Hence, the entire array $A[1 \twodots n]$ is sorted due to the loop
-  invariant, implying that $\proc{Insertion-Sort}$ correctly solves the sorting
-  problem.
-
-  Now we analyze the running time of $\proc{Insertion-Sort}$.
-  Let $t_i$ denote the number of times the \While loop test in line 4 is
-  executed for that value of $i$.
-  Then the running time $T(n)$ is given by
-  \begin{equation*}
-    T(n) = \Theta\left(\sum_{i=2}^n t_i\right).
-  \end{equation*}
-  We have $T(n) = O(n^2)$ since $t_i \leq i$ for each $i \in \{2, \dots, n\}$.
-  If the original array is strictly decreasing, then $t_i = i$ for each $i \in
-  \{2, \dots, n\}$, and we have $T(n) = \Omega(n^2)$ in this case.
-  Thus, $T(n)  = \Theta(n^2)$ in the worst case, which completes the proof.
-\end{proof}
 
 \section{Heap Sort}
-This section is under construction.
+\begin{definition}
+  An array $A$ of $n$ numbers can be viewed as a complete binary tree, where
+  each node of the tree corresponds to an element of $A$.
+  \begin{itemize}
+    \item $A[1]$ is the root.
+    \item The left child of $A[i]$ is $A[2i]$ (if $2i \leq n$).
+    \item The right child of $A[i]$ is $A[2i+1]$ (if $2i+1 \leq n$).
+  \end{itemize}
+  We say that $A$ is \emph{heapified} if
+  \begin{equation*}
+    A\left[\left\lfloor\frac{i}{2}\right\rfloor\right] \geq A[i]
+  \end{equation*}
+  holds for each $i \in \{2, \dots, n\}$.
+\end{definition}
+
 \begin{codebox}
-  \Procname{$\proc{Max-Heapify}(A, i, n)$}
-  \li $l \gets 2i$
-  \li $r \gets 2i + 1$
-  \li $k \gets i$
-  \li \If $l \leq n$ and $A[l] > A[i]$ \Then
-  \li     $k \gets l$
-      \End
-  \li \If $r \leq n$ and $A[r] > A[i]$ \Then
-  \li     $k \gets r$
-      \End
-  \li \If $k \neq i$ \Then
-  \li     swap $A[i]$ and $A[k]$
-  \li     $\proc{Max-Heapify}(A, k)$
+  \Procname{$\proc{Heapify-Down}(A, i)$}
+  \li $n \gets |A|$
+  \li $\phi \gets \const{true}$
+  \li \While $\phi$ \Do
+  \li     $\ell \gets 2i$
+  \li     $r \gets 2i+1$
+  \li     $j \gets i$
+  \li     \If $\ell \leq n$ and $A[\ell] > A[j]$ \Then
+  \li         $j \gets \ell$
+          \End
+  \li     \If $r \leq n$ and $A[r] > A[j]$ \Then
+  \li         $j \gets r$
+          \End
+  \li     \If $j = i$ \Then
+  \li         $\phi \gets \const{false}$
+  \li     \Else
+  \li         swap $A[i]$ and $A[j]$
+  \li         $i \gets j$
+          \End
       \End
 \end{codebox}
 
 \begin{codebox}
-  \Procname{$\proc{Build-Max-Heap}(A, n)$}
-  \li \For $i \gets \lfloor n / 2 \rfloor$ \Downto $1$ \Do
-  \li     $\proc{Max-Heapify}(A, i, n)$
+  \Procname{$\proc{Heapify-Up}(A, i)$}
+  \li \While $i > 1$ and $A[i] > A[\lfloor i/2 \rfloor]$ \Do
+  \li     swap $A[i]$ and $A[\lfloor i/2 \rfloor]$
+  \li     $i \gets \lfloor i/2 \rfloor$
       \End
 \end{codebox}
 
 \begin{codebox}
-  \Procname{$\proc{Heap-Sort}(A, n)$}
-  \li $\proc{Build-Max-Heap}(A, n)$
-  \li \For $i \gets n$ \Downto $2$ \Do
-  \li     swap $A[1]$ and $A[i]$
-  \li     $\proc{Max-Heapify}(A, 1, i - 1)$
+  \Procname{$\proc{Heap-Sort}(A)$}
+  \li $n \gets |A|$
+  \li \For $i \gets \lfloor n/2 \rfloor$ \Downto $1$ \Do
+  \li     $\proc{Heapify-Down}(A, i)$
+      \End
+  \li \For $j \gets n$ \Downto $2$ \Do
+  \li     swap $A[1]$ and $A[j]$
+  \li     $\proc{Heapify-Down}(A[1 \twodots j-1], 1)$
       \End
 \end{codebox}

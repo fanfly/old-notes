@@ -1,0 +1,49 @@
+\chapter{Shortest Paths}
+\section{Single-Source Shortest Paths}
+\begin{codebox}
+  \Procname{$\proc{Bellman-Ford}(G, w, s)$}
+  \li $n \gets |V(G)|$
+  \li \For each $u \in V(G)$ \Do
+  \li     $\attrib{u}{d} \gets \infty$
+  \li     $\attrib{u}{\pi} \gets \const{nil}$
+      \End
+  \li $\attrib{s}{d} \gets 0$
+  \li \For $i \gets 1$ \To $n - 1$ \Do
+  \li     \For each $u \in V(G)$ \Do
+  \li       \For each $v \in N_G(u)$ \Do
+  \li           \If $\attrib{v}{d} > \attrib{u}{d} + w(u, v)$ \Then
+  \li               $\attrib{v}{d} \gets \attrib{u}{d} + w(u, v)$
+  \li               $\attrib{v}{\pi} \gets u$
+                \End
+            \End
+          \End
+      \End
+  \li \For each $u \in V(G)$ \Do
+  \li       \For each $v \in N_G(u)$ \Do
+  \li           \If $\attrib{v}{d} > \attrib{u}{d} + w(u, v)$ \Then
+  \li               \Return $\const{false}$
+                \End
+            \End
+          \End
+      \End
+  \li \Return $\const{true}$
+\end{codebox}
+
+\begin{codebox}
+  \Procname{$\proc{Dijkstra}(G, w, s)$}
+  \li \For each $u \in V(G)$ \Do
+  \li     $\attrib{u}{d} \gets \infty$
+  \li     $\attrib{u}{\pi} \gets \const{nil}$
+      \End
+  \li $\attrib{s}{d} \gets 0$
+  \li $Q \gets V(G)$
+  \li \While $Q \neq \varnothing$ \Do
+  \li     $u \gets \proc{Extract-Min}(Q)$
+  \li     \For each $v \in N_G(u)$ \Do
+  \li         \If $\attrib{v}{d} > \attrib{u}{d} + w(u, v)$ \Then
+  \li             $\attrib{v}{d} \gets \attrib{u}{d} + w(u, v)$
+  \li             $\attrib{v}{\pi} \gets u$
+              \End
+          \End
+      \End
+\end{codebox}
