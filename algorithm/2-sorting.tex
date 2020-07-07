@@ -1,77 +1,130 @@
 \chapter{Sorting}
 \section{Insertion Sort}
+In this chapter, we focus on the sorting problem.
+An algorithm that solves the sorting problem is usually called a sorting
+algorithm.
 \begin{problem}[Sorting Problem]
   \leavevmode
   \begin{itemize}
-    \item Input: An array $A$ of $n$ numbers.
+    \item Input: An array $A[1 \twodots n]$ of numbers.
     \item Output: A permutation of $A$ that is nondecreasing.
   \end{itemize}
 \end{problem}
 
-\begin{codebox}
-  \Procname{$\proc{Insertion-Sort}(A)$}
-  \li $n \gets |A|$
-  \li \For $i \gets 2$ \To $n$ \Do
-  \li     $\tau \gets A[i]$
-  \li     $j \gets i$
-  \li     \While $j > 1$ and $A[j - 1] > \tau$ \Do
-  \li         $A[j] \gets A[j - 1]$
-  \li         $j \gets j - 1$
-          \End
-  \li     $A[j] \gets \tau$
-      \End
-\end{codebox}
+\begin{algorithm}
+  $\proc{Insertion-Sort}$ is an efficient sorting algorithm if the size of
+  input array is small.
+  \leavevmode
+  \begin{codebox}
+    \Procname{$\proc{Insertion-Sort}(A[1 \twodots n])$}
+    \li \For $i \gets 2$ \To $n$ \Do
+    \li     $\tau \gets A[i]$
+    \li     $j \gets i$
+    \li     $\phi \gets \const{true}$
+    \li     \While $\phi$ \Do
+    \li         \If $j = 1$ or $A[j-1] \leq \tau$ \Then
+    \li             $\phi \gets \const{false}$
+    \li         \Else
+    \li             $A[j] \gets A[j-1]$
+    \li             $j \gets j-1$
+                \End
+            \End
+    \li     $A[j] \gets \tau$
+        \End
+  \end{codebox}
+\end{algorithm}
 
-\section{Heap Sort}
+\begin{theorem}
+  The algorithm $\proc{Insertion-Sort}$ correctly solves the sorting problem.
+\end{theorem}
+\begin{proof}
+  We prove the loop invariant that at the start of each iteration of the \For
+  loop of lines 1 -- 11, the subarray $A[1 \twodots i-1]$ is a nondecreasing
+  permutation of the elements originally in $A[1 \twodots i-1]$.
+  The loop invariant is trivially true for $i = 2$, and we show that each
+  iteration maintains the loop invariant.
+
+  First, we set $\tau \gets A[i]$ and $j \gets i$.
+  Then the \While loop of lines 5 -- 10 maintains the loop invariant that
+  at the start of each iteration, $A[1 \twodots j-1]$ remains unchanged, and
+  the elements in $A[j+1 \twodots i]$ are the elements originally in
+  $A[j \twodots i-1]$, each at its corresponding position.
+  It can be shown that when the \While loop of lines 5 -- 10 terminates,
+  each element in $A[1 \twodots j-1]$ is less than or equal to $A[j]$, and each
+  element in $A[j+1 \twodots i]$ is greater than $A[j]$.
+  Thus, after we set $A[j] \gets \tau$, the subarray $A[1 \twodots i]$ becomes
+  a sorted permutation of the elements originally in $A[1 \twodots i]$,
+  implying that the loop invariant holds after the increment of $i$.
+
+  When the \For loop of lines 1 -- 11 terminates, we have $i = n+1$.
+  Due to the loop invariant, the entire array is a nondecreasing permutation of
+  the original input array, which completes the proof.
+\end{proof}
+
+\begin{theorem}
+  The worst-case running time of $\proc{Insertion-Sort}$ is $\Theta(n^2)$.
+\end{theorem}
+\begin{proof}
+  It is easy to verify that the \While loop of lines 5 -- 10 takes $O(i)$ time.
+  Thus, the overall running time is $O(n^2)$.
+
+  However, if the input array is strictly decreasing, then the \While loop of
+  lines 5 -- 10 will takes $\Omega(i)$ time.
+  In this case, the overall running time is $\Omega(n^2)$.
+  Thus, the worst-case running time of $\proc{Insertion-Sort}$ is
+  $\Theta(n^2)$.
+\end{proof}
+
+\section{Heapsort}
 \begin{definition}
-  An array $A$ of $n$ numbers can be viewed as a complete binary tree, where
-  each node of the tree corresponds to an element of $A$.
-  \begin{itemize}
-    \item $A[1]$ is the root.
-    \item The left child of $A[i]$ is $A[2i]$ (if $2i \leq n$).
-    \item The right child of $A[i]$ is $A[2i+1]$ (if $2i+1 \leq n$).
-  \end{itemize}
-  We say that $A$ is \emph{heapified} if
-  \begin{equation*}
-    A\left[\left\lfloor\frac{i}{2}\right\rfloor\right] \geq A[i]
-  \end{equation*}
-  holds for each $i \in \{2, \dots, n\}$.
+  A \emph{binary heap} is a complete binary tree such that the value of each
+  node is not less than the values of its children.
+
+  We can use an array to represent a complete binary tree, such that $A[1]$
+  is the root of the tree, and $A[2i]$ and $A[2i+1]$ are the left child and the
+  right child of $A[i]$.
 \end{definition}
 
+\begin{algorithm}
+  Suppose that $A[1 \twodots n]$ is an array representing a complete binary
+  tree.
+  If the subtrees rooted at $A[2i]$ and $A[2i+1]$ are already heapfied, then we
+  can use $\proc{Heapify-Down}$ to heapify the subtree rooted at $A[i]$.
+  \begin{codebox}
+    \Procname{$\proc{Heapify-Down}(A[1 \twodots n], i)$}
+    \li $\phi \gets \const{true}$
+    \li \While $\phi$ \Do
+    \li     $\ell \gets 2i$
+    \li     $r \gets 2i+1$
+    \li     $j \gets i$
+    \li     \If $\ell \leq n$ and $A[\ell] > A[j]$ \Then
+    \li         $j \gets \ell$
+            \End
+    \li     \If $r \leq n$ and $A[r] > A[j]$ \Then
+    \li         $j \gets r$
+            \End
+    \li     \If $j = i$ \Then
+    \li         $\phi \gets \const{false}$
+    \li     \Else
+    \li         swap $A[i]$ and $A[j]$
+    \li         $i \gets j$
+            \End
+        \End
+  \end{codebox}
+\end{algorithm}
+
 \begin{codebox}
-  \Procname{$\proc{Heapify-Down}(A, i)$}
-  \li $n \gets |A|$
-  \li $\phi \gets \const{true}$
-  \li \While $\phi$ \Do
-  \li     $\ell \gets 2i$
-  \li     $r \gets 2i+1$
-  \li     $j \gets i$
-  \li     \If $\ell \leq n$ and $A[\ell] > A[j]$ \Then
-  \li         $j \gets \ell$
-          \End
-  \li     \If $r \leq n$ and $A[r] > A[j]$ \Then
-  \li         $j \gets r$
-          \End
-  \li     \If $j = i$ \Then
-  \li         $\phi \gets \const{false}$
-  \li     \Else
-  \li         swap $A[i]$ and $A[j]$
-  \li         $i \gets j$
-          \End
+  \Procname{$\proc{Heapify-Up}(A[1 \twodots n], i)$}
+  \li $j \gets \lfloor i/2 \rfloor$
+  \li \While $j \geq 1$ and $A[i] > A[j]$ \Do
+  \li     swap $A[i]$ and $A[j]$
+  \li     $i \gets j$
+  \li     $j \gets \lfloor j/2 \rfloor$
       \End
 \end{codebox}
 
 \begin{codebox}
-  \Procname{$\proc{Heapify-Up}(A, i)$}
-  \li \While $i > 1$ and $A[i] > A[\lfloor i/2 \rfloor]$ \Do
-  \li     swap $A[i]$ and $A[\lfloor i/2 \rfloor]$
-  \li     $i \gets \lfloor i/2 \rfloor$
-      \End
-\end{codebox}
-
-\begin{codebox}
-  \Procname{$\proc{Heap-Sort}(A)$}
-  \li $n \gets |A|$
+  \Procname{$\proc{Heapsort}(A[1 \twodots n])$}
   \li \For $i \gets \lfloor n/2 \rfloor$ \Downto $1$ \Do
   \li     $\proc{Heapify-Down}(A, i)$
       \End
