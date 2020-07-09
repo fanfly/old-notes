@@ -131,35 +131,53 @@
   \end{align*}
 \end{proof}
 
-\begin{definition}
-  The \emph{characteristic polynomial} of $A \in F^{n \times n}$ is the
-  polynomial $f_A \in \mathcal{P}(F)$ with
-  \begin{equation*}
-    f_A(t) = \det(A - tI_n).
-  \end{equation*}
-\end{definition}
-
 \begin{theorem}
-  Let $A, B \in F^{n \times n}$. If $A \sim B$, then $f_A = f_B$.
+  Let $A, B \in F^{n \times n}$ and $\lambda \in F$.
+  If $A \sim B$, then
+  \begin{equation*}
+    \det(A - \lambda I_n) = \det(B - \lambda I_n).
+  \end{equation*}
 \end{theorem}
 \begin{proof}
-  To be completed.
+  Suppose that $Q \in F^{n \times n}$ is invertible such that $A = Q^{-1}BQ$.
+  Then we have
+  \begin{align*}
+    \det(A - \lambda I_n)
+    &= \det(Q^{-1}BQ - \lambda Q^{-1}I_nQ) \\
+    &= \det(Q^{-1}(B - \lambda I_n)Q) \\
+    &= \det(Q^{-1})\det(B - \lambda I_n)\det(Q) \\
+    &= \det(B - \lambda I_n).
+    \qedhere
+  \end{align*}
 \end{proof}
 
 \begin{definition}
-  Let $V$ be a finite-dimensional vector space over $F$ with $\dim(V) = n$.
-  For all $T \in \mathcal{L}(V)$, we define the
-  \emph{characteristic polynomial} of $T$ as
-  \begin{equation*}
-    f_T = f_A,
-  \end{equation*}
-  where $A = [T]_\beta^\beta$ for some arbitrary ordered basis $\beta$ of $V$.
+  Let $V$ be a finite-dimensional vector space with $\dim(V) = n$.
+  \begin{itemize}
+    \item For any linear operator $T: V \to V$, the \emph{characteristic
+    polynomial} of $T$ is
+    \begin{equation*}
+      f_T(t) = \det([T]_\beta^\beta - tI_n),
+    \end{equation*}
+    where $\beta$ is an arbitrary basis of $V$.
+    \item For any $A \in F^{n \times n}$, the \emph{characteristic polynomial}
+    of $A$ is
+    \begin{equation*}
+      f_A(t) = \det(A - tI_n).
+    \end{equation*}
+  \end{itemize}
 \end{definition}
+\begin{remark}
+  The characteristic polynomial of a linear operator $T: V \to V$ is
+  well-defined, since $[T]_\beta^\beta \sim [T]_\gamma^\gamma$ holds for any
+  bases $\beta$ and $\gamma$ of $V$.
+\end{remark}
 
 \begin{theorem}
-  Let $V$ be a vector space over a field $F$ and let $T \in \mathcal{L}(V)$.
-  For any $\lambda \in F$ and $x \in V \setminus \{0_V\}$, $(\lambda, x)$ is
-  an eigenpair of $T$ if and only if $x \in \mathcal{N}(T - \lambda I_V)$.
+  Let $V$ be a vector space over a field $F$ and let $T: V \to V$ be linear.
+  For any scalar $\lambda \in F$ and for any nonzero vector $x \in V$,
+  $(\lambda, x)$ is an eigenpair of $T$ if and only if
+  $x \in N(T - \lambda I_V)$.
 \end{theorem}
 \begin{proof}
   The proof is as follows.
@@ -168,22 +186,173 @@
     &\quad \Leftrightarrow \quad T(x) = \lambda x \\
     &\quad \Leftrightarrow \quad T(x) = (\lambda I_V)(x) \\
     &\quad \Leftrightarrow \quad (T - \lambda I_V)(x) = 0_V \\
-    &\quad \Leftrightarrow \quad x \in \mathcal{N}(T - \lambda I_V).
+    &\quad \Leftrightarrow \quad x \in N(T - \lambda I_V).
     \qedhere
   \end{align*}
 \end{proof}
 
 \begin{definition}
-  Let $V$ be a vector space over a field $F$.
-  Let $T: V \to V$ be linear and let $\lambda$ be an eigenvalue of $T$.
-  Then
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  For each scalar $\lambda \in F$, we define
   \begin{equation*}
-    E_T(\lambda) = \mathcal{N}(T - \lambda I_V).
+    E_T(\lambda) = N(T - \lambda I_V).
   \end{equation*}
-  is called the \emph{eigenspace} of $T$ with respect to $\lambda$.
+  If $\lambda$ is an eigenvalue of $T$, then $E_T(\lambda)$ is called the
+  \emph{eigenspace} of $T$ with respect to $\lambda$.
 \end{definition}
 
+\begin{theorem}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  If $(\lambda_1, x_1), \dots, (\lambda_k, x_k)$ are eigenpairs of $T$ such
+  that $\lambda_1, \dots, \lambda_k$ are distinct, then $\{x_1, \dots, x_k\}$
+  is linearly independent.
+\end{theorem}
+\begin{proof}
+  The proof is by induction on $k$.
+  For $k = 1$, the theorem trivially holds.
+  For the inductive step, let $k \geq 2$.
+  Suppose that there are scalars $a_1, \dots, a_k \in F$ such that
+  \begin{equation*}
+    \sum_{i=1}^k a_ix_i = 0_V.
+  \end{equation*}
+  Applying $T - \lambda_k I_V$ to both sides, we have
+  \begin{equation*}
+    0_V
+    = \sum_{i=1}^k (T - \lambda_k I_V)(a_ix_i)
+    = \sum_{i=1}^k a_i(\lambda_i - \lambda_k)x_i
+    = \sum_{i=1}^{k-1} a_i(\lambda_i - \lambda_k)x_i.
+  \end{equation*}
+  Thus, we have $a_i = 0_F$ for each $i \in \{1, \dots, k-1\}$ since
+  $\{x_1, \dots, x_{k-1}\}$ is linearly independent by induction hypothesis.
+  It follows that $a_k = 0_F$ since
+  \begin{equation*}
+    a_kx_k = 0_V - \sum_{i=1}^{k-1} a_ix_i = 0_V.
+  \end{equation*}
+  Thus, $\{x_1, \dots, x_k\}$ is linearly independent, completing the proof.
+\end{proof}
+
 \section{Diagonalizability}
+\begin{definition}
+  Let $V$ be a finite-dimensional vector space over $F$ and let $T: V \to V$ be
+  linear.
+  For any scalar $\lambda \in F$, the \emph{multiplicity} of $\lambda$ with
+  respect to $T$ is the largest nonnegative integer $m$ such that
+  \begin{equation*}
+    (t-\lambda)^m \mid f_T(t).
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space over $F$ and let $T: V \to V$ be
+  linear.
+  For any $\lambda \in F$, if $m$ is the multiplicity of $\lambda$ with respect
+  to $T$ and $d$ is the dimension of $E_T(\lambda)$, then
+  \begin{equation*}
+    d \leq m.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $\{x_1, \dots, x_d\}$ be a basis of $E_T(\lambda)$.
+  By replacement theorem, there exists an ordered basis $\beta = \{x_1, \dots,
+  x_n\}$ of $V$.
+  Note that we have
+  \begin{equation*}
+    [T]_\beta^\beta =
+    \begin{pmatrix}
+      \lambda I_d & X \\
+      O & Y
+    \end{pmatrix},
+  \end{equation*}
+  where $O$ is an $(n-d) \times d$ zero matrix.
+  It follows that
+  \begin{equation*}
+    f_T(t) = \det
+    \begin{pmatrix}
+      (\lambda - t)I_d & X \\
+      O & Y - tI_{n-d}
+    \end{pmatrix}
+    = (\lambda - t)^d \det(Y - tI_{n-d}),
+  \end{equation*}
+  implying
+  \begin{equation*}
+    (t - \lambda)^d \mid f_T(t).
+  \end{equation*}
+  Thus, $d \leq m$.
+\end{proof}
+
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space with $\dim(V) = n$ and let
+  $T: V \to V$ be linear.
+  Let $\lambda_1, \dots, \lambda_k$ be the distinct eigenvalues of $T$, and let
+  $d_i = \dim(E_T(\lambda_i))$ for $i \in \{1, \dots, k\}$.
+  Then $V$ has an eigenbasis of $T$ if and only if
+  \begin{equation*}
+    \sum_{i=1}^k d_i = n.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  ($\Leftarrow$)
+  For each $i \in \{1, \dots, k\}$ let
+  \begin{equation*}
+    S_i = \{x_{ij}: 1 \leq j \leq d_i\}
+  \end{equation*}
+  be a basis of $E_T(\lambda_i)$.
+  Suppose that there are scalars $a_{ij} \in F$ for each $i \in
+  \{1, \dots, k\}$ and for each $j \in \{1, \dots, d_i\}$ such that
+  \begin{equation*}
+    \sum_{i=1}^k \sum_{j=1}^{d_i} a_{ij}x_{ij} = 0_V,
+  \end{equation*}
+  and we define
+  \begin{equation*}
+    y_i = \sum_{j=1}^{d_i} a_{ij}x_{ij}
+  \end{equation*}
+  for each $i \in \{1, \dots, k\}$.
+  We claim that $y_i = 0_V$ for each $i \in \{1, \dots, k\}$, which is proved
+  as follows.
+
+  Let $\pi$ be a permutation over $\{1, \dots, k\}$ such that
+  $y_{\pi(1)}, \dots, y_{\pi(\ell)}$ are nonzero and
+  $y_{\pi(\ell+1)}, \dots, y_{\pi(k)}$ are zero, where $0 \leq \ell \leq k$.
+  Assume for contradiction that $\ell \neq 0$.
+  It is obvious that $\{y_{\pi(1)}, y_{\pi(2)}, \dots, y_{\pi(\ell)}\}$ is
+  linearly dependent.
+  However,
+  \begin{equation*}
+    (\lambda_{\pi(1)}, y_{\pi(1)}),
+    (\lambda_{\pi(2)}, y_{\pi(2)}),
+    \dots,
+    (\lambda_{\pi(\ell)}, y_{\pi(\ell)})
+  \end{equation*}
+  are eigenpairs of $T$, implying that $\{y_{\pi(1)}, y_{\pi(2)}, \dots,
+  y_{\pi(\ell)}\}$ is linearly independent, contradiction.
+
+  It follows that for each $i \in \{1, \dots, k\}$ we have $y_i = 0_V$, and
+  thus $a_{ij} = 0_F$ for each $j \in \{1, \dots, d_i\}$ since $S_i$ is
+  linearly independent.
+  Therefore,
+  \begin{equation*}
+    S = \bigcup_{i=1}^k S_i
+  \end{equation*}
+  is linearly independent, and thus is a basis of $V$.
+
+  ($\Rightarrow$)
+  Let $S$ be an eigenbasis of $V$, and let $S_i = S \cap E_T(\lambda_i)$ for
+  each $i \in \{1, \dots, k\}$.
+  Let $m_i$ is the multiplicity of $\lambda_i$.
+  Then we have
+  \begin{equation*}
+    n
+    = \sum_{i=1}^k |S_i|
+    \leq \sum_{i=1}^k d_i
+    \leq \sum_{i=1}^k m_i
+    \leq n,
+  \end{equation*}
+  implying
+  \begin{equation*}
+    \sum_{i=1}^k d_i = n.
+    \qedhere
+  \end{equation*}
+\end{proof}
 
 \section{Cayley-Hamilton Theorem}
 \begin{definition}
