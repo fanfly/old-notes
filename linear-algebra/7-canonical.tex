@@ -1,0 +1,109 @@
+\chapter{Canonical Forms}
+\section{Generalized Eigenspaces}
+\begin{definition}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  We say that $\lambda \in F$ and $x \in V \setminus \{0_V\}$ form a
+  \emph{generalized eigenpair} if
+  \begin{equation*}
+    (T - \lambda I_V)^\ell(x) = 0_V
+  \end{equation*}
+  holds for some positive integer $\ell$.
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  If $(\lambda, x)$ is a generalized eigenpair of $T$, then $\lambda$ is an
+  eigenvalue of $T$.
+\end{theorem}
+\begin{proof}
+  Let $\ell$ be the smallest positive integer such that 
+  $(T - \lambda I_V)^\ell(x) = 0_V$.
+  Let
+  \begin{equation*}
+    y = (T - \lambda I_V)^{\ell-1}(x).
+  \end{equation*}
+  Since $(T - \lambda I_V)(y) = (T - \lambda I_V)^\ell(x) = 0_V$,
+  $(\lambda, y)$ is an eigenpair of $T$, and thus $\lambda$ is an eigenvalue of
+  $T$.
+\end{proof}
+
+\begin{definition}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  For any scalar $\lambda \in F$, we define
+  \begin{equation*}
+    G_T(\lambda) = \{x \in V : \text{$(T - \lambda I_V)^\ell(x) = 0_V$ for some
+    nonnegative integer $\ell$}\}.
+  \end{equation*}
+  If $\lambda$ is an eigenvalue of $T$, then $G_T(\lambda)$ is called the
+  \emph{generalized eigenspace} of $T$ corresponding to $\lambda$.
+\end{definition}
+
+\begin{theorem}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  If scalars $\lambda_1, \lambda_2 \in F$ are distinct, then
+  \begin{equation*}
+    G_T(\lambda_1) \cap G_T(\lambda_2) = \{0_V\}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Assume $x \in (G_T(\lambda_1) \cap G_T(\lambda_2)) \setminus \{0_V\}$
+  for contradiction.
+  Let $\ell_1$ be the smallest positive integer with
+  \begin{equation*}
+    (T - \lambda_1I_V)^{\ell_1}(x) = 0_V.
+  \end{equation*}
+  Let $y = (T - \lambda_1I_V)^{\ell_1-1}(x)$, and we have
+  $(T - \lambda_1I_V)(y) = 0_V$.
+  Note that there is a positive integer $\ell_2$ such that
+  \begin{equation*}
+    (T - \lambda_2I_V)^{\ell_2}(x) = 0_V,
+  \end{equation*}
+  and it follows that
+  \begin{align*}
+    (T - \lambda_2I_V)^{\ell_2}(y)
+    &= (T - \lambda_2I_V)^{\ell_2}(T - \lambda_2I_V)^{\ell_1-1}(x) \\
+    &= (T - \lambda_1I_V)^{\ell_1-1}(T - \lambda_2I_V)^{\ell_2}(x) \\
+    &= 0_V.
+  \end{align*}
+  Thus we can define $\ell_2'$ as the smallest positive integer such that
+  \begin{equation*}
+    (T - \lambda_2I_V)^{\ell_2'}(y) = 0_V.
+  \end{equation*}
+  Let $z = (T - \lambda_2I_V)^{\ell_2'-1}(y)$, and we have
+  $(T - \lambda_2I_V)(z) = 0_V$.
+  Furthermore,
+  \begin{align*}
+    (T - \lambda_1I_V)(z)
+    &= (T - \lambda_1I_V)(T - \lambda_2I_V)^{\ell_2'}(y) \\
+    &= (T - \lambda_2I_V)^{\ell_2'}(T - \lambda_1I_V)(y) \\
+    &= 0_V.
+  \end{align*}
+  Thus, $z \in (E_T(\lambda_1) \cap E_T(\lambda_2)) \setminus \{0_V\}$,
+  contradiction.
+\end{proof}
+
+\section{The Jordan Canonical Form}
+\begin{definition}
+  Let $V$ be a vector space over $F$ and let $T: V \to V$ be linear.
+  If $(\lambda, x)$ is a generalized eigenpair and $\ell$ is the smallest
+  positive integer such that
+  \begin{equation*}
+    (T - \lambda I_V)^\ell(x) = 0_V,
+  \end{equation*}
+  then the ordered set
+  \begin{equation*}
+    ((T - \lambda I_V)^{\ell-1}(x),
+     (T - \lambda I_V)^{\ell-2}(x),
+     \dots,
+     (T - \lambda I_V)^2(x),
+     (T - \lambda I_V)(x),
+     x)
+  \end{equation*}
+  is a \emph{chain} of generalized eigenvectors of $T$ corresponding to
+  $\lambda$, where
+  \begin{itemize}
+    \item $\ell$ is called the \emph{length} of the chain, and
+    \item $(T - \lambda I_V)^{\ell-1}(x)$ and $x$ are called the \emph{initial
+    vector} and the \emph{end vector} of the chain, respectively.
+  \end{itemize}
+\end{definition}
