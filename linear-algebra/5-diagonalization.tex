@@ -354,6 +354,40 @@
   \end{equation*}
 \end{proof}
 
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space over $F$ with $\dim(V) = n$ and
+  let $T: V \to V$ be linear.
+  If $\lambda_1, \lambda_2, \dots, \lambda_k$ are the eigenvalues of $T$, then
+  \begin{equation*}
+    V = E_T(\lambda_1) \oplus E_T(\lambda_2) \oplus \cdots \oplus
+    E_T(\lambda_k)
+  \end{equation*}
+  if and only if $V$ has an eigenbasis for $T$.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  By \Cref{thm:direct-sum}, there is an ordered basis $\beta_i$ of
+  $E_T(\lambda_i)$ for each $i \in \{1, \dots, k\}$ such that
+  $\beta = \beta_1 \cup \beta_2 \cup \cdots \cup \beta_k$ is an ordered basis
+  of $V$.
+
+  ($\Leftarrow$)
+  By \Cref{thm:direct-sum}, it suffices to show that there is an ordered basis
+  $\beta_i$ of $E_T(\lambda_i)$ for each $i \in \{1, \dots, k\}$ such that
+  $\beta_1 \cup \cdots \cup \beta_k$ is an ordered basis of $V$.
+  Let $\beta$ be an eigenbasis of $V$ for $T$.
+  For each $i \in \{1, \dots, k\}$, let $\beta_i = \beta \cap E_T(\lambda_i)$
+  and $d_i = \dim(E_T(\lambda_i))$.
+  Note that $|\beta_i| \leq d_i$ holds by the linear independence of $\beta_i$,
+  and we have
+  \begin{equation*}
+    \sum_{i=1}^k d_i = n = \sum_{i=1}^k |\beta_i|.
+  \end{equation*}
+  It follows that for each $i \in \{1, \dots, k\}$, we have $|\beta_i| = d_i$,
+  and thus $\beta_i$ is an ordered basis of $E_T(\lambda_i)$ for each
+  $i \in \{1, \dots, k\}$.
+\end{proof}
+
 \section{Cayley-Hamilton Theorem}
 \begin{definition}
   Let $V$ be a vector space and let $T \in \mathcal{L}(V)$.

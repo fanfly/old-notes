@@ -1049,131 +1049,107 @@
   \end{enumerate}
 \end{proof}
 
-\section{Projections}
+\section{Direct Sums and Projections}
 \begin{definition}
-  \label{def:direct-sum}
-  Let $V_1, \dots, V_k$ be subspaces of a vector space $U$.
-  We say that $U$ is the \emph{direct sum} of $V_1, \dots, V_k$, denoted
+  Let $V$ and $W$ be subspaces of a vector space $U$.
+  We say that $U$ is the \emph{direct sum} of $V$ and $W$, denoted
   \begin{equation*}
-    U = V_1 \oplus \cdots \oplus V_k,
+    U = V \oplus W,
   \end{equation*}
-  if both of the following conditions hold.
-  \begin{enumerate}
-    \item $U = V_1 + \cdots + V_k$.
-    \item For each $i \in \{1, \dots, k\}$,
-    $V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots V_k) = \{0_U\}$.
-  \end{enumerate}
+  if $V \cap W = \{0_U\}$ and $U = V + W$.
 \end{definition}
 
 \begin{theorem}
-  If $V_1, \dots, V_k$ are subspaces of a finite-dimensional vector space $U$,
-  then the following statements are equivalent.
+  \label{thm:direct-sum}
+  Let $U$ be a finite-dimensional vector space over $F$ and let $V$ and $W$ be
+  subspaces of $U$.
+  Then the following statements are equivalent.
   \begin{enumerate}
-    \item $W = V_1 \oplus \cdots \oplus V_k$.
-    \item $W = V_1 + \cdots + V_k$.
-    Moreover, if $x_1 + \cdots + x_k = 0_U$ with $x_i \in V_i$ for each
-    $1 \leq i \leq k$, then $x_i = 0_U$ for each $1 \leq i \leq k$.
-    \item Each vector $x \in U$ can be uniquely written as
-    $x = x_1 + \cdots + x_k$, where $x_i \in V_i$ for $1 \leq i \leq k$.
-    \item If $\beta_i$ with $1 \leq i \leq k$ is an ordered basis for $V_i$,
-    then $\beta_1 \cup \cdots \cup \beta_k$ is an ordered basis for $U$.
-    \item For $1 \leq i \leq k$, there exists an ordered basis $\beta_i$ for
-    $V_i$, such that $\beta_1 \cup \cdots \cup \beta_k$ is an ordered basis for
-    $U$.
+    \item $U = V \oplus W$.
+    \item For any vector $x \in U$, there is a unique vector $y \in V$ and a
+    unique vector $z \in W$ such that $x = y + z$.
+    \item If $R$ and $S$ are bases of $V$ and $W$, respectively, then
+    $R \cup S$ is a basis of $U$ with $R \cap S = \varnothing$.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
-  First we assume (a) and prove (b).
-  Clearly we have $W = V_1 + \cdots + V_k$ by \Cref{def:direct-sum} (a).
-  Now suppose that $x_1 + \cdots + x_k = 0_U$ with $x_i \in V_i$ for
-  $1 \leq i \leq k$.
-  For each $i \in \{1, \dots, k\}$, we have
+  First we asssume (a) and prove (b).
+  Since $U = V + W$, for each $x \in U$ there are vectors $y \in V$ and
+  $z \in W$ with $x = y + z$.
+  For the uniqueness, let $y, y' \in V$ and $z, z' \in W$ be vectors with
   \begin{equation*}
-    -x_i
-    = x_1 + \cdots + x_{i-1} + x_{i+1} + \cdots + x_k,
+    x = y + z = y' + z'.
   \end{equation*}
-  implying
-  \begin{equation*}
-    -x_i
-    \in V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots V_k)
-    = \{0_U\}.
-  \end{equation*}
-  Thus, $x_i = 0_U$, which proves (b).
+  Note that $y - y' = z - z'$ is a vector in $V \cap W = \{0_V\}$.
+  Thus, $y = y'$ and $z = z'$.
 
   Now we assume (b) and prove (c).
-  For each vector $x \in U$, there exist vectors $x_i \in V_i$ for
-  $1 \leq i \leq k$ such that $x = x_1 + \cdots + x_k$ since
-  $V = V_1 + \cdots + V_k$.
-  If there also exist $x_i' \in V_i$ for $1 \leq i \leq k$ such that
-  $x = x_1' + \cdots + x_k'$, then we have
+  Let $R = \{x_1, \dots, x_m\}$ and $S = \{x_{m+1}, \dots, x_n\}$.
+  Note that $R \cup S$ spans $U$ since
   \begin{equation*}
-    (x_1 - x_1') + \cdots + (x_k - x_k') = 0_U,
+    \spn(R \cup S) = \spn(R) + \spn(S) = V + W = U.
   \end{equation*}
-  implying $x_i = x_i'$ for $1 \leq i \leq k$.
-  Thus, (c) is proved.
+  For the linear independence of $R \cup S$, suppose that $a_1, \dots, a_n \in
+  F$ are scalars such that
+  \begin{equation*}
+    \sum_{i=1}^n a_ix_i = 0_U.
+  \end{equation*}
+  Since $0_U = 0_V + 0_W$ holds and we have
+  \begin{equation*}
+    \sum_{i=1}^m a_ix_i \in V
+    \quad \text{and} \quad
+    \sum_{i=m+1}^n a_ix_i \in W,
+  \end{equation*}
+  it follows that
+  \begin{equation*}
+    \sum_{i=1}^m a_ix_i = 0_V
+    \quad \text{and} \quad
+    \sum_{i=m+1}^n a_ix_i = 0_W,
+  \end{equation*}
+  by (b), implying $a_i = 0_F$ for any $i \in \{1, \dots, n\}$ by the linear
+  independence of $R$ and $S$.
+  Thus, $R \cup S$ are linearly independent.
+  Since $R \cap S \subseteq V \cap W = \{0_V\}$, we have
+  $R \cap S = \varnothing$.
 
-  Now we assume (c) and prove (d).
-  Let $\beta = \beta_1 \cup \cdots \cup \beta_k$.
-  Since $U = V_1 + \cdots + V_k$ by (c), it follows that $\spn(\beta) = U$.
-  Thus, we only need to show that $\beta$ is linearly independent.
-  Suppose that for $1 \leq i \leq k$, the ordered basis $\beta_i$ has $m_i$
-  elements with $\beta_i = \{x_{ij}: 1 \leq j \leq m_i\}$.
-  If there exist scalars $a_{ij} \in F$ for $1 \leq i \leq k$ and
-  $1 \leq j \leq m_i$ such that
+  Finally we assume (c) and prove (a).
+  Let $R = \{x_1, \dots, x_m\}$ and $S = \{x_{m+1}, \dots, x_n\}$ are bases of
+  $V$ and $W$, respectively.
+  Then $R \cup S$ is a basis of $U$, and thus
   \begin{equation*}
-    \sum_{i=1}^{k} \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U,
+    U = \spn(R \cup S) = \spn(R) + \spn(S) = V + W.
   \end{equation*}
-  then by (c) we have
+  If $x \in V \cap W$, then there exist scalars $a_1, \dots, a_m, a_{m+1}',
+  \dots, a_n' \in F$ such that
   \begin{equation*}
-    \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U
+    \sum_{i=1}^m a_ix_i = x = \sum_{i=m+1}^n a_i'x_i.
   \end{equation*}
-  for each $i \in \{1, \dots, k\}$.
-  Since $\beta_i$ is linearly independent, we can conclude that
-  $a_{ij} = 0_F$ for any $j$ with $1 \leq j \leq m_i$.
-  Thus, $\beta$ is linearly independent, which proves (d).
-  Note that (e) follows from (d) immediately.
-
-  Finally, we assume (e) and prove (a).
-  Since
-  \begin{align*}
-    U
-    &= \spn(\beta_1 \cup \cdots \cup \beta_k) \\
-    &= \spn(\beta_1) + \cdots + \spn(\beta_k) \\
-    &= V_1 + \cdots + V_k,
-  \end{align*}
-  it suffices to prove that
-  $V_i \cap (V_1 + \cdots + V_{i-1} + V_{i+1} + \cdots + V_k) = \{0_U\}$
-  holds for all $1 \leq i \leq k$.
-  Suppose that there is a nonzero vector $y \in U$ such that
-  \begin{equation*}
-    y \in V_h \cap (V_1 + \cdots + V_{h-1} + V_{h+1} + \cdots + V_k)
-  \end{equation*}
-  for some $h \in \{1, \dots, k\}$.
-  For each $i \in \{1, \dots, k\}$, let
-  $\beta_i = \{x_{ij}: 1 \leq j \leq m_i\}$, where $m_i$ is the number of
-  vectors in $\beta_i$.
+  Let $a_i = -a_i'$ for all $i \in \{m+1, \dots, n\}$.
   Then we have
   \begin{equation*}
-    \sum_{j=1}^{m_h} -a_{hj}x_{hj}
-    = y
-    = \sum_{\substack{i \neq h \\ 1 \leq i \leq k}}
-      \sum_{j=1}^{m_i} a_{ij}x_{ij}.
+    \sum_{i=1}^n a_ix_i
+    = \sum_{i=1}^m a_ix_i + \sum_{i=m+1}^n (-a_i')x_i
+    = x + (-x)
+    = 0_U.
   \end{equation*}
-  It follows that
-  \begin{equation*}
-    \sum_{i=1}^k \sum_{j=1}^{m_i} a_{ij}x_{ij} = 0_U,
-  \end{equation*}
-  implying $a_{ij} = 0_F$ for each $i \in \{1, \dots, k\}$ and for each
-  $j \in \{1, \dots, m_i\}$, contradiction.
-  Hence (a) is proved, and thus the proof is completed.
+  Since $R \cup S$ is linearly independent by (c) , it follows that $a_i = 0_F$
+  for all $i \in \{1, \dots, n\}$, implying $x = 0_U$.
+  Thus, $V \cap W = \{0_U\}$, which completes the proof.
 \end{proof}
 
 \begin{definition}
   \label{def:projection}
   Let $V$ and $W$ be subspaces of a vector space $U$ with $U = V \oplus W$.
   Then the \emph{projection} on $V$ along $W$ is a transformation $T: U \to U$
-  such that for any $x \in U$, $y \in V$ and $w \in W$ with $x = y + z$,
-  we have $T(x) = y$.
+  such that
+  \begin{equation*}
+    T(x) = y
+  \end{equation*}
+  holds for any $x \in U$ with
+  \begin{equation*}
+    x = y + z,
+  \end{equation*}
+  where $y \in V$ and $z \in W$.
 \end{definition}
 
 \begin{theorem}
@@ -1209,12 +1185,8 @@
 \begin{theorem}
   Let $V$ and $W$ be subspaces of a vector space $U$ with $U = V \oplus W$.
   Let $T: U \to U$ be linear.
-  Then $T$ is the projectioon on $V$ along $W$ if and only if the following
-  statements are satisfied.
-  \begin{enumerate}
-    \item For any $y \in V$, $T(y) = y$.
-    \item For any $z \in W$, $T(z) = 0_U$.
-  \end{enumerate}
+  Then $T$ is the projectioon on $V$ along $W$ if and only if $T(y) = y$ for
+  any $y \in V$ and $T(z) = 0_U$ for any $z \in W$.
 \end{theorem}
 \begin{proof}
   ($\Rightarrow$) Straightforward.
