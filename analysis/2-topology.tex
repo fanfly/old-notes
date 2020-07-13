@@ -43,22 +43,77 @@
   \end{enumerate}
 \end{theorem}
 
+\begin{definition}
+  Let $(X, d)$ be a metric space and let $S \subseteq X$.
+  \begin{itemize}
+    \item A point $x \in X$ is a \emph{limit point} of $S$ if there exists
+    $y \in S \setminus \{x\}$ with $d(x, y) < \epsilon$ for any $\epsilon > 0$.
+    \item A point $x \in X$ is an \emph{isolated point} of $S$ if $x$ belongs
+    to $S$ and is not a limit point of $S$.
+  \end{itemize}
+\end{definition}
+
 \section{Compact Sets}
 \begin{definition}
   Let $(X, d)$ be a metric space and let $S \subseteq X$.
-  An \emph{open cover} of $S$ is a collection $\{R_i: i \in I\}$ of open
-  subsets of $X$ such that
-  \begin{equation*}
-    S \subseteq \bigcup_{i \in I} R_i.
-  \end{equation*}
+  \begin{itemize}
+    \item A \emph{cover} of $S$ is a collection of subsets of $X$ whose union
+    contains $S$.
+    An \emph{open cover} of $S$ is a cover of $S$ whose elements are all open.
+    \item We say that $S$ is \emph{compact} if every open cover $\Omega$ of $S$
+    contains a finite cover $\Phi$ of $S$.
+  \end{itemize}
 \end{definition}
 
-\begin{definition}
-  Let $(X, d)$ be a metric space and let $S \subseteq X$.
-  We say that $S$ is \emph{compact} if for any open cover $\{R_i: i \in I\}$
-  of $S$ there exist finitely many indices $i_1, \dots, i_n \in I$
-  such that
+\begin{theorem}
+  Let $(X, d)$ be a metric space and let $R \subseteq S \subseteq X$.
+  If $S$ is compact and $R$ is closed, then $R$ is compact.
+\end{theorem}
+\begin{proof}
+  Suppose that $R$ has an open cover $\Omega$.
+  Then $\Omega' = \Omega \cup \{X \setminus R\}$ is an open cover of $S$ since
+  $X \setminus R$ is open.
+  Let $\Phi' \subseteq \Omega'$ be a finite cover of $S$, and let
+  $\Phi = \Phi' \setminus \{X \setminus R\}$.
+  Then $\Phi$ is a finite open cover of $R$ with $\Phi \subseteq \Omega$.
+  Thus, $R$ is compact.
+\end{proof}
+
+\begin{theorem}[Nested Interval Theorem]
+  Let $\seq{I_n}$ be a sequence of rectangles in $\mathbb{R}^k$ such that
+  $I_{n+1} \subseteq I_n$, then the intersection of $\{I_n: n \in \mathbb{N}\}$
+  is nonempty.
+\end{theorem}
+\begin{proof}
+  For each positive integer $n$, let
   \begin{equation*}
-    S \subseteq \bigcup_{k=1}^n R_{i_k}.
+    I_n = [a_n^{(1)}, b_n^{(1)}] \times \cdots \times
+    [a_n^{(k)}, b_n^{(k)}].
   \end{equation*}
-\end{definition}
+  For each $i \in \{1, \dots, k\}$, we have
+  \begin{equation*}
+    a_n^{(i)} \leq a_{n+m}^{(i)} \leq b_{n+m}^{(i)} \leq b_m^{(i)}
+  \end{equation*}
+  for any $n, m \in \mathbb{N}$, and it follows that
+  \begin{equation*}
+    c^{(i)} = \sup(\{a_n^{(i)}: n \in \mathbb{N}\})
+  \end{equation*}
+  exists.
+  Since
+  \begin{equation*}
+    a_n^{(i)} \leq c^{(i)} \leq b_m^{(i)}
+  \end{equation*}
+  holds for any $n, m \in \mathbb{N}$, we conclude that
+  \begin{equation*}
+    (c^{(1)}, \dots, c^{(k)}) \in \bigcap_{n=1}^\infty I_n,
+  \end{equation*}
+  completing the proof.
+\end{proof}
+
+\begin{theorem}[Heine--Borel Theorem]
+  Let $S \subseteq \mathbb{R}^n$.
+  Then $S$ is compact if and only if $S$ is bounded and closed.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}

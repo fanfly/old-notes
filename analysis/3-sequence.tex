@@ -118,3 +118,40 @@
     \end{equation*}
   \end{enumerate}
 \end{proof}
+
+\begin{definition}
+  Let $\seq{a_n}$ be a sequence of real numbers.
+  \begin{itemize}
+    \item We say that $\seq{a_n}$ is \emph{increasing} (resp., \emph{strictly
+    increasing}) if $a_n \leq a_{n+1}$ (resp. $a_n < a_{n+1}$) holds for all
+    $n \in \mathbb{N}$.
+    \item We say that $\seq{a_n}$ is \emph{decreasing} (resp., \emph{strictly
+    decreasing}) if $a_n \geq a_{n+1}$ (resp. $a_n > a_{n+1}$) holds for all
+    $n \in \mathbb{N}$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $\seq{a_n}$ be a sequence of real numbers.
+  If $\seq{a_n}$ is increasing and bounded above, then $\seq{a_n}$ converges.
+\end{theorem}
+\begin{proof}
+  Let $L = \sup(\{a_n: n \in \mathbb{N}\})$.
+  For any $\epsilon > 0$, since $L - \epsilon$ is not an upper bound of
+  $\{a_n: n \in \mathbb{N}\}$, there exists a positive integer $N$ with
+  $a_N > L - \epsilon$.
+  Since $\seq{a_n}$ is increasing, we have
+  \begin{equation*}
+    L - \epsilon < a_N < a_n \leq L
+  \end{equation*}
+  for all positive integer $n > N$, implying $|a_n - L| \leq \epsilon$ for all
+  positive integer $n > N$.
+  Thus, $\seq{a_n}$ converges to $L$.
+\end{proof}
+
+\begin{definition}
+  Let $(X, d)$ be a metric space and let $\seq{x_n}$ be a sequence in $X$.
+  We say that $\seq{x_n}$ is a \emph{Cauchy sequence} if for any $\epsilon > 0$
+  there is a positive integer $N$, such that $n \geq N$ and $m \geq N$ implies
+  $d(x_n, x_m) < \epsilon$.
+\end{definition}
