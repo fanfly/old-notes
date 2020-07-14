@@ -36,3 +36,26 @@
     defined as the number of basic operations performed.
   \end{itemize}
 \end{definition}
+
+\section{Asymptotic Notations}
+\begin{definition}
+  Let $f(n)$ and $g(n)$ be functions.
+  \begin{itemize}
+    \item We write $f(n) = O(g(n))$ if there exists positive constants $c$ and
+    $n_0$ such that
+    \begin{equation*}
+      0 \leq f(n) \leq cg(n)
+    \end{equation*}
+    holds for any integer $n \geq n_0$.
+    \item We write $f(n) = \Omega(g(n))$ if $g(n) = O(f(n))$.
+    \item We write $f(n) = \Theta(g(n))$ if $f(n) = O(g(n))$ and $g(n) =
+    O(f(n))$.
+    \item We write $f(n) = o(g(n))$ if for any real number $c > 0$, there
+    exists a positive constant $n_0$ such that
+    \begin{equation*}
+      0 \leq f(n) < cg(n)
+    \end{equation*}
+    holds for any integer $n \geq n_0$.
+    \item We write $f(n) = \omega(g(n))$ if $g(n) = o(f(n))$.
+  \end{itemize}
+\end{definition}
