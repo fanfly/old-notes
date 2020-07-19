@@ -11,3 +11,4 @@ FanFly's study notes.
 | [Logic](logic/logic.pdf) | About 10% |
 | [Set Theory](set-theory/set-theory.pdf) | Just started |
 | [Algorithm](algorithm/algorithm.pdf) | Just started |
+| [Graph Theory](graph-theory/graph-theory.pdf) | Just started |
