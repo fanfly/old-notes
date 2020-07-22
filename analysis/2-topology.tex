@@ -94,26 +94,88 @@
   \begin{equation*}
     a_n^{(i)} \leq a_{n+m}^{(i)} \leq b_{n+m}^{(i)} \leq b_m^{(i)}
   \end{equation*}
-  for any $n, m \in \mathbb{N}$, and it follows that
+  for any $n, m \in \mathbb{N}$.
+  Thus, $\{a_n^{(i)}: n \in \mathbb{N}\}$ is bounded above, implying the
+  existence of
   \begin{equation*}
-    c^{(i)} = \sup(\{a_n^{(i)}: n \in \mathbb{N}\})
+    x_i = \sup(\{a_n^{(i)}: n \in \mathbb{N}\}).
   \end{equation*}
-  exists.
-  Since
+  We have
   \begin{equation*}
-    a_n^{(i)} \leq c^{(i)} \leq b_m^{(i)}
+    a_n^{(i)} \leq x_i \leq b_m^{(i)}
   \end{equation*}
-  holds for any $n, m \in \mathbb{N}$, we conclude that
+  for any $n, m \in \mathbb{N}$.
+  Thus,
   \begin{equation*}
-    (c^{(1)}, \dots, c^{(k)}) \in \bigcap_{n=1}^\infty I_n,
+    x = (x_1, \dots, x_n) \in \bigcap_{n \geq 1} I_n,
   \end{equation*}
   completing the proof.
 \end{proof}
 
-\begin{theorem}[Heine--Borel Theorem]
-  Let $S \subseteq \mathbb{R}^n$.
-  Then $S$ is compact if and only if $S$ is bounded and closed.
+\begin{theorem}
+  Every $k$-cell in $\mathbb{R}^k$ is compact.
 \end{theorem}
 \begin{proof}
-  To be completed.
+  Let $I = [a_1, b_1] \times \cdots \times [a_k, b_k]$.
+  We have
+  \begin{equation*}
+    \Vert x - x' \Vert \leq \sqrt{\textstyle \sum_{i=1}^k (a_i - b_i)^2}
+  \end{equation*}
+  for any $x, x' \in I$.
+  Assume that there is an open cover $\mathcal{O}$ of $I$ that contains no
+  finite subcover of $I$.
+  Let $c_i = (a_i + b_i) / 2$ for all $i \in \{1, \dots, n\}$, and let
+  \begin{equation*}
+    \mathcal{C} = \{I^{(1)} \times \dots \times I^{(k)}:
+    \text{$I^{(i)} \in \{[a_i, c_i], [c_i, b_i]\}$ for $1 \leq i \leq k$}\}
+  \end{equation*}
+  be a collection of $2^k$ $k$-cells whose union is $I$.
+  Then there must be a $k$-cell $I' \in \mathcal{C}$ cannot be covered by any
+  finite subset of $\mathcal{O}$, or $I$ could be covered by that set,
+  contradtion.
+
+  Thus, if $I$ is not compact, then we can construct a sequence $\seq{I_n}$ of
+  $k$-cells which are not covered by any finite subset of $\mathcal{O}$ such
+  that $I_1 = I$, $I_{n+1} \subseteq I_n$ for any integer $n \geq 1$, and
+  \begin{equation*}
+    \Vert x - x' \Vert \leq \frac{\sqrt{\sum_{i=1}^k (a_i - b_i)^2}}{2^{n-1}}
+  \end{equation*}
+  holds for any $x, x' \in I_n$.
+  It follows that there is a point $y \in \bigcap \{I_n\}$, and we have
+  $y \in S$ for some $S \in \mathcal{O}$.
+  Since $S$ is open, we have $B_r(y) \subseteq S$ for some $r > 0$.
+  Let $N$ be a positive integer such that
+  \begin{equation*}
+    2^N > \frac{\sqrt{\sum_{i=1}^k (a_i - b_i)^2}}{r/2}.
+  \end{equation*}
+  Then for any $x \in I_N$,
+  \begin{equation*}
+    \Vert x - y \Vert
+    \leq \frac{\sqrt{\sum_{i=1}^k (a_i - b_i)^2}}{2^{N-1}}
+    < r,
+  \end{equation*}
+  implying $x \in B_r(y) \subseteq S$.
+  It follows that $I_N \subseteq S$, and $\{S\}$ is a finite subset of
+  $\mathcal{O}$, contradtion.
+  Thus, $I$ is compact.
+\end{proof}
+
+\begin{theorem}[Heine--Borel Theorem]
+  Let $S \subseteq \mathbb{R}^k$.
+  Then $S$ is compact if and only if $S$ is closed and bounded.
+\end{theorem}
+\begin{proof}
+  ($\Leftarrow$)
+  If $S$ is closed and bounded, then there is a $k$-cell $I$ with $S \subseteq
+  I$.
+  Since $I$ is compact, and $S$ is closed, we conclude that $S$ is compact.
+
+  ($\Rightarrow$)
+  Suppose that $S$ is compact.
+  Then $S$ is closed.
+  Since $\mathcal{O} = \{B_r(0_{\mathbb{R}^k}): r \in \mathbb{N}\}$ is an open
+  cover of $S$, there is $\mathcal{O}' \subseteq \mathcal{O}$ such that $S
+  \subseteq \bigcup \mathcal{O}'$.
+  It can be shown that $\bigcup \mathcal{O}'$ is bounded, and thus $S$ is
+  bounded.
 \end{proof}

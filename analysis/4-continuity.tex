@@ -1,7 +1,8 @@
 \chapter{Continuity}
+\section{Limits of Functions}
 \begin{definition}
-  Let $(X, d_X)$ and $(Y, d_Y)$ be a metric spaces and let $S \subseteq X$.
-  Let $f: S \to Y$ be a map.
+  Let $(X, d_X)$ and $(Y, d_Y)$ be a metric spaces.
+  Let $f: D \to Y$ be a map with $D \subseteq X$.
   Then we say that $b \in Y$ is the \emph{limit} of $f$ at $a \in X$, denoted
   by
   \begin{equation*}
@@ -16,3 +17,19 @@
     0 < d_X(x, a) < \delta.
   \end{equation*}
 \end{definition}
+
+\begin{definition}
+  Let $(X, d_x)$ and $(Y, d_Y)$ be metric spaces.
+  Let $f: D \to Y$ be a map with $D \subseteq X$.
+  Then $f$ is \emph{continuous} at $a \in X$ if for any $\epsilon > 0$, there
+  exists $\delta > 0$ such that
+  \begin{equation*}
+    d_Y(f(x), f(a)) < \epsilon
+  \end{equation*}
+  holds for any $x \in D$ with
+  \begin{equation*}
+    d_X(x, a) < \delta.
+  \end{equation*}
+\end{definition}
+
+\section{Continuity and Compactness}
