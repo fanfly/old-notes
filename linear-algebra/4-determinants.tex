@@ -1,4 +1,70 @@
 \chapter{Determinants}
+\section{Permutations and Determinants}
+\begin{definition}
+  A \emph{permutation} over a set $R$ is a bijection from $R$ to $R$.
+  Let $S_n$ denote the set of all permutation over $\{1, 2, \dots, n\}$.
+\end{definition}
+
+\begin{remark}
+  There are $n!$ permutations in $S_n$.
+\end{remark}
+
+\begin{example}
+  Let $\sigma: \{1, 2, 3\} \to \{1, 2, 3\}$ be the function with
+  \begin{equation*}
+    \sigma(1) = 2,
+    \quad
+    \sigma(2) = 3,
+    \quad
+    \sigma(3) = 1.
+  \end{equation*}
+  Then $\sigma$ is a permutation and belongs to $S_3$.
+\end{example}
+
+\begin{definition}
+  For any permutation $\sigma \in S_n$, we say that a pair $(i, j)$ of integers
+  in $\{1, 2, \dots, n\}$ is an \emph{inversion} of $\sigma$ if both $i < j$
+  and $\sigma(i) > \sigma(j)$ hold.
+  Furthremore, we define the \emph{sign} of $\sigma$ by
+  \begin{equation*}
+    \sgn(\sigma) = (-1)^{\rho(\sigma)},
+  \end{equation*}
+  where $\rho(\sigma)$ denotes the number of inversions of $\sigma$.
+\end{definition}
+
+\begin{example}
+  If $\sigma: \{1, 2, 3\} \to \{1, 2, 3\}$ is a permutation with
+  \begin{equation*}
+    \sigma(1) = 2,
+    \quad
+    \sigma(2) = 3,
+    \quad
+    \sigma(3) = 1,
+  \end{equation*}
+  then we have $\rho(\sigma) = 2$ since $(1, 3)$ and $(2, 3)$ are the only
+  inversions of $\sigma$.
+  It follows that $\sgn(\sigma) = (-1)^2 = 1$.
+\end{example}
+
+\begin{definition}
+  For any matrix $A \in F^{n \times n}$, we define the \emph{determinant} of
+  $A$ by
+  \begin{equation*}
+    \det(A) = \sum_{\sigma \in S_n} \sgn(\sigma) \prod_{(i, j) \in \sigma}
+    A_{ij}.
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  For each $A \in F^{3 \times 3}$, we have
+  \begin{align*}
+    \det(A)
+    &= \sum_{\sigma \in S_3} \sgn(\sigma) \prod_{(i, j) \in \sigma} A_{ij} \\
+    &= A_{11}A_{22}A_{33} - A_{11}A_{23}A_{32} + A_{12}A_{23}A_{31}
+    - A_{12}A_{21}A_{33} + A_{13}A_{21}A_{32} - A_{13}A_{22}A_{31}.
+  \end{align*}
+\end{example}
+
 \section{Characterization of the Determinant}
 \begin{definition}
   \label{def:multilinear}
@@ -223,25 +289,6 @@
   \end{equation*}
   where $\delta: F^{n \times n} \to F$ is the alternating $n$-linear function
   with $\delta(I_n) = 1_F$.
-\end{definition}
-
-\section{Permutations}
-\begin{definition}
-  \label{def:permutation}
-  \leavevmode
-  \begin{itemize}
-    \item A function $\sigma: \{1, 2, \dots, n\} \to \{1, 2, \dots, n\}$
-    is a \emph{permutation} over $\{1, 2, \dots, n\}$ if $\sigma$ is
-    bijective. The set of all permutations over $\{1, 2, \dots, n\}$ is denoted
-    by $S_n$.
-    \item An inversion of $\sigma \in S_n$ is a pair $(i, j)$ with
-    $1 \leq i < j \leq n$ and $\sigma(i) > \sigma(j)$.
-    The number of inversions of $\sigma$ is denoted by $\rho(\sigma)$.
-    \item The \emph{sign} of $\sigma \in S_n$ is defined by
-    \begin{equation*}
-      \sgn(\sigma) = (-1)^{\rho(\sigma)}.
-    \end{equation*}
-  \end{itemize}
 \end{definition}
 
 \begin{theorem}

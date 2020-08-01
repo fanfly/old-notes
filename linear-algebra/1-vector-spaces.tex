@@ -1,41 +1,54 @@
 \chapter{Vector Spaces}
-\section{Fields}
+\section{Abelian Groups and Fields}
+\begin{definition}
+  \label{def:abelian-group}
+  Let $G$ be a set, and let $\star$ be a binary operation defined on $G$.
+  We say that $(G, \star)$ is an \emph{Abelian group} if it satisfies the
+  following properties.
+  \begin{enumerate}[1.]
+    \item Closeness: If $a \in G$ and $b \in G$, then $a \star b \in G$.
+    \item Commutativity: We have $a \star b = b \star a$ for any $a, b \in G$.
+    \item Associativity: We have $(a \star b) \star c = a \star (b \star c)$
+    for any $a, b, c \in G$.
+    \item Existence of identity: There exists an element $e \in G$, called the
+    \emph{identity}, such that $a \star e = a$ for any $a \in G$.
+    \item Existence of inverses: For all $a \in G$, there exists an element
+    $b \in G$, called the \emph{inverse} of $a$, such that $a \star b = e$.
+  \end{enumerate}
+\end{definition}
+
 \begin{definition}
   \label{def:field}
-  A \emph{field} is a set $F$ with two operations, called \emph{addition}
-  (denoted by $+$) and \emph{multiplication} (denoted by $\cdot$), such that
-  the following properties hold.
-  \begin{itemize}
-    \item Closeness: If $a \in F$ and $b \in F$, then $a + b \in F$ and
-    $a \cdot b \in F$.
-    \item Commutativity: $a + b = b + a$ and $a \cdot b = b \cdot a$ hold for
-    any $a, b \in F$.
-    \item Associativity: $(a + b) + c = a + (b + c)$ and
-    $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ hold for any $a, b, c \in F$.
-    \item Identity elements: There is an element $0_F$ in $F$, called the
-    \emph{additive identity}, such that $a + 0_F = a$ for any $a \in F$.
-    Also, there is an element $1_F$ in $F \setminus \{0_F\}$, called the
-    \emph{multiplicative identity}, such that $a \cdot 1_F = a$ for any
-    $a \in F$.
-    \item Inverse elements: For each $a \in F$ there is an element $-a$ in $F$,
-    called the \emph{additive inverse} of $a$, such that $a + (-a) = 0_F$.
-    Also, for each $a \in F \setminus \{0_F\}$ there is an element $a^{-1}$ in
-    $F$, called the \emph{multiplicative inverse} of $a$, such that
-    $a \cdot a^{-1} = 1_F$.
+  Let $F$ be a field, and let $+$ and $\cdot$ be binary operations defined on
+  $F$.
+  We say that $(F, +, \cdot)$ is a \emph{field} if it satisfies the following
+  conditions.
+  \begin{enumerate}[1.]
+    \item Additive Abelian group: $(F, +)$ is an Abelian group with identity
+    $0_F$.
+    \item Multiplicative Abelian group: $(F \setminus \{0_F\}, \cdot)$ is an
+    Abelian group with identity $1_F$.
     \item Distributivity: $a \cdot (b + c) = a \cdot b + a \cdot c$ for any
     $a, b, c \in F$.
+  \end{enumerate}
+  Let $-a$ and $a^{-1}$ denote the additive inverse and the multiplicative
+  inverse of $a$, respectively.
+  Subtraction and division are defined as follows.
+  \begin{itemize}
+    \item For $a \in F$ and $b \in F$, we define $a - b = a + (-b)$.
+    \item For $a \in F$ and $b \in F \setminus \{0_F\}$, we define
+    $a / b = a \cdot b^{-1}$.
   \end{itemize}
-  For any $a, b \in F$, we define $a - b = a + (-b)$.
-  For any $a, b \in F$ with $b \neq 0_F$, we define $a / b = a \cdot b^{-1}$.
 \end{definition}
+
 \begin{remark}
-  For simplification, we usually write $ab$ instead of $a \cdot b$ in this
-  note.
+  We may use the underlying set $F$ to represent the entire field if addition
+  and multiplication are self-explanatory.
 \end{remark}
 
 \begin{examples}
   The set $\mathbb{Q}$ of rational numbers, the set $\mathbb{R}$ of real
-  numbers, and the set $\mathbb{C}$ of complex numbers are fields.
+  numbers, and the set $\mathbb{C}$ of complex numbers are all fields.
 \end{examples}
 
 \begin{theorem}[Cancellation Laws]
@@ -387,25 +400,28 @@
 \end{proof}
 
 \section{Bases and Dimension}
-\begin{definition}\label{def:basis}
-  A \emph{basis} for a vector space $V$ is a linearly independent subset of $V$
+\begin{definition}
+  \label{def:basis}
+  A \emph{basis} of a vector space $V$ is a linearly independent subset of $V$
   that spans $V$.
 \end{definition}
 
-\begin{examples}
-  \leavevmode
-  \begin{itemize}
-    \item $\varnothing$ is a basis for $\{0_V\}$.
-    \item $\{e_1, \dots, e_n\}$ is a basis for $F^n$, where $e_i$ is the
-      $n$-tuple whose $i$-th component is $1_F$ and the other components are
-      all $0_F$.
-    \item $\{E_{ij} : 1 \leq i \leq m\ \text{and}\ 1 \leq j \leq n\}$ is a
-      basis for $F^{m \times n}$, where $E_{ij}$ is the matrix whose
-      $(i, j)$-entry is $1_F$ and the other entries are all $0_F$.
-    \item $\{t^0, t^1, t^2, \dots, t^n\}$ is a basis for $\mathcal{P}_n(F)$.
-    \item $\{t^0, t^1, t^2, \dots\}$ is a basis for $\mathcal{P}(F)$.
-  \end{itemize}
-\end{examples}
+\begin{example}
+  $\varnothing$ is a basis of the zero vector space.
+\end{example}
+
+\begin{example}
+  Let
+  \begin{equation*}
+    e_j = \Bigl( \llbracket i = j \rrbracket \Bigr)_{1 \leq i \leq n}
+  \end{equation*}
+  for each $j \in \{1, \dots, n\}$.
+  Then the set $\{e_1, e_2, \dots, e_n\}$ is a basis of $F^n$.
+\end{example}
+
+\begin{example}
+  $\{1, t, t^2, \dots\}$ is a basis of $\mathcal{P}(F)$.
+\end{example}
 
 \begin{proposition}\label{prop:finite-basis-existence}
   Let $V$ be a vector space.
