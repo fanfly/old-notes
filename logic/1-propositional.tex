@@ -1,35 +1,39 @@
 \chapter{Propositional Logic}
 \section{The Language of Propositional Logic}
+In this chapter, we reserve a countable set $\mathcal{A}$, whose elements are
+called \emph{propositional variables}.
+
 \begin{definition}
-  Let $V$ be a countably infinite set, whose elements are called
-  \emph{propositional variables}.
-  We define the set of \emph{formulas} as the minimal set of strings on
-  the alphabet $V \cup \{\neg, \to, (, )\}$ satisfying the following
-  properties.
-  \begin{enumerate}
-    \item Each propositional variable in $V$ is a formula on $V$.
-    \item If $\alpha$ is a formula, then so is $\neg\alpha$.
-    \item If $\alpha$ and $\beta$ are formulas, then so is
-    $(\alpha \to \beta)$.
+  We define \emph{formulas} as follows.
+  \begin{enumerate}[1.]
+    \item Each propositional variable is a formula.
+    \item If $\alpha$ is a formula, then $\neg\alpha$ is a formula.
+    \item If $\alpha$ and $\beta$ are formulas, then $(\alpha \to \beta)$ is a
+    formula.
   \end{enumerate}
 \end{definition}
 
-\section{Truth Assignment}
+\section{Truth Assignments}
 \begin{definition}
-  A \emph{truth assignment} is a function $\tau: V \to \{0, 1\}$, and it can be
-  extended to have its domain the set of formulas as follows.
-  \begin{enumerate}
-    \item $\tau(\neg\alpha) = 1 - \tau(\alpha)$ for any formula $\alpha$.
-    \item $\tau((\alpha \to \beta)) = 1 - \tau(\alpha)
-    (1 - \tau(\beta))$ for any formulas $\alpha$ and $\beta$.
-  \end{enumerate}
-\end{definition}
+  A \emph{truth assignment} is a function $\tau: \mathcal{A} \to \{0, 1\}$, and
+  it can be extended to have its domain the set of formulas such that
+  \begin{equation*}
+    \tau(\neg\alpha) =
+    \begin{cases}
+      0, & \text{if $\tau(\alpha) = 1$} \\
+      1, & \text{if $\tau(\alpha) = 0$}
+    \end{cases}
+    \quad \text{and} \quad
+    \tau(\alpha \to \beta) =
+    \begin{cases}
+      0, & \text{if $\tau(\alpha) = 1$ and $\tau(\beta) = 0$} \\
+      1, & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  for any formula $\alpha$ and $\beta$.
 
-\begin{definition}
-  We say that a truth assignment $\tau$ \emph{satisfies} a formula $\alpha$
-  if $\tau(\alpha) = 1$.
-  Also, we say that $\tau$ \emph{satisfies} a set $\Sigma$ of formulas if it
-  satisfies each formula in $\Sigma$.
+  We say that $\tau$ \emph{satisfies} a formula $\alpha$, denoted by
+  $\tau \vDash \alpha$, if $\tau(\alpha) = 1$.
 \end{definition}
 
 \begin{definition}
@@ -39,7 +43,7 @@
   also satisfies $\alpha$.
 \end{definition}
 
-\section{Proof System}
+\section{The Proof System}
 \begin{definition}
   The collection $\Lambda$ of \emph{axioms} consists of the formulas listed
   below, where $\alpha, \beta, \gamma$ are formulas.
@@ -372,90 +376,104 @@
   which completes the proof.
 \end{proof}
 
-\section{Soundness and Completeness}
-\begin{theorem}
-  Let $\alpha$ be a formula which consists of only the propositional variables
-  $p_1, \dots, p_k$ and let $\tau$ be a truth assignment.
-  Let $p_1^*, \dots, p_k^*$ be formulas such that for each
-  $i \in \{1, \dots, k\}$,
+\section{Completeness}
+\begin{lemma}
+  \label{thm:completeness-lemma}
+  Let $\tau$ be a truth assignment.
+  For each formula $\phi$, we define
   \begin{equation*}
-    p_i^* =
+    \phi^{(\tau)} =
     \begin{cases}
-      p_i, & \text{if $\tau(p_i) = 1$} \\
-      \neg p_i, & \text{if $\tau(p_i) = 0$}.
+      \phi, & \text{if $\tau(\phi) = 1$} \\
+      \neg \phi, & \text{if $\tau(\phi) = 0$}.
     \end{cases}
   \end{equation*}
-  Furthermore, let $\alpha^*$ be the formula defined by
+  Then for any formula $\alpha$ that consists of only the propositional
+  variables $p_1, \dots, p_k$, we have
   \begin{equation*}
-    \alpha^* =
-    \begin{cases}
-      \alpha, & \text{if $\tau(\alpha) = 1$} \\
-      \neg \alpha, & \text{if $\tau(\alpha) = 0$}.
-    \end{cases}
+    \Bigl\{p_1^{(\tau)}, \dots, p_k^{(\tau)}\Bigr\} \vdash \alpha^{(\tau)}.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Let
+  \begin{equation*}
+    \Pi = \Bigl\{p_1^{(\tau)}, \dots, p_k^{(\tau)}\Bigr\}.
+  \end{equation*}
+  The proof is by induction.
+  If $\alpha$ is atomic, i.e., $\alpha = p_i$ for some $i \in \{1, \dots, k\}$,
+  then we have $\alpha^{(\tau)} \in \Pi$, and thus $\Pi \vdash
+  \alpha^{(\tau)}$.
+
+  Now suppose that $\Pi \vdash \alpha^{(\tau)}$, and we prove that $\Pi \vdash
+  \beta^{(\tau)}$ with $\beta = \neg\alpha$.
+
+  \textbf{Case 1.}
+  If $\tau(\alpha) = 0$, then $\tau(\beta) = 1$, and it follows that
+  $\alpha^{(\tau)} = \neg\alpha = \beta^{(\tau)}$, implying
+  $\Pi \vdash \beta^{(\tau)}$.
+
+  \textbf{Case 2.}
+  If $\tau(\alpha) = 1$, then $\tau(\beta) = 0$, and it follows that
+  $\alpha^{(\tau)} = \alpha$ and $\beta^{(\tau)} = \neg\neg\alpha$.
+  Since $\Pi \vdash \alpha$ and $\vdash \alpha \to \neg\neg\alpha$, we have
+  $\Pi \vdash \neg\neg\alpha$, implying $\Pi \vdash \beta^{(\tau)}$.
+
+  Now suppose that $\Pi \vdash \alpha^{(\tau)}$ and $\Pi \vdash
+  \beta^{(\tau)}$, and we prove that $\Pi \vdash \gamma^{(\tau)}$ with
+  $\gamma = \alpha \to \beta$.
+
+  \textbf{Case 1.}
+  If $\tau(\alpha) = 0$, then $\tau(\gamma) = 1$, and it follows that
+  $\alpha^{(\tau)} = \neg\alpha$ and $\gamma^{(\tau)} = \alpha \to \beta$.
+  Since $\Pi \vdash \neg\alpha$, and $\vdash \neg\alpha \to (\alpha \to
+  \beta)$, we have $\Pi \vdash \alpha \to \beta$, implying $\Pi \vdash
+  \gamma^{(\tau)}$.
+
+  \textbf{Case 2.}
+  If $\tau(\beta) = 1$, then $\tau(\gamma) = 1$, and it follows that
+  $\beta^{(\tau)} = \beta$ and $\gamma^{(\tau)} = \alpha \to \beta$.
+  Since $\Pi \vdash \beta$ and $\beta \vdash (\alpha \to \beta)$, we have
+  $\Pi \vdash \alpha \to \beta$, implying $\Pi \vdash \gamma^{(\tau)}$.
+  
+  \textbf{Case 3.}
+  If $\tau(\alpha) = 1$ and $\tau(\beta) = 0$, then $\tau(\gamma) = 0$, and it
+  follows that $\alpha^{(\tau)} = \alpha$, $\beta^{(\tau)} = \neg\beta$, and
+  $\gamma^{(\tau)} = \neg(\alpha \to \beta)$.
+  Since $\Pi \vdash \alpha$, $\Pi \vdash \neg\beta$ and $\vdash \alpha \to
+  (\neg\beta \to \neg(\alpha \to \beta))$, we have $\Pi \vdash \neg(\alpha \to
+  \beta)$, implying $\Pi \vdash \gamma^{(\tau)}$.
+\end{proof}
+
+\begin{theorem}[Completness Theorem]
+  For each formula $\alpha$, $\vDash \alpha$ implies $\vdash \alpha$.
+\end{theorem}
+\begin{proof}
+  By \Cref{thm:completeness-lemma},
+  \begin{equation*}
+    p_1^{(\tau)}, p_2^{(\tau)}, \dots, p_k^{(\tau)} \vdash \alpha
+  \end{equation*}
+  holds for any truth assignment $\tau$, where $p_1, p_2, \dots, p_k$ are the
+  propositional variables that appears in $\alpha$.
+
+  Now suppose that $\tau$ is a truth assignment and $p_1, \dots, p_j$ are
+  propositional variables such that
+  \begin{equation*}
+    p_1^{(\tau)}, \dots, p_{j-1}^{(\tau)}, p_j \vdash \alpha
+    \quad \text{and} \quad
+    p_1^{(\tau)}, \dots, p_{j-1}^{(\tau)}, \neg p_j \vdash \alpha.
   \end{equation*}
   Then we have
   \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \alpha^*.
-  \end{equation*}
-\end{theorem}
-\begin{proof}
-  The proof is by induction on the complexity of $\alpha$.
-  It is straightforward that the theorem holds when $\alpha = p_i$ for some
-  $i \in \{1, \dots, k\}$.
-
-  Now suppose that $\{p_1^*, \dots, p_k^*\} \vdash \alpha^*$, and we prove
-  that
-  \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \beta^*
-  \end{equation*}
-  with $\beta = \neg\alpha$.
-  If $\tau(\alpha) = 0$, then $\tau(\beta) = 1$, and we have
-  $\alpha^* = \neg\alpha = \beta^*$.
-  Thus, $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$.
-  If $\tau(\alpha) = 1$, then $\tau(\beta) = 0$, and we have
-  $\alpha^* = \alpha$ and $\beta^* = \neg\neg\alpha$.
-  Since
-  \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \alpha
+    p_1^{(\tau)}, \dots, p_{j-1}^{(\tau)} \vdash p_j \to \alpha
     \quad \text{and} \quad
-    \vdash \alpha \to \neg\neg\alpha,
+    p_1^{(\tau)}, \dots, p_{j-1}^{(\tau)} \vdash \neg p_j \to \alpha.
   \end{equation*}
-  we have $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$.
-
-  Now suppose that $\{p_1^*, \dots, p_k^*\} \vdash \alpha^*$ and
-  $\{p_1^*, \dots, p_k^*\} \vdash \beta^*$, and we prove that
+  Since $\vdash (p_j \to \alpha) \to ((\neg p_j \to \alpha) \to \alpha)$,
+  it follows that
   \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \gamma^*
+    p_1^{(\tau)}, \dots, p_{j-1}^{(\tau)} \vdash \alpha.
   \end{equation*}
-  with $\gamma = \alpha \to \beta$.
-  If $\tau(\alpha) = 0$, then $\tau(\gamma) = 1$, and we have
-  $\alpha^* = \neg\alpha$ and $\gamma^* = \alpha \to \beta$.
-  Since $\{p_1^*, \dots, p_k^*\} \vdash \neg\alpha$
-  \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \neg\alpha
-    \quad \text{and} \quad
-    \vdash \neg\alpha \to (\alpha \to \beta)
-  \end{equation*}
-  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
-  If $\tau(\beta) = 1$, then $\tau(\gamma) = 1$, and we have
-  $\beta^* = \beta$ and $\gamma^* = \alpha \to \beta$.
-  Since
-  \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \beta
-    \quad \text{and} \quad
-    \vdash \beta \to (\alpha \to \beta)
-  \end{equation*}
-  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$.
-  If $\tau(\alpha) = 1$ and $\tau(\beta) = 0$, then
-  $\tau(\gamma) = 0$, and we have $\alpha^* = \alpha$, 
-  $\beta^* = \neg\beta$ and $\gamma^* = \neg(\alpha \to \beta)$.
-  Since
-  \begin{equation*}
-    \{p_1^*, \dots, p_k^*\} \vdash \alpha,
-    \quad
-    \{p_1^*, \dots, p_k^*\} \vdash \neg\beta,
-    \quad \text{and} \quad
-    \vdash \alpha \to (\neg\beta \to \neg(\alpha \to \beta)),
-  \end{equation*}
-  we have $\{p_1^*, \dots, p_k^*\} \vdash \gamma^*$, completing the proof.
+  This process can be performed continually such that all the premises are
+  eliminated.
+  Thus, we conclude that $\vdash \alpha$.
 \end{proof}

@@ -1,7 +1,7 @@
 \chapter{Predicate Logic}
 \section{The Language of Predicate Logic}
-In this chapter, we reserve a countable set $\mathcal{V}$, in which each
-element is called a \emph{variable}.
+In this chapter, we reserve a countable set $\mathcal{V}$, whose elements are
+called \emph{variables}.
 
 \begin{definition}
   A \emph{vocabulary} is a pair
@@ -16,16 +16,16 @@ element is called a \emph{variable}.
 
 \begin{definition}
   We define \emph{terms} as follows.
-  \begin{itemize}
+  \begin{enumerate}[1.]
     \item Each variable is a term.
     \item If $f$ is an $n$-ary function symbol and $t_1, \dots, t_n$ are terms,
     then $f(t_1, \dots, t_n)$ is a term.
-  \end{itemize}
+  \end{enumerate}
 \end{definition}
 
 \begin{definition}
   We define \emph{formulas} as follows.
-  \begin{itemize}
+  \begin{enumerate}[1.]
     \item If $P$ is an $n$-ary predicate symbol and $t_1, \dots, t_n$ are
     terms, then $P(t_1, \dots, t_n)$ is a formula.
     \item If $\alpha$ is a formula, then $\neg\alpha$ is a formula.
@@ -33,7 +33,7 @@ element is called a \emph{variable}.
     formula.
     \item If $\alpha$ is a formula and $x$ is a variable, then
     $\forall x \alpha$ is a formula.
-  \end{itemize}
+  \end{enumerate}
 \end{definition}
 
 \section{Models}
@@ -42,16 +42,19 @@ element is called a \emph{variable}.
   is a triple
   \begin{equation*}
     \mathcal{M} =
-    \Bigl(A, \bigl(P^\mathcal{M}\bigr)_{P \in \mathcal{P}},
-    \bigl(f^M\bigr)_{f \in \mathcal{F}}\Bigr),
+    \Bigl(
+      M,
+      \bigl(P^\mathcal{M}\bigr)_{P \in \mathcal{P}},
+      \bigl(f^\mathcal{M}\bigr)_{f \in \mathcal{F}}
+    \Bigr),
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
-    \item $A$ is a nonempty set called \emph{universe}.
+    \item $M$ is a nonempty set called \emph{universe}.
     \item To each $n$-ary relation symbol $P$ an $n$-ary relation
-    $P^\mathcal{M} \subseteq A^n$ is assigned.
+    $P^\mathcal{M} \subseteq M^n$ is assigned.
     \item To each $n$-ary function symbol $f$ an $n$-ary function
-    $f^\mathcal{M}: A^n \to A$ is assigned.
+    $f^\mathcal{M}: M^n \to M$ is assigned.
   \end{itemize}
 \end{definition}
 
@@ -59,13 +62,13 @@ element is called a \emph{variable}.
   Let $\mathcal{M}$ be a model of vocabulary $\mathcal{L} = (\mathcal{P},
   \mathcal{F})$.
   An \emph{object assignment} is a function $\sigma$ that maps each variable to
-  an element in $A$.
+  an element in $M$.
 
   It can be extended to have its domain the set of terms such that for any
   $n$-ary function symbol $f$ and any terms $t_1, \dots, t_n$, we have
   \begin{equation*}
     \sigma(f(t_1, \dots, t_n))
-    = f^M(\sigma(t_1), \sigma(t_2), \dots, \sigma(t_n)).
+    = f^\mathcal{M}(\sigma(t_1), \sigma(t_2), \dots, \sigma(t_n)).
   \end{equation*}
 \end{definition}
 
@@ -74,14 +77,14 @@ element is called a \emph{variable}.
   the satisfaction relation $(\mathcal{M}, \sigma) \vDash \phi$ for each
   formula $\phi$ as follows.
   \begin{itemize}
-    \item $(\mathcal{M}, \sigma) \vDash P(t_1, \dots, t_n)$ holds if and only
-    if $(t_1, \dots, t_n) \in P^\mathcal{M}$ holds.
+    \item $(\mathcal{M}, \sigma) \vDash P(t_1, \dots, t_n)$ means
+    $(t_1, \dots, t_n) \in P^\mathcal{M}$.
     \item $(\mathcal{M}, \sigma) \vDash \neg\alpha$ holds if and only if
-    $(\mathcal{M}, \sigma) \vDash \alpha$ does not hold.
+    $(\mathcal{M}, \sigma) \nvDash \alpha$.
     \item $(\mathcal{M}, \sigma) \vDash (\alpha \to \beta)$ holds if and only
-    if $(\mathcal{M}, \sigma) \vDash \alpha$ does not hold or
-    $(\mathcal{M}, \sigma) \vDash \beta$ holds.
+    if either $(\mathcal{M}, \sigma) \nvDash \alpha$ or
+    $(\mathcal{M}, \sigma) \vDash \beta$.
     \item $(\mathcal{M}, \sigma) \vDash \forall x \alpha$ holds if and only if
-    $(\mathcal{M}, \sigma[x \mapsto c]) \vDash \alpha$ holds for all $c \in A$.
+    $(\mathcal{M}, \sigma[x \mapsto c]) \vDash \alpha$ for all $c \in M$.
   \end{itemize}
 \end{definition}
