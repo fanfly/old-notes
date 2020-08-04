@@ -3,32 +3,37 @@
 \begin{definition}
   A \emph{graph} is a pair
   \begin{equation*}
-    G = (V, E)
+    G = (V, E),
   \end{equation*}
-  of finite sets, where $E$ consists of unordered pairs of elements in $V$.
-  The elements of $V$ are called \emph{vertices} of $G$, and the elements of
-  $E$ are called \emph{edges} of $G$.
+  where $V$ is a finite set of \emph{vertices}, and $E$ is a set of
+  \emph{edges}, which are 2-element subsets of $V$.
+  \begin{itemize}
+    \item The elements of an edge is called its \emph{endpoints}, and we say
+    that an edge \emph{joins} its endpoints.
+    \item We say that two vertices are \emph{adjacent} if they are joined by an
+    edge.
+  \end{itemize}
 \end{definition}
+\begin{remark}
+  An edge $\{u, v\}$ is usually written as $uv$.
+\end{remark}
 
 \section{Paths}
 \begin{definition}
-  A \emph{path} is a graph $P = (V, E)$ with
+  A \emph{walk} of a graph $G = (V, E)$ is a sequence
   \begin{equation*}
-    V = \{x_1, x_2, \dots, x_{n+1}\}
-    \quad \text{and} \quad
-    E = \{x_1x_2, x_2x_3, \dots, x_nx_{n+1}\}.
+    (v_0, e_1, v_1, \dots, e_k, v_k),
   \end{equation*}
-  The \emph{length} of a path is defined as the number of edges.
-\end{definition}
-
-\begin{definition}
-  A \emph{cycle} is a graph $C = (V, E)$ with
-  \begin{equation*}
-    C = \{x_1, x_2, \dots, x_n\}
-    \quad \text{and} \quad
-    E = \{x_1x_2, x_2x_3, \dots, x_{n-1}x_n, x_nx_1\}.
-  \end{equation*}
-  The \emph{length} of a cycle is defined as the number of edges.
+  where $v_0, v_1, \dots, v_k \in V$ and $e_1, \dots, e_k \in E$ such that
+  $e_i = v_{i-1}v_i$ for each $i \in \{1, \dots, k\}$.
+  The number of edges in a walk is called the \emph{length} of the walk.
+  \begin{itemize}
+    \item A \emph{trail} is a walk with no repeated edges.
+    \item A \emph{circuit} is a trail with starting vertex and ending vertex
+    being the same.
+    \item A \emph{path} is a walk with no repeated vertices.
+    \item A \emph{cycle} is a circuit with no repeated internal vertices.
+  \end{itemize}
 \end{definition}
 
 \section{Connectivity}
