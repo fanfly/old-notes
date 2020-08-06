@@ -1,57 +1,92 @@
 \chapter{Basic Topology}
 \section{Metric Spaces}
 \begin{definition}
-  A set $X$ with a function $d: X \times X \to \mathbb{R}$ is a
-  \emph{metric space} if the following statements hold for any $x, y, z \in X$.
-  \begin{enumerate}
-    \item $d(x, y) \geq 0$.
-    \item $d(x, y) = 0$ if and only if $x = y$.
+  A set $X$ and a function $d: X \times X \to \mathbb{R}$ form a \emph{metric
+  space} if the following properties hold for any $x, y, z \in X$.
+  \begin{enumerate}[1.]
+    \item $d(x, y) > 0$ if $x \neq y$, and $d(x, x) = 0$.
     \item $d(x, y) = d(y, x)$.
     \item $d(x, y) \leq d(x, z) + d(z, y)$.
   \end{enumerate}
 \end{definition}
+\begin{remark}
+  We may use the underlying set $X$ to represent the metric space $(X, d)$,
+  and in this case, the distance function $d$ is denoted by $d_X$.
+\end{remark}
 
 \begin{definition}
-  Let $(X, d)$ be a metric space.
-  Let $r > 0$ be a real number and let $x_0 \in X$.
-  The \emph{open ball} of radius $r$ centered at $x_0$, denoted by $B_r(x_0)$,
-  is defined by
+  Let $X$ be a metric space.
+  For any $\epsilon > 0$ and $x \in X$, we define the \emph{open ball} of
+  radius $\epsilon$ centered at $x$ by
   \begin{equation*}
-    B_r(x_0) = \{x \in X: d(x, x_0) < r\}.
+    B_\epsilon(x) = \{y \in X: d_X(x, y) < \epsilon\}.
   \end{equation*}
 \end{definition}
 
 \begin{definition}
-  Let $(X, d)$ be a metric space and let $S \subseteq X$.
+  Let $X$ be a metric space with $S \subseteq X$ and $x \in X$.
   \begin{itemize}
-    \item $S$ is \emph{open} if for any $x \in S$, there is a real number
-    $r > 0$ such that $B_r(x) \subseteq S$.
-    \item $S$ is \emph{closed} if $X \setminus S$ is open.
+    \item We say that $x$ is an \emph{interior point} of $S$ if
+    $B_\epsilon(x) \subseteq S$ for some $\epsilon > 0$.
+    If every point of $S$ is an interior point of $S$, then $S$ is said to be
+    \emph{open}.
+    \item We say that $x$ is an \emph{limit point} of $S$ if
+    $(B_\epsilon(x) \setminus \{x\}) \cap S$ is not empty for all
+    $\epsilon > 0$.
+    If every limit point of $S$ is a point of $S$, then $S$ is said to be
+    \emph{close}.
   \end{itemize}
 \end{definition}
 
 \begin{theorem}
-  Let $(X, d)$ be a metric space.
+  Let $X$ be a metric space and $S \subseteq X$.
+  Then $S$ is open if and only if $X \setminus S$ is closed.
+\end{theorem}
+\begin{proof}
+  ($\Rightarrow$)
+  Suppose that $x$ is a limit point of $X \setminus S$.
+  Then $B_\epsilon(x) \setminus S \neq \varnothing$ for any $\epsilon > 0$,
+  implying that $x$ is not an interior point of $S$.
+  Since $S$ is open, we have $x \notin S$, i.e., $x \in X \setminus S$.
+  Thus, $X \setminus S$ is closed.
+
+  ($\Leftarrow$)
+  Let $x \in S$.
+  If $x$ is a limit point of $X \setminus S$, then $x \in X \setminus S$ since
+  $X \setminus S$ is closed, contradiction.
+  Thus, $x$ is not a limit point of $X \setminus S$, and there exists
+  $\epsilon > 0$ such that $B_\epsilon(x) \subseteq S$, implying that $S$ is
+  open.
+\end{proof}
+
+\begin{theorem}
+  Let $\{S_\alpha\}_{\alpha \in A}$ be a collection of open sets.
   \begin{enumerate}
-    \item $X$ and $\varnothing$ are open.
-    \item If $S_1, S_2$ are open subsets of $X$, then $S_1 \cap S_2$ is open.
-    \item If $\{S_i: i \in I\}$ is a collection of open subsets of $X$, then
-    \begin{equation*}
-      \bigcup_{i \in I} S_i
-    \end{equation*}
+    \item $\bigcup_{\alpha \in A} S_\alpha$ is open.
+    \item If $A$ is nonempty and finite, then $\bigcap_{\alpha \in A} S_\alpha$
     is open.
   \end{enumerate}
 \end{theorem}
-
-\begin{definition}
-  Let $(X, d)$ be a metric space and let $S \subseteq X$.
-  \begin{itemize}
-    \item A point $x \in X$ is a \emph{limit point} of $S$ if there exists
-    $y \in S \setminus \{x\}$ with $d(x, y) < \epsilon$ for any $\epsilon > 0$.
-    \item A point $x \in X$ is an \emph{isolated point} of $S$ if $x$ belongs
-    to $S$ and is not a limit point of $S$.
-  \end{itemize}
-\end{definition}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item Suppose that $x \in \bigcup_{\alpha \in A} S_\alpha$.
+    Then $x \in S_\alpha$ for some $\alpha \in A$.
+    Since $S_\alpha$ is open, $x$ is an interior point of $S_\alpha$, and it
+    follows that $x$ is an interior point of $\bigcup_{\alpha \in A} S_\alpha$.
+    Thus, $\bigcup_{\alpha \in A} S_\alpha$ is open.
+    \item Suppose that $x \in \bigcap_{\alpha \in A} S_\alpha$.
+    For each $\alpha \in A$, since $S_\alpha$ is open, we have
+    $B_{\epsilon_\alpha}(x) \subseteq S_\alpha$ for some $\epsilon_\alpha > 0$.
+    Since $A$ is finite and nonempty,
+    $\epsilon = \min(\{\epsilon_\alpha\}_{\alpha \in A})$ exists.
+    It follows that $B_\epsilon(x) \subseteq \bigcap_{\alpha \in A} S_\alpha$,
+    implying that $x$ is an interior point of $\bigcap_{\alpha \in A}
+    S_\alpha$.
+    Thus, $\bigcap_{\alpha \in A} S_\alpha$ is open.
+    \qedhere
+  \end{enumerate}
+\end{proof}
 
 \section{Compact Sets}
 \begin{definition}

@@ -1,7 +1,7 @@
 \chapter{Continuity}
 \section{Limits of Functions}
 \begin{definition}
-  Let $(X, d_X)$ and $(Y, d_Y)$ be a metric spaces.
+  Let $X$ and $Y$ be a metric spaces.
   Let $f: D \to Y$ be a map with $D \subseteq X$.
   Then we say that $b \in Y$ is the \emph{limit} of $f$ at $a \in X$, denoted
   by
@@ -18,11 +18,12 @@
   \end{equation*}
 \end{definition}
 
+\section{Continuous Functions}
 \begin{definition}
-  Let $(X, d_x)$ and $(Y, d_Y)$ be metric spaces.
+  Let $X$ and $Y$ be metric spaces.
   Let $f: D \to Y$ be a map with $D \subseteq X$.
-  Then $f$ is \emph{continuous} at $a \in X$ if for any $\epsilon > 0$, there
-  exists $\delta > 0$ such that
+  We say that $f$ is \emph{continuous} at $a \in X$ if for any $\epsilon > 0$,
+  there exists $\delta > 0$ such that
   \begin{equation*}
     d_Y(f(x), f(a)) < \epsilon
   \end{equation*}
@@ -30,6 +31,26 @@
   \begin{equation*}
     d_X(x, a) < \delta.
   \end{equation*}
+  Also, we say that $f$ is \emph{continuous} on $D$ if $f$ is continuous at
+  every point of $D$.
 \end{definition}
 
+\begin{theorem}
+  Let $X$ and $Y$ be metric spaces.
+  Let $f: X \to Y$ be a map.
+  Then $f$ is continuous if and only if $f^{-1}(E)$ is open for any open set
+  $E$ in $Y$.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
+
 \section{Continuity and Compactness}
+\begin{theorem}
+  Let $X$ and $Y$ be metric spaces.
+  Let $f: X \to Y$ be a map.
+  If $K \subseteq X$ is compact, then $f(K)$ is compact.
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}

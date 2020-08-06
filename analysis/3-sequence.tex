@@ -1,60 +1,61 @@
 \chapter{Sequences and Series}
 \begin{definition}
-  Let $(X, d)$ be a metric space.
-  Let $\{x_n\}$ be a sequence in $X$.
-  We say that $\{x_n\}$ \emph{converges} to a point $x \in X$, denoted by
+  Let $X$ be a metric space and let $(x_n)_{n \in \mathbb{N}}$ be a sequence in
+  $X$.
+  We say that $(x_n)_{n \in \mathbb{N}}$ \emph{converges} to a point $x \in X$,
+  denoted by
   \begin{equation*}
     \lim_{n \to \infty} x_n = x,
   \end{equation*}
   if for any real number $\epsilon > 0$ there is a positive integer $N$
-  such that $n \geq N$ implies $d(x_n, x) < \epsilon$.
+  such that $d_X(x_n, x) < \epsilon$ for any integer $n > N$.
   \begin{itemize}
-    \item We say that $\{x_n\}$ is \emph{convergent} if it converges to some
-    point in $X$.
-    \item We say that $\{x_n\}$ is \emph{divergent} if it is not convergent.
+    \item We say that $(x_n)_{n \in \mathbb{N}}$ is \emph{convergent} if it
+    converges to some point in $X$.
+    \item We say that $(x_n)_{n \in \mathbb{N}}$ is \emph{divergent} if it is
+    not convergent.
   \end{itemize}
 \end{definition}
 
 \begin{theorem}
-  Let $\{x_n\}$ be a sequence in a metric space $(X, d)$.
-  If $\{x_n\}$ converges to both $x \in X$ and $x' \in X$, then $x = x'$.
+  Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in a metric space $X$.
+  If $(x_n)_{n \in \mathbb{N}}$ converges to both $x \in X$ and $x' \in X$,
+  then $x = x'$.
 \end{theorem}
 \begin{proof}
   For any $\epsilon > 0$, there exists a positive integer $N$ such that
   \begin{align*}
-    d(x_n, x) < \frac{\epsilon}{2}
+    d_X(x_n, x) < \frac{\epsilon}{2}
     \quad \text{and} \quad
-    d(x_n, x') < \frac{\epsilon}{2}
+    d_X(x_n, x') < \frac{\epsilon}{2}
   \end{align*}
-  for each $n \geq N$, implying
+  hold for any integer $n \geq N$.
+  It follows that
   \begin{equation*}
-    d(x, x') \leq d(x_n, x) + d(x_n, x') < \epsilon.
-    \qedhere
+    d_X(x, x')
+    \leq d_X(x_n, x) + d_X(x_n, x')
+    < \frac{\epsilon}{2} + \frac{\epsilon}{2}
+    = \epsilon
   \end{equation*}
+  holds for any integer $n \geq N$.
+  Thus, $x = x'$.
 \end{proof}
 
 \begin{theorem}
-  Let $\{a_n\}$ and $\{b_n\}$ be complex sequences with
+  Let $(a_n)_{n \in \mathbb{N}}$ and $(b_n)_{n \in \mathbb{N}}$ be real
+  sequences with
   \begin{equation*}
     \lim_{n \to \infty} a_n = L
     \quad \text{and} \quad
     \lim_{n \to \infty} b_n = M.
   \end{equation*}
-  Let $c$ be a complex number.
   Then the following statements are true.
   \begin{enumerate}
-    \item We have
-    \begin{equation*}
-      \lim_{n \to \infty} (a_n + b_n) = L + M.
-    \end{equation*}
-    \item We have
-    \begin{equation*}
-      \lim_{n \to \infty} a_nb_n = LM.
-    \end{equation*}
-    \item If $L \neq 0$ and $a_n \neq 0$ for each positive integer $n$, we have
-    \begin{equation*}
-      \lim_{n \to \infty} \frac{1}{a_n} = \frac{1}{L}.
-    \end{equation*}
+    \item $\lim\limits_{n \to \infty} (a_n + b_n) = L + M$, and
+    $\lim\limits_{n \to \infty} (a_n - b_n) = L - M$.
+    \item $\lim\limits_{n \to \infty} a_nb_n = LM$.
+    \item If $L \neq 0$ and $a_n \neq 0$ for all $n \in \mathbb{N}$, then
+    $\lim\limits_{n \to \infty} a_n^{-1} = L^{-1}$.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
