@@ -4,7 +4,7 @@
   A set $X$ and a function $d: X \times X \to \mathbb{R}$ form a \emph{metric
   space} if the following properties hold for any $x, y, z \in X$.
   \begin{enumerate}[1.]
-    \item $d(x, y) > 0$ if $x \neq y$, and $d(x, x) = 0$.
+    \item $d(x, y) \geq 0$, and $d(x, y) = 0$ holds if and only if $x = y$.
     \item $d(x, y) = d(y, x)$.
     \item $d(x, y) \leq d(x, z) + d(z, y)$.
   \end{enumerate}
@@ -39,6 +39,7 @@
 \end{definition}
 
 \begin{theorem}
+  \label{thm:open-versus-closed}
   Let $X$ be a metric space and $S \subseteq X$.
   Then $S$ is open if and only if $X \setminus S$ is closed.
 \end{theorem}
@@ -60,6 +61,7 @@
 \end{proof}
 
 \begin{theorem}
+  \label{thm:open-sets}
   Let $\{S_\alpha\}_{\alpha \in A}$ be a collection of open sets.
   \begin{enumerate}
     \item $\bigcup_{\alpha \in A} S_\alpha$ is open.
@@ -86,6 +88,18 @@
     Thus, $\bigcap_{\alpha \in A} S_\alpha$ is open.
     \qedhere
   \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+  Let $\{S_\alpha\}_{\alpha \in A}$ be a collection of closed sets.
+  \begin{enumerate}
+    \item $\bigcap_{\alpha \in A} S_\alpha$ is closed.
+    \item If $A$ is nonempty and finite, then $\bigcup_{\alpha \in A} S_\alpha$
+    is closed.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  Straightforward from \Cref{thm:open-versus-closed} and \Cref{thm:open-sets}.
 \end{proof}
 
 \section{Compact Sets}
