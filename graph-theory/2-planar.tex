@@ -1,46 +1,57 @@
 \chapter{Planar Graphs}
-\section{Topological Prerequisites}
+\section{The Jordan Polygon Theorem}
 \begin{definition}
-  Let $x, y \in \mathbb{R}^2$ be different points.
-  \begin{itemize}
-    \item A \emph{straight line segment} between $x$ and $y$ is a set
-    $\ell \subseteq \mathbb{R}^2$ with
-    \begin{equation*}
-      \ell = \{x + \lambda(y - x): 0 \leq \lambda \leq 1\}.
-    \end{equation*}
-    \item A \emph{polygonal arc} between $x$ and $y$ is a set $\alpha \subseteq
-    \mathbb{R}^2$ which is a union of finitely many straight line segments such
-    that there is a homeomorphism $\varphi: [0, 1] \to \alpha$ with $\varphi(0)
-    = x$ and $\varphi(1) = y$.
-  \end{itemize}
+  A \emph{line segment} is a set of the form
+  \begin{equation*}
+    \{\lambda x + (1 - \lambda y): 0 \leq \lambda \leq 1\},
+  \end{equation*}
+  where $x$ and $y$ are distinct points in $\mathbb{R}^2$, called the
+  \emph{endpoints} of the line segment.
 \end{definition}
 
 \begin{definition}
-  Let $S \subseteq \mathbb{R}^2$ beopen and let $\sim$ be the equivalence
-  relation of being connected by a polygonal arc.
-  The members of $S / {\sim}$ are called the \emph{regions} of $S$.
+  A \emph{polygonal curve} $C$ is a union of line segments such that there is
+  a continuous bijection $\gamma: [0, 1] \to C$.
+  The points $\gamma(0)$ and $\gamma(1)$ are called the \emph{endpoints} of
+  $C$.
 \end{definition}
 
 \begin{definition}
-  Let $S \subseteq \mathbb{R}^2$.
-  The \emph{boundary} of $S$ is the set of points whose every neighborhood
-  consists of both a point in $S$ and a point not in $S$.
+  A \emph{polygon} $P$ is a union of line segments such that there is
+  a continuous bijection $\gamma: S^1 \to P$, where
+  \begin{equation*}
+    S^1 = \{(x, y): x^2 + y^2 = 1\}.
+  \end{equation*}
 \end{definition}
+
+\begin{definition}
+  We say that $S \subseteq \mathbb{R}^2$ is \emph{connected} if for any
+  $x, y \in S$, there exists a polygonal curve $C \subseteq S$ whose endpoints
+  are $x$ and $y$.
+  Furthermore, we say that $S$ is a \emph{region} of $Q \subseteq \mathbb{R}^2$
+  if $S$ is a maximal connected subset of $Q$.
+\end{definition}
+
+\begin{theorem}[Jordan Polygon Theorem]
+  Let $P$ be a polygon.
+  Then $\mathbb{R}^2 \setminus P$ has exactly two regions.
+\end{theorem}
 
 \section{Plane Graphs}
 \begin{definition}
-  A \emph{plane graph} is a pair $G = (V, E)$ of finite sets such that the
-  following properties hold, where the elements of $V$ and those of $E$ are
-  called \emph{vertices} and \emph{edges}, respectively.
+  A \emph{plane graph} is a pair $G = (V, E)$, where each components are as
+  follows.
   \begin{itemize}
-    \item $V$ is a finite subset of $\mathbb{R}^2$.
-    \item $E$ is a finite set of simple curves between vertices.
-    \item Different edges in $E$ have different set of endpoints.
-    \item The interior of an edge contains no vertex and no point of any other
-    edge.
+    \item $V$ consists of a finite number of points (called \emph{vertices}) in
+    $\mathbb{R}^2$.
+    \item $E$ consists of polygonal curves (called \emph{edges})
+    that connects vertices, such that no two edges have the same set of
+    endpoints, and the interior of any edge does not contain any vertex or any
+    point of other edges.
   \end{itemize}
-  The \emph{faces} of $G$ are the regions of $\mathbb{R}^2 \setminus (V \cup
-  \bigcup E)$, and we denote the set of faces of $G$ by $F(G)$.
+  A region of $\mathbb{R}^2 \setminus \bigcup E$ is called a \emph{face} of
+  $G$.
+  The set of faces of $G$ is denoted by $F(G)$.
 \end{definition}
 \begin{remark}
   A plane graph defines a graph in a natural way.
