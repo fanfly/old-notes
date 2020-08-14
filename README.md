@@ -1,6 +1,6 @@
 FanFly's Study Notes
 ===
-## Lists
+## Note List
 * Linear Algebra
 * Probability
 * Theory of Computation
