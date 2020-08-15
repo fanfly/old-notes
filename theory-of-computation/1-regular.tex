@@ -1,57 +1,71 @@
 \chapter{Regular Languages}
-\section{Languages}
+\section{Strings and Languages}
 \begin{definition}
-  \label{def:alphabet}
-  An \emph{alphabet} is a finite nonempty set of symbols.
+  An \emph{alphabet} is a finite set of symbols.
+  A \emph{string} over alphabet $\Sigma$ is a finite sequence
+  \begin{equation*}
+    w = a_1 a_2 \cdots a_n
+  \end{equation*}
+  with $a_1, \dots, a_n \in \Sigma$, where $n$ is called the \emph{length} of
+  the string $w$.
+  The \emph{empty string} is the unique string of length zero, which is denoted
+  by $\epsilon$.
 \end{definition}
 
 \begin{definition}
-  \label{def:string}
-  Let $\Sigma$ be an alphabet.
-  \begin{itemize}
-    \item A \emph{string} over $\Sigma$ is a finite sequence of symbols from
-    $\Sigma$.
-    The collection of all strings over $\Sigma$ is denoted by $\Sigma^*$.
-    \item The \emph{length} of a string $w$, denoted by $|w|$, is the number of
-    symbols it contains.
-    \item The string containing no symbols is called the \emph{empty string},
-    denoted by $\epsilon$.
-  \end{itemize}
+  The \emph{concatenation} of strings
+  \begin{equation*}
+    u = a_1 a_2 \cdots a_n
+    \quad \text{and} \quad
+    v = b_1 b_2 \cdots b_m
+  \end{equation*}
+  is defined as the string
+  \begin{equation*}
+    uv = a_1 a_2 \cdots a_n b_1 b_2 \cdots b_m.
+  \end{equation*}
 \end{definition}
 
 \begin{definition}
-  \label{def:language}
+  Let $\Sigma^*$ denote the set of all strings over $\Sigma$.
   A subset of $\Sigma^*$ is called a \emph{language} over $\Sigma$.
+\end{definition}
+
+\begin{definition}
+  The \emph{concatenation} of languages $L_1$ and $L_2$ is
+  \begin{equation*}
+    L_1L_2 = \{w_1w_2 : \text{$w_1 \in L_1$ and $w_2 \in L_2$}\}.
+  \end{equation*}
+  For any language $L$, we define $L^0 = \{\epsilon\}$ and $L^{n+1} = L^nL$
+  for all integers $n \geq 0$.
+  Also, we define $L^* = \bigcup_{n \geq 0}L^n$.
 \end{definition}
 
 \section{Deterministic Finite State Automata}
 \begin{definition}
-  \label{def:dfa}
-  A \emph{deterministic finite state automaton} (DFA) is a tuple
+  A \emph{deterministic finite state automaton (DFA)} is a 5-tuple
   \begin{equation*}
-    A = (Q, \Sigma, \delta, q_0, F),
+    M = (Q, \Sigma, \delta, s, F),
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
     \item $Q$ is a finite set of \emph{states}.
-    \item $\Sigma$ is a finite set of input symbols.
-    \item $\delta: Q \times \Sigma \to Q$ is a function, called the
-    \emph{transition function}.
-    \item $q_0 \in Q$ is called the \emph{start state}.
-    \item $F \subseteq Q$ is called the \emph{accepting states}.
+    \item $\Sigma$ is an alphabet.
+    \item $\delta: Q \times \Sigma \to Q$ is a \emph{transition function}.
+    \item $s \in Q$ is the \emph{start state}.
+    \item $F \subseteq Q$ is the set of \emph{final states}.
   \end{itemize}
 \end{definition}
 
-\begin{definition}
-  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.
-  For each string $w \in \Sigma^*$, we define $\delta_w: Q \to Q$ as follows,
-  where $a \in \Sigma$ and $x \in \Sigma^*$.
-  \begin{itemize}
-    \item $\delta_\epsilon(p) = p$ for each $p \in Q$.
-    \item $\delta_a(p) = \delta(p, a)$ for each $p \in Q$.
-    \item $\delta_{xa}(p) = \delta(\delta_x(p), a)$ for each $p \in Q$.
-  \end{itemize}
-\end{definition}
+%\begin{definition}
+%  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.
+%  For each string $w \in \Sigma^*$, we define $\delta_w: Q \to Q$ as follows,
+%  where $a \in \Sigma$ and $x \in \Sigma^*$.
+%  \begin{itemize}
+%    \item $\delta_\epsilon(p) = p$ for each $p \in Q$.
+%    \item $\delta_a(p) = \delta(p, a)$ for each $p \in Q$.
+%    \item $\delta_{xa}(p) = \delta(\delta_x(p), a)$ for each $p \in Q$.
+%  \end{itemize}
+%\end{definition}
 
 \begin{definition}
   Let $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA.

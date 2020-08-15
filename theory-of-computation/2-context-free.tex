@@ -7,96 +7,105 @@
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
-    \item $V$ is a finite set of symbols, called \emph{variables}.
-    \item $\Sigma$ is a finite set of symbols, called \emph{terminals}, and we
-    have $V \cap \Sigma = \varnothing$.
+    \item $V$ is a finite set of \emph{variables}.
+    \item $\Sigma$ is a finite set of \emph{terminals} with $V \cap \Sigma =
+    \varnothing$.
     \item $R$ is a finite set of \emph{rules}, where each rule is a pair
-    $(A, \gamma)$ with $A \in V$ and $\gamma \in (V \cup \Sigma^*)$.
-    \item $S \in V$ is the \emph{start variable}.
+    $(A, \gamma)$ with $A \in V$ and $\gamma \in (V \cup \Sigma)^*$.
+    \item $S$ is a special variable in $V$, called the \emph{start variable}.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
   Let $G = (V, \Sigma, R, S)$ be a CFG.
   \begin{itemize}
-    \item For any variable $A \in V$ and for any strings
-    $\alpha, \beta, \gamma \in (V \cup \Sigma)^*$, we say that $\alpha A \beta$
-    \emph{yields} $\alpha\gamma\beta$ under $G$, denoted by
+    \item For any $A \in V$ and for any $\alpha, \beta, \gamma \in (V \cup
+    \Sigma)^*$, we say that $\alpha A \beta$ \emph{yields} $\alpha\gamma\beta$
+    under $G$, denoted by
     \begin{equation*}
       \alpha A \beta \mathrel{\mathop\Rightarrow\limits_G} \alpha\gamma\beta,
     \end{equation*}
     if there is a rule $(A, \gamma) \in R$.
-    \item For any strings $\alpha, \beta \in (V \cup \Sigma)^*$, we say that
-    $\alpha$ \emph{derives} $\beta$ under $G$, denoted by
+    \item For any $\alpha, \beta \in (V \cup \Sigma)^*$, we say that $\alpha$
+    \emph{derives} $\beta$ under $G$, denoted by
     \begin{equation*}
       \alpha \mathrel{\mathop\Rightarrow\limits_G^*} \beta,
     \end{equation*}
-    if $\alpha = \beta$ or there exists a string $\gamma \in (V \cup \Sigma)^*$
-    such that $\alpha \mathrel{\mathop\Rightarrow\limits_G^*} \gamma$ and
+    if $\alpha = \beta$, or there exists $\gamma \in (V \cup\Sigma)^*$ such
+    that $\alpha \mathrel{\mathop\Rightarrow\limits_G^*}\gamma$ and
     $\gamma \mathrel{\mathop\Rightarrow\limits_G} \beta$.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
   Let $G = (V, \Sigma, R, S)$ be a CFG.
-  \begin{itemize}
-    \item We say that $G$ \emph{accepts} a string $w \in \Sigma^*$ if
-    \begin{equation*}
-      S \mathrel{\mathop\Rightarrow\limits_G^*} w.
-    \end{equation*}
-    \item The \emph{language} of $G$, denoted $L(G)$, is the set of strings
-    that are accepted by $G$.
-  \end{itemize}
-\end{definition}
-
-\begin{definition}
-  A language $L$ is \emph{context-free} if there is a CFG $G$ with $L(G) = L$.
+  For any string $w \in \Sigma^*$, if
+  \begin{equation*}
+    S \mathrel{\mathop\Rightarrow\limits_G^*} w,
+  \end{equation*}
+  then we say that $G$ \emph{accepts} $w$.
+  The set of string accepted by $G$ is called the \emph{language} of $G$,
+  denoted by $L(G)$.
+  A language $L$ is \emph{context-free} if $L = L(G)$ for some CFG $G$.
 \end{definition}
 
 \section{Pushdown Automata}
 \begin{definition}
   A \emph{pushdown automaton (PDA)} is a 7-tuple
   \begin{equation*}
-    A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F),
+    M = (Q, \Sigma, \Gamma, \delta, s, \mathord\perp, F),
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
-    \item $Q$ is a finite set of states.
-    \item $\Sigma$ is a finite alphabet, called the input alphabet.
-    \item $\Gamma$ is a finite alphabet, called the stack alphabet.
-    \item $\delta \subseteq (Q \times \Sigma \times \Gamma) \times
-    (Q \times \Gamma^*)$ is the transition relation.
-    \item $q_0 \in Q$ is the initial state.
-    \item $Z \in \Gamma$ is the initial symbol.
-    \item $F \subseteq Q$ is the set of accepting states.
+    \item $Q$ is a finite set of \emph{states}.
+    \item $\Sigma$ is a finite alphabet, called the \emph{input alphabet}.
+    \item $\Gamma$ is a finite alphabet, called the \emph{stack alphabet}.
+    \item $\delta \subseteq Q \times (\Sigma \cup \{\epsilon\}) \times \Gamma
+    \times Q \times \Gamma^*$ is the \emph{transition relation}.
+    \item $s \in Q$ is the \emph{initial state}.
+    \item $\mathord\perp \in \Gamma$ is the \emph{initial stack symbol}.
+    \item $F \subseteq Q$ is the set of \emph{final states}.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
-  Let $A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F)$ be a PDA.
-  For each string $w \in \Sigma^*$, we define
-  $\delta_w \subseteq (Q \times \Gamma^*) \times (Q \times \Gamma^*)$ such that
-  the following properties are satisfied for each $a \in \Sigma$ and
-  $x \in \Sigma^*$.
-  \begin{itemize}
-    \item $\delta_\epsilon = \{(p, \alpha, p, \alpha) :
-    \text{$p \in Q$ and $\alpha \in \Gamma^*$}\}$.
-    \item $\delta_a = \{(p, X\alpha, q, \gamma\alpha) :
-    \text{$(p, a, X, q, \gamma) \in \delta$ and $\alpha \in \Gamma^*$}\}$.
-    \item $\delta_{xa} = \{(p, \alpha, q, \beta):
-    \text{$(p, \alpha, r, \gamma) \in \delta_x$ and
-    $(r, \gamma, q, \beta) \in \delta_a$
-    for some $(r, \gamma) \in Q \times \Gamma^*$}\}$.
-  \end{itemize}
+  A \emph{configuration} of a PDA $M = (Q, \Sigma, \Gamma, \delta, s,
+  \mathord\perp, F)$ is a triple
+  \begin{equation*}
+    (q, w, \gamma),
+  \end{equation*}
+  where $q \in Q$ is the current state, $w \in \Sigma^*$ is the unprocessed
+  input, and $\gamma \in \Gamma^*$ is the current stack.
+  The \emph{initial configuration} of $M$ on input string $w$ is
+  $(s, w, \mathord\perp)$.
+
+  We define the single-step relation $\mathop\vdash_M$ such that for
+  any $p, q \in Q$, $a \in \Sigma$, $h \in \Gamma$, $w \in \Sigma^*$ and
+  $\beta, \gamma \in \Gamma^*$,
+  \begin{equation*}
+    (p, aw, h\gamma)
+    \; \mathop\vdash\nolimits_M \;
+    (q, w, \beta\gamma)
+  \end{equation*}
+  holds if and only if $(p, a, h, q, \beta) \in \delta$.
+  The reflexive transitive closure of $\mathop\vdash_M$ is denoted by
+  $\mathop\vdash_M^*$.
 \end{definition}
 
 \begin{definition}
-  Let $A = (Q, \Sigma, \Gamma, \delta, q_0, Z, F)$ be a PDA.
-  \begin{itemize}
-    \item We say that $A$ \emph{accepts} a string $w \in \Sigma^*$ if
-    $(q_0, Z, q, \gamma) \in \delta_w$ for some $q \in F$ and
-    $\gamma \in \Gamma^*$.
-    \item The \emph{language} of $A$, denoted $L(A)$, is the set of strings
-    that are accepted by $A$.
-  \end{itemize}
+  Let $M = (Q, \Sigma, \Gamma, \delta, s, \mathord\perp, F)$ be a
+  PDA.
+  A string $w \in \Sigma^*$ is \emph{accepted} by $M$ if
+  \begin{equation*}
+    (s, w, \mathord\perp)
+    \; \mathop\vdash\nolimits_M^* \;
+    (q, \epsilon, \gamma)
+  \end{equation*}
+  for some $q \in F$ and $\gamma \in \Gamma^*$.
+  The \emph{language} $L(M)$ accepted by $M$ is defined as
+  the collection of strings that are accepted by $M$.
 \end{definition}
+
+\begin{theorem}
+  If $L$ is context-free, then there is a PDA $M$ that accepts $L$.
+\end{theorem}
