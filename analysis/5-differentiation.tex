@@ -1,1 +1,87 @@
 \chapter{Differentiation}
+\section{Derivatives}
+\begin{definition}
+  Let $f: D \to \mathbb{R}$ be a map with $D \subseteq \mathbb{R}$.
+  For each $a \in \mathbb{R}$ such that $(a - \delta, a + \delta) \subseteq D$
+  for some $\delta > 0$, we define the \emph{derivative} of $f$ at $a$ by
+  \begin{equation*}
+    f'(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}.
+  \end{equation*}
+  We say that $f$ is \emph{differentiable} at $a$ if $f'(a)$ exists.
+\end{definition}
+
+\begin{theorem}
+  Let $f: D \to \mathbb{R}$ be a map with $D \subseteq \mathbb{R}$.
+  For each $a \in \mathbb{R}$ such that $(a - \delta, a + \delta) \subseteq D$
+  for some $\delta > 0$, if $f$ is differentiable at $a$, then $f$ is
+  continuous at $a$.
+\end{theorem}
+\begin{proof}
+  We have
+  \begin{align*}
+    \lim_{x \to a} f(x)
+    &= \lim_{h \to 0} f(a + h) \\
+    &= \lim_{h \to 0} \left(f(a) + \frac{f(a + h) - f(a)}{h} \cdot h\right) \\
+    &= f(a) + f'(a) \cdot 0 \\
+    &= f(a).
+    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  Let $f: D \to \mathbb{R}$ and $g: E \to \mathbb{R}$ be maps with
+  $D \subseteq \mathbb{R}$ and $E \subseteq \mathbb{R}$.
+  If both $f$ and $g$ are differentiable at $a \in \mathbb{R}$, then the
+  following statements are true.
+  \begin{enumerate}
+    \item $f + g$ is differentiable at $a$, and $(f + g)'(a) = f'(a) + g'(a)$.
+    \item $f \cdot g$ is differentiable at $a$, and
+    $(f \cdot g)'(a) = f'(a) \cdot g(a) + f(a) \cdot g'(a)$.
+    \item If $g(a) \neq 0$, then $1 /g$ is differentiable at $a$, and
+    $(1 / g)'(a) = -g'(a) / (g(a))^2$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item We have
+    \begin{align*}
+      (f + g)'(a)
+      &= \lim_{h \to 0} \frac{(f + g)(a + h) - (f + g)(a)}{h} \\
+      &= \lim_{h \to 0} \left(\frac{f(a + h) - f(a)}{h}
+      + \frac{g(a + h) - g(a)}{h}\right) \\[.3em]
+      &= f'(a) + g'(a).
+    \end{align*}
+    \item We have
+    \begin{align*}
+      (f \cdot g)'(a)
+      &= \lim_{h \to 0} \frac{(f \cdot g)(a + h) - (f \cdot g)(a)}{h} \\
+      &= \lim_{h \to 0} \frac{f(a + h)g(a + h) - f(a)g(a + h) + f(a)g(a + h)
+      - f(a)g(a)}{h} \\
+      &= \lim_{h \to 0} \left(\frac{f(a + h) - f(a)}{h} \cdot g(a + h)
+      + f(a) \cdot \frac{g(a + h) - g(a)}{h}\right) \\[.3em]
+      &= f'(a) \cdot g(a) + f(a) \cdot g'(a).
+    \end{align*}
+    \item We have
+    \begin{align*}
+      \left(\frac{1}{g}\right)'(a)
+      &= \lim_{h \to 0} \frac{(1/g)(a + h) - (1/g)(a)}{h} \\
+      &= \lim_{h \to 0} \frac{g(a) - g(a + h)}{hg(a)g(a + h)} \\
+      &= \frac{-g'(a)}{(g(a))^2}.
+      \qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Chain Rule]
+  Let $f: D \to \mathbb{R}$ and $g: E \to \mathbb{R}$ be maps with
+  $D \subseteq \mathbb{R}$ and $E \subseteq \mathbb{R}$.
+  If $f$ is differentiable at $a \in \mathbb{R}$ and $g$ is differentiable at
+  $f(a)$, then $g \circ f$ is differentiable at $a$ and
+  \begin{equation*}
+    (g \circ f)'(a) = g'(f(a)) \cdot f'(a).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  To be completed.
+\end{proof}
