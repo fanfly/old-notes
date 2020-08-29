@@ -85,3 +85,30 @@
 \begin{proof}
   To be completed.
 \end{proof}
+
+\section{The Mean Value Theorem}
+\begin{theorem}
+  Let $a \in \mathbb{R}$ and let $f: D \to \mathbb{R}$ be a map with
+  $D \subseteq \mathbb{R}$.
+  If $f$ is differentiable at $a$ and $f$ has a local maximum at $a$, then
+  $f'(a) = 0$.
+\end{theorem}
+\begin{proof}
+  Assume for contradiction that $f'(a) \neq 0$.
+  Choose $\delta > 0$ such that $f(x) \leq f(a)$ and
+  \begin{equation*}
+    \left|\frac{f(x) - f(a)}{x - a} - f'(a)\right| < \frac{|f'(a)|}{2}
+  \end{equation*}
+  hold for all $x \in (a - \delta, a + \delta)$.
+  If $f'(a) > 0$, then
+  \begin{equation*}
+    f(x) - f(a) > \frac{f'(a)(x - a)}{2} > 0
+  \end{equation*}
+  for all $x \in (a, a + \delta)$, contradiction.
+  If $f'(a) < 0$, then
+  \begin{equation*}
+    f(x) - f(a) > \frac{f'(a)(x - a)}{2} > 0
+  \end{equation*}
+  for all $x \in (a - \delta, a)$, contradiction.
+  Thus, $f'(a) = 0$.
+\end{proof}
