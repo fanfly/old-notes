@@ -1,27 +1,26 @@
 \chapter{Continuity}
 \section{Limits of Functions}
 \begin{definition}
-  Let $X$ and $Y$ be a metric spaces.
-  Let $f: D \to Y$ be a map with $D \subseteq X$.
-  Then we say that $b \in Y$ is the \emph{limit} of $f$ at $a \in X$, denoted
-  by
+  Let $X$ and $Y$ be a metric spaces and let $f: D \to Y$ be a map with
+  $D \subseteq X$.
+  Let $a \in X$ be a limit point and $b \in Y$.
+  Then we say that $b$ is the \emph{limit} of $f$ at $a$, denoted
   \begin{equation*}
     \lim_{x \to a} f(x) = b,
   \end{equation*}
-  if for any $\epsilon > 0$ there exists $\delta > 0$ such that
+  if for any $\epsilon > 0$, there exists $\delta > 0$ such that for all $x \in
+  D$,
   \begin{equation*}
-    d_Y(f(x), b) < \epsilon
-  \end{equation*}
-  holds for any $x \in S$ with
-  \begin{equation*}
-    0 < d_X(x, a) < \delta.
+    0 < d_X(x, a) < \delta
+    \quad \Rightarrow \quad
+    d_Y(f(x), b) < \epsilon.
   \end{equation*}
 \end{definition}
 
 \section{Continuous Functions}
 \begin{definition}
-  Let $X$ and $Y$ be metric spaces.
-  Let $f: D \to Y$ be a map with $D \subseteq X$.
+  Let $X$ and $Y$ be a metric spaces and let $f: D \to Y$ be a map with
+  $D \subseteq X$.
   We say that $f$ is \emph{continuous} at $a \in X$ if for any $\epsilon > 0$,
   there exists $\delta > 0$ such that
   \begin{equation*}
@@ -45,11 +44,49 @@
   To be completed.
 \end{proof}
 
-\section{Continuity and Compactness}
+\section{Properties of Continuous Maps}
 \begin{theorem}
-  Let $X$ and $Y$ be metric spaces.
-  Let $f: X \to Y$ be a map.
+  Let $X$ and $Y$ be metric spaces, and let $f: X \to Y$ be a continuous map.
   If $K \subseteq X$ is compact, then $f(K)$ is compact.
+\end{theorem}
+\begin{proof}
+  For any open cover $\{V_\alpha\}_{\alpha \in A}$ of $f(K)$, we have
+  \begin{equation*}
+    K
+    \subseteq f^{-1}(f(K))
+    \subseteq f^{-1}\left(\bigcup_{\alpha \in A} V_\alpha\right)
+    = \bigcup_{\alpha \in A} f^{-1}(V_\alpha).
+  \end{equation*}
+  Since $f$ is continuous, $\{f^{-1}(V_\alpha)\}_{\alpha \in A}$ is an open
+  cover of $K$.
+  Due to compactness of $K$, there exist $\alpha_1, \dots, \alpha_m \in A$ such
+  that
+  \begin{equation*}
+    K \subseteq \bigcup_{i=1}^m f^{-1}(V_{\alpha_i}),
+  \end{equation*}
+  and we have
+  \begin{equation*}
+    f(K)
+    \subseteq f\left(\bigcup_{i=1}^m f^{-1}(V_{\alpha_i})\right)
+    = f\left(f^{-1}\left(\bigcup_{i=1}^m V_{\alpha_i}\right)\right)
+    = \bigcup_{i=1}^m V_{\alpha_i}.
+  \end{equation*}
+  Thus, $f(K)$ is compact.
+\end{proof}
+
+\begin{theorem}
+  Let $X$ be a metric space and let $f: X \to \mathbb{R}$ be a continuous map.
+  If $K \subseteq X$ is compact, then $\max(f(K))$ and $\min(f(K))$ exist.
+\end{theorem}
+\begin{proof}
+  Since $f$ is continuous and $K$ is compact, $f(K)$ is a compact subset of
+  $\mathbb{R}$.
+  Thus, $f(K)$ has maximum and minimum.
+\end{proof}
+
+\begin{theorem}[Intermediate Value Theorem]
+  Let $f: [a, b] \to \mathbb{R}$ be continuous and let $c \in \mathbb{R}$.
+  If $f(a) < c < f(b)$, then $f(x) = c$ for some $x \in (a, b)$.
 \end{theorem}
 \begin{proof}
   To be completed.
