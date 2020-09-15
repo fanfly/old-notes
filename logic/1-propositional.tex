@@ -1,76 +1,62 @@
 \chapter{Propositional Logic}
-\section{The Language of Propositional Logic}
-In this chapter, we reserve a countable set $\mathcal{A}$, whose elements are
-called \emph{propositional variables}.
-
+\section{Basics of Propositional Logic}
 \begin{definition}
-  We define \emph{formulas} as follows.
+  We choose an arbitrary countably infinite set $A$ of \emph{propositional
+  atoms}, and we define \emph{propositions} as follows.
   \begin{enumerate}[1.]
-    \item Each propositional variable is a formula.
-    \item If $\alpha$ is a formula, then $\neg\alpha$ is a formula.
-    \item If $\alpha$ and $\beta$ are formulas, then $(\alpha \to \beta)$ is a
-    formula.
+    \item Each propositional atom is a proposition.
+    \item If $\alpha$ is a proposition, then $\neg\alpha$ is a proposition.
+    \item If $\alpha$ and $\beta$ are propositions, then $(\alpha \to \beta)$
+    is a proposition.
   \end{enumerate}
 \end{definition}
 
-\section{Truth Assignments}
 \begin{definition}
-  A \emph{truth assignment} is a function $\tau: \mathcal{A} \to \{0, 1\}$, and
-  it can be extended to have its domain the set of formulas such that
+  A \emph{truth assignment} is a map $\tau: A \to \{0, 1\}$, and we further
+  define
   \begin{equation*}
     \tau(\neg\alpha) =
     \begin{cases}
       0, & \text{if $\tau(\alpha) = 1$} \\
-      1, & \text{if $\tau(\alpha) = 0$}
+      1, & \text{otherwise}
     \end{cases}
     \quad \text{and} \quad
-    \tau(\alpha \to \beta) =
+    \tau((\alpha \to \beta)) =
     \begin{cases}
       0, & \text{if $\tau(\alpha) = 1$ and $\tau(\beta) = 0$} \\
       1, & \text{otherwise}
     \end{cases}
   \end{equation*}
-  for any formula $\alpha$ and $\beta$.
-
-  We say that $\tau$ \emph{satisfies} a formula $\alpha$, denoted by
-  $\tau \vDash \alpha$, if $\tau(\alpha) = 1$.
-\end{definition}
-
-\begin{definition}
-  Let $\Gamma$ be a set of formulas and let $\alpha$ be a formula.
-  We say that $\Gamma$ \emph{tautologically implies} $\alpha$, denoted by
-  $\Gamma \vDash \alpha$, if every truth assignment satisfying $\Gamma$
-  also satisfies $\alpha$.
+  for each formula $\alpha$ and $\beta$.
+  We say that $\tau$ \emph{satisfies} formula $\alpha$ if $\tau(\alpha) = 1$.
 \end{definition}
 
 \section{The Proof System}
 \begin{definition}
-  The collection $\Lambda$ of \emph{axioms} consists of the formulas listed
-  below, where $\alpha, \beta, \gamma$ are formulas.
+  The formulas of the forms (A1), (A2) and (A3) listed below are called
+  \emph{axioms}, where $\alpha, \beta, \gamma$ are formulas.
   \begin{enumerate}[leftmargin=3.5em]
     \item[(A1)] $\alpha \to (\beta \to \alpha)$.
     \item[(A2)] $(\alpha \to (\beta \to \gamma)) \to
     ((\alpha \to \beta) \to (\alpha \to \gamma))$.
     \item[(A3)] $(\neg \beta \to \neg \alpha) \to (\alpha \to \beta)$.
   \end{enumerate}
+  We denote the set of axioms by $\Lambda$.
 \end{definition}
 
 \begin{definition}
-  A \emph{proof} of a formula $\alpha$ from a collection $\Gamma$ of formulas
-  is a sequence of formulas
+  Let $\Gamma$ be a set of formulas and let $\alpha$ be a formula.
+  We say that $\alpha$ can be \emph{proved} from $\Gamma$ if there exist
+  formulas $\beta_1, \dots, \beta_n$ with $\beta_n = \alpha$ such that
   \begin{equation*}
-    (\alpha_1, \alpha_2, \dots, \alpha_n)
+    \beta_k \in \Gamma \cup \Lambda
+    \quad \text{or} \quad
+    \text{$\beta_j = (\beta_i \to \beta_k)$ for some $i, j \in \{1, 2,
+    \dots, k-1\}$}
   \end{equation*}
-  satisfying the following properties.
-  \begin{enumerate}
-    \item $\alpha_n = \alpha$.
-    \item For $k \in \{1, 2, \dots, n\}$, either
-    $\alpha_k \in \Lambda \cup \Gamma$ or there exist
-    $i, j \in \{1, 2, \dots, k-1\}$ with $\alpha_j = \alpha_i \to \alpha_k$.
-  \end{enumerate}
-  If there exists a proof of $\varphi$ from $\Gamma$, we write
-  $\Gamma \vdash \varphi$.
-  If $\varnothing \vdash \varphi$, we write $\vdash \varphi$ for short.
+  holds for all $k \in \{1, \dots, n\}$.
+  We write $\Gamma \vdash \alpha$ if $\alpha$ can be proved from $\Gamma$,
+  and if $\Gamma = \varnothing$, we write $\vdash \alpha$ for short.
 \end{definition}
 
 \begin{theorem}[Law of Identity]
