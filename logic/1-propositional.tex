@@ -1,37 +1,45 @@
 \chapter{Propositional Logic}
-\section{Basics of Propositional Logic}
+\section{Formulas}
+In propositional logic, we reserve a countable set $\mathcal{V}$ of
+\emph{propositional variables}.
+
 \begin{definition}
-  We choose an arbitrary countably infinite set $A$ of \emph{propositional
-  atoms}, and we define \emph{propositions} as follows.
+  We define \emph{formulas} as follows.
   \begin{enumerate}[1.]
-    \item Each propositional atom is a proposition.
-    \item If $\alpha$ is a proposition, then $\neg\alpha$ is a proposition.
-    \item If $\alpha$ and $\beta$ are propositions, then $(\alpha \to \beta)$
-    is a proposition.
+    \item Each propositional variable is a formula.
+    \item If $\alpha$ is a formula, then $\neg\alpha$ is a formula.
+    \item If $\alpha$ and $\beta$ are formulas, then $(\alpha \to \beta)$
+    is a formula.
   \end{enumerate}
 \end{definition}
 
+\section{Truth Assignments}
 \begin{definition}
-  A \emph{truth assignment} is a map $\tau: A \to \{0, 1\}$, and we further
-  define
-  \begin{equation*}
-    \tau(\neg\alpha) =
+  A \emph{truth assignment} is a map $\tau: \mathcal{V} \to \{0, 1\}$, and we
+  define the \emph{truth value} $[\![\alpha]\!]_\tau$ of $\alpha$ under $\tau$
+  as follows.
+  \begin{enumerate}[1.]
+    \item For each propositional variable $p$, $[\![p]\!]_\tau = \tau(p)$.
+    \item For each formula $\alpha$,
+    \begin{equation*}
+      [\![\neg\alpha]\!]_\tau =
     \begin{cases}
-      0, & \text{if $\tau(\alpha) = 1$} \\
-      1, & \text{otherwise}
+      0, & \text{if $[\![\alpha]\!]_\tau = 1$} \\
+      1, & \text{otherwise.}
     \end{cases}
-    \quad \text{and} \quad
-    \tau((\alpha \to \beta)) =
+    \end{equation*}
+    \item For each formula $\alpha$ and $\beta$,
+    \begin{equation*}
+      [\![(\alpha \to \beta)]\!]_\tau =
     \begin{cases}
-      0, & \text{if $\tau(\alpha) = 1$ and $\tau(\beta) = 0$} \\
-      1, & \text{otherwise}
+      0, & \text{if $[\![\alpha]\!]_\tau = 1$ and $[\![\beta]\!]_\tau = 0$} \\
+      1, & \text{otherwise.}
     \end{cases}
-  \end{equation*}
-  for each formula $\alpha$ and $\beta$.
-  We say that $\tau$ \emph{satisfies} formula $\alpha$ if $\tau(\alpha) = 1$.
+    \end{equation*}
+  \end{enumerate}
 \end{definition}
 
-\section{The Proof System}
+\section{Proofs}
 \begin{definition}
   The formulas of the forms (A1), (A2) and (A3) listed below are called
   \emph{axioms}, where $\alpha, \beta, \gamma$ are formulas.
