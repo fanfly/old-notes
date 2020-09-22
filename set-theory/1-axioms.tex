@@ -1,93 +1,149 @@
 \chapter{Axioms and Operations}
 \section{Basic Axioms}
+For sets $x$ and $y$, we write $x \in y$ to say that $x$ is an element of
+$y$, and we write $x = y$ to say that $x$ and $y$ are equal.
+Furthermore, we define
+\begin{align*}
+  x \notin y \quad &\Leftrightarrow \quad \neg(x \in y) \\
+  x \neq y \quad &\Leftrightarrow \quad \neg(x = y).
+\end{align*}
+
 \begin{axiom}[Extensionality]
-  For any sets $x$ and $y$, if for any set $z$, we have $z \in x$ if and only
-  if $z \in y$, then we say that $x$ and $y$ are \emph{equal}, denoted $x = y$.
-\end{axiom}
-
-\begin{axiom}[Empty Set]
-  There is a set $x$ such that $y \notin x$ for each set $y$.
-  The set $x$ is called the \emph{empty set} and is denoted by $\varnothing$.
-\end{axiom}
-
-\begin{axiom}[Pairing]
-  For any sets $x$ and $y$, there is a set $w$ such that for each set
-  $z \in w$, either $z = x$ or $z = y$ holds.
-  The set $w$ is called the \emph{pair set} of $x$ and $y$ and is denoted by
-  $\{x, y\}$.
-  If $x = y$, then we write $\{x\}$ for short.
-\end{axiom}
-
-\begin{example}
-  By axiom of pairing, $\{\varnothing\}$ and $\{\varnothing, \{\varnothing\}\}$
-  are sets.
-\end{example}
-
-\begin{axiom}[Power Set]
-  For any set $x$, there exists a set $y$ such that for any set $z$, $z \in y$
-  if and only if $z \subseteq x$.
-  The set $y$ is called the \emph{power set} of $x$ and is denoted by
-  $\mathcal{P}(x)$.
-\end{axiom}
-
-\begin{axiom}[Subset]
-  Let $\phi(z)$ be a first-order formula such that $z$ is the only free
-  variable in $\phi$.
-  For any set $x$, there exists a set $y$ such that for any set $z$, $z \in y$
-  if and only if both $z \in x$ and $\phi(z)$ holds.
-  The set $y$ will be denoted by
+  Two sets are equal if they have exactly the same elements.
+  Formally,
   \begin{equation*}
-    y = \{z \in x: \phi(z)\}.
+    \forall x \forall y (\forall z (z \in x \leftrightarrow z \in y) \to
+    x = y).
   \end{equation*}
 \end{axiom}
 
+\begin{definition}
+  Let $x$ and $y$ be sets.
+  We say that $x$ is a \emph{subset} of $y$, denoted by $x \subseteq y$, if
+  every element of $x$ belongs to $y$.
+  Formally,
+  \begin{equation*}
+    x \subseteq y
+    \quad \Leftrightarrow \quad
+    \forall z (z \in x \to z \in y).
+  \end{equation*}
+  Furthermore, $x$ is a \emph{proper subset} of $y$, denoted by
+  $x \subsetneq y$, if both $x \subseteq y$ and $x \neq y$ hold.
+\end{definition}
+
+\begin{definition}
+  The \emph{empty set}, denoted by $\varnothing$, is the set that has no
+  elements.
+\end{definition}
+
+\begin{axiom}[Pairing]
+  For any two sets $x$ and $y$, there is a set that consists of exactly $x$ and
+  $y$.
+  Formally,
+  \begin{equation*}
+    \forall x \forall y \exists z \forall w (w \in z \leftrightarrow
+    (w = x \vee w = y)).
+  \end{equation*}
+\end{axiom}
+
+\begin{definition}
+  The \emph{pair set} of two sets $x$ and $y$, denoted by $\{x, y\}$, is the
+  set that consists of exactly $x$ and $y$.
+\end{definition}
+
+\begin{axiom}[Power Set]
+  For any set $x$, there is a set whose memebers are exactly the subsets
+  of $x$.
+  Formally,
+  \begin{equation*}
+    \forall x \exists y \forall z (z \subseteq x \leftrightarrow z \in y).
+  \end{equation*}
+\end{axiom}
+
+\begin{definition}
+  The \emph{power set} of a set $x$, denoted by $\mathcal{P}(x)$, is the set
+  that consists of exactly the subsets of $x$.
+\end{definition}
+
+\begin{axiom}[Separation Scheme]
+  Let $\phi(z)$ be a formula.
+  For any set $x$, there exists a set $y$ such that for any set $z$, we have
+  $z \in y$ if and only if both $z \in x$ and $\phi(z)$ hold.
+  Formally,
+  \begin{equation*}
+    \forall x \exists y \forall z (z \in y \leftrightarrow z \in x \wedge
+    \phi(z)).
+  \end{equation*}
+\end{axiom}
+
+\begin{definition}
+  Let $x, y$ be sets and let $\phi(z)$ be a formula.
+  If for any set $z$, we have $z \in y$ if and only if $z \in x$ and $\phi(z)$,
+  then we write
+  \begin{equation*}
+    y = \{z \in x: \phi(z)\}.
+  \end{equation*}
+\end{definition}
+
 \begin{theorem}
   There is no set to which every set belongs.
-  That is, for any set $x$, there exists a set $y$ such that $y \notin x$.
+  Formally,
+  \begin{equation*}
+    \forall x \exists y (y \notin x).
+  \end{equation*}
 \end{theorem}
 \begin{proof}
-  Let $y = \{z \in x: z \notin z\}$.
-  Then we have $y \in y$ if and only if $y \in x$ and $y \notin y$.
-  If $y \in x$, then $y \in y$ if and only if $y \notin y$, contradiction.
-  Thus, $y \notin x$.
+  Let $x$ be a set and let $y = \{z \in x: z \notin z\}$.
+  Then
+  \begin{equation*}
+    y \in y
+    \quad \Leftrightarrow \quad
+    y \in x \wedge y \notin y.
+  \end{equation*}
+  If $y \in x$, then
+  \begin{equation*}
+    y \in y \quad \Leftrightarrow \quad y \notin y,
+  \end{equation*}
+  contradiction.
+  Thus $y \notin x$, which completes the proof.
 \end{proof}
 
-\section{Arbitrary Unions and Intersections}
 \begin{axiom}[Union]
-  For any set $x$, there exists a set $y$ whose elements are exactly the
-  members of the members of $x$.
-  That is,
+  For any set $x$, there exists a set whose elements are exactly the
+  elements of the elements of $x$.
+  Formally,
   \begin{equation*}
     \forall x \exists y \forall z
     (z \in y \leftrightarrow \exists w (w \in x \wedge z \in w)).
   \end{equation*}
-  The set $y$ is called the \emph{union} of $x$, denoted by $\bigcup x$.
 \end{axiom}
 
-\begin{theorem}
-  For any nonempty set $x$, there exists a unique set $y$ such that for any
-  set $z$, $z \in y$ if and only if $z$ belongs to every member of $x$.
-\end{theorem}
-\begin{proof}
-  Since $x$ is nonempty, there is a member $w_0$ of $x$.
-  Then by a subset axiom there exists a set $y$ such that
-  \begin{equation*}
-    y = \{z \in w_0: \forall w (w \in x \to z \in w)\},
-  \end{equation*}
-  and uniqueness of $y$ follows from extensionality.
-\end{proof}
-
 \begin{definition}
-  For any nonempty set $x$, we define the \emph{intersection} of $x$ as the set
-  $y$ such that for any set $z$, $z \in y$ if and only if $z$ belongs to every
-  member of $x$.
-  Let $\bigcap x$ denote the intersection of $x$.
+  Let $x$ be a set.
+  \begin{itemize}
+    \item We define the \emph{union} of $x$, denoted by $\bigcup x$, to be the
+    set that consists of the sets that belongs to at least one element of $x$.
+    Formally, for any set $z$ we have
+    \begin{equation*}
+      z \in \bigcup x
+      \quad \Leftrightarrow \quad
+      \exists w (w \in x \wedge z \in w).
+    \end{equation*}
+    \item If $x$ is nonempty, we define the \emph{intersection} of $x$, denoted
+    by $\bigcap x$, to be the set that consists of the sets that belongs to all
+    elements of $x$.
+    Formally, for any set $z$ we have
+    \begin{equation*}
+      z \in \bigcap x
+      \quad \Leftrightarrow \quad
+      \forall w (w \in x \to z \in w).
+    \end{equation*}
+  \end{itemize}
 \end{definition}
 
 \begin{definition}
   For any sets $x$ and $y$, we define
-  \begin{align*}
-    x \cup y &= \bigcup \{x, y\} \\
-    x \cap y &= \bigcap \{x, y\}.
-  \end{align*}
+  \begin{equation*}
+    x \cup y = \bigcup \{x, y\}, \qquad x \cap y = \bigcap \{x, y\}.
+  \end{equation*}
 \end{definition}
