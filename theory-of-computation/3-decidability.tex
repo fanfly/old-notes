@@ -1,9 +1,9 @@
 \chapter{Decidability}
 \section{Turing Machines}
 \begin{definition}
-  A \emph{Turing machine (TM)} is an 8-tuple
+  A \emph{Turing machine} is an 8-tuple
   \begin{equation*}
-    M = (Q, \Sigma, \Gamma, \delta, q_0, B, q_\text{acc}, q_\text{rej}),
+    M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc}, q_\text{rej}),
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
@@ -14,7 +14,7 @@
     \item $\delta : (Q \setminus \{q_\text{acc}, q_\text{rej}\}) \times \Gamma
     \to Q \times \Gamma \times \{-1, +1\}$ is the \emph{transition function}.
     \item $q_0 \in Q$ is the \emph{initial state}.
-    \item $B \in \Gamma \setminus \Sigma$ is a special symbol, called the
+    \item $\sqcup \in \Gamma \setminus \Sigma$ is a special symbol, called the
     \emph{blank symbol}.
     \item $q_\text{acc}$ and $q_\text{rej}$ are different states in $Q$,
     called the \emph{accepting state} and the \emph{rejecting state},
@@ -23,100 +23,93 @@
 \end{definition}
 
 \begin{definition}
-  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, B, q_\text{acc}, q_\text{rej})$ be
-  a TM.
+  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
+  q_\text{rej})$ be a Turing machine.
   \begin{itemize}
-    \item A \emph{configuration} of $M$ is a triple
+    \item A \emph{configuration} of $M$ is a triple in $Q \times \{1, 2,
+    \dots\} \times \Gamma^*$.
+    \item We define a binary relation $\vdash_M$ over $Q \times \{1, 2, \dots\}
+    \times \Gamma^*$ such that for any $p, q \in Q$, $i, j \in \{1, 2, \dots
+    \}$ and $u, v \in \Gamma^*$,
     \begin{equation*}
-      (p, i, \alpha),
+      (p, i, u)
+      \quad \mathop\vdash\limits_{M} \quad
+      (q, j, v)
     \end{equation*}
-    where $p$ is a state in $Q$, $i$ is a positive integer, and $\alpha$ is
-    a string over $\Gamma$.
-    \item For each configuration $(p, i, a_1 \cdots a_n)$ with
-    $\delta(p, a_i) = (q, c, d)$, its \emph{subsequent configuration} is
-    defined as the triple
+    if and only if the following conditions hold, where
     \begin{equation*}
-      (q, j, b_1 \cdots b_nB),
-    \end{equation*}
-    where
-    \begin{equation*}
-      j = \max\{1, i + d\}
-    \end{equation*}
-    and
-    \begin{equation*}
-      b_k =
-      \begin{cases}
-        c, &\text{if $k = i$} \\
-        a_k, &\text{otherwise}
-      \end{cases}
-    \end{equation*}
-    for each $1 \leq k \leq n$.
-    \item If $(p, i, \alpha)$ is a configuration of $M$ and its subsequent
-    configuration is $(q, j, \beta)$, then we write
-    \begin{equation*}
-      (p, i, \alpha)
-      \; \mathop\vdash\limits_M \;
-      (q, j, \beta).
-    \end{equation*}
-    Furthermore, we write
-    \begin{equation*}
-      (p, i, \alpha)
-      \; \mathop\vdash\limits_M^* \;
-      (q, j, \beta)
-    \end{equation*}
-    if $(p, i, \alpha) = (q, j, \beta)$ or there exists a configuration
-    $(r, k, \gamma)$ of $M$ such that
-    \begin{equation*}
-      (p, i, \alpha)
-      \; \mathop\vdash\limits_M^* \;
-      (r, k, \gamma)
+      u = a_1a_2 \cdots a_n
       \quad \text{and} \quad
-      (r, k, \gamma)
-      \; \mathop\vdash\limits_M \;
-      (q, j, \beta).
+      v = a_1'a_2' \cdots a_m'.
     \end{equation*}
+    \begin{enumerate}[1.]
+      \item $\delta(p, a_i) = (q, a_i', j - i)$.
+      \item Two strings $u$ and $v$ matches except for the $i$th symbol.
+      That is, for each $k \in \{1, 2, \dots\} \setminus \{i\}$,
+      \begin{equation*}
+        \begin{array}{ll}
+          a_k = a_k' & \text{if $k \leq n$ and $k \leq m$}, \\[.3em]
+          a_k = \sqcup & \text{if $m < k \leq n$}, \\[.3em]
+          a_k' = \sqcup & \text{if $n < k \leq m$}.
+        \end{array}
+      \end{equation*}
+    \end{enumerate}
+    \item Let $\vdash_M^{(n)}$ denote the $n$th power of $\vdash_M$, and let
+    $\vdash_M^*$ denote the reflexive transitive closure of $\vdash_M$.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
-  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, B, q_\text{acc}, q_\text{rej})$ be
-  a TM.
+  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
+  q_\text{rej})$ be a Turing machine.
   \begin{itemize}
-    \item We say that $M$ \emph{accepts} a string $w \in \Sigma^*$ if
-    \begin{equation*}
-      (q_0, 1, wB)
-      \; \mathop\vdash\limits_M^* \;
-      (q_\text{acc}, i, \alpha)
-    \end{equation*}
-    for some $i \geq 1$ and $\alpha \in \Gamma^*$.
-    \item We say that $M$ \emph{rejects} a string $w \in \Sigma^*$ if
-    \begin{equation*}
-      (q_0, 1, wB)
-      \; \mathop\vdash\limits_M^* \;
-      (q_\text{rej}, i, \alpha)
-    \end{equation*}
-    for some $i \geq 1$ and $\alpha \in \Gamma^*$. 
+    \item We say that $M$ \emph{accepts} a string $w \in \Sigma^*$ if $(q_0, 1,
+    w) \vdash_M^* (q_\text{acc}, j, u)$ for some $j \in \{1, 2, \dots\}$ and
+    $u \in \Gamma^*$.
+    \item We say that $M$ \emph{rejects} a string $w \in \Sigma^*$ if $(q_0, 1,
+    w) \vdash_M^* (q_\text{rej}, j, u)$ for some $j \in \{1, 2, \dots\}$ and
+    $u \in \Gamma^*$.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
-  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, B, q_\text{acc}, q_\text{rej})$ be
-  a TM and let $L$ be a language over $\Sigma$.
+  Let $L$ be a language over $\Sigma$.
+  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
+  q_\text{rej})$ be a Turing machine.
   \begin{itemize}
-    \item We say that $M$ \emph{recognizes} $L$ if $M$ accepts $w$ for each
-    $w \in L$, and $M$ does not accept $w$ for each
-    $w \in \Sigma^* \setminus L$.
-    \item We say that $M$ \emph{decides} $L$ if $M$ accepts $w$ for each
-    $w \in L$, and $M$ rejects $w$ for each $w \in \Sigma^* \setminus L$.
+    \item We say that $M$ \emph{recognizes} $L$ if for each $w \in \Sigma^*$,
+    \begin{equation*}
+      w \in L
+      \quad \Leftrightarrow \quad
+      \text{$M$ accepts $w$}.
+    \end{equation*}
+    A language is \emph{recursively enumerable} if it is recognized by some
+    Turing machine.
+    The collection of recursively enumerable languages is denoted by
+    $\mathbf{RE}$.
+    \item We say that $M$ \emph{decides} $L$ if for each $w \in \Sigma^*$,
+    \begin{align*}
+      w \in L
+      \quad &\Rightarrow \quad
+      \text{$M$ accepts $w$} \\
+      w \notin L
+      \quad &\Rightarrow \quad
+      \text{$M$ rejects $w$}.
+    \end{align*}
+    A language is \emph{recursive} if it is decided by some Turing machine.
+    The collection of recursive languages is denoted by $\mathbf{R}$.
   \end{itemize}
 \end{definition}
+\begin{remark}
+  Note that we have $\mathbf{R} \subseteq \mathbf{RE}$.
+\end{remark}
 
 \section{BF Programs}
 \begin{definition}
   We define the language of \emph{BF programs} over the alphabet
-  $\{L, R, U, D, \langle, \rangle\}$ as follows.
+  $\{\leftarrow, \rightarrow, +, -, \langle, \rangle\}$ as follows.
   \begin{itemize}
-    \item $L$, $R$, $U$ and $D$ are BF programs.
+    \item $\leftarrow$, $\rightarrow$, $+$ and $-$ are BF programs.
     \item If $P_1$ and $P_2$ are BF programs, then so is $P_1P_2$.
     \item If $P$ is a BF program, then so is $\langle P \rangle$.
   \end{itemize}
@@ -125,7 +118,7 @@
 \begin{definition}
   A \emph{BF machine} is a 5-tuple
   \begin{equation*}
-    M = (P, \Sigma, \Gamma, B, \sigma),
+    M = (P, \Sigma, \Gamma, \sqcup, \sigma),
   \end{equation*}
   where each component is as follows.
   \begin{itemize}
@@ -133,11 +126,11 @@
     \item $\Sigma$ is the finite set of \emph{input symbols}.
     \item $\Gamma$ is the finite set of \emph{tape symbols} with
     $\Sigma \subseteq \Gamma$.
-    \item $B \in \Gamma \setminus \Sigma$ is the \emph{blank symbol}.
+    \item $\sqcup \in \Gamma \setminus \Sigma$ is the \emph{blank symbol}.
     \item $\sigma: \Gamma \to \Gamma$ is the \emph{sucessor function} such
     that
     \begin{equation*}
-      \Gamma = \bigcup_{k \geq 0} \left\{\sigma^k(B)\right\}.
+      \Gamma = \bigcup_{k \geq 0} \left\{\sigma^k(\sqcup)\right\}.
     \end{equation*}
   \end{itemize}
 \end{definition}
