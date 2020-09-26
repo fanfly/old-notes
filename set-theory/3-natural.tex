@@ -5,8 +5,11 @@
   \begin{equation*}
     x^+ = x \cup \{x\}.
   \end{equation*}
-  We say that a set $A$ is \emph{inductive} if $\varnothing \in A$ and for any
-  $x \in A$, we have $x^+ \in A$.
+\end{definition}
+
+\begin{definition}
+  A set $A$ is \emph{inductive} if $\varnothing \in A$, and for any $a \in A$,
+  we have $a^+ \in A$.
 \end{definition}
 
 \begin{axiom}[Infinity]
@@ -29,13 +32,73 @@
   Thus, $\omega$ is inductive.
 \end{proof}
 
+\begin{definition}
+  Let
+  \begin{equation*}
+    0 = \varnothing, \quad
+    1 = \varnothing^+, \quad
+    2 = (\varnothing^+)^+, \quad
+    3 = ((\varnothing^+)^+)^+, \quad
+    4 = (((\varnothing^+)^+)^+)^+, \quad
+    \dots
+  \end{equation*}
+  denote the natural numbers.
+\end{definition}
+
 \section{Recursion}
 \begin{theorem}[Recursion Theorem]
-  Let $S$ be a set, let $s \in S$, and let $\sigma: S \to S$.
-  Then there exists a unique function $f: \omega \to S$ such that $f(0) = s$
-  and $f(n^+) = \sigma(f(n))$ for all $n \in \omega$.
+  Let $A$ be a set.
+  Let $a \in A$ and $G: A \to A$.
+  Then there is a unique function $f: \omega \to A$ such that $f(0) = a$
+  and $f(n^+) = G(f(n))$ for all $n \in \omega$.
 \end{theorem}
+\begin{proof}
+  Let $H$ be the set of functions $h \subseteq \omega \times X$ satisfying the
+  following conditions.
+  \begin{enumerate}[1.]
+    \item If $0 \in \dom(h)$, then $h(0) = a$.
+    \item For any $n \in \omega$, if $n^+ \in \dom(h)$, then $n \in \dom(h)$
+    and $h(n^+) = G(h(n))$.
+  \end{enumerate}
+  Let $f = \bigcup H$.
+  The rest of this proof is to be completed.
+\end{proof}
 
 \section{Arithmetic}
+\begin{definition}
+  For $n, m \in \omega$, we define
+  \begin{equation*}
+    n + 0 = n
+    \qquad \text{and} \qquad
+    n + m^+ = (n + m)^+
+  \end{equation*}
+  for all $n, m \in \omega$.
+\end{definition}
+
+\begin{definition}
+  For $n, m \in \omega$, we define
+  \begin{equation*}
+    n \cdot 0 = 0
+    \qquad \text{and} \qquad
+    n \cdot m^+ = n \cdot m + n
+  \end{equation*}
+  for all $n, m \in \omega$.
+\end{definition}
 
 \section{Ordering}
+\begin{definition}
+  We define binary relations $<$ and $\leq$ over the set $\omega$ of natural
+  numbers such that
+  \begin{equation*}
+    n < m
+    \quad \Leftrightarrow \quad
+    n \in m
+  \end{equation*}
+  and
+  \begin{equation*}
+    n \leq m
+    \quad \Leftrightarrow \quad
+    \text{$n \in m$ or $n = m$}
+  \end{equation*}
+  for $n, m \in \omega$.
+\end{definition}
