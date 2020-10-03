@@ -6,6 +6,15 @@
 
 \newcommand{\seq}[1]{\left\langle#1\right\rangle}
 
+% upper and lower integrals
+\def\upint{\mathchoice
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
 \begin{document}
   \tableofcontents
   \input{1-real}

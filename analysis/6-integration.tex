@@ -1,1 +1,43 @@
 \chapter{Integration}
+\section{Integrals}
+\begin{definition}
+  Let $[a, b]$ be a given interval.
+  A \emph{partition} of $[a, b]$ is a finite set
+  \begin{equation*}
+    P = \{x_0, x_1, \dots, x_n\}
+    \qquad \text{with} \qquad
+    a \leq x_0 < x_1 < \cdots < x_{n-1} < x_n \leq b.
+  \end{equation*}
+  For every partition $P$ of $[a, b]$, the \emph{upper sum} of $f$ with
+  respect to $P$ is defined by
+  \begin{equation*}
+    U(f, P) = \sum_{i=1}^n \sup\{f(x): x_{i-1} \leq x \leq x_i\} \cdot
+    (x_i - x_{i-1}),
+  \end{equation*}
+  and the \emph{lower sum} of $f$ with respect to $P$ is defined by
+  \begin{equation*}
+    L(f, P) = \sum_{i=1}^n \inf\{f(x): x_{i-1} \leq x \leq x_i\} \cdot
+    (x_i - x_{i-1}).
+  \end{equation*}
+  Finally, we define the \emph{upper integral} and the
+  \emph{lower integral} of $f$ on $[a, b]$ by
+  \begin{equation*}
+    \upint_a^b f(x) \, dx
+    = \inf\{U(f, P): \text{$P$ is a parition of $[a, b]$}\}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lowint_a^b f(x) \, dx
+    = \sup\{L(f, P): \text{$P$ is a parition of $[a, b]$}\},
+  \end{equation*}
+  respectively.
+  If
+  \begin{equation*}
+    \upint_a^b f(x) \, dx = \lowint_a^b f(x) \, dx,
+  \end{equation*}
+  then we say that $f$ is \emph{integrable} on $[a, b]$, and this
+  common value is denoted by
+  \begin{equation*}
+    \int_a^b f(x) \, dx.
+  \end{equation*}
+\end{definition}
