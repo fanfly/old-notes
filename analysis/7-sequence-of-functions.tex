@@ -1,0 +1,27 @@
+\chapter{Sequences of Functions}
+\section{Pointwise Convergence}
+\begin{definition}
+  Let $(f_n)_{n \in \mathbb{N}}$ be a sequence of real-valued functions defined
+  on $D \subseteq \mathbb{R}$.
+  We say that $(f_n)_{n \in \mathbb{N}}$ \emph{converges pointwise} to a
+  function $f$ defined on $D$ if
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x)
+  \end{equation*}
+  for all $x \in D$.
+\end{definition}
+
+\section{Uniform Convergence}
+\begin{definition}
+  Let $(f_n)_{n \in \mathbb{N}}$ be a sequence of real-valued functions defined
+  on $D \subseteq \mathbb{R}$.
+  We say that $(f_n)_{n \in \mathbb{N}}$ \emph{converges uniformly} to a
+  function $f$ defined on $D$, if for each $\epsilon \in \mathbb{R}^+$ there
+  exists $n_0 \in \mathbb{N}$ such that
+  \begin{equation*}
+    n \geq N
+    \quad \Rightarrow \quad
+    |f_n(x) - f(x)| < \epsilon
+  \end{equation*}
+  for all $x \in D$ and $n \in \mathbb{N}$.
+\end{definition}
