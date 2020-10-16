@@ -8,8 +8,13 @@
 \end{definition}
 
 \begin{definition}
-  A set $A$ is \emph{inductive} if $\varnothing \in A$, and for any $a \in A$,
-  we have $a^+ \in A$.
+  A set $A$ is \emph{inductive} if it has the empty set as member and is closed
+  under successor. Formally,
+  \begin{equation*}
+    \text{$A$ is inductive}
+    \quad \Leftrightarrow \quad
+    \varnothing \in A \wedge \forall x (x \in A \to x^+ \in A).
+  \end{equation*}
 \end{definition}
 
 \begin{axiom}[Infinity]
@@ -17,8 +22,14 @@
 \end{axiom}
 
 \begin{definition}
-  A \emph{natural number} is a set belonging to all inductive sets.
+  A \emph{natural number} is a set $x$ that belongs to all inductive sets.
   The set of natural numbers is denoted by $\omega$.
+  Formally,
+  \begin{equation*}
+    x \in \omega
+    \quad \Leftrightarrow \quad
+    \forall A (\text{$A$ is inductive} \to x \in A)
+  \end{equation*}
 \end{definition}
 
 \begin{theorem}
@@ -47,21 +58,65 @@
 
 \section{Recursion}
 \begin{theorem}[Recursion Theorem]
-  Let $A$ be a set.
-  Let $a \in A$ and $G: A \to A$.
-  Then there is a unique function $f: \omega \to A$ such that $f(0) = a$
-  and $f(n^+) = G(f(n))$ for all $n \in \omega$.
+  For any sets $A$ and $e$ with $e \in A$ and any function $\Phi: A \to A$,
+  there is a unique function $f: \omega \to A$ such that
+  \begin{equation*}
+    f(\varnothing) = e
+    \qquad \text{and} \qquad
+    f(n^+) = \Phi(f(n))
+  \end{equation*}
+  for all $n \in \omega$.
 \end{theorem}
 \begin{proof}
-  Let $H$ be the set of functions $h \subseteq \omega \times X$ satisfying the
-  following conditions.
+  We call a function $h \in \mathcal{P}(\omega \times A)$ a candidate function
+  if it satisfies the following properties.
   \begin{enumerate}[1.]
-    \item If $0 \in \dom(h)$, then $h(0) = a$.
-    \item For any $n \in \omega$, if $n^+ \in \dom(h)$, then $n \in \dom(h)$
-    and $h(n^+) = G(h(n))$.
+    \item If $\varnothing \in \dom(h)$, then $h(\varnothing) = e$.
+    \item For every $n \in \omega$, if $n^+ \in \dom(h)$, then $n \in \dom(h)$
+    and $f(n^+) = \Phi(f(n))$.
   \end{enumerate}
-  Let $f = \bigcup H$.
-  The rest of this proof is to be completed.
+  Let $H$ denote the set of all candidate functions and let $f = \bigcup H$.
+  First we show that $f \in \mathcal{P}(\omega \times A)$ is a function,
+  i.e., the set
+  \begin{equation*}
+    I = \{n \in \omega: \text{$\langle n, a \rangle, \langle n, a' \rangle$
+    implies $a = a'$ for all $a, a' \in A$}\}
+  \end{equation*}
+  is inductive.
+  We have $\varnothing \in I$ by definition of candidate function.
+  Now suppose that $n \in I$ and we prove that $n^+ \in I$.
+  For any $h, h' \in H$ with $n^+ \in \dom(h)$ and $n^+ \in \dom(h')$, we have
+  $h(n) = h'(n)$ by $n \in I$, implying
+  \begin{equation*}
+    h(n^+) = \Phi(h(n)) = \Phi(h'(n)) = h'(n^+).
+  \end{equation*}
+  Thus $n^+ \in I$, and we conclude that $f$ is a function.
+  Now we show that $\dom(f) = \omega$.
+  We have $\varnothing \in \dom(f)$ since $\{\langle \varnothing, e \rangle\}
+  \in H$.
+  For any $n \in \dom(f)$, let $h \in H$ with $n \in \dom(h)$.
+  If $n^+ \in \dom(h)$, then $n^+ \in \dom(f)$.
+  Otherwise, since $h' = h \cup \{\langle n^+, \Phi(h(n)) \rangle\} \in H$, we
+  also have $n^+ \in \dom(f)$.
+
+  Now we show that $f \in H$.
+  We have $f(\varnothing) = e$ since
+  $\{\langle \varnothing, e \rangle\} \in H$.
+  For any $n \in \dom(f)$, let $h \in H$ with $n \in \dom(h)$.
+  If $n^+ \in \dom(h)$, then we have
+  \begin{equation*}
+    f(n^+) = h(n^+) = \Phi(h(n)) = \Phi(f(n)).
+  \end{equation*}
+  Otherwise, let $h' = h \cup \{\langle n^+, \Phi(h(n)) \rangle\} \in H$, and
+  then we have
+  \begin{equation*}
+    f(n^+) = h'(n^+) = \Phi(h(n)) = \Phi(f(n)).
+  \end{equation*}
+  Thus $f \in H$.
+  For the uniqueness of $f$, let $g \in H$ with $\dom(g) = \omega$, and then
+  since $g \subseteq f$, we have $g(n) = f(n)$ for all $n \in \omega$, implying
+  $g = f$.
+  This completes the proof.
 \end{proof}
 
 \section{Arithmetic}
@@ -75,6 +130,68 @@
   for all $n, m \in \omega$.
 \end{definition}
 
+\begin{lemma}
+  For $n, m \in \omega$, we have the following properties.
+  \begin{enumerate}
+    \item $0 + n = n$.
+    \item $n^+ + m = (n + m)^+$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item The proof is by induction on $n$.
+    We have $0 + 0 = 0$.
+    Now let $n \in \omega$.
+    If $0 + n = n$, then
+    \begin{equation*}
+      0 + n^+ = (0 + n)^+ = n^+.
+    \end{equation*}
+    \item The proof is by induction on $m$.
+    We have $n^+ + 0 = n^+ = (n + 0)^+$ for all $n \in \omega$.
+    Now let $m \in \omega$.
+    If $n^+ + m = (n + m)^+$ for all $n \in \omega$, then
+    \begin{equation*}
+      n^+ + m^+ = (n^+ + m)^+ = ((n + m)^+)^+ = (n + m^+)^+.
+    \end{equation*}
+    for all $n \in \omega$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  For $n, m, \ell \in \omega$, we have the following properties.
+  \begin{enumerate}
+    \item $n + m = m + n$.
+    \item $(n + m) + \ell = n + (m + \ell)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item The proof is by induction on $m$.
+    We have $n + 0 = n = 0 + n$ for all $n \in \omega$.
+    Now let $m \in \omega$.
+    If $n + m = m + n$ for all $n \in \omega$, then
+    \begin{equation*}
+      n + m^+ = (n + m)^+ = (m + n)^+ = m^+ + n.
+    \end{equation*}
+    for all $n \in \omega$.
+    \item The proof is by induction on $\ell$.
+    We have $(n + m) + 0 = n + m = n + (m + 0)$.
+    Now let $\ell \in \omega$.
+    If $(n + m) + \ell = n + (m + \ell)$ for all $n, m \in \omega$, then
+    \begin{align*}
+      (n + m) + \ell^+
+      &= ((n + m) + \ell)^+ \\
+      &= (n + (m + \ell))^+ \\
+      &= n + (m + \ell)^+ \\
+      &= n + (m + \ell^+)
+    \end{align*}
+    for all $n, m \in \omega$.
+  \end{enumerate}
+\end{proof}
+
 \begin{definition}
   For $n, m \in \omega$, we define
   \begin{equation*}
@@ -84,6 +201,99 @@
   \end{equation*}
   for all $n, m \in \omega$.
 \end{definition}
+
+\begin{lemma}
+  For $n, m \in \omega$, we have the following properties.
+  \begin{enumerate}
+    \item $0 \cdot n = 0$.
+    \item $n^+ \cdot m = n \cdot m + m$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item The proof is by induction on $n$.
+    We have $0 \cdot 0 = 0$.
+    Now let $n \in \omega$.
+    If $0 \cdot n = 0$, then
+    \begin{equation*}
+      0 + n^+ = 0 \cdot n^+ + 0 = 0.
+    \end{equation*}
+    \item The proof is by induction on $m$.
+    We have $n^+ \cdot 0 = 0 = n \cdot 0 + 0$ for all $n \in \omega$.
+    Now let $m \in \omega$.
+    If $n^+ \cdot m = n \cdot m + m$ for all $n \in \omega$, then
+    \begin{align*}
+      n^+ \cdot m^+
+      &= n^+ \cdot m + n^+ \\
+      &= n \cdot m + m + n^+ \\
+      &= n \cdot m + n + m^+ \\
+      &= n \cdot m^+ + m^+
+    \end{align*}
+    for all $n \in \omega$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  For $n, m, \ell \in \omega$, we have the following properties.
+  \begin{enumerate}
+    \item $n \cdot (m + \ell) = n \cdot m + n \cdot \ell$.
+    \item $n \cdot m = m \cdot n$.
+    \item $(n \cdot m) \cdot \ell = n \cdot (m \cdot \ell)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item The proof is by induction on $\ell$.
+    We have
+    \begin{equation*}
+      n \cdot (m + 0)
+      = n \cdot m
+      = n \cdot m + 0
+      = n \cdot m + n \cdot 0
+    \end{equation*}
+    for all $n, m \in \omega$.
+    Now let $\ell \in \omega$.
+    If $n \cdot (m + \ell) = n \cdot m + n \cdot \ell$ for all $n, m \in
+    \omega$, then
+    \begin{align*}
+      n \cdot (m + \ell^+)
+      &= n \cdot (m + \ell)^+ \\
+      &= n \cdot (m + \ell) + n \\
+      &= (n \cdot m + n \cdot \ell) + n \\
+      &= n \cdot m + (n \cdot \ell + n) \\
+      &= n \cdot m + n \cdot \ell^+
+    \end{align*}
+    for all $n, m \in \omega$.
+    \item The proof is by induction on $m$.
+    We have $n \cdot 0 = 0 = 0 \cdot n$ for all $n \in \omega$.
+    Now let $m \in \omega$.
+    If $n \cdot m = m \cdot n$ for all $n \in \omega$, then
+    \begin{equation*}
+      n \cdot m^+
+      = n \cdot m + n
+      = m \cdot n + n
+      = m^+ \cdot n
+    \end{equation*}
+    for all $n \in \omega$.
+    \item The proof is by induction on $\ell$.
+    We have $(n \cdot m) \cdot 0 = 0 = n \cdot (m + 0)$.
+    Now let $\ell \in \omega$.
+    If $(n \cdot m) \cdot \ell = n \cdot (m \cdot \ell)$ for all $n, m \in
+    \omega$, then
+    \begin{align*}
+      (n \cdot m) \cdot \ell^+
+      &= (n \cdot m) \cdot \ell + n \cdot m \\
+      &= n \cdot (m \cdot \ell) + n \cdot m \\
+      &= n \cdot (m \cdot \ell + m) \\
+      &= n \cdot (m \cdot \ell^+)
+    \end{align*}
+    for all $n, m \in \omega$.
+    \qedhere
+  \end{enumerate}
+\end{proof}
 
 \section{Ordering}
 \begin{definition}
