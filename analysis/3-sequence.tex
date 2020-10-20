@@ -1,53 +1,57 @@
 \chapter{Sequences and Series}
+\section{Convergence}
+Let $\mathbb{N} = \{1, 2, 3, \dots\}$ denote the set of positive integers.
 \begin{definition}
-  Let $X$ be a metric space and let $(x_n)_{n \in \mathbb{N}}$ be a sequence in
+  Let $\langle x_n \rangle_{n \in \mathbb{N}}$ be a sequence in a metric space
   $X$.
-  We say that $(x_n)_{n \in \mathbb{N}}$ \emph{converges} to a point $x \in X$,
-  denoted by
+  We say that $\langle x_n \rangle_{n \in \mathbb{N}}$ \emph{converges} to a
+  point $x \in X$, denoted by
   \begin{equation*}
     \lim_{n \to \infty} x_n = x,
   \end{equation*}
-  if for any real number $\epsilon > 0$ there exists $n_0 \in \mathbb{N}$
-  such that 
+  if for any $\epsilon > 0$ there exists some $n_0 \in \mathbb{N}$ such that
   \begin{equation*}
+    n \geq n_0
+    \quad \Rightarrow \quad
     d_X(x_n, x) < \epsilon
   \end{equation*}
-  holds for all $n \in \mathbb{N}$ with $n \geq n_0$.
+  holds for all $n \in \mathbb{N}$.
   \begin{itemize}
-    \item We say that $(x_n)_{n \in \mathbb{N}}$ is \emph{convergent} if it
-    converges to some point in $X$.
-    \item We say that $(x_n)_{n \in \mathbb{N}}$ is \emph{divergent} if it is
-    not convergent.
+    \item We say that $\langle x_n \rangle_{n \in \mathbb{N}}$ is
+    \emph{convergent} if it converges to a point in $X$.
+    \item We say that $\langle x_n \rangle_{n \in \mathbb{N}}$ is
+    \emph{divergent} if it is not convergent.
   \end{itemize}
 \end{definition}
 
 \begin{theorem}
-  Let $(x_n)_{n \in \mathbb{N}}$ be a sequence in a metric space $X$.
-  If $(x_n)_{n \in \mathbb{N}}$ converges to both $x \in X$ and $x' \in X$,
-  then $x = x'$.
+  Let $\langle x_n \rangle_{n \in \mathbb{N}}$ be a sequence in a metric space
+  $X$.
+  If $\langle x_n \rangle_{n \in \mathbb{N}}$ converges to both $x \in X$ and
+  $x' \in X$, then $x = x'$.
 \end{theorem}
 \begin{proof}
-  For any $\epsilon > 0$, there exists a positive integer $N$ such that
+  For any $\epsilon > 0$, there exists some $n_0 \in \mathbb{N}$ such that
   \begin{align*}
     d_X(x_n, x) < \frac{\epsilon}{2}
     \quad \text{and} \quad
     d_X(x_n, x') < \frac{\epsilon}{2}
   \end{align*}
-  hold for any integer $n \geq N$.
-  It follows that
+  hold for all $n \in \mathbb{N}$ with $n \geq n_0$.
+  Then we have
   \begin{equation*}
     d_X(x, x')
     \leq d_X(x_n, x) + d_X(x_n, x')
     < \frac{\epsilon}{2} + \frac{\epsilon}{2}
     = \epsilon
   \end{equation*}
-  holds for any integer $n \geq N$.
-  Thus, $x = x'$.
+  for all $n \in \mathbb{N}$ with $n \geq n_0$.
+  Thus $d_X(x, x') = 0$, implying $x = x'$.
 \end{proof}
 
 \begin{theorem}
-  Let $(a_n)_{n \in \mathbb{N}}$ and $(b_n)_{n \in \mathbb{N}}$ be real
-  sequences with
+  Let $\langle a_n \rangle_{n \in \mathbb{N}}$ and
+  $\langle b_n \rangle_{n \in \mathbb{N}}$ be sequence in $\mathbb{R}$ with
   \begin{equation*}
     \lim_{n \to \infty} a_n = L
     \quad \text{and} \quad
@@ -55,57 +59,73 @@
   \end{equation*}
   Then the following statements are true.
   \begin{enumerate}
-    \item $\lim\limits_{n \to \infty} (a_n + b_n) = L + M$, and
-    $\lim\limits_{n \to \infty} (a_n - b_n) = L - M$.
-    \item $\lim\limits_{n \to \infty} a_nb_n = LM$.
-    \item If $L \neq 0$ and $a_n \neq 0$ for all $n \in \mathbb{N}$, then
-    $\lim\limits_{n \to \infty} a_n^{-1} = L^{-1}$.
+    \item We have
+    \begin{equation*}
+      \lim_{n \to \infty} (a_n + b_n) = L + M
+      \quad \text{and} \quad
+      \lim_{n \to \infty} (a_n - b_n) = L - M.
+    \end{equation*}
+    \item We have
+    \begin{equation*}
+      \lim_{n \to \infty} a_nb_n = LM.
+    \end{equation*}
+    \item If $L \neq 0$ and $a_n \neq 0$ for all $n \in \mathbb{N}$, then we
+    have
+    \begin{equation*}
+      \lim_{n \to \infty} \frac{1}{a_n} = \frac{1}{L}. 
+    \end{equation*}
   \end{enumerate}
 \end{theorem}
 \begin{proof}
   \leavevmode
   \begin{enumerate}
-    \item For any $\epsilon > 0$, there exists a positive integer $N$ such that
-    for any $n \geq N$, we have
+    \item For any $\epsilon > 0$, there exists $n_0 \in \mathbb{N}$ such that
     \begin{equation*}
       |a_n - L| < \frac{\epsilon}{2}
       \quad \text{and} \quad
-      |b_n - M| < \frac{\epsilon}{2},
+      |b_n - M| < \frac{\epsilon}{2}
     \end{equation*}
-    implying
+    holds for all $n \in \mathbb{N}$ with $n \geq n_0$.
+    Then
     \begin{equation*}
-      |(a_n + b_n) - (L + M)|
-      \leq |a_n - L| + |b_n - M|
+      \lvert (a_n + b_n) - (L + M) \rvert
+      \leq \lvert a_n - L \rvert + \lvert b_n - M \rvert
       < \frac{\epsilon}{2} + \frac{\epsilon}{2}
-      = \epsilon.
+      = \epsilon
     \end{equation*}
-    
-    \item Let $C > 0$ such that $|L| \leq C$ and $|b_n| \leq C$ for any
-    positive integer $n$.
-    For any $\epsilon > 0$, there exists a positive integer $N$ such that for
-    any $n \geq N$, we have
+    and
+    \begin{equation*}
+      \lvert (a_n - b_n) - (L - M) \rvert
+      \leq \lvert a_n - L \rvert + \lvert -b_n + M \rvert
+      < \frac{\epsilon}{2} + \frac{\epsilon}{2}
+      = \epsilon
+    \end{equation*}
+    hold for all $n \in \mathbb{N}$ with $n \geq n_0$, completing the proof.
+    \item Choose $C > 0$ such that $|L| \leq C$ and $|b_n| \leq C$ for all
+    $n \in \mathbb{N}$.
+    For any $\epsilon > 0$, there exists $n_0 \in \mathbb{N}$ such that
     \begin{equation*}
       |a_n - L| < \frac{\epsilon}{2C}
       \quad \text{and} \quad
-      |b_n - M| < \frac{\epsilon}{2C},
+      |b_n - M| < \frac{\epsilon}{2C}
     \end{equation*}
-    implying
+    hold for all $n \in \mathbb{N}$ with $n \geq n_0$.
+    Then
     \begin{align*}
       |a_nb_n - LM|
       &= |(a_n - L)b_n + (b_n - M)L| \\
-      &\leq |a_n - L||b_n| + |b_n - M||L| \\
-      &< \frac{\epsilon (|b_n| + L)}{2C} \\
-      &\leq \epsilon.
+      &\leq |a_n - L| \cdot |b_n| + |b_n - M| \cdot |L| \\
+      &\leq |a_n - L| \cdot C + |b_n - M| \cdot C \\
+      &< \epsilon
     \end{align*}
-  
-    \item For any $\epsilon > 0$, there exists a positive integer $N$ such that
-    for any $n \geq N$, we have
+    holds for all $n \in \mathbb{N}$ with $n \geq n_0$, completing the proof.
+    \item For any $\epsilon > 0$, there exists $n_0 \in \mathbb{N}$ such that
     \begin{equation*}
-      |a_n - L| < \frac{|L|^2\epsilon}{2}
-      \quad \text{and} \quad
-      |a_n - L| < \frac{|L|}{2}.
+      |a_n - L|
+      < \min\left(\left\{\frac{|L|^2\epsilon}{2}, \frac{|L|}{2}\right\}\right)
     \end{equation*}
-    It follows that
+    hold for all $n \in \mathbb{N}$ with $n \geq n_0$.
+    Then for all $n \in \mathbb{N}$ with $n \geq n_0$ we have
     \begin{equation*}
       |a_n|
       = |L + (a_n - L)|
@@ -116,52 +136,69 @@
     \begin{equation*}
       \left|\frac{1}{a_n} - \frac{1}{L}\right|
       = \left|\frac{a_n - L}{a_nL}\right|
-      = \frac{|a_n - L|}{|a_n||L|}
-      < \frac{2|a_n - L|}{|L|^2}
-      < \epsilon.
-      \qedhere
+      = \frac{|a_n - L|}{|a_n| \cdot |L|}
+      < \frac{|L|^2\epsilon / 2}{|L| / 2 \cdot |L|}
+      = \epsilon,
     \end{equation*}
+    completing the proof.
+    \qedhere
   \end{enumerate}
 \end{proof}
 
+\section{Cauchy Sequences}
 \begin{definition}
-  Let $(a_n)_{n \in \mathbb{N}}$ be a sequence of real numbers.
+  Let $\langle x_n \rangle_{n \in \mathbb{N}}$ be a sequence in a metric space
+  $X$.
+  We say that $\langle x_n \rangle_{n \in \mathbb{N}}$ is a
+  \emph{Cauchy sequence}, if for any $\epsilon > 0$ there exists some
+  $n_0 \in \mathbb{N}$ such that
+  \begin{equation*}
+    n \geq n_0
+    \quad \text{and} \quad
+    m \geq n_0
+    \quad \Rightarrow \quad
+    d_X(x_n, x_m) < \epsilon
+  \end{equation*}
+  holds for all $n, m \in \mathbb{N}$.
+\end{definition}
+
+\begin{definition}
+  Let $\langle a_n \rangle_{n \in \mathbb{N}}$ be a sequence in $\mathbb{R}$.
   \begin{itemize}
-    \item We say that $(a_n)_{n \in \mathbb{N}}$ is \emph{increasing}
-    (resp., \emph{strictly increasing}) if $a_n \leq a_{n+1}$
-    (resp., $a_n < a_{n+1}$) holds for all $n \in \mathbb{N}$.
-    \item We say that $(a_n)_{n \in \mathbb{N}}$ is \emph{decreasing}
-    (resp., \emph{strictly decreasing}) if $a_n \geq a_{n+1}$
-    (resp., $a_n > a_{n+1}$) holds for all $n \in \mathbb{N}$.
+    \item We say that $\langle a_n \rangle_{n \in \mathbb{N}}$ is
+    \emph{increasing} (resp., \emph{strictly increasing}) if
+    \begin{equation*}
+      a_n \leq a_{n+1}
+      \qquad
+      \text{(resp., $a_n < a_{n+1}$)}
+    \end{equation*}
+    holds for all $n \in \mathbb{N}$.
+    \item We say that $\langle a_n \rangle_{n \in \mathbb{N}}$ is
+    \emph{decreasing} (resp., \emph{strictly decreasing}) if
+    \begin{equation*}
+      a_n \geq a_{n+1}
+      \qquad
+      \text{(resp., $a_n > a_{n+1}$)}
+    \end{equation*}
+    holds for all $n \in \mathbb{N}$.
   \end{itemize}
 \end{definition}
 
 \begin{theorem}
-  Let $(a_n)_{n \in \mathbb{N}}$ be a sequence of real numbers.
-  If $(a_n)_{n \in \mathbb{N}}$ is increasing and its range is bounded above,
-  then $(a_n)_{n \in \mathbb{N}}$ converges.
+  Let $\langle a_n \rangle_{n \in \mathbb{N}}$ be a sequence in $\mathbb{R}$.
+  If $\langle a_n \rangle_{n \in \mathbb{N}}$ is increasing and its range
+  $A = \{a_n: n \in \mathbb{N}\}$ is bounded above, then
+  $\langle a_n \rangle_{n \in \mathbb{N}}$ converges.
 \end{theorem}
 \begin{proof}
-  Let $L = \sup(\{a_n\}_{n \in \mathbb{N}})$.
-  For any $\epsilon > 0$, since $L - \epsilon$ is not an upper bound of
-  $\{a_n\}_{n \in \mathbb{N}}$, there exists $n_0 \in \mathbb{N}$ with
-  $a_{n_0} > L - \epsilon$.
-  Since $(a_n)_{n \in \mathbb{N}}$ is increasing, for any integer $n \geq n_0$
-  we have
+  Let $L = \sup(A)$.
+  For any $\epsilon > 0$, since $L - \epsilon$ is not an upper bound of $A$,
+  there exists $n_0 \in \mathbb{N}$ with $a_{n_0} > L - \epsilon$.
+  Since $\langle a_n \rangle_{n \in \mathbb{N}}$ is increasing, for all
+  $n \in \mathbb{N}$ with $n \geq n_0$ we have
   \begin{equation*}
     L - \epsilon < a_{n_0} \leq a_n \leq L,
   \end{equation*}
-  implying $|a_n - L| < \epsilon$.
-  Thus, $(a_n)_{n \in \mathbb{N}}$ converges to $L$.
+  and thus $|a_n - L| < \epsilon$.
+  It follows that $\langle a_n \rangle_{n \in \mathbb{N}}$ converges to $L$.
 \end{proof}
-
-\begin{definition}
-  Let $X$ be a metric space and let $(x_n)_{n \in \mathbb{N}}$ be a sequence in
-  $X$.
-  We say that $(x_n)_{n \in \mathbb{N}}$ is a \emph{Cauchy sequence} if for any
-  $\epsilon > 0$ there exists $n_0 \in \mathbb{N}$, such that
-  \begin{equation*}
-    d_X(x_n, x_m) < \epsilon
-  \end{equation*}
-  holds for any $n, m \in \mathbb{N}$ with $n \geq n_0$ and $m \geq n_0$.
-\end{definition}
