@@ -11,9 +11,18 @@
 % title of table of contents
 \renewcommand*\contentsname{Set Theory}
 
+% blackboard symbol
+\DeclareMathAlphabet{\mathbbmsl}{U}{bbm}{m}{sl}
+\newcommand{\ZZ}{\mathbbmsl{Z}}
+\newcommand{\QQ}{\mathbbmsl{Q}}
+\newcommand{\RR}{\mathbbmsl{R}}
+
+\newcommand{\eqrel}[1]{\mathord{\sim_{#1}}}
+
 \begin{document}
   \tableofcontents
   \input{1-axioms}
   \input{2-relation}
   \input{3-natural}
+  \input{4-real}
 \end{document}

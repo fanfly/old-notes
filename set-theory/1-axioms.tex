@@ -2,34 +2,22 @@
 \section{Basic Axioms}
 For sets $x$ and $y$, we write $x \in y$ to say that $x$ is an element of
 $y$, and we write $x = y$ to say that $x$ and $y$ are equal.
-Furthermore, we define
+For simplicity, we write
 \begin{align*}
   x \notin y \quad &\Leftrightarrow \quad \neg(x \in y) \\
-  x \neq y \quad &\Leftrightarrow \quad \neg(x = y).
+  x \neq y \quad &\Leftrightarrow \quad \neg(x = y) \\
+  x \subseteq y \quad &\Leftrightarrow \quad \forall z (z \in x \to z \in y) \\
+  x \subsetneq y \quad &\Leftrightarrow \quad x \subseteq y \wedge x \neq y.
 \end{align*}
 
 \begin{axiom}[Extensionality]
   Two sets are equal if they have exactly the same elements.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \forall y (\forall z (z \in x \leftrightarrow z \in y) \to
     x = y).
   \end{equation*}
 \end{axiom}
-
-\begin{definition}
-  Let $x$ and $y$ be sets.
-  We say that $x$ is a \emph{subset} of $y$, denoted by $x \subseteq y$, if
-  every element of $x$ belongs to $y$.
-  Formally,
-  \begin{equation*}
-    x \subseteq y
-    \quad \Leftrightarrow \quad
-    \forall z (z \in x \to z \in y).
-  \end{equation*}
-  Furthermore, $x$ is a \emph{proper subset} of $y$, denoted by
-  $x \subsetneq y$, if both $x \subseteq y$ and $x \neq y$ hold.
-\end{definition}
 
 \begin{definition}
   The \emph{empty set}, denoted by $\varnothing$, is the set that has no
@@ -39,7 +27,7 @@ Furthermore, we define
 \begin{axiom}[Pairing]
   For any two sets $x$ and $y$, there is a set that consists of exactly $x$ and
   $y$.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \forall y \exists z \forall w (w \in z \leftrightarrow
     (w = x \vee w = y)).
@@ -52,9 +40,9 @@ Furthermore, we define
 \end{definition}
 
 \begin{axiom}[Power Set]
-  For any set $x$, there is a set whose memebers are exactly the subsets
+  For any set $x$, there is a set whose members are exactly the subsets
   of $x$.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \exists y \forall z (z \subseteq x \leftrightarrow z \in y).
   \end{equation*}
@@ -69,7 +57,7 @@ Furthermore, we define
   Let $\phi(z)$ be a formula.
   For any set $x$, there exists a set $y$ such that for any set $z$, we have
   $z \in y$ if and only if both $z \in x$ and $\phi(z)$ hold.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \exists y \forall z (z \in y \leftrightarrow z \in x \wedge
     \phi(z)).
@@ -94,7 +82,7 @@ Furthermore, we define
 
 \begin{theorem}
   There is no set to which every set belongs.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \exists y (y \notin x).
   \end{equation*}
@@ -118,7 +106,7 @@ Furthermore, we define
 \begin{axiom}[Union]
   For any set $x$, there exists a set whose elements are exactly the
   elements of the elements of $x$.
-  Formally,
+  That is,
   \begin{equation*}
     \forall x \exists y \forall z
     (z \in y \leftrightarrow \exists w (w \in x \wedge z \in w)).

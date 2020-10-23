@@ -8,23 +8,28 @@
 \end{definition}
 
 \begin{definition}
-  A set $A$ is \emph{inductive} if it has the empty set as member and is closed
-  under successor. Formally,
+  A set $x$ is \emph{inductive} if it has the empty set as member and is closed
+  under successor.
+  That is,
   \begin{equation*}
-    \text{$A$ is inductive}
+    \text{$x$ is inductive}
     \quad \Leftrightarrow \quad
-    \varnothing \in A \wedge \forall x (x \in A \to x^+ \in A).
+    \varnothing \in x \wedge \forall y (y \in x \to y^+ \in x).
   \end{equation*}
 \end{definition}
 
 \begin{axiom}[Infinity]
   There exists an inductive set.
+  That is,
+  \begin{equation*}
+    \exists x (\varnothing \in x \wedge \forall y (y \in x \to y^+ \in x)).
+  \end{equation*}
 \end{axiom}
 
 \begin{definition}
   A \emph{natural number} is a set $x$ that belongs to all inductive sets.
   The set of natural numbers is denoted by $\omega$.
-  Formally,
+  That is,
   \begin{equation*}
     x \in \omega
     \quad \Leftrightarrow \quad
