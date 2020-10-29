@@ -12,11 +12,12 @@
     \item $\Gamma$ is the finite set of \emph{tape symbols} with
     $\Sigma \subseteq \Gamma$.
     \item $\delta : (Q \setminus \{q_\text{acc}, q_\text{rej}\}) \times \Gamma
-    \to Q \times \Gamma \times \{-1, +1\}$ is the \emph{transition function}.
+    \to Q \times \Gamma \times \{-1, 0, +1\}$ is the
+    \emph{transition function}.
     \item $q_0 \in Q$ is the \emph{initial state}.
     \item $\sqcup \in \Gamma \setminus \Sigma$ is a special symbol, called the
     \emph{blank symbol}.
-    \item $q_\text{acc}$ and $q_\text{rej}$ are different states in $Q$,
+    \item $q_\text{acc}$ and $q_\text{rej}$ are distinct states in $Q$,
     called the \emph{accepting state} and the \emph{rejecting state},
     respectively.
   \end{itemize}
@@ -26,8 +27,8 @@
   Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
   q_\text{rej})$ be a Turing machine.
   \begin{itemize}
-    \item A \emph{configuration} of $M$ is a triple in $Q \times \{1, 2,
-    \dots\} \times \Gamma^*$.
+    \item A \emph{configuration} of $M$ is a triple in
+    $Q \times \{1, 2, \dots\} \times \Gamma^*$.
     \item We define a binary relation $\vdash_M$ over $Q \times \{1, 2, \dots\}
     \times \Gamma^*$ such that for any $p, q \in Q$, $i, j \in \{1, 2, \dots
     \}$ and $u, v \in \Gamma^*$,
@@ -36,39 +37,57 @@
       \quad \mathop\vdash\limits_{M} \quad
       (q, j, v)
     \end{equation*}
-    if and only if the following conditions hold, where
-    \begin{equation*}
-      u = a_1a_2 \cdots a_n
-      \quad \text{and} \quad
-      v = a_1'a_2' \cdots a_m'.
-    \end{equation*}
-    \begin{enumerate}[1.]
-      \item $\delta(p, a_i) = (q, a_i', j - i)$.
-      \item Two strings $u$ and $v$ matches except for the $i$th symbol.
-      That is, for each $k \in \{1, 2, \dots\} \setminus \{i\}$,
-      \begin{equation*}
-        \begin{array}{ll}
-          a_k = a_k' & \text{if $k \leq n$ and $k \leq m$}, \\[.3em]
-          a_k = \sqcup & \text{if $m < k \leq n$}, \\[.3em]
-          a_k' = \sqcup & \text{if $n < k \leq m$}.
-        \end{array}
-      \end{equation*}
-    \end{enumerate}
-    \item Let $\vdash_M^{(n)}$ denote the $n$th power of $\vdash_M$, and let
-    $\vdash_M^*$ denote the reflexive transitive closure of $\vdash_M$.
+    if and only if
+    \begin{align*}
+      u^{(1)} \cdots u^{(i-1)}u^{(i+1)} \cdots u^{(n)} \sqcup \sqcup \cdots
+      \quad &= \quad
+      v^{(1)} \cdots v^{(i-1)}v^{(i+1)} \cdots v^{(m)} \sqcup \sqcup \cdots \\
+      \delta(p, u^{(i)}) \quad &= \quad (q, v^{(i)}, j - i).
+    \end{align*}
+    Let $\vdash_M^{(n)}$ denote the $n$th power of $\vdash_M$, and let
+    $\mathord{\vdash_M^*} = \bigcup_{n \in \mathbb{N}} \vdash_M^{(n)}$.
   \end{itemize}
 \end{definition}
+\begin{remark}
+  $\vdash_M$ is a partial function.
+\end{remark}
 
 \begin{definition}
   Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
   q_\text{rej})$ be a Turing machine.
+  Let $u \in \Sigma^*$.
   \begin{itemize}
-    \item We say that $M$ \emph{accepts} a string $w \in \Sigma^*$ if $(q_0, 1,
-    w) \vdash_M^* (q_\text{acc}, j, u)$ for some $j \in \{1, 2, \dots\}$ and
-    $u \in \Gamma^*$.
-    \item We say that $M$ \emph{rejects} a string $w \in \Sigma^*$ if $(q_0, 1,
-    w) \vdash_M^* (q_\text{rej}, j, u)$ for some $j \in \{1, 2, \dots\}$ and
-    $u \in \Gamma^*$.
+    \item We say that $M$ \emph{accepts} $u$ if
+    $(q_0, 1, w) \vdash_M^* (q_\text{acc}, j, v)$ for some
+    $j \in \{1, 2, \dots\}$ and $v \in \Gamma^*$.
+    \item We say that $M$ \emph{rejects} $u$ if
+    $(q_0, 1, w) \vdash_M^* (q_\text{rej}, j, v)$ for some
+    $j \in \{1, 2, \dots\}$ and $v \in \Gamma^*$.
+    \item We say that $M$ \emph{halts} on input $u$ if $M$ either accepts or
+    rejects $u$.
+  \end{itemize}
+  If $M$ halts on $u$, then we have the following definitions.
+  \begin{itemize}
+    \item The \emph{running time} of $M$ on input $u$ is the integer $t$ such
+    that
+    \begin{equation*}
+      (q_0, 1, u)
+      \;\; \mathop\vdash\limits_{M}^{(t)} \;\;
+      (q_\text{acc}, j, v)
+      \qquad \text{or} \qquad
+      (q_0, 1, u)
+      \;\; \mathop\vdash\limits_{M}^{(t)} \;\;
+      (q_\text{rej}, j, v),
+    \end{equation*}
+    where $j \in \{1, 2, \dots\}$ and $v \in \Sigma^*$.
+    \item The \emph{accessed space} of $M$ on input $u$ is the maximum integer
+    $s$ such that
+    \begin{equation*}
+      (q_0, 1, u)
+      \;\; \mathop\vdash\limits_{M}^* \;\;
+      (q, s, v),
+    \end{equation*}
+    where $q \in Q$ and $v \in \Sigma^*$.
   \end{itemize}
 \end{definition}
 
@@ -101,36 +120,154 @@
   \end{itemize}
 \end{definition}
 \begin{remark}
-  Note that we have $\mathbf{R} \subseteq \mathbf{RE}$.
+  If $M$ decides $L$, then $M$ recognizes $L$.
+  Thus, $\mathbf{R} \subseteq \mathbf{RE}$.
 \end{remark}
 
-\section{BF Programs}
+\section{Variants of Turing Machines}
 \begin{definition}
-  We define the language of \emph{BF programs} over the alphabet
-  $\{\leftarrow, \rightarrow, +, -, \langle, \rangle\}$ as follows.
+  A \emph{$k$-tape Turing machine} is
+  \begin{equation*}
+    M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc}, q_\text{rej}),
+  \end{equation*}
+  where
+  \begin{equation*}
+    \delta: (Q \setminus \{q_\text{acc}, q_\text{rej}\}) \times \Gamma^k
+    \to Q \times \Gamma^k \times \{-1, 0, +1\}^k
+  \end{equation*}
+  is the \emph{transition function} and other components are the same as those
+  in the definition of Turing machine.
   \begin{itemize}
-    \item $\leftarrow$, $\rightarrow$, $+$ and $-$ are BF programs.
-    \item If $P_1$ and $P_2$ are BF programs, then so is $P_1P_2$.
-    \item If $P$ is a BF program, then so is $\langle P \rangle$.
+    \item A \emph{configuration} of $M$ is a triple in
+    $Q \times \{1, 2, \dots\}^k \times (\Gamma^*)^k$, and we define the binary
+    relation $\vdash_M$ over the configurations of $M$ such that for any
+    $p, q \in Q$, $i_1, \dots, i_k, j_1, \dots, j_k \in \{1, 2, \dots\}$ and
+    $u_1, \dots, u_k, v_1, \dots, v_k \in \Gamma^*$,
+    \begin{equation*}
+      (p, (i_1, \dots, i_k), (u_1, \dots, u_k))
+      \quad \mathop\vdash\limits_{M} \quad
+      (q, (j_1, \dots, j_k), (v_1, \dots, v_k))
+    \end{equation*}
+    if and only if
+    \begin{equation*}
+      u_\kappa^{(1)} \cdots u_\kappa^{(i_\kappa-1)}
+      u_\kappa^{(i_\kappa+1)} \cdots u_\kappa^{(n_\kappa)} \sqcup \sqcup \cdots
+      \quad = \quad
+      v_\kappa^{(1)} \cdots v_\kappa^{(i_\kappa-1)}
+      v_\kappa^{(i_\kappa+1)} \cdots v_\kappa^{(m_\kappa)} \sqcup \sqcup \cdots
+    \end{equation*}
+    for all $\kappa \in \{1, \dots, k\}$ and
+    \begin{equation*}
+      \delta(p, (u_1^{(i_1)}, \dots, u_k^{(i_k)}))
+      \quad = \quad
+      (q, (v_1^{(i_1)}, \dots, v_k^{(i_k)}), (j_1 - i_1, \dots, j_k - i_k)).
+    \end{equation*}
+    \item We say that $M$ \emph{accepts} (resp., \emph{rejects})
+    $w \in \Sigma^*$ if
+    \begin{align*}
+      (q_0, (1, 1, \dots, 1), (w, \epsilon, \dots, \epsilon))
+      \quad &\mathop\vdash\limits_{M}^* \quad
+      (q_\text{acc}, (j_1, j_2, \dots, j_k), (v_1, v_2, \dots, v_k)) \\
+      \Bigl(\text{resp.,} \;
+      (q_0, (1, 1, \dots, 1), (w, \epsilon, \dots, \epsilon))
+      \quad &\mathop\vdash\limits_{M}^* \quad
+      (q_\text{rej}, (j_1, j_2, \dots, j_k), (v_1, v_2, \dots, v_k))
+      \Bigr)
+    \end{align*}
+    for some $j_1, j_2, \dots, j_k \in \{1, 2, \dots\}$ and
+    $v_1, v_2, \dots, v_k \in \Gamma^*$.
+    If $M$ either accepts or rejects $w$, then we say that $M$ \emph{halts} on
+    $w$.
+    \item If $M$ halts on $w \in \Sigma^*$, then the \emph{running time} of $M$
+    on input $w$ is the integer $t$ with
+    \begin{equation*}
+      (q_0, (1, 1, \dots, 1), (w, \epsilon, \dots, \epsilon))
+      \quad \mathop\vdash\limits_{M}^{(t)} \quad
+      (q_\text{acc}, (j_1, j_2, \dots, j_k), (v_1, v_2, \dots, v_k))
+    \end{equation*}
+    or
+    \begin{equation*}
+      (q_0, (1, 1, \dots, 1), (w, \epsilon, \dots, \epsilon))
+      \quad \mathop\vdash\limits_{M}^{(t)} \quad
+      (q_\text{rej}, (j_1, j_2, \dots, j_k), (v_1, v_2, \dots, v_k)),
+    \end{equation*}
+    and the \emph{accessed space} of $M$ on input $w$ is the maximum sum of
+    integers $s_1, \dots, s_k$ with
+    \begin{equation*}
+      (q_0, (1, 1, \dots, 1), (w, \epsilon, \dots, \epsilon))
+      \;\; \mathop\vdash\limits_{M}^* \;\;
+      (q, (j_1, j_2, \dots, j_k), (v_1, v_2, \dots, v_k)),
+    \end{equation*}
+    where $q \in Q$, $j_1, j_2, \dots, j_k \in \{1, 2, \dots\}$ and
+    $v_1, v_2, \dots, v_k \in \Gamma^*$.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
-  A \emph{BF machine} is a 5-tuple
+  A \emph{nondeterministic Turing machine} is
   \begin{equation*}
-    M = (P, \Sigma, \Gamma, \sqcup, \sigma),
+    M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc}, q_\text{rej}),
   \end{equation*}
-  where each component is as follows.
+  where
+  \begin{equation*}
+    \delta \subseteq ((Q \setminus \{q_\text{acc}, q_\text{reg}\}) \times
+    \Gamma) \times (Q \times \Gamma \times \{-1, 0, +1\})
+  \end{equation*}
+  is the \emph{transition relation} and other components are the same as those
+  in the definition of Turing machine.
   \begin{itemize}
-    \item $P$ is a BF program.
-    \item $\Sigma$ is the finite set of \emph{input symbols}.
-    \item $\Gamma$ is the finite set of \emph{tape symbols} with
-    $\Sigma \subseteq \Gamma$.
-    \item $\sqcup \in \Gamma \setminus \Sigma$ is the \emph{blank symbol}.
-    \item $\sigma: \Gamma \to \Gamma$ is the \emph{sucessor function} such
-    that
+    \item A \emph{configuration} of $M$ is a triple in
+    $Q \times \{1, 2, \dots\} \times (\Gamma^*)$, and we define the binary
+    relation $\vdash_M$ over the configurations of $M$ such that for any
+    $p, q \in Q$, $i, j \in \{1, 2, \dots\}$ and $u, v \in \Gamma^*$,
     \begin{equation*}
-      \Gamma = \bigcup_{k \geq 0} \left\{\sigma^k(\sqcup)\right\}.
+      (p, i, u)
+      \quad \mathop\vdash\limits_{M} \quad
+      (q, j, v)
     \end{equation*}
+    if and only if
+    \begin{align*}
+      u^{(1)} \cdots u^{(i-1)}u^{(i+1)} \cdots u^{(n)} \sqcup \sqcup \cdots
+      \quad &= \quad
+      v^{(1)} \cdots v^{(i-1)}v^{(i+1)} \cdots v^{(m)} \sqcup \sqcup \cdots \\
+      ((p, u^{(i)}), (q, v^{(i)}, j - i)) \quad &\in \quad \delta.
+    \end{align*}
+    \item Let $u \in \Sigma^*$.
+    We say that $M$ \emph{diverges} on input $u$
+    (i.e., $M$ does not \emph{halt} on $u$) if for any integer $t \geq 1$ there
+    exist $q \in Q$, $j \in \{1, 2, \dots\}$ and $v \in \Gamma^*$ such that
+    \begin{equation*}
+      (q_0, 1, u)
+      \quad \mathop\vdash\limits_{M}^{(t)} \quad
+      (q, j, v).
+    \end{equation*}
+    We say that $M$ \emph{accepts} $u$ if
+    \begin{equation*}
+      (q_0, 1, u)
+      \quad \mathop\vdash\limits_{M}^* \quad
+      (q_\text{acc}, j, v)
+    \end{equation*}
+    for some $j \in \{1, 2, \dots\}$ and $v \in \Gamma^*$.
+    We say that $M$ \emph{rejects} $u$ if $M$ neither accepts $u$
+    nor diverges on $u$.
+    \item If $M$ halts on $u \in \Sigma^*$, then the \emph{running time} of $M$
+    on input $u$ is the maximum integer $t$ with
+    \begin{equation*}
+      (q_0, 1, u)
+      \quad \mathop\vdash\limits_{M}^{(t)} \quad
+      (q_\text{acc}, j, v)
+      \qquad \text{or} \qquad
+      (q_0, 1, u)
+      \quad \mathop\vdash\limits_{M}^{(t)} \quad
+      (q_\text{rej}, j, v),
+    \end{equation*}
+    and the \emph{accessed space} of $M$ on input $u$ is the maximum integer
+    $s$ with
+    \begin{equation*}
+      (q_0, 1, u)
+      \quad \mathop\vdash\limits_{M}^* \quad
+      (q, s, v)
+    \end{equation*}
+    where $q \in Q$, $j \in \{1, 2, \dots\}$ and $v \in \Gamma^*$.
   \end{itemize}
 \end{definition}
