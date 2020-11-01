@@ -29,8 +29,7 @@
 \end{proof}
 
 \begin{theorem}
-  Let $f: D \to \mathbb{R}$ and $g: E \to \mathbb{R}$ be maps with
-  $D \subseteq \mathbb{R}$ and $E \subseteq \mathbb{R}$.
+  Let $f$ and $g$ be real functions.
   If both $f$ and $g$ are differentiable at $a \in \mathbb{R}$, then the
   following statements are true.
   \begin{enumerate}
@@ -74,24 +73,62 @@
 \end{proof}
 
 \begin{theorem}[Chain Rule]
-  Let $f: D \to \mathbb{R}$ and $g: E \to \mathbb{R}$ be maps with
-  $D \subseteq \mathbb{R}$ and $E \subseteq \mathbb{R}$.
+  Let $f$ and $g$ be real functions.
   If $f$ is differentiable at $a \in \mathbb{R}$ and $g$ is differentiable at
-  $f(a)$, then $g \circ f$ is differentiable at $a$ and
+  $f(a)$, then $g \circ f$ is differentiable at $a$, and
   \begin{equation*}
     (g \circ f)'(a) = g'(f(a)) \cdot f'(a).
   \end{equation*}
 \end{theorem}
 \begin{proof}
-  To be completed.
+  Let
+  \begin{equation*}
+    u(x, h) =
+    \begin{cases}
+      0, &\text{if $h = 0$} \\[0.5em]
+      \displaystyle \frac{f(x + h) - f(x)}{h} - f'(x), &\text{otherwise}
+    \end{cases}
+  \end{equation*}
+  and
+  \begin{equation*}
+    v(y, k) =
+    \begin{cases}
+      0, &\text{if $k = 0$} \\[0.5em]
+      \displaystyle \frac{g(y + k) - g(y)}{k} - g'(y), &\text{otherwise}.
+    \end{cases}
+  \end{equation*}
+  Note that we have
+  \begin{align*}
+    f(x + h) &= f(x) + h \cdot (f'(x) + u(x, h)) \\
+    g(y + k) &= g(y) + k \cdot (g'(y) + v(y, k)).
+  \end{align*}
+  Then for every $h \neq 0$ we have
+  \begin{align*}
+    \frac{g(f(a + h)) - g(f(a))}{h}
+    &= \frac{(f(a + h) - f(a)) \cdot (g'(f(a)) + v(f(a), f(a + h) - f(a)))}{h}
+    \\
+    &= (f'(a) + u(a, h)) \cdot (g'(f(a)) + v(f(a), (f'(a) + u(a, h))h)).
+  \end{align*}
+  Since
+  \begin{equation*}
+    \lim_{h \to 0} u(x, h) = 0
+    \qquad \text{and} \qquad
+    \lim_{k \to 0} v(y, k) = 0,
+  \end{equation*}
+  it follows that
+  \begin{equation*}
+    (g \circ f)'(a)
+    = \lim_{h \to 0} \frac{g(f(a + h)) - g(f(a))}{h}
+    = f'(a) \cdot g'(f(a)).
+    \qedhere
+  \end{equation*}
 \end{proof}
 
 \section{The Mean Value Theorem}
 \begin{theorem}
-  Let $a \in \mathbb{R}$ and let $f: D \to \mathbb{R}$ be a map with
-  $D \subseteq \mathbb{R}$.
-  If $f$ is differentiable at $a$ and $f$ has a local maximum at $a$, then
-  $f'(a) = 0$.
+  Let $f$ be a real function.
+  If $f$ has a local maximum at $a$ and $f$ is differentiable at $a$,
+  then $f'(a) = 0$.
 \end{theorem}
 \begin{proof}
   Assume for contradiction that $f'(a) \neq 0$.
@@ -111,4 +148,45 @@
   \end{equation*}
   for all $x \in (a - \delta, a)$, contradiction.
   Thus, $f'(a) = 0$.
+\end{proof}
+
+\begin{theorem}[Rolle's Theorem]
+  Let $f$ be a real function that is continuous on $[a, b]$ and is
+  differentiable on $(a, b)$.
+  If $f(a) = f(b)$, then there exists $c \in (a, b)$ such that $f'(c) = 0$.
+\end{theorem}
+\begin{proof}
+  Let $c^+, c^- \in [a, b]$ such that $f(c^-) \leq f(x) \leq f(c^+)$ for all
+  $x \in [a, b]$.
+  If $\{c^+, c^-\} = \{a, b\}$, then $f$ is a constant function, and thus
+  $f'(c) = 0$ for all $c \in (a, b)$.
+  Otherwise, let $c \in \{c^+, c^-\} \setminus \{a, b\}$, and we have
+  $f'(c) = 0$.
+\end{proof}
+
+\begin{theorem}[Mean Value Theorem]
+  Let $f$ be a real function that is continuous on $[a, b]$ and is
+  differentiable on $(a, b)$.
+  Then there exists $c \in (a, b)$ such that
+  \begin{equation*}
+    f'(c) = \frac{f(a) - f(b)}{a - b}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Define $g: [a, b] \to \mathbb{R}$ with
+  \begin{equation*}
+    g(x) = f(x) - f(a) - \frac{f(a) - f(b)}{a - b} \cdot (x - a).
+  \end{equation*}
+  Note that $g$ is continuous on $[a, b]$ and is differentiable on $(a, b)$.
+  Also we have $g(a) = g(b) = 0$.
+  Thus, there exists $c \in (a, b)$ with $g'(c) = 0$.
+  Since
+  \begin{equation*}
+    g'(x) = f'(x) - \frac{f(a) - f(b)}{a - b}
+  \end{equation*}
+  holds for all $x \in (a, b)$, we have
+  \begin{equation*}
+    f'(c) = \frac{f(a) - f(b)}{a - b}.
+    \qedhere
+  \end{equation*}
 \end{proof}
