@@ -203,6 +203,43 @@
   \end{itemize}
 \end{definition}
 
+\begin{theorem}
+  Every $k$-tape Turing machine has an equivalent $1$-tape Turing machine.
+\end{theorem}
+\begin{proof}
+  Let $M = (Q, \Sigma, \Gamma, \delta, q_0, \sqcup, q_\text{acc},
+  q_\text{rej})$ be a $k$-tape Turing machine.
+  We show how to convert $M$ to an equivalent $1$-tape Turing machine
+  $M' = (Q', \Sigma, \Gamma', \delta', q_0, \sqcup, q_\text{acc},
+  q_\text{rej})$, where we use
+  \begin{equation*}
+    \Gamma' = \Gamma \times \{\square, \overset\bullet\square\}
+    \cup \{\#\}
+  \end{equation*}
+  as the tape symbols.
+  On input $w \in \Sigma^*$, the machine $M'$ performs the following steps:
+  \begin{enumerate}[1.]
+    \item Format the tape by turning its content from
+    \begin{equation*}
+      w_1 \cdots w_n
+    \end{equation*}
+    into
+    \begin{equation*}
+      \# \overset\bullet{w_1} \cdots w_n \sqcup \# \overset\bullet{\sqcup} \#
+      \overset\bullet{\sqcup} \# \cdots \# \overset\bullet{\sqcup} \#
+    \end{equation*}
+    such that the tape of $M'$ can simulate the $k$ tapes of $M$.
+    \item Continue performing steps 3 -- 4 until it halts.
+    \item Scan the tape from the first $\#$ to the last $\#$ to determine the
+    $k$ symbols under the dots.
+    \item Update the tape according to the transition function $\delta$ of $M$.
+    If there is any $\overset\bullet\#$, then replace it with a
+    $\overset\bullet\sqcup$ and then insert a $\#$ after it.
+  \end{enumerate}
+  It can be shown that if $M$ runs on $w$ in time $t$, then $M'$ runs on $w$
+  in time $O(t^2)$.
+\end{proof}
+
 \begin{definition}
   A \emph{nondeterministic Turing machine} is
   \begin{equation*}
@@ -217,7 +254,7 @@
   in the definition of Turing machine.
   \begin{itemize}
     \item A \emph{configuration} of $M$ is a triple in
-    $Q \times \{1, 2, \dots\} \times (\Gamma^*)$, and we define the binary
+    $Q \times \{1, 2, \dots\} \times \Gamma^*$, and we define the binary
     relation $\vdash_M$ over the configurations of $M$ such that for any
     $p, q \in Q$, $i, j \in \{1, 2, \dots\}$ and $u, v \in \Gamma^*$,
     \begin{equation*}
