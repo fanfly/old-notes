@@ -236,6 +236,35 @@
     If there is any $\overset\bullet\#$, then replace it with a
     $\overset\bullet\sqcup$ and then insert a $\#$ after it.
   \end{enumerate}
+  We have an implementation as follows.
+  \begin{equation*}
+    \delta'(q, a) =
+    \begin{cases}
+      ((\text{init}, 1, \overset\bullet{a}), \triangleright, +1),
+      & \text{if $q = (\text{init}, 1, \triangleright)$} \\
+      ((\text{init}, 1, a), b, +1),
+      & \text{if $q = (\text{init}, 1, b)$ with $b \in \Gamma \cup
+      \overset\bullet\Gamma$ and $a \neq \sqcup$} \\
+      ((\text{init}, 1, \#), b, +1),
+      & \text{if $q = (\text{init}, 1, b)$ with $b \in \Gamma \cup
+      \overset\bullet\Gamma$ and $a = \sqcup$} \\
+      ((\text{init}, \kappa + 1, \overset\bullet\sqcup), \#, +1),
+      & \text{if $q = (\text{init}, \kappa, \#)$ with
+      $1 \leq \kappa \leq k-1$} \\
+      ((\text{init}, \text{back}), \#, 0),
+      & \text{if $q = (\text{init}, k, \#)$} \\
+      ((\text{init}, \kappa, \#), \overset\bullet\sqcup, +1),
+      & \text{if $q = (\text{init}, \kappa, \overset\bullet\sqcup)$ with
+      $2 \leq \kappa \leq k$} \\
+      ((\text{init}, \text{back}), a, -1),
+      & \text{if $q = (\text{init}, \text{back})$ and
+      $a \neq \triangleright$} \\
+      ((\text{scan}, p, \epsilon), \triangleright, +1),
+      & \text{if $q = (\text{init}, \text{back})$ and
+      $a = \triangleright$} \\
+      \cdots & \\
+    \end{cases}
+  \end{equation*}
   It can be shown that if $M$ runs on $w$ in time $t$, then $M'$ runs on $w$
   in time $O(t^2)$.
 \end{proof}
